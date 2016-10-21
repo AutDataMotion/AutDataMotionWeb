@@ -1,0 +1,7 @@
+
+jfinaluib.sql 是带微信、测试功能的sql语句
+
+dbpublic.backup 是自带的pgAdmin导出的架构，建议用它新建一个库，然后恢复文件
+
+
+
