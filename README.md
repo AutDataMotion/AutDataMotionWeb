@@ -11,3 +11,4 @@ AutDataMotion
 
 ##项目启动
 * 使用Application 启动com.platform.config.run
+* 访问地址：http://127.0.0.1:100/jf/platform/index 用户名：admins 密码：000000
