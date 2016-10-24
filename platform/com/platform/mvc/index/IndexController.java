@@ -47,7 +47,7 @@ public class IndexController extends BaseController {
 	/**
 	 * 首页content
 	 */
-	public void content(){;
+	public void content(){
 		setAttrs(ResourcesService.service.pv());
 		setAttrs(ResourcesService.service.getResources());
 		render("/platform/index/content.html");

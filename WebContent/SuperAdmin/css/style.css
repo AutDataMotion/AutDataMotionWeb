@@ -440,7 +440,7 @@ blockquote small {
     white-space: nowrap;
     background: rgba(0,0,0,0.95);
     z-index: 9;
-    width: 188px;
+    width: 100px;
     display: block;
     line-height: normal;
     text-align: left;

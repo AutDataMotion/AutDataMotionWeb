@@ -22,6 +22,35 @@
     <link href="css/generics.css" rel="stylesheet">
     <link href="css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
     <style>
+        button{
+            border: 0px;
+            background:none;
+        }
+        button:hover{
+            background-color: #A78C00;
+        }
+        .smallText{
+            background-color: rgba(0, 0, 0, 0.05);
+            border:1px solid rgba(255, 255, 255, 0.3);
+            width:30px;
+        }
+        #treeDemo {
+            width: 200px;
+            height: 300px;
+            overflow-x: auto;
+            overflow-y: scroll;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        #treeDemo::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        #treeDemo::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.5);;
+        }
+
         .logo {
             width: 500px;
         }
@@ -31,15 +60,17 @@
         }
 
         .block-area {
-            margin-left: 150px;
+            margin-left: 0px;
         }
+
+
     </style>
 </head>
 <body id="skin-blur-violate">
 
 <header id="header" class="media">
     <a href="" id="menu-toggle"></a>
-    <a class="logo pull-left" href="#">自动运营平台</a>
+    <a class="logo pull-left" href="index.html">SUPER ADMIN 1.0</a>
 
     <div class="media-body">
         <div class="media" id="top-menu">
@@ -104,7 +135,7 @@
                 </a>
                 <ul class="list-unstyled menu-item">
                     <li><a href="form-elements.html">下载数据管理</a></li>
-                    <li><a href="download_config.html">配置管理</a></li>
+                    <li><a href="form-components.html">配置管理</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -361,12 +392,223 @@
             <li class="active">Data</li>
         </ol>
 
-        <h4 class="page-title" align="center">数据自动化运营管理流程</h4>
+        <h4 class="page-title">主界面</h4>
         <!-- Shortcuts -->
+        <div class="block-area shortcut-area" style="text-align: center" ;>
+            <a class="shortcut tile" href="">
+                <img src="img/shortcuts/control_panel.ico" alt="">
+                <small class="t-overflow">控制面板</small>
+            </a>
+            <a class="shortcut tile" href="">
+                <img src="img/shortcuts/statistical_analysis.ico" alt="">
+                <small class="t-overflow">统计分析</small>
+            </a>
+            <a class="shortcut tile" href="">
+                <img src="img/shortcuts/monitor.ico" alt="">
+                <small class="t-overflow">运行监控</small>
+            </a>
+            <a class="shortcut tile" href="">
+                <img src="img/shortcuts/download.ico" alt="">
+                <small class="t-overflow">下载管理</small>
+            </a>
+            <a class="shortcut tile" href="">
+                <img src="img/shortcuts/archive.ico" alt="">
+                <small class="t-overflow">归档管理</small>
+            </a>
+            <a class="shortcut tile" href="">
+                <img src="img/shortcuts/release.ico" alt="">
+                <small class="t-overflow">检出发布</small>
+            </a>
+        </div>
+        <div class="block-area" id="text-input">
+            <h3 class="block-title">数据源配置</h3>
+            <p class="bottom_line"></p>
+            <form id="myForm01" action="">
+                <table class="row">
+                    <tr>
+                        <td><label class="mylabel">FTP地址：</label></td>
+                        <td><input id="ftp_addr" name="ftp_addr" type="text" class="form-control myinput"/></td>
+                        <td><label class="mylabel">端口号：</label></td>
+                        <td><input id="port" name="port" type="text" class="form-control myinput"/></td>
+                        <td><label class="mylabel">源目录：</label></td>
+                        <td><input id="catalog" name="catalog" type="text" class="form-control myinput"/></td>
+                    </tr>
+                    <tr>
+                        <td><label class="mylabel">用户名：</label></td>
+                        <td><input id="username" name="username" type="text" class="form-control myinput"/></td>
+                        <td><label class="mylabel">密码：</label></td>
+                        <td><input id="password" name="password" type="password" class="form-control myinput"/></td>
+                        <td><label class="mylabel"></label></td>
+                        <td><label class="mybutton">
+                            <input id="save_btn" name="save_btn" type="button" onclick="Save()"
+                                   value="保存" class="btn m-r-5"/></label></td>
+                    </tr>
+                </table>
+            </form>
+            <h3 class="block-title">下载文件配置</h3>
+            <p class="bottom_line"></p>
+            <table>
+                <tr>
+                    <td align="left" valign="top">
+                        <table border=0 height=460px align=left>
+                            <tr>
+                                <td width=200px align=left valign=top>
+                                    <ul id="treeDemo" class="ztree"></ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td align="left" valign="top">
+                        <form id="myForm02" action="">
+                            <div class="list-container">
+                                <table id="myTable" style="margin-left: 15px;line-height: 0px"
+                                       class="table table-bordered table-hover tile">
+                                    <thead>
+                                    <tr>
+                                        <th width="2%">
+                                            <input type="checkbox" class="pull-left list-parent-check" value=""/>
+                                        </th>
+                                        <th width="6%">序号</th>
+                                        <th width="21%">文件名匹配规则</th>
+                                        <th width="14%">是否自动下载</th>
+                                        <th width="22%">下载保存路径</th>
+                                        <th width="25%">备注说明</th>
+                                        <th width="10%">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div class="text-right">
+                                <label>记录数：10</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label>页次：1/5</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button>首页</button>
+                                <button>上一页</button>
+                                <button>下一页</button>
+                                <button>尾页</button>
+                                <label>每页<input class="smallText" type="text"/>条</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label>转到<input class="smallText" type="text"/>页</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button style="border: 1px solid rgba(255, 255, 255, 0.3);">Go</button>
+                            </div>
+                            <div class="text-center" style="display: none">
+                                <ul class="pagination">
+                                    <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                </ul>
+                            </div>
 
-        <div class="block-area">
-            <img width="900px" height="500px" src="img/shortcuts/process.png" alt="">
+                        </form>
+                        <p></p>
 
+                        <form id="myForm03" role="form" class="p-15" action="">
+                            <div style="padding: 7px 0 7px 0">
+                                <input id="11" name="" type="button" onclick="add_Btn()" value="新增" class="btn m-r-5"/>
+                            </div>
+
+                            <div class="myPanel">
+                                <br>
+                                <div class="col-md-1 mylabel">
+                                    <label>通道：</label>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <select multiple class="select">
+                                        <option value="option1" selected>option1</option>
+                                        <option value="option2" selected>option2</option>
+                                        <option value="option3" selected>option3</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1 mylabel">
+                                    <label>飞行器：</label>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <select multiple class="select">
+                                        <option value="option1">option1</option>
+                                        <option value="option2">option2</option>
+                                        <option value="option3">option3</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1 mylabel">
+                                    <label>载荷：</label>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <select multiple class="select">
+                                        <option value="option1">option1</option>
+                                        <option value="option2">option2</option>
+                                        <option value="option3">option3</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1 mylabel">
+                                    <label>产品标识：</label>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <select multiple class="select">
+                                        <option value="option1">option1</option>
+                                        <option value="option2">option2</option>
+                                        <option value="option3">option3</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1 mylabel">
+                                    <label>产品类别：</label>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <select multiple class="select">
+                                        <option value="option1">option1</option>
+                                        <option value="option2">option2</option>
+                                        <option value="option3">option3</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1 mylabel">
+                                    <label>产品等级：</label>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <select multiple class="select">
+                                        <option value="option1">option1</option>
+                                        <option value="option2">option2</option>
+                                        <option value="option3">option3</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1 mylabel">
+                                    <label>文件名后缀：</label>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <select multiple class="select">
+                                        <option value="option1">option1</option>
+                                        <option value="option2">option2</option>
+                                        <option value="option3">option3</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1 mylabel">
+                                    <label>是否下载：</label>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <select class="select">
+                                        <option value="">请选择</option>
+                                        <option value="option1">是</option>
+                                        <option value="option2">否</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <input type="text" class="form-control" placeholder="保存路径" value="123445"/>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <textarea class="input-sm validate[required] form-control"
+                                              rows="4" cols="25" placeholder="备注说明">sffvfddddf</textarea>
+                                </div>
+                                <p></p>
+                                <div class="col-md-5 form-group">
+                                    <input id=" " name="" type="button" onclick="" value="保存" class="btn m-r-5"/>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
         </div>
 
         <!-- Chat -->
