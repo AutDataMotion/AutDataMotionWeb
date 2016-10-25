@@ -638,3 +638,16 @@ if(flag==0) {
     });
 }
 */
+var arr=['1234'];
+function string2int(s){
+    var res=s.map(function (x) {
+        return x/1;
+    }).reduce(function(x,y){
+        return x*10+y;
+    });
+    return res;
+}
+
+var a=123;
+123..toString();
+(123).toString();
