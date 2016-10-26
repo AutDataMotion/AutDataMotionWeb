@@ -25,20 +25,19 @@ function createData(start,end,Smooth,Name,Effect,ItemStyle){
 }
 var data1=[    // 第一组标线数据（宽波段数据）
     createData([50,140],[550,200],0,"MWI01",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#4169E1', 'dashed')),
-    createData([670, 250],[350, 700],0,"MWI02",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#4169E1', 'dashed')),
-    createData([670, 250],[850, 700],0,"MWI03",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#4169E1', 'dashed')),
+    createData([570, 250],[350, 700],0,"MWI02",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#4169E1', 'dashed')),
+    createData([570, 250],[850, 700],0,"MWI03",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#4169E1', 'dashed')),
 ];
-
 var data2=[    // 第二组标线数据（紫外数据）
-    createData([60, 220],[550, 200],0,"ZW01",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#FF00FF', 'dashed')),
-    createData([570, 245],[350, 700],0,"ZW02",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#FF00FF', 'dashed')),
-    createData([570, 250],[850, 700],0,"ZW03",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#FF00FF', 'dashed')),
+    createData([65, 180],[550, 200],0,"ZW01",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#FF00FF', 'dashed')),
+    createData([620, 250],[350, 700],0,"ZW02",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#FF00FF', 'dashed')),
+    createData([620, 250],[850, 700],0,"ZW03",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#FF00FF', 'dashed')),
 ];
 
 var data3=[   // 第三组标线数据（高度计数据）
-    createData([65, 180], [550, 200],0,"IALT01",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#FF6100', 'dashed')),
-    createData([620, 250],[350, 700],0,"IALT02",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#FF6100', 'dashed')),
-    createData([620, 250],[850, 700],0,"IALT03",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#FF6100', 'dashed')),
+    createData([60, 220], [550, 200],0,"IALT01",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#FF6100', 'dashed')),
+    createData([670, 245],[350, 700],0,"IALT02",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#FF6100', 'dashed')),
+    createData([670, 250],[850, 700],0,"IALT03",effectLine(false, '#fff', 30),itemStyleSet(borderWidth, '#FF6100', 'dashed')),
 ];
 
 var data4=[
@@ -311,17 +310,18 @@ function SetAttr(status, speed) {
     myChart.addMarkLine(seriesIndex, {
         smooth: true,
         selectedMode: 'single',
-        symbol: ['none'],
+        symbol:['none'] ,
         data: [LineData]
     });
 }
-/*
+
 function fake_LineType_Data() {
-    var line_data = new Array(9);
-    for (var i = 0; i < 9; i++) {
+    var nums=parseInt(Math.random())%9+1;
+    var line_data = new Array(nums);
+    for (var i = 0; i < nums; i++) {
         line_data[i] = {"number": i, "lines": new Array()};
     }
-    for (var j = 0; j < 9; j++) {
+    for (var j = 0; j < nums; j++) {
         line_data[j] = {"number": j, "lines": new Array()};
         for (var i = 0; i < 3; i++) {
             line_data[j]["lines"][i] = {
@@ -351,7 +351,7 @@ function flushData() {
             SetAttr(status, speed);
         }
     }
-}*/
+}
 /*
 window.setInterval(flushData, 5000);
 var a = '1';
@@ -444,17 +444,22 @@ function loadMyChartMap() {
         });
 }
 loadMyChartMap();
-
-var count=3,flag=0;
-$("#btn_click").on("click",function(){
-    count++;
-    for(count=4;count<=10;count++) {
-        var tempData = dataArray[count - 1];
-        var start = tempData[0][0].geoCoord;
-        var end = tempData[0][1].geoCoord;
-        var Smooth = tempData[0][0].smoothness;
-        var Name = tempData[0][0].name;
-        var Color = tempData[0][0].itemStyle.normal.lineStyle.color;
+$.fn.styles=function(){
+    this.css("backgroundColor",'rgba(0,0,0,0.3)')
+        .css("color","white");
+    return this;
+}
+$(function(){
+    var mains=$("#mychart");
+    mains.before("<input id='add' type='button' value='增加'/><input id='del' type='button' value='删除'/>");
+    $("#add").styles();$("#del").styles();
+    var tempData = dataArray[3];
+    var start = tempData[0][0].geoCoord;
+    var end = tempData[0][1].geoCoord;
+    var Smooth = tempData[0][0].smoothness;
+    var Name = tempData[0][0].name;
+    var Color = tempData[0][0].itemStyle.normal.lineStyle.color;
+    $("#add").click(function(){
         LineData = createData(
             start,
             end,
@@ -463,41 +468,14 @@ $("#btn_click").on("click",function(){
             effectLine(true, '#fff', 30),
             itemStyleSet(borderWidth, Color, 'solid')
         );
-        myChart.delMarkLine(count,Name);
         myChart.addMarkLine(seriesIndex,{
             smooth: true,
             selectedMode: 'single',
             symbol: ['none'],
             data:[LineData]
         });
-    }
-    /*if(flag==1){
-        myChart.delMarkLine(count,Name);
-        myChart.addMarkLine(seriesIndex,{
-            smooth: true,
-            selectedMode: 'single',
-            symbol: ['none'],
-            data:[LineData]
-        });
-    }
-    else {
-        option.series[count]
-            .markLine.data[0][0]
-            .itemStyle.normal
-            .lineStyle
-            .type = 'solid';
-        option.series[count]
-            .markLine.data[0][0]
-            .effect
-            .show = true;
-        option.series[count]
-            .markLine.data[0][0]
-            .effect
-            .period = 30;
-        myChart.setOption(option);
-    }
-
-
-
-    if(count==9)count=3;*/
+    });
+    $("#del").click(function(){
+        myChart.delMarkLine(4,Name);
+    });
 });
