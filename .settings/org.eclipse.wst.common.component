@@ -5,6 +5,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/junit"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/jfinal20"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/ueditor"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/datamotion"/>
         <property name="context-root" value="JFinalUIBV2"/>
         <property name="java-output-path" value="/JFinalUIBV2/build/classes"/>
     </wb-module>
