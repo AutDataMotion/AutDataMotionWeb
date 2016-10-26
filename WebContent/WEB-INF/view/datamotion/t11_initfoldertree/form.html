@@ -1,0 +1,120 @@
+
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">唯一key
+</label>
+	<div class="col-sm-7">
+		<input type="text" name="t11_initfoldertree.key_" value="${escapeXml(t11_initfoldertree.key_!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">英文缩写</label>
+	<div class="col-sm-7">
+		<input type="text" name="t11_initfoldertree.nameeng" value="${escapeXml(t11_initfoldertree.nameeng!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">中文名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t11_initfoldertree.namechi" value="${escapeXml(t11_initfoldertree.namechi!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">树级别，root为0</label>
+	<div class="col-sm-7">
+		<input type="text" name="t11_initfoldertree.level" value="${t11_initfoldertree.level!}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">父节点keys</label>
+	<div class="col-sm-7">
+		<textarea name="t11_initfoldertree.parentkeys" class="autosize form-control">${escapeXml(t11_initfoldertree.parentkeys!)}</textarea>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">子节点keys</label>
+	<div class="col-sm-7">
+		<textarea name="t11_initfoldertree.childkeys" class="autosize form-control">${escapeXml(t11_initfoldertree.childkeys!)}</textarea>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">下载备份归档检出配置key</label>
+	<div class="col-sm-7">
+		<input type="text" name="t11_initfoldertree.fkeyinitmodule" value="${escapeXml(t11_initfoldertree.fkeyinitmodule!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">扩展</label>
+	<div class="col-sm-7">
+		<textarea name="t11_initfoldertree.extend1" class="autosize form-control">${escapeXml(t11_initfoldertree.extend1!)}</textarea>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">状态</label>
+	<div class="col-sm-7">
+		<input type="text" name="t11_initfoldertree.status_" value="${t11_initfoldertree.status_!}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">添加时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t11_initfoldertree.timeadd" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t11_initfoldertree.timeadd!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">更新时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t11_initfoldertree.timeupdate" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t11_initfoldertree.timeupdate!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">标签id串</label>
+	<div class="col-sm-7">
+		<textarea name="t11_initfoldertree.labelids" class="autosize form-control">${escapeXml(t11_initfoldertree.labelids!)}</textarea>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>

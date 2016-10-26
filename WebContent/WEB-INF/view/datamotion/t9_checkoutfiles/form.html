@@ -1,0 +1,236 @@
+
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">随机码</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.key_" value="${escapeXml(t9_checkoutfiles.key_!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">源文件路径</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.pathsrc" value="${escapeXml(t9_checkoutfiles.pathsrc!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">备份文件名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.namesrc" value="${escapeXml(t9_checkoutfiles.namesrc!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">备份文件路径</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.pathdest" value="${escapeXml(t9_checkoutfiles.pathdest!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">目的名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.namedest" value="${escapeXml(t9_checkoutfiles.namedest!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">备份时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t9_checkoutfiles.timedo" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t9_checkoutfiles.timedo!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">文件大小</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.filesize" value="${t9_checkoutfiles.filesize!}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">接收站名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.station" value="${escapeXml(t9_checkoutfiles.station!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">飞行器</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.aircraft" value="${escapeXml(t9_checkoutfiles.aircraft!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">载荷名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.sensor" value="${escapeXml(t9_checkoutfiles.sensor!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">数据类型</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.datatype" value="${escapeXml(t9_checkoutfiles.datatype!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">数据级别</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.datalevel" value="${escapeXml(t9_checkoutfiles.datalevel!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">产品标识</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.camera" value="${escapeXml(t9_checkoutfiles.camera!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">下传时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t9_checkoutfiles.timerecive" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t9_checkoutfiles.timerecive!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">拍摄开始时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t9_checkoutfiles.timecollectstart" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t9_checkoutfiles.timecollectstart!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">拍摄结束时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t9_checkoutfiles.timecollectend" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t9_checkoutfiles.timecollectend!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">后缀名</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.suffix" value="${escapeXml(t9_checkoutfiles.suffix!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">是否主文件</label>
+	<div class="col-sm-7">
+		<select name="t9_checkoutfiles.ismain" class="combox">
+		<option value="0" ${t9_checkoutfiles.ismain! == 0 ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+		<option value="1" ${t9_checkoutfiles.ismain! == 1 ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+		</select>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">辅助文件keys</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.auxkeys" value="${escapeXml(t9_checkoutfiles.auxkeys!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">处理次数</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.cntdo" value="${t9_checkoutfiles.cntdo!}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">状态</label>
+	<div class="col-sm-7">
+		<input type="text" name="t9_checkoutfiles.status_" value="${t9_checkoutfiles.status_!}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">添加时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t9_checkoutfiles.timeadd" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t9_checkoutfiles.timeadd!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">标签id串</label>
+	<div class="col-sm-7">
+		<textarea name="t9_checkoutfiles.labelids" class="autosize form-control">${escapeXml(t9_checkoutfiles.labelids!)}</textarea>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
