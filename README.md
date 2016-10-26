@@ -1,5 +1,10 @@
-# AutDataMotionWeb
 
+# AutDataMotionWeb
+---
+2016-10-26---
+* 更新了设计doc，请查看数据库设计和流程设计
+* 流程设计根据自身需求进行修改和包装
+---
 ##导入项目  
 * 导入依赖项目  
 UtilZW  
