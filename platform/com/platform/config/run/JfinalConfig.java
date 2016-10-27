@@ -37,6 +37,9 @@ import com.platform.thread.TimerResources;
 import com.platform.tools.ToolCache;
 import com.platform.tools.ToolString;
 
+import datamotion.config.DBMappingMy;
+import datamotion.constant.PropertiesInitMy;
+
 /**
  * Jfinal API 引导式配置
  */
@@ -55,8 +58,8 @@ public class JfinalConfig extends JFinalConfig {
 		com.platform.config.run.ConfMain.getInstance().initProperties();
 		
 		//配置文件-------子系统
-//		targrecog.config.ConfMain.getInstance().setPropertyes(new PropertiesInitMy(loadPropertyFile("init_target.properties"), false));
-//		targrecog.config.ConfMain.getInstance().initProperties();
+		datamotion.config.ConfMain.getInstance().setPropertyes(new PropertiesInitMy(loadPropertyFile("init_autdatamotion.properties"), false));
+		datamotion.config.ConfMain.getInstance().initProperties();
 		
 		log.info("configConstant 设置字符集");
 		constants.setEncoding(ToolString.encoding);
@@ -87,7 +90,7 @@ public class JfinalConfig extends JFinalConfig {
 		log.info("configRoute 手动注册路由");
 		routes.add(new PlatformRoutes());
 		//路由设置 ---子系统
-//		routes.add(new targrecog.config.RoutePlugins());
+		routes.add(new datamotion.config.RoutePlugins());
 	}
 
 	/**
@@ -99,8 +102,8 @@ public class JfinalConfig extends JFinalConfig {
 		com.platform.config.run.ConfMain.getInstance().setDBMapping(new PlatformMapping());
 		com.platform.config.run.ConfMain.getInstance().initDBMapping(plugins);
 		//数据库层设置初始化  ---子系统
-//		targrecog.config.ConfMain.getInstance().setDBMapping(new DBMappingMy());
-//		targrecog.config.ConfMain.getInstance().initDBMapping(plugins);
+		datamotion.config.ConfMain.getInstance().setDBMapping(new DBMappingMy());
+		datamotion.config.ConfMain.getInstance().initDBMapping(plugins);
 		log.info("I18NPlugin 国际化键值对加载");
 		plugins.add(new I18NPlugin());
 
@@ -172,7 +175,7 @@ public class JfinalConfig extends JFinalConfig {
 //		wisefuse.mvc.cms.MainConf.GetInstance().start();
 
 		//Zeroc Ice Util 初始化----------!!!最好增加配置文件开关？？？
-		IceClientUtil.init( 180);
+//		IceClientUtil.init( 180);
 		//初始化ftp地址-----------!!!最好增加配置文件开关？？？
 		com.platform.config.run.ConfMain.getInstance().initFtp();
 		//初始化ftp地址-----------子系统  !!!最好增加配置文件开关？？？
@@ -201,9 +204,9 @@ public class JfinalConfig extends JFinalConfig {
 	public void beforeJFinalStop() {
 		
 		//Zeroc Ice Util 销毁
-		IceClientUtil.closeCommunicator(true);
+//		IceClientUtil.closeCommunicator(true);
 		//释放资源----------子系统
-//		wisefuse.mvc.cms.MainConf.GetInstance().stop();
+//		datamotion.mvc.cms.MainConf.GetInstance().stop();
 		
 		log.info("beforeJFinalStop 释放lucene索引资源");
 		boolean luceneIndex = getPropertyToBoolean(
