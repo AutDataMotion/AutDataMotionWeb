@@ -1,0 +1,236 @@
+
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">随机码</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.key_" value="${escapeXml(t8_archivefile.key_!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">源文件路径</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.pathsrc" value="${escapeXml(t8_archivefile.pathsrc!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">备份文件名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.namesrc" value="${escapeXml(t8_archivefile.namesrc!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">备份文件路径</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.pathdest" value="${escapeXml(t8_archivefile.pathdest!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">目的名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.namedest" value="${escapeXml(t8_archivefile.namedest!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">备份时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t8_archivefile.timedo" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t8_archivefile.timedo!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">文件大小</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.filesize" value="${t8_archivefile.filesize!}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">接收站名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.station" value="${escapeXml(t8_archivefile.station!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">飞行器</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.aircraft" value="${escapeXml(t8_archivefile.aircraft!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">载荷名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.sensor" value="${escapeXml(t8_archivefile.sensor!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">数据类型</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.datatype" value="${escapeXml(t8_archivefile.datatype!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">数据级别</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.datalevel" value="${escapeXml(t8_archivefile.datalevel!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">产品标识</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.camera" value="${escapeXml(t8_archivefile.camera!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">下传时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t8_archivefile.timerecive" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t8_archivefile.timerecive!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">拍摄开始时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t8_archivefile.timecollectstart" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t8_archivefile.timecollectstart!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">拍摄结束时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t8_archivefile.timecollectend" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t8_archivefile.timecollectend!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">后缀名</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.suffix" value="${escapeXml(t8_archivefile.suffix!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">是否主文件</label>
+	<div class="col-sm-7">
+		<select name="t8_archivefile.ismain" class="combox">
+		<option value="0" ${t8_archivefile.ismain! == 0 ? "selected='selected'":"" }>${i18nMap["admin.common.no"]}</option>
+		<option value="1" ${t8_archivefile.ismain! == 1 ? "selected='selected'":"" }>${i18nMap["admin.common.yes"]}</option>
+		</select>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">辅助文件keys</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.auxkeys" value="${escapeXml(t8_archivefile.auxkeys!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">处理次数</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.cntdo" value="${t8_archivefile.cntdo!}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">状态</label>
+	<div class="col-sm-7">
+		<input type="text" name="t8_archivefile.status_" value="${t8_archivefile.status_!}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">添加时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t8_archivefile.timeadd" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t8_archivefile.timeadd!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">标签id串</label>
+	<div class="col-sm-7">
+		<textarea name="t8_archivefile.labelids" class="autosize form-control">${escapeXml(t8_archivefile.labelids!)}</textarea>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>

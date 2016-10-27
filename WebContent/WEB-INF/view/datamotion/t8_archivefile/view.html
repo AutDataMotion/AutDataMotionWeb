@@ -1,0 +1,174 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/datamotion/index');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('${pthc}');">归档文件管理</a></li>
+			<li class="active">查看</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">查看</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			<div class="panel-body">	
+				<form role="form" class="form-horizontal">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">自增id </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${t8_archivefile.id!}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">随机码 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(t8_archivefile.key_!)}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">源文件路径 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(t8_archivefile.pathsrc!)}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">备份文件名称 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(t8_archivefile.namesrc!)}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">备份文件路径 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(t8_archivefile.pathdest!)}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">目的名称 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(t8_archivefile.namedest!)}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">备份时间 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${t8_archivefile.timedo!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">文件大小 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${t8_archivefile.filesize!}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">接收站名称 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(t8_archivefile.station!)}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">飞行器 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(t8_archivefile.aircraft!)}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">载荷名称 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(t8_archivefile.sensor!)}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">数据类型 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(t8_archivefile.datatype!)}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">数据级别 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(t8_archivefile.datalevel!)}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">产品标识 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(t8_archivefile.camera!)}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">下传时间 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${t8_archivefile.timerecive!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">拍摄开始时间 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${t8_archivefile.timecollectstart!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">拍摄结束时间 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${t8_archivefile.timecollectend!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">后缀名 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(t8_archivefile.suffix!)}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">是否主文件 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${t8_archivefile.ismain!==0?"否":"是"}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">辅助文件keys </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(t8_archivefile.auxkeys!)}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">处理次数 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${t8_archivefile.cntdo!}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">状态 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${t8_archivefile.status_!}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">添加时间 </label>
+							<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${t8_archivefile.timeadd!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">标签id串 </label>
+							<div class="col-sm-7">
+							<textarea class="autosize form-control" readonly="readonly">${escapeXml(t8_archivefile.labelids!)}</textarea>
+							</div>
+						</div>
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	

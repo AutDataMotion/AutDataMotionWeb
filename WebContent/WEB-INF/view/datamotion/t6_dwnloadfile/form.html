@@ -1,0 +1,195 @@
+
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">随机码</label>
+	<div class="col-sm-7">
+		<input type="text" name="t6_dwnloadfile.key_" value="${escapeXml(t6_dwnloadfile.key_!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">ftp文件路径</label>
+	<div class="col-sm-7">
+		<input type="text" name="t6_dwnloadfile.pathsrc" value="${escapeXml(t6_dwnloadfile.pathsrc!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">下载文件名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t6_dwnloadfile.namesrc" value="${escapeXml(t6_dwnloadfile.namesrc!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">下载文件路径</label>
+	<div class="col-sm-7">
+		<input type="text" name="t6_dwnloadfile.pathdest" value="${escapeXml(t6_dwnloadfile.pathdest!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">下载时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t6_dwnloadfile.timedo" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t6_dwnloadfile.timedo!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">文件大小</label>
+	<div class="col-sm-7">
+		<input type="text" name="t6_dwnloadfile.filesize" value="${t6_dwnloadfile.filesize!}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">接收站名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t6_dwnloadfile.station" value="${escapeXml(t6_dwnloadfile.station!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">飞行器</label>
+	<div class="col-sm-7">
+		<input type="text" name="t6_dwnloadfile.aircraft" value="${escapeXml(t6_dwnloadfile.aircraft!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">载荷名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t6_dwnloadfile.sensor" value="${escapeXml(t6_dwnloadfile.sensor!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">数据类型</label>
+	<div class="col-sm-7">
+		<input type="text" name="t6_dwnloadfile.datatype" value="${escapeXml(t6_dwnloadfile.datatype!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">数据级别</label>
+	<div class="col-sm-7">
+		<input type="text" name="t6_dwnloadfile.datalevel" value="${escapeXml(t6_dwnloadfile.datalevel!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">产品标识</label>
+	<div class="col-sm-7">
+		<input type="text" name="t6_dwnloadfile.camera" value="${escapeXml(t6_dwnloadfile.camera!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">下传时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t6_dwnloadfile.timerecive" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t6_dwnloadfile.timerecive!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">拍摄开始时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t6_dwnloadfile.timecollectstart" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t6_dwnloadfile.timecollectstart!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">拍摄结束时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t6_dwnloadfile.timecollectend" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t6_dwnloadfile.timecollectend!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">后缀名</label>
+	<div class="col-sm-7">
+		<input type="text" name="t6_dwnloadfile.suffix" value="${escapeXml(t6_dwnloadfile.suffix!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">状态</label>
+	<div class="col-sm-7">
+		<input type="text" name="t6_dwnloadfile.status_" value="${t6_dwnloadfile.status_!}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">添加时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t6_dwnloadfile.timeadd" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t6_dwnloadfile.timeadd!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">标签id串</label>
+	<div class="col-sm-7">
+		<textarea name="t6_dwnloadfile.labelids" class="autosize form-control">${escapeXml(t6_dwnloadfile.labelids!)}</textarea>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>

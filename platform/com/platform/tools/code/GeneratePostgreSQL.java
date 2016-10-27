@@ -85,12 +85,14 @@ public class GeneratePostgreSQL extends GenerateBase {
 				continue;
 			}
 
-			// 1.生成sql文件
+//			 1.生成sql文件
 			base.sql(classNameSmall, tableName);
 
 			// 2.生成model
 			base.model(className, classNameSmall, dataSource, tableName,
 					pkName, colunmList);
+//			base.modelcpp(className, classNameSmall, dataSource, tableName,
+//					pkName, colunmList);
 
 			// 3.生成validator
 			base.validator(className, classNameSmall);
@@ -113,10 +115,10 @@ public class GeneratePostgreSQL extends GenerateBase {
 			base.add(classNameSmall, tableName, pageTitle, colunmList);
 		}
 
-		// 生成MappingTable
-		base.tableMapping(basePath, listTableMap);
-		// 生成route
-		base.routePlugin(basePath, listTableMap);
+		// 生成config 类文件
+		base.configGen(basePath, listTableMap);
+		// 生成constant 类文件
+		base.constantGen(basePath, listTableMap);
 		System.exit(0);
 	}
 

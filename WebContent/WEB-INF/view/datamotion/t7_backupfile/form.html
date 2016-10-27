@@ -1,0 +1,195 @@
+
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">随机码</label>
+	<div class="col-sm-7">
+		<input type="text" name="t7_backupfile.key_" value="${escapeXml(t7_backupfile.key_!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">源文件路径</label>
+	<div class="col-sm-7">
+		<input type="text" name="t7_backupfile.pathsrc" value="${escapeXml(t7_backupfile.pathsrc!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">备份文件名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t7_backupfile.namesrc" value="${escapeXml(t7_backupfile.namesrc!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">备份文件路径</label>
+	<div class="col-sm-7">
+		<input type="text" name="t7_backupfile.pathdest" value="${escapeXml(t7_backupfile.pathdest!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">备份时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t7_backupfile.timedo" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t7_backupfile.timedo!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">文件大小</label>
+	<div class="col-sm-7">
+		<input type="text" name="t7_backupfile.filesize" value="${t7_backupfile.filesize!}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">接收站名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t7_backupfile.station" value="${escapeXml(t7_backupfile.station!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">飞行器</label>
+	<div class="col-sm-7">
+		<input type="text" name="t7_backupfile.aircraft" value="${escapeXml(t7_backupfile.aircraft!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">载荷名称</label>
+	<div class="col-sm-7">
+		<input type="text" name="t7_backupfile.sensor" value="${escapeXml(t7_backupfile.sensor!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">数据类型</label>
+	<div class="col-sm-7">
+		<input type="text" name="t7_backupfile.datatype" value="${escapeXml(t7_backupfile.datatype!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">数据级别</label>
+	<div class="col-sm-7">
+		<input type="text" name="t7_backupfile.datalevel" value="${escapeXml(t7_backupfile.datalevel!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">产品标识</label>
+	<div class="col-sm-7">
+		<input type="text" name="t7_backupfile.camera" value="${escapeXml(t7_backupfile.camera!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">下传时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t7_backupfile.timerecive" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t7_backupfile.timerecive!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">拍摄开始时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t7_backupfile.timecollectstart" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t7_backupfile.timecollectstart!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">拍摄结束时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t7_backupfile.timecollectend" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t7_backupfile.timecollectend!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">后缀名</label>
+	<div class="col-sm-7">
+		<input type="text" name="t7_backupfile.suffix" value="${escapeXml(t7_backupfile.suffix!)}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">状态</label>
+	<div class="col-sm-7">
+		<input type="text" name="t7_backupfile.status_" value="${t7_backupfile.status_!}" 
+		class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">添加时间</label>
+	<div class="col-sm-7">
+		<div class="input-group">
+		<input type="text" name="t7_backupfile.timeadd" date-data-format="yyyy-mm-dd" data-data-viewmode="years" class="form-control data-picker" value="${t7_backupfile.timeadd!, dateFormat="yyyy-MM-dd HH:mm:ss"}">
+		<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		</div>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">标签id串</label>
+	<div class="col-sm-7">
+		<textarea name="t7_backupfile.labelids" class="autosize form-control">${escapeXml(t7_backupfile.labelids!)}</textarea>
+		<span class="help-inline col-sm-2"></span>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 1-100个任意字符 </span>
+</div>

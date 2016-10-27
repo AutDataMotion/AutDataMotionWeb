@@ -16,23 +16,6 @@ import com.jfinal.plugin.redis.RedisPlugin;
 import com.platform.config.mapping.PlatformMapping;
 import com.platform.constant.ConstantCache;
 import com.platform.constant.ConstantInit;
-import com.platform.mvc.dept.Department;
-import com.platform.mvc.dict.Dict;
-import com.platform.mvc.group.Group;
-import com.platform.mvc.menu.Menu;
-import com.platform.mvc.module.Module;
-import com.platform.mvc.operator.Operator;
-import com.platform.mvc.param.Param;
-import com.platform.mvc.resources.Resources;
-import com.platform.mvc.role.Role;
-import com.platform.mvc.station.Station;
-import com.platform.mvc.syslog.Syslog;
-import com.platform.mvc.systems.Systems;
-import com.platform.mvc.upload.Upload;
-import com.platform.mvc.user.User;
-import com.platform.mvc.user.UserInfo;
-import com.platform.plugin.I18NPlugin;
-import com.platform.plugin.ParamInitPlugin;
 import com.platform.plugin.PropertiesPlugin;
 import com.platform.plugin.SqlXmlPlugin;
 import com.platform.tools.ToolCache;
@@ -47,7 +30,7 @@ public class ConfigCore {
 	
     public ConfigCore() throws IOException {
     	Properties properties = new Properties();
-    	properties.load(ConfigCore.class.getResourceAsStream("/init.properties"));
+    	properties.load(ConfigCore.class.getResourceAsStream("/init_autdatamotion.properties"));
     	PropertiesPlugin propertiesPlugin = new PropertiesPlugin(properties,true);
     	propertiesPlugin.start();
 		
@@ -95,30 +78,15 @@ public class ConfigCore {
 		PlatformMapping baseMapping = new PlatformMapping();
 		baseMapping.setConfigName(ConstantInit.db_dataSource_main);
 		baseMapping.setArp(arp);
-		baseMapping.scan(propertiesPlugin);
+		//baseMapping.scan(propertiesPlugin);
 
-		log.info("configPlugin 表手工注册");
-		arp.addMapping("pt_department", "ids", Department.class);
-		arp.addMapping("pt_dict", "ids", Dict.class);
-		arp.addMapping("pt_group", "ids", Group.class);
-		arp.addMapping("pt_menu", "ids", Menu.class);
-		arp.addMapping("pt_module", "ids", Module.class);
-		arp.addMapping("pt_operator", "ids", Operator.class);
-		arp.addMapping("pt_param", "ids", Param.class);
-		arp.addMapping("pt_resources", "ids", Resources.class);
-		arp.addMapping("pt_role", "ids", Role.class);
-		arp.addMapping("pt_station", "ids", Station.class);
-		arp.addMapping("pt_syslog", "ids", Syslog.class);
-		arp.addMapping("pt_systems", "ids", Systems.class);
-		arp.addMapping("pt_upload", "ids", Upload.class);
-		arp.addMapping("pt_user", "ids", User.class);
-		arp.addMapping("pt_userinfo", "ids", UserInfo.class);
+
 		
 		arp.start();
 		
-		log.info("I18NPlugin 国际化键值对加载");
-		I18NPlugin i18NPlugin = new I18NPlugin();
-		i18NPlugin.start();
+//		log.info("I18NPlugin 国际化键值对加载");
+//		I18NPlugin i18NPlugin = new I18NPlugin();
+//		i18NPlugin.start();
 		
 		if(ToolCache.getCacheType().equals(ConstantCache.cache_type_ehcache)){
 			log.info("EhCachePlugin EhCache缓存");
@@ -132,14 +100,14 @@ public class ConfigCore {
 			RedisPlugin systemRedis = new RedisPlugin(ConstantCache.cache_name_redis_system, redisIp, redisPort);
 			systemRedis.start();
 		}
-		
+//		
 		log.info("SqlXmlPlugin 解析并缓存 xml sql");
 		SqlXmlPlugin sqlXmlPlugin = new SqlXmlPlugin();
 		sqlXmlPlugin.start();
-		
-		log.info("afterJFinalStart 缓存参数");
-		ParamInitPlugin paramInitPlugin = new ParamInitPlugin();
-		paramInitPlugin.start();
+//		
+//		log.info("afterJFinalStart 缓存参数");
+//		ParamInitPlugin paramInitPlugin = new ParamInitPlugin();
+//		paramInitPlugin.start();
     }
 
 }

@@ -1,16 +1,11 @@
-/**
- * <p>title:ConfMain.java<／p>
- * <p>Description: <／p>
- * @date:2016年6月21日上午9:52:27
- * @author：ZhongwengHao email:zhongweng.hao@qq.com
- * @version 1.0
- */
-package com.platform.config.run;
+package ${prjName}.config;
 
 import org.apache.log4j.Logger;
 
+import com.platform.config.run.BaseConfMain;
+
 /**  
- * 创建时间：2016年6月21日 上午9:52:27  
+ * 创建时间：2016年1月26日 上午11:13:45  
  * 项目名称：DUCPlatFormWeb   
  * 文件名称：ConfMain.java  
  * 类说明：  
@@ -18,21 +13,14 @@ import org.apache.log4j.Logger;
  * Modification History:   
  * Date        Author         Version      Description   
  * ----------------------------------------------------------------- 
- * 2016年6月21日     Zhongweng       1.0         1.0 Version   
+ * 2016年1月26日     Zhongweng       1.0         1.0 Version   
  */
-/**
- * <p>Title: ConfMain<／p>
- * <p>Description: <／p>
- * @author ZhongwengHao
- * @date 2016年6月21日
- */
+
 public class ConfMain extends BaseConfMain{
 	private static Logger log = Logger.getLogger(ConfMain.class);
 	private final static ConfMain single = new ConfMain();
 	
-	
 	public static ConfMain getInstance(){
 		return single;
 	}
-
 }

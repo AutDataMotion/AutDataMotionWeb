@@ -80,20 +80,41 @@ public abstract class GenerateBase {
 //		{null, "listblack", null, "Listblack","失信黑榜"},
 //		{null, "listinvestor", null, "Listinvestor","每周资方"},
 //		{null, "listprj", null, "Listprj","每周项目"}
-		{null, "r2_user_look_img", null, "R2_user_look_img","用户查看图片"},
-		{null, "r3_user_search_word", null, "R3_user_search_word","用户文字搜索"},
-		{null, "r4_user_upload_img", null, "R4_user_upload_img","用户上传图片"},
-		{null, "r5_user_search_img", null, "R5_user_search_img","用户图片搜索"},
-		{null, "t3targetinfo", null, "T3targetinfo","目标信息"},
-		{null, "t4pic", null, "T4pic","目标普通图像"},
-		{null, "t4_1piccap", null, "T4_1piccap","目标普通剪切图像"},
-		{null, "t5remotecap", null, "T5remotecap","目标遥感影像"},
-		{null, "t6remoteimg", null, "T6remoteimg","原始遥感影像"},
-		{null, "t7dictionary", null, "T7dictionary","特征库"}
+//		{null, "r2_user_look_img", null, "R2_user_look_img","用户查看图片"},
+//		{null, "r3_user_search_word", null, "R3_user_search_word","用户文字搜索"},
+//		{null, "r4_user_upload_img", null, "R4_user_upload_img","用户上传图片"},
+//		{null, "r5_user_search_img", null, "R5_user_search_img","用户图片搜索"},
+//		{null, "t3targetinfo", null, "T3targetinfo","目标信息"},
+//		{null, "t4pic", null, "T4pic","目标普通图像"},
+//		{null, "t4_1piccap", null, "T4_1piccap","目标普通剪切图像"},
+//		{null, "t5remotecap", null, "T5remotecap","目标遥感影像"},
+//		{null, "t6remoteimg", null, "T6remoteimg","原始遥感影像"},
+//		{null, "t7dictionary", null, "T7dictionary","特征库"}
+		
+//		{null, "t1_1_part_mwi", null, "T1_1_part_mwi","宽波段分景产品"},
+//		{null, "t1_2_lx_mwi", null, "T1_2_lx_mwi","宽波段高级产品"},
+//		{null, "t1_dp_mwi", null, "T1_dp_mwi","宽波段原始数据"},
+//		{null, "t2_dp_ialt", null, "T2_dp_ialt","高度计分景产品"}
+//		{null, "t2_1_part_ialt2", null, "T2_1_part_ialt2","高度计二维分景产品"},
+//		{null, "t2_dp_ialt2", null, "T2_dp_ialt2","高度计二维原始数据"},
+//		{null, "t3_1_part_ialt3", null, "T3_1_part_ialt3","高度计三维分景产品"},
+//		{null, "t3_dp_ialt3", null, "T3_dp_ialt3","高度计三维原始数据"},
+//		{null, "t4_dp_zw_f", null, "T4_dp_zw_f","紫外前向产品"},
+//		{null, "t5_dp_zw_r", null, "T5_dp_zw_r","紫外环形产品"}
+//		{null, "t_initparameter", null, "T_initparameter","参数设置"},
+//		{null, "t_log_proc", null, "T_log_proc","处理日志"},
+		
+		{null, "t6_dwnloadfile", null, "T6_dwnloadfile","下载文件"},
+		{null, "t7_backupfile", null, "T7_backupfile","备份文件"},
+		{null, "t8_archivefile", null, "T8_archivefile","归档文件"},
+		{null, "t9_checkoutfiles", null, "T9_checkoutfiles","检出文件"},
+		{null, "t11_initfoldertree", null, "T11_initfoldertree","产品树配置"},
+		{null, "t12_initmodule", null, "T12_initmodule","模块配置"}
+		
 	};
 	
 	//String prjName = "targrecog";
-	public static String  prjName = "targrecog";
+	public static String  prjName = "datamotion";
 	/**
 	 * 生成的包和类所在的源码根目录，比如src或者是weiXin
 	 */
@@ -107,6 +128,7 @@ public abstract class GenerateBase {
 	 */
 	public static String packageBase = prjName+".mvc";
 	public static String packageConf = prjName+".config";
+	public static String packageConstant = prjName+".constant";
 	/**
 	 * controller基础路径，例如
 	 * @Controller(controllerKey = "/jf/platform/authImg") 中的platform
@@ -178,6 +200,23 @@ public abstract class GenerateBase {
 		String filePath = System.getProperty("user.dir") +generalPathSrc+srcFolder+"/" + packages.replace(".", "/") + "/" + className +".java";
 		createFileByTemplete("model.html", paraMap, filePath);
 	}
+	public void modelcpp(String className, String classNameSmall, String dataSource, String tableName, String pkName, List<TableColumnDto> colunmList){
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		String packages = packageBase + "." + className.toLowerCase();
+		paraMap.put("package", packages);
+		paraMap.put("className", className);
+		paraMap.put("dataSource", dataSource);
+		paraMap.put("tableName", tableName);
+		paraMap.put("pkName", pkName);
+		paraMap.put("namespace", basePath + "." + classNameSmall);
+
+		paraMap.put("colunmList", colunmList);
+		paraMap.put("dataTypes", getJataTypeList(tableName));
+		
+		String filePath = System.getProperty("user.dir") +generalPathSrc+srcFolder+"/" + packages.replace(".", "/") + "/" + className +".h";
+		createFileByTemplete("modelCPP.html", paraMap, filePath);
+	}
+
 
 	/**
 	 * 生成DTO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
@@ -230,7 +269,7 @@ public abstract class GenerateBase {
 		paraMap.put("classNameSmall", classNameSmall);
 		paraMap.put("basePath", basePath);
 		paraMap.put("tableName", tableName);
-		
+		paraMap.put("prjName", prjName);
 		String filePath = System.getProperty("user.dir") + generalPathSrc+srcFolder+"/" + packages.replace(".", "/") + "/" + className + "Controller.java";
 		createFileByTemplete("controller.html", paraMap, filePath);
 	}
@@ -334,27 +373,49 @@ public abstract class GenerateBase {
 		createFileByTemplete("add.html", paraMap, filePath);
 	}
 
-	public void tableMapping(String basePath,List<GenerateTableMappingRoute> listTableMap){
+	public void configGen(String basePath,List<GenerateTableMappingRoute> listTableMap){
 		
 		Map<String, Object> paraMap = new HashMap<String, Object>();
-		paraMap.put("basePath", basePath);
 		System.out.println("tableMapping listTableMap size:"+listTableMap.size());
+		paraMap.put("basePath", basePath);
 		paraMap.put("listTableMap", listTableMap);
+		paraMap.put("prjName", prjName);
+		String filePathPackage = System.getProperty("user.dir") + generalPathSrc+srcFolder+"/" + packageConf.replace(".", "/");
 		
-		String filePath = System.getProperty("user.dir") + generalPathSrc+srcFolder+"/" + packageConf.replace(".", "/") + "/MappingTable.java";
+		String filePath = filePathPackage + "/MappingTable.java";
 		createFileByTemplete("MappingTable.html", paraMap, filePath);
+		
+		filePath = filePathPackage + "/RoutePlugins.java";
+		createFileByTemplete("RoutePlugins.html", paraMap, filePath);
+		
+		filePath = filePathPackage + "/ConfMain.java";
+		createFileByTemplete("ConfMain.html", paraMap, filePath);
+		
+		filePath = filePathPackage + "/DBMappingMy.java";
+		createFileByTemplete("DBMappingMy.html", paraMap, filePath);
+		
 	}
 	
-	public void routePlugin(String basePath,List<GenerateTableMappingRoute> listTableMap){
-		Map<String, Object> paraMap = new HashMap<String, Object>();
-		System.out.println("routePlugin listTableMap size:"+listTableMap.size());
-		paraMap.put("basePath", basePath);
-		paraMap.put("listTableMap", listTableMap);
-		
-		String filePath = System.getProperty("user.dir") + generalPathSrc+srcFolder+"/" + packageConf.replace(".", "/") + "/RoutePlugins.java";
-		createFileByTemplete("RoutePlugins.html", paraMap, filePath);
-	}
+//	public void routePlugin(String basePath,List<GenerateTableMappingRoute> listTableMap){
+//		Map<String, Object> paraMap = new HashMap<String, Object>();
+//		System.out.println("routePlugin listTableMap size:"+listTableMap.size());
+//		paraMap.put("basePath", basePath);
+//		paraMap.put("listTableMap", listTableMap);
+//		
+//		String filePath = System.getProperty("user.dir") + generalPathSrc+srcFolder+"/" + packageConf.replace(".", "/") + "/RoutePlugins.java";
+//		createFileByTemplete("RoutePlugins.html", paraMap, filePath);
+//	}
 
+	public void constantGen(String basePath,List<GenerateTableMappingRoute> listTableMap){
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("basePath", basePath);
+		paraMap.put("prjName", prjName);
+		String filePathPackage = System.getProperty("user.dir") + generalPathSrc+srcFolder+"/" + packageConstant.replace(".", "/");
+		String filePath =  filePathPackage + "/ConstantInitMy.java";
+		createFileByTemplete("ConstantInitMy.html", paraMap, filePath);
+		filePath = filePathPackage + "/PropertiesInitMy.java";
+		createFileByTemplete("PropertiesInitMy.html", paraMap, filePath);
+	}
 	/**
 	 * 根据具体模板生成文件
 	 * @param templateFileName
