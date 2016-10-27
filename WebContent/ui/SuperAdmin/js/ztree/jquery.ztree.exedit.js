@@ -736,7 +736,9 @@
 				tools.setCursorPosition(inputObj.get(0), inputObj.val().length);
 			}
 		},
-		inputSelect: function(inputObj) {
+		inputSelect: function(inputObj) {   
+			//当修改名称时，改变字体颜色
+			inputObj.css("color","green");
 			if (inputObj.get(0)) {
 				inputObj.focus();
 				inputObj.select();

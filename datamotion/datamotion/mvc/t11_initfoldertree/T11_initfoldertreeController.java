@@ -37,9 +37,14 @@ public class T11_initfoldertreeController extends BaseController {
 	/**
 	 * 列表
 	 */
+	
 	public void index() {
 		paging(ConstantInitMy.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, T11_initfoldertree.sqlId_splitPage_from);
 		renderWithPath(pthv+"list.html");
+	}
+	@Clear
+	public void treeIndex() {
+		render(pthv+"treeConfig.html");
 	}
 	@Clear
 	public void show(){
