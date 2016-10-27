@@ -6,6 +6,7 @@ import com.platform.mvc.base.BaseModel;
 
 import org.apache.log4j.Logger;
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Clear;
 
 import datamotion.constant.ConstantInitMy;
 
@@ -31,6 +32,7 @@ public class T7_backupfileController extends BaseController {
 
 	public static final String pthc = "/jf/datamotion/t7_backupfile/";
 	public static final String pthv = "/datamotion/t7_backupfile/";
+	public static final String pthvf = "/datamotion/f/";
 
 	/**
 	 * 列表
@@ -91,7 +93,10 @@ public class T7_backupfileController extends BaseController {
 		T7_backupfileService.service.deleteById("t7_backupfile", getPara() == null ? ids : getPara());	//serial int id
 		redirect(pthc);
 	}
-	
+	@Clear
+	public void test(){
+		render(pthvf+"backupfile.html");
+	}
 	public void setViewPath(){
 		setAttr(ConstantRender.PATH_CTL_NAME, pthc);
 		setAttr(ConstantRender.PATH_VIEW_NAME, pthv);
