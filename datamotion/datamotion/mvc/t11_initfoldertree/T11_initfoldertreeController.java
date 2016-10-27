@@ -5,7 +5,9 @@ import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
 
 import org.apache.log4j.Logger;
+
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Clear;
 
 import datamotion.constant.ConstantInitMy;
 
@@ -47,7 +49,6 @@ public class T11_initfoldertreeController extends BaseController {
 	public void save() {
 		T11_initfoldertree t11_initfoldertree = getModel(T11_initfoldertree.class);
 		//other set 
-		
 		//t11_initfoldertree.save();		//guiid
 		t11_initfoldertree.saveGenIntId();	//serial int id
 		renderWithPath(pthv+"add.html");
@@ -56,6 +57,7 @@ public class T11_initfoldertreeController extends BaseController {
 	/**
 	 * 准备更新
 	 */
+	@Clear
 	public void edit() {
 		//T11_initfoldertree t11_initfoldertree = T11_initfoldertree.dao.findById(getPara());	//guuid
 		T11_initfoldertree t11_initfoldertree = T11_initfoldertreeService.service.SelectById(getParaToInt());		//serial int id
