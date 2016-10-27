@@ -41,7 +41,14 @@ public class T11_initfoldertreeController extends BaseController {
 		paging(ConstantInitMy.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, T11_initfoldertree.sqlId_splitPage_from);
 		renderWithPath(pthv+"list.html");
 	}
-	
+	@Clear
+	public void show(){
+		T11_initfoldertree t11_initfoldertree = new T11_initfoldertree();
+		t11_initfoldertree.setId(1234);
+		t11_initfoldertree.setKey_("nihao");
+		setAttr("t11_initfoldertree", t11_initfoldertree);
+		renderWithPath(pthv+"view.html");
+	}
 	/**
 	 * 保存
 	 */
