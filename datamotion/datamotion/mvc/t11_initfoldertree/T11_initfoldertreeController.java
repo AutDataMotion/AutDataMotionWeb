@@ -102,7 +102,7 @@ public class T11_initfoldertreeController extends BaseController {
 		
 		/*更新当前节点的中文名称*/
 		Db.use(ConstantInitMy.db_dataSource_main)
-			.update("update t11_initfoldertree set namechi=? where key_=?",newName,key_);
+			.update("update t11_initfoldertree set namechi=?,timeupdate='"+new Timestamp(System.currentTimeMillis())+"' where key_=?",newName,key_);
 	}
 	
 	@Clear
@@ -111,14 +111,10 @@ public class T11_initfoldertreeController extends BaseController {
 		String key_=getPara("key_");
 		String childkeys=getPara("childkeys");
 		
-		log.debug("***"+childkeys);
-		log.debug("update t11_initfoldertree set childkeys='"+childkeys+
-				"' where key_=(select parentkeys from t11_initfoldertree"+
-				" where key_='"+key_+"')");
 		/*根据key_更新该父节点的子节点信息*/
 		Db.use(ConstantInitMy.db_dataSource_main)
 			.update("update t11_initfoldertree set childkeys='"+childkeys+
-				"' where key_=(select parentkeys from t11_initfoldertree"+
+				"',timeupdate='"+new Timestamp(System.currentTimeMillis())+"' where key_=(select parentkeys from t11_initfoldertree"+
 				" where key_='"+key_+"')");
 		/*根据key_删除当前节点以及子节点*/
 		Db.use(ConstantInitMy.db_dataSource_main)

@@ -444,11 +444,14 @@ function loadMyChartMap() {
         });
 }
 loadMyChartMap();
+
+
 $.fn.styles=function(){
     this.css("backgroundColor",'rgba(0,0,0,0.3)')
         .css("color","white");
     return this;
 }
+
 $(function(){
     var mains=$("#mychart");
     mains.before("<input id='add' type='button' value='增加'/><input id='del' type='button' value='删除'/>");

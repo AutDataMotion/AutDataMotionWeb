@@ -1,188 +1,20 @@
-<!DOCTYPE html>
-<!--[if IE 9 ]>
-<html class="ie9"><![endif]-->
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <meta name="format-detection" content="telephone=no">
-    <meta charset="UTF-8">
+<% var cssSec={ %>
 
-    <meta name="description" content="Violate Responsive Admin Template">
-    <meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
+<% }; %>
 
-    <title>自动运营平台</title>
-    <script type="text/javascript">
-		var cxt = '${cxt!}';
-	</script>
-
-    <!-- CSS -->
-    <link href="${cxt!}/ui/SuperAdmin/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${cxt!}/ui/SuperAdmin/css/animate.min.css" rel="stylesheet">
-    <link href="${cxt!}/ui/SuperAdmin/css/font-awesome.min.css" rel="stylesheet">
-    <link href="${cxt!}/ui/SuperAdmin/css/form.css" rel="stylesheet">
-    <link href="${cxt!}/ui/SuperAdmin/css/calendar.css" rel="stylesheet">
-    <link href="${cxt!}/ui/SuperAdmin/css/style.css" rel="stylesheet">
-    <link href="${cxt!}/ui/SuperAdmin/css/icons.css" rel="stylesheet">
-    <link href="${cxt!}/ui/SuperAdmin/css/generics.css" rel="stylesheet">
-    <link href="${cxt!}/ui/SuperAdmin/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
-    <style>
-        #sidebar {
-            width: 0px;
-        }
-        #treeDiv{
-	         border:1px solid rgba(255, 255, 255, 0.3);
-	         margin:10px;
-	         width: 500px;
-	         overflow: auto;
-        }
-        .ztree li span.button.add {
-            margin-left: 2px;
-            margin-right: -1px;
-            background-position: -144px 0;
-            vertical-align: top;
-            vertical-align: middle
-        }
-    </style>
-</head>
-<body id="skin-blur-violate">
-<header id="header" class="media">
-    <a href="" id="menu-toggle"></a>
-    <a class="logo pull-left" href="#">自动运营平台</a>
-    <div class="media-body">
-        <div class="media" id="top-menu">
-
-            <div id="time" class="pull-right">
-                <span id="hours"></span>
-                :
-                <span id="min"></span>
-                :
-                <span id="sec"></span>
-            </div>
-        </div>
-    </div>
-</header>
-<section id="main" class="p-relative" role="main">
-    <!-- Sidebar -->
-    <aside id="sidebar">
-        <!-- Side Menu -->
-        <ul class="list-unstyled side-menu">
-            <li class="active">
-                <a class="sa-side-process" href="http://127.0.0.1:8800/ui/SuperAdmin/project.html">
-                    <span class="menu-item">运营流程面板</span>
-                </a>
-            </li>
-            <li>
-                <a class="sa-side-control" href="#">
-                    <span class="menu-item">运营控制面板</span>
-                </a>
-            </li>
-            <li>
-                <a class="sa-side-statistical" href="#">
-                    <span class="menu-item">数据分析统计</span>
-                </a>
-            </li>
-            <li>
-                <a class="sa-side-monitor" href="http://127.0.0.1:8800/ui/SuperAdmin/visualization.html">
-                    <span class="menu-item">系统运行监控</span>
-                </a>
-            </li>
-            <li class="dropdown">
-                <a class="sa-side-download" href="">
-                    <span class="menu-item">数据采集下载</span>
-                </a>
-                <ul class="list-unstyled menu-item">
-                    <li><a href="">下载数据管理</a></li>
-                    <li><a href="http://127.0.0.1:8800/ui/SuperAdmin/download_config.html">配置管理</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a class="sa-side-storage" href="">
-                    <span class="menu-item">数据存储备份</span>
-                </a>
-                <ul class="list-unstyled menu-item">
-                    <li><a href="">备份数据管理</a></li>
-                    <li><a href="">配置管理</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a class="sa-side-file" href="">
-                    <span class="menu-item">数据编目归档</span>
-                </a>
-                <ul class="list-unstyled menu-item">
-                    <li><a href="">归档数据管理</a></li>
-                    <li><a href="">流程面板</a></li>
-                    <li><a href="">日志管理</a></li>
-                    <li><a href="">配置管理</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a class="sa-side-release" href="">
-                    <span class="menu-item">数据检出发布</span>
-                </a>
-                <ul class="list-unstyled menu-item">
-                    <li><a href="">检出查询检索</a></li>
-                    <li><a href="">管理配置</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="sa-side-sysConfig" href="http://127.0.0.1:8800/jf/datamotion/t11_initfoldertree/treeIndex">
-                    <span class="menu-item">系统配置</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
-    <!-- Content -->
-    <h4 class="page-title" align="center">系统配置</h4>
+<% var contSec={ %>
+	<h4 class="page-title" align="center">系统配置</h4>
     <section id="content" class="container">
-    <center>
-    	<div id="treeDiv">
-	    	<ul id="treeDemo" class="ztree"></ul>
-	    </div>
-    </center>
-	    
-    	
+	    <center>
+	    	<div id="treeDiv">
+		    	<ul id="treeDemo" class="ztree"></ul>
+		    </div>
+	    </center>
 	</section>
-</section>
+<% }; %>
 
-<!-- Javascript Libraries -->
-<!-- jQuery -->
-<script src="${cxt!}/ui/SuperAdmin/js/jquery.min.js"></script> <!-- jQuery Library -->
-<script src="${cxt!}/ui/SuperAdmin/js/jquery-ui.min.js"></script> <!-- jQuery UI -->
-<script src="${cxt!}/ui/SuperAdmin/js/jquery.easing.1.3.js"></script> <!-- jQuery Easing - Requirred for Lightbox + Pie Charts-->
-
-<!-- Bootstrap -->
-<script src="${cxt!}/ui/SuperAdmin/js/bootstrap.min.js"></script>
-<!-- Charts -->
-<script src="${cxt!}/ui/SuperAdmin/js/charts/jquery.flot.js"></script> <!-- Flot Main -->
-<script src="${cxt!}/ui/SuperAdmin/js/charts/jquery.flot.time.js"></script> <!-- Flot sub -->
-<script src="${cxt!}/ui/SuperAdmin/js/charts/jquery.flot.animator.min.js"></script> <!-- Flot sub -->
-<script src="${cxt!}/ui/SuperAdmin/js/charts/jquery.flot.resize.min.js"></script> <!-- Flot sub - for repaint when resizing the screen -->
-
-<script src="${cxt!}/ui/SuperAdmin/js/sparkline.min.js"></script> <!-- Sparkline - Tiny charts -->
-<script src="${cxt!}/ui/SuperAdmin/js/easypiechart.js"></script> <!-- EasyPieChart - Animated Pie Charts -->
-<script src="${cxt!}/ui/SuperAdmin/js/charts.js"></script> <!-- All the above chart related functions -->
-
-<!-- Map -->
-<script src="${cxt!}/ui/SuperAdmin/js/maps/jvectormap.min.js"></script> <!-- jVectorMap main library -->
-<script src="${cxt!}/ui/SuperAdmin/js/maps/usa.js"></script> <!-- USA Map for jVectorMap -->
-
-<!--  Form Related -->
-<script src="${cxt!}/ui/SuperAdmin/js/select.min.js"></script> <!-- Custom Select -->
-<script src="${cxt!}/ui/SuperAdmin/js/chosen.min.js"></script> <!-- Custom Multi Select -->
-<script src="${cxt!}/ui/SuperAdmin/js/icheck.js"></script> <!-- Custom Checkbox + Radio -->
-
-<!-- UX -->
-<script src="${cxt!}/ui/SuperAdmin/js/scroll.min.js"></script> <!-- Custom Scrollbar -->
-
-<!-- Other -->
-<script src="${cxt!}/ui/SuperAdmin/js/calendar.min.js"></script> <!-- Calendar -->
-<script src="${cxt!}/ui/SuperAdmin/js/feeds.min.js"></script> <!-- News Feeds -->
-<script src="${cxt!}/ui/SuperAdmin/js/jquery.cookie.js"></script>
-<script src="${cxt!}/ui/SuperAdmin/js/ztree/jquery.ztree.core.js"></script>
-<script src="${cxt!}/ui/SuperAdmin/js/ztree/jquery.ztree.excheck.js"></script>
-<script src="${cxt!}/ui/SuperAdmin/js/ztree/jquery.ztree.exedit.js"></script>
-<!-- All JS functions -->
-<script src="${cxt!}/ui/SuperAdmin/js/functions.js"></script>
-<script type="text/javascript">
+<% var jsSec={ %>
+	<script type="text/javascript">
     	//定义全局
     	var treeNodes;
         var setting = {
@@ -329,14 +161,23 @@
             };
             return false;
         }
-        //显示删除按钮（根节点不显示删除按钮）
+        //显示删除按钮
         function showRemoveBtn(treeId, treeNode) {
-            return !(treeNode.pId==null);
+        	if(treeNode.isParent==true){
+        		var childObj=treeNode.children;
+        		//如果该节点的孩子节点存在是父节点，则不显示删除按钮
+        		for(var i=0;i<childObj.length;i++){
+        			if(childObj[i].isParent==true)
+        				return false;
+        		}
+        	} 
+        	//根节点不显示删除按钮
+            if(treeNode.pId==null)return false;
+            else return true;
         }
         //叶子节点的点击事件
         function onClick(event, treeId, treeNode) {
-        	console.log(treeNode.pId==null);
-        	
+        	console.log(treeNode.children);
         	if(treeNode!=null&&treeNode.isParent==false){
             	console.log(treeNode.name);
             };	
@@ -384,7 +225,5 @@
             $.fn.zTree.init($("#treeDemo"), setting, treeNodes);
         });
     </script>
-</body>
-</html>
-
-
+<% }; %>
+<% include("common.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
