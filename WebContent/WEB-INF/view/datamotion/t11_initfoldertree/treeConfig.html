@@ -3,14 +3,48 @@
 <% }; %>
 
 <% var contSec={ %>
-	<h4 class="page-title" align="center">系统配置</h4>
-    <section id="content" class="container">
-	    <center>
-	    	<div id="treeDiv">
-		    	<ul id="treeDemo" class="ztree"></ul>
-		    </div>
-	    </center>
-	</section>
+<div class="myPanel">
+	<div>
+		<label class="mylabel">原文件名规则：</label>
+		<input class="myTreeinput" style="width:600px" type="text" value=""/>
+	</div>
+	<div>
+		<label class="mylabel">改名规则：</label>
+		<input class="myTreeinput" style="width:600px" type="text" value=""/>
+	</div>
+	<div style="margin-left:10px" class="col-md-1 mylabel">
+        <label>是否有辅助数据：</label>
+    </div>
+    <div class="col-md-3 form-group"  style="margin:10px">
+        <select class="select">
+            <option value="">请选择</option>
+            <option value="option1">是</option>
+            <option value="option2">否</option>
+        </select>
+    </div>
+    <div class="col-md-1 mylabel">
+        <label>是否自动检出：</label>
+    </div>
+    <div class="col-md-3 form-group"  style="margin:10px">
+        <select class="select">
+            <option value="">请选择</option>
+            <option value="option1">是</option>
+            <option value="option2">否</option>
+        </select>
+    </div>
+    <div>
+    	<label class="mylabel">辅助数据格式：</label>
+		<input class="myTreeinput" style="width:350px" type="text" value=""/>
+    </div>
+    <div>
+    	<label class="mylabel">保存路径：</label>
+		<input class="myTreeinput" style="width:350px" type="text" value=""/>可扩展date/time/level目录
+    </div>
+    <br><br>
+	<div class="col-md-12 form-group" align="center"> 
+		<input type="button" onclick="" value="保存" class="btn m-r-5"/>
+    </div>
+</div>
 <% }; %>
 
 <% var jsSec={ %>
@@ -89,7 +123,7 @@
                 	childNode=childNode.id.split("_");
                 	currentId=(parseInt(parentNode[0])+1)+"_"+(parseInt(childNode[1])+1);
                 }
-                zTree.addNodes(treeNode, {id:currentId, pId:treeNode.id, name:"new node" + (currentId)});
+                zTree.addNodes(treeNode, {id:currentId, pid:treeNode.id, name:"new node" + (currentId)});
                 $.post(
                 	'${cxt!}/jf/datamotion/t11_initfoldertree/addTreeNode',
                 	{//传入参数
@@ -172,12 +206,11 @@
         		}
         	} 
         	//根节点不显示删除按钮
-            if(treeNode.pId==null)return false;
-            else return true;
+        	if(treeNode.pid==null)return false;
+        	return true;
         }
         //叶子节点的点击事件
         function onClick(event, treeId, treeNode) {
-        	console.log(treeNode.children);
         	if(treeNode!=null&&treeNode.isParent==false){
             	console.log(treeNode.name);
             };	
@@ -226,4 +259,4 @@
         });
     </script>
 <% }; %>
-<% include("common.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
+<% include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
