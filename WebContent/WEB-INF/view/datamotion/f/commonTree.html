@@ -30,7 +30,7 @@
         .block-area{
         	margin-left: 0px;
         }
-        /*#treeDemo {
+        #treeDemo {
             width: 200px;
             height: 300px;
             overflow-x: auto;
@@ -44,8 +44,7 @@
 
         #treeDemo::-webkit-scrollbar-thumb {
             background-color: rgba(0, 0, 0, 0.5);;
-        }*/
-        
+        }
     </style>
 </head>
 <body id="skin-blur-violate">
@@ -153,7 +152,7 @@
 	        <img src="${cxt!}/ui/SuperAdmin/img/shortcuts/download.ico" alt="">
 	        <small class="t-overflow">下载管理</small>
 	    </a>
-	    <a class="shortcut tile" href="www.baidu.com">
+	    <a class="shortcut tile" href="">
 	        <img src="${cxt!}/ui/SuperAdmin/img/shortcuts/archive.ico" alt="">
 	        <small class="t-overflow">归档管理</small>
 	    </a>
@@ -162,19 +161,17 @@
 	        <small class="t-overflow">检出发布</small>
 	    </a>
 	</div>
-    <h3 class="block-title">系统配置</h3>
- 	<p class="bottom_line"></p>
-        <table>
-        	<tr>
-            	<td align="left" valign="top">
-                 	<ul id="treeDemo" class="ztree"></ul>
-                </td>
-               <td align="left" valign="top">
-	               <!-- Content -->
-	    			${contSec!}
-               </td>
-            </tr>
-         </table>
+    <table>
+    	<tr>
+        	<td align="left" valign="top">
+             	<ul id="treeDemo" class="ztree"></ul>
+            </td>
+           <td align="left" valign="top">
+           		<!-- Content -->
+				${contSec!}
+           </td>
+        </tr>
+     </table>
    </section>
 </section>
 
@@ -217,6 +214,7 @@
 <script src="${cxt!}/ui/SuperAdmin/js/ztree/jquery.ztree.exedit.js"></script>
 <!-- All JS functions -->
 <script src="${cxt!}/ui/SuperAdmin/js/functions.js"></script>
+<script src="${cxt!}/ui/SuperAdmin/js/globalTree.js"></script>
 ${jsSec!}
 </body>
 </html>
