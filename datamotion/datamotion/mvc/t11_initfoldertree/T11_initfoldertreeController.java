@@ -123,7 +123,15 @@ public class T11_initfoldertreeController extends BaseController {
 			.update("delete from t11_initfoldertree where key_=?",key_);
 		
 	}
-	
+	@Clear
+	/*get tree node*/
+	public void getTreeNode(){
+		List<Record> res = Db.use(ConstantInitMy.db_dataSource_main)
+			.find("select key_ as id,parentkeys as pid,namechi as name from t11_initfoldertree");
+		log.debug("*****");
+		log.debug(res);
+		renderJson(res);
+	}
 	@Clear
 	public void show(){
 		T11_initfoldertree t11_initfoldertree = new T11_initfoldertree();
