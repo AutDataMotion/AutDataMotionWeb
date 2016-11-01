@@ -3,14 +3,9 @@
 <% }; %>
 
 <% var contSec={ %>
-	<h4 class="page-title" align="center">系统配置</h4>
-    <section id="content" class="container">
-	    <center>
 	    	<div id="treeDiv">
-		    	<ul id="treeDemo" class="ztree"></ul>
+		    	dddd
 		    </div>
-	    </center>
-	</section>
 <% }; %>
 
 <% var jsSec={ %>
@@ -89,7 +84,7 @@
                 	childNode=childNode.id.split("_");
                 	currentId=(parseInt(parentNode[0])+1)+"_"+(parseInt(childNode[1])+1);
                 }
-                zTree.addNodes(treeNode, {id:currentId, pId:treeNode.id, name:"new node" + (currentId)});
+                zTree.addNodes(treeNode, {id:currentId, pid:treeNode.id, name:"new node" + (currentId)});
                 $.post(
                 	'${cxt!}/jf/datamotion/t11_initfoldertree/addTreeNode',
                 	{//传入参数
@@ -172,8 +167,8 @@
         		}
         	} 
         	//根节点不显示删除按钮
-            if(treeNode.pId==null)return false;
-            else return true;
+        	if(treeNode.pid==null)return false;
+        	return true;
         }
         //叶子节点的点击事件
         function onClick(event, treeId, treeNode) {

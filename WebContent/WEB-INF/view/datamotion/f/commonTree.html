@@ -30,7 +30,7 @@
         .block-area{
         	margin-left: 0px;
         }
-        /*#treeDemo {
+        #treeDemo {
             width: 200px;
             height: 300px;
             overflow-x: auto;
@@ -44,7 +44,7 @@
 
         #treeDemo::-webkit-scrollbar-thumb {
             background-color: rgba(0, 0, 0, 0.5);;
-        }*/
+        }
     </style>
 </head>
 <body id="skin-blur-violate">
@@ -161,16 +161,14 @@
 	    </a>
 	</div>
     <section id="content" class="container">
-    <h3 class="block-title">系统配置</h3>
- 	<p class="bottom_line"></p>
         <table>
         	<tr>
             	<td align="left" valign="top">
                  	<ul id="treeDemo" class="ztree"></ul>
                 </td>
                <td align="left" valign="top">
-	               <!-- Content -->
-	    			${contSec!}
+               		<!-- Content -->
+    				${contSec!}
                </td>
             </tr>
          </table>
@@ -216,6 +214,7 @@
 <script src="${cxt!}/ui/SuperAdmin/js/ztree/jquery.ztree.exedit.js"></script>
 <!-- All JS functions -->
 <script src="${cxt!}/ui/SuperAdmin/js/functions.js"></script>
+<script src="${cxt!}/ui/SuperAdmin/js/globalTree.js"></script>
 ${jsSec!}
 </body>
 </html>
