@@ -3,9 +3,48 @@
 <% }; %>
 
 <% var contSec={ %>
-	    	<div id="treeDiv">
-		    	dddd
-		    </div>
+<div class="myPanel">
+	<div>
+		<label class="mylabel">原文件名规则：</label>
+		<input class="myTreeinput" style="width:600px" type="text" value=""/>
+	</div>
+	<div>
+		<label class="mylabel">改名规则：</label>
+		<input class="myTreeinput" style="width:600px" type="text" value=""/>
+	</div>
+	<div style="margin-left:10px" class="col-md-1 mylabel">
+        <label>是否有辅助数据：</label>
+    </div>
+    <div class="col-md-3 form-group"  style="margin:10px">
+        <select class="select">
+            <option value="">请选择</option>
+            <option value="option1">是</option>
+            <option value="option2">否</option>
+        </select>
+    </div>
+    <div class="col-md-1 mylabel">
+        <label>是否自动检出：</label>
+    </div>
+    <div class="col-md-3 form-group"  style="margin:10px">
+        <select class="select">
+            <option value="">请选择</option>
+            <option value="option1">是</option>
+            <option value="option2">否</option>
+        </select>
+    </div>
+    <div>
+    	<label class="mylabel">辅助数据格式：</label>
+		<input class="myTreeinput" style="width:350px" type="text" value=""/>
+    </div>
+    <div>
+    	<label class="mylabel">保存路径：</label>
+		<input class="myTreeinput" style="width:350px" type="text" value=""/>可扩展date/time/level目录
+    </div>
+    <br><br>
+	<div class="col-md-12 form-group" align="center"> 
+		<input type="button" onclick="" value="保存" class="btn m-r-5"/>
+    </div>
+</div>
 <% }; %>
 
 <% var jsSec={ %>
@@ -172,7 +211,6 @@
         }
         //叶子节点的点击事件
         function onClick(event, treeId, treeNode) {
-        	console.log(treeNode.children);
         	if(treeNode!=null&&treeNode.isParent==false){
             	console.log(treeNode.name);
             };	
@@ -221,4 +259,4 @@
         });
     </script>
 <% }; %>
-<% include("common.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
+<% include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
