@@ -1971,7 +1971,7 @@ a.list-group-item.active > .badge,
 
     /* Sidebar */
     #sidebar {
-        padding-left: 45px;
+        padding-left: 50px;
     }
 
     #sidebar.toggled {
@@ -1980,7 +1980,7 @@ a.list-group-item.active > .badge,
     }
 
     #sidebar .side-menu {
-        width: 45px;
+        width: 50px;
         height: 100%;
         left: 0;
         position: absolute;
