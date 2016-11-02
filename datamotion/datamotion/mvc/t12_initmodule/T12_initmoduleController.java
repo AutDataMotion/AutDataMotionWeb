@@ -1,12 +1,20 @@
 package datamotion.mvc.t12_initmodule;
 
+import java.sql.Timestamp;
+import java.util.List;
+
 import com.platform.constant.ConstantRender;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
 
 import org.apache.log4j.Logger;
-import com.jfinal.aop.Before;
 
+import com.jfinal.aop.Before;
+import com.jfinal.aop.Clear;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
+
+import csuduc.platform.util.generID.UUIDGener;
 import datamotion.constant.ConstantInitMy;
 
 
@@ -32,6 +40,83 @@ public class T12_initmoduleController extends BaseController {
 	public static final String pthc = "/jf/datamotion/t12_initmodule/";
 	public static final String pthv = "/datamotion/t12_initmodule/";
 
+	@Clear
+	public void getModelInfo(){
+		String fkey=getPara("key_");
+		List<Record> res = Db.use(ConstantInitMy.db_dataSource_main)
+			.find("select * from t12_initmodule where fkeystreenode=?",fkey);
+		renderJson(res);
+	}
+	
+	@Clear
+	public void saveModelInfo(){
+		String fkeystreenode=getPara("fkeystreenode");
+		String aircraft=getPara("aircraft");
+		String sensor=getPara("sensor");
+		String datatype=getPara("datatype");
+		String camera=getPara("camera");
+		String datalevel=getPara("datalevel");
+		String isdwnload=getPara("isdwnload");
+		String pathftp=getPara("pathftp");
+		String pathdwnload=getPara("pathdwnload");
+		String isbackup=getPara("isbackup");
+		String pathbackup=getPara("pathbackup");
+		String isarchive=getPara("isarchive");
+		String patharchive=getPara("patharchive");
+		String ischeckout=getPara("ischeckout");
+		String pathcheckout=getPara("pathcheckout");
+		String namemdlsrc=getPara("namemdlsrc");
+		String namemdldes=getPara("namemdldes");
+		String ishavaaux=getPara("ishavaaux");
+		String auxfiletypes=getPara("auxfiletypes");
+		log.debug(Boolean.valueOf(isdwnload)+"ddd");
+		List<Record> res = Db.use(ConstantInitMy.db_dataSource_main)
+				.find("select * from t12_initmodule where fkeystreenode=?",fkeystreenode);
+		
+		if(res.size()==0||res.isEmpty()){
+			Record t12_initmodule=new Record()
+			.set("key_", UUIDGener.getUUIDShort())
+			.set("fkeystreenode", fkeystreenode)
+			.set("aircraft", aircraft)
+			.set("sensor", sensor)
+			.set("datatype", datatype)
+			.set("camera", camera)
+			.set("datalevel", datalevel)
+			.set("isdwnload", Boolean.valueOf(isdwnload))
+			.set("pathftp", pathftp)
+			.set("pathdwnload", pathdwnload)
+			.set("isbackup", Boolean.valueOf(isbackup))
+			.set("pathbackup", pathbackup)
+			.set("isarchive", Boolean.valueOf(isarchive))
+			.set("patharchive", patharchive)
+			.set("ischeckout", Boolean.valueOf(ischeckout))
+			.set("pathcheckout", pathcheckout)
+			.set("namemdlsrc", namemdlsrc)
+			.set("namemdldes", namemdldes)
+			.set("ishavaaux", Boolean.valueOf(ishavaaux))
+			.set("auxfiletypes", auxfiletypes)
+			.set("timeadd", new Timestamp(System.currentTimeMillis()));
+			Db.use(ConstantInitMy.db_dataSource_main)
+			  .save("t12_initmodule", t12_initmodule);
+		}else {
+			String key_=res.get(0).get("key_");
+			Db.use(ConstantInitMy.db_dataSource_main)
+			.update("update t12_initmodule set aircraft='"+aircraft+
+			"',sensor='"+sensor+"',datatype='"+datatype+
+			"',camera='"+camera+"',datalevel='"+datalevel+
+			"',isdwnload="+Boolean.valueOf(isdwnload)+",pathftp='"+pathftp+
+			"',pathdwnload='"+pathdwnload+"',isbackup="+Boolean.valueOf(isbackup)+
+			",pathbackup='"+pathbackup+"',isarchive="+Boolean.valueOf(isarchive)+
+			",patharchive='"+patharchive+"',ischeckout="+Boolean.valueOf(ischeckout)+
+			",pathcheckout='"+pathcheckout+"',namemdlsrc='"+namemdlsrc+
+			"',namemdldes='"+namemdldes+"',ishavaaux="+Boolean.valueOf(ishavaaux)+
+			",auxfiletypes='"+auxfiletypes+
+			"',timeupdate='"+new Timestamp(System.currentTimeMillis())+
+			"' where key_=?",key_);
+		}
+		renderText("operate succeed");
+	}
+	
 	/**
 	 * 列表
 	 */

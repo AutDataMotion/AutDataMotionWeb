@@ -3,57 +3,153 @@
 <% }; %>
 
 <% var contSec={ %>
-<div class="myPanel">
-	<div>
-		<label class="mylabel">原文件名规则：</label>
-		<input class="myTreeinput" style="width:600px" type="text" value=""/>
-	</div>
-	<div>
-		<label class="mylabel">改名规则：</label>
-		<input class="myTreeinput" style="width:600px" type="text" value=""/>
-	</div>
-	<div style="margin-left:10px" class="col-md-1 mylabel">
-        <label>是否有辅助数据：</label>
-    </div>
-    <div class="col-md-3 form-group"  style="margin:10px">
-        <select class="select">
-            <option value="">请选择</option>
-            <option value="option1">是</option>
-            <option value="option2">否</option>
-        </select>
-    </div>
-    <div class="col-md-1 mylabel">
-        <label>是否自动检出：</label>
-    </div>
-    <div class="col-md-3 form-group"  style="margin:10px">
-        <select class="select">
-            <option value="">请选择</option>
-            <option value="option1">是</option>
-            <option value="option2">否</option>
-        </select>
-    </div>
-    <div>
-    	<label class="mylabel">辅助数据格式：</label>
-		<input class="myTreeinput" style="width:350px" type="text" value=""/>
-    </div>
-    <div>
-    	<label class="mylabel">保存路径：</label>
-		<input class="myTreeinput" style="width:350px" type="text" value=""/>可扩展date/time/level目录
-    </div>
-    <br><br>
+<div class="myPanel" style="margin-left: 3px">
+	<h3 class="block-title">文件信息</h3>
+ 	<p class="bottom_line"></p>
+ 	<table class="row">
+	    <tr>
+	        <td><label class="mylabel">飞行器：</label></td>
+	        <td width="200px">
+		        <select id="aircraft" name="aircraft" class="select">
+		            <option value="天宫一号">天宫一号</option>
+		            <option value="天宫二号">天宫二号</option>
+		        </select>
+			</td>
+			<td><label class="mylabel">载荷：</label></td>
+	        <td width="200px">
+		        <select id="sensor" name="sensor" class="select">
+		            <option value="高度计">高度计</option>
+		            <option value="宽波段">宽波段</option>
+		        </select>
+			</td>
+			<td><label class="mylabel">数据类型：</label></td>
+	        <td width="200px">
+		        <select id="datatype" name="datatype" class="select">
+		            <option value="IMG">IMG</option>
+		            <option value="AUX">AUX</option>
+		            <option value="SCI">SCI</option>
+		            <option value="ENG">ENG</option>
+		        </select>
+			</td>
+	    </tr>
+	    <tr>
+	        <td><label class="mylabel">产品标识：</label></td>
+	        <td width="200px">
+		        <select id="camera" name="camera" class="select">
+		            <option value="VNI">VNI</option>
+		            <option value="INF">INF</option>
+		        </select>
+			</td>
+			<td><label class="mylabel">产品等级：</label></td>
+	        <td width="200px">
+		        <select id="datalevel" name="datalevel" class="select">
+		            <option value="0B">0B</option>
+		            <option value="0C">0C</option>
+		            <option value="L1">L1</option>
+		            <option value="L2">L2</option>
+		        </select>
+			</td>
+			
+	    </tr>
+	</table>
+ 	<h3 class="block-title">下载配置</h3>
+ 	<p class="bottom_line"></p>
+ 	<table class="row">
+	    <tr>
+	        <td><label class="mylabel">是否下载：</label></td>
+	        <td width="200px">
+		        <select id="isdwnload" name="isdwnload" class="select">
+		            <option value="true">是</option>
+		            <option value="false">否</option>
+		        </select>
+			</td>
+			<td><label class="mylabel">FTP路径：</label></td>
+            <td><input id="pathftp" name="pathftp" type="text" class="form-control myinput"/></td>
+			<td><label class="mylabel">下载路径：</label></td>
+            <td><input id="pathdwnload" name="pathdwnload" type="text" class="form-control myinput"/></td>
+		</tr>
+ 	</table>
+ 	<h3 class="block-title">备份配置</h3>
+ 	<p class="bottom_line"></p>
+ 	<table class="row">
+	    <tr>
+	        <td><label class="mylabel">是否备份：</label></td>
+	        <td width="200px">
+		        <select id="isbackup" name="isbackup" class="select">
+		            <option value="true">是</option>
+		            <option value="false">否</option>
+		        </select>
+			</td>
+			<td><label class="mylabel">备份路径：</label></td>
+            <td><input style="width:400px" id="pathbackup" name="pathbackup" type="text" class="form-control"/></td>
+		</tr>
+ 	</table>
+ 	<h3 class="block-title">归档配置</h3>
+ 	<p class="bottom_line"></p>
+ 	<table class="row">
+	    <tr>
+	        <td><label class="mylabel">是否归档：</label></td>
+	        <td width="200px">
+		        <select id="isarchive" name="isarchive" class="select">
+		            <option value="true">是</option>
+		            <option value="false">否</option>
+		        </select>
+			</td>
+			<td><label class="mylabel">归档路径：</label></td>
+            <td><input style="width:400px" id="patharchive" name="patharchive" type="text" class="form-control"/></td>
+		</tr>
+ 	</table>
+ 	<h3 class="block-title">检出配置</h3>
+ 	<p class="bottom_line"></p>
+ 	<table class="row">
+	    <tr>
+	        <td><label class="mylabel1">是否检出：</label></td>
+	        <td width="200px">
+		        <select id="ischeckout" name="ischeckout" class="select">
+		            <option value="true">是</option>
+		            <option value="false">否</option>
+		        </select>
+			</td>
+			<td><label class="mylabel1">检出路径：</label></td>
+            <td><input style="width:400px" id="pathcheckout" name="pathcheckout" type="text" class="form-control"/></td>
+         </tr>
+         <tr>
+            <td><label class="mylabel1">原文件名规则：</label></td>
+            <td colspan="3"><input style="width:600px" id="namemdlsrc" name="namemdlsrc" type="text" class="form-control"/></td>
+         </tr>
+         <tr>
+            <td><label class="mylabel1">改名规则：</label></td>
+            <td colspan="3"><input style="width:600px" id="namemdldes" name="namemdldes" type="text" class="form-control"/></td>
+		</tr>
+		<tr>
+	        <td><label class="mylabel1">是否有辅助数据：</label></td>
+	        <td width="200px">
+		        <select id="ishavaaux" name="ishavaaux" class="select">
+		            <option value="true">是</option>
+		            <option value="false">否</option>
+		        </select>
+			</td>
+			<td><label class="mylabel1">辅助数据格式：</label></td>
+            <td><input style="width:400px" id="auxfiletypes" name="auxfiletypes" type="text" class="form-control"/></td>
+         </tr>
+ 	</table>
+ 	<br>
 	<div class="col-md-12 form-group" align="center"> 
-		<input type="button" onclick="" value="保存" class="btn m-r-5"/>
+		<input id="modelSave" type="button" value="保存" class="btn m-r-5"/>
     </div>
+    <br>
+    <br>
 </div>
 <% }; %>
 
 <% var jsSec={ %>
+<script src="${cxt!}/ui/SuperAdmin/js/myConfigTree.js"></script>
 	<script type="text/javascript">
     	//定义全局
     	var treeNodes;
         var setting = {
             view: {
-                addHoverDom: addHoverDom,
+                //addHoverDom: addHoverDom,
                 removeHoverDom: removeHoverDom,
                 selectedMulti: false
             },
@@ -97,166 +193,6 @@
 				<%}
 			}%>			
         ];
-
-        /*显示添加按钮*/
-        function addHoverDom(treeId, treeNode) {   
-            var sObj = $("#" + treeNode.tId + "_span");
-            if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
-            var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
-                    + "' title='add node' onfocus='this.blur();'></span>";
-            sObj.after(addStr);
-            var btn = $("#addBtn_"+treeNode.tId);
-            /*增加节点：点击事件*/
-            if (btn) btn.bind("click", function(){   
-                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                var parentNode=treeNode.id;
-                parentNode=parentNode.split("_");
-                var currentId;
-                /*
-                	如果当前节点不是父节点，则新增节点命名只需在level上加1;
-                	如果当前节点事父节点，则新增节点的名称为父节点的最后一个孩子节点的名称加1
-                */
-                if(treeNode.isParent==false){
-                    currentId=(parseInt(parentNode[0])+1)+"_"+(parseInt(parentNode[1]));
-                }else {
-                	var childNode=treeNode.children[treeNode.children.length-1];//获取最后一个孩子节点
-                	childNode=childNode.id.split("_");
-                	currentId=(parseInt(parentNode[0])+1)+"_"+(parseInt(childNode[1])+1);
-                }
-                zTree.addNodes(treeNode, {id:currentId, pid:treeNode.id, name:"new node" + (currentId)});
-                $.post(
-                	'${cxt!}/jf/datamotion/t11_initfoldertree/addTreeNode',
-                	{//传入参数
-                		key_:currentId,
-                		parentkeys:treeNode.id,
-                		namechi:"new node"+currentId
-                	}
-                );
-                return false;
-            });
-        };
-        
-        /*修改节点：点击事件*/
-        function beforeEditName(treeId, treeNode) {    
-            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-            zTree.selectNode(treeNode);
-            setTimeout(function() {
-                if (confirm("确认修改节点--" + treeNode.name + "--的名称吗？")) {
-                    setTimeout(function() {
-                        zTree.editName(treeNode);
-                    }, 0);
-                }
-            }, 0);
-            return false;
-        }
-        function beforeRename(treeId, treeNode, newName, isCancel) {
-            if (newName.length == 0) {
-                setTimeout(function() {
-                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                    zTree.cancelEditName();
-                    alert("节点名称不能为空！");
-                }, 0);
-                return false;
-            }
-            $.post(
-                '${cxt!}/jf/datamotion/t11_initfoldertree/modifyTreeNode',
-               	{
-                	key_:treeNode.id,
-                	newName:newName
-               	}
-            );
-            return true;
-        }
-        
-        /*删除节点：点击事件*/
-        function beforeRemove(treeId, treeNode) {
-            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-            zTree.selectNode(treeNode);
-            if(confirm("确认删除节点 --" + treeNode.name + "--吗？")){
-            	var childObj=treeNode.getParentNode().children;
-            	var childkeys="";
-            	for(var i=0;i<childObj.length;i++){
-            		if(childObj[i].id==treeNode.id)continue;
-            		if(i==childObj.length-1)
-            			childkeys+=childObj[i].id;
-            		else childkeys+=childObj[i].id+"-";
-            	}
-            	if(childkeys[childkeys.length-1]=='-'){
-            		childkeys=childkeys.substring(0,childkeys.length-1);
-            	}
-            	$.post(
-                	'${cxt!}/jf/datamotion/t11_initfoldertree/delTreeNode',
-                    {
-                     	key_:treeNode.id,
-                     	childkeys:childkeys
-                    }
-                );
-                return true;
-            };
-            return false;
-        }
-        //显示删除按钮
-        function showRemoveBtn(treeId, treeNode) {
-        	if(treeNode.isParent==true){
-        		var childObj=treeNode.children;
-        		//如果该节点的孩子节点存在是父节点，则不显示删除按钮
-        		for(var i=0;i<childObj.length;i++){
-        			if(childObj[i].isParent==true)
-        				return false;
-        		}
-        	} 
-        	//根节点不显示删除按钮
-        	if(treeNode.pid==null)return false;
-        	return true;
-        }
-        //叶子节点的点击事件
-        function onClick(event, treeId, treeNode) {
-        	if(treeNode!=null&&treeNode.isParent==false){
-            	console.log(treeNode.name);
-            };	
-        }
-        
-        function onRemove(e, treeId, treeNode) {
-            console.log("delete:"+treeNode.id);
-        }
-  
-        function onRightClick(event, treeId, treeNode) {
-            console.log("rightClick dosomething.....");
-        }
-
-        function beforeDrag(treeId, treeNodes) {
-            return false;
-        }
-        
-        
-        function onRename(e, treeId, treeNode, isCancel) {
-        	console.log("修改？");
-            console.log((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
-        }
-        
-        function showRenameBtn(treeId, treeNode) {
-            //return !treeNode.isLastNode;
-            return treeNode;
-        }
-
-        function getTime() {
-            var now= new Date(),
-                    h=now.getHours(),
-                    m=now.getMinutes(),
-                    s=now.getSeconds(),
-                    ms=now.getMilliseconds();
-            return (h+":"+m+":"+s+ " " +ms);
-        }
-
-        //鼠标移动是否显示按钮
-        function removeHoverDom(treeId, treeNode) {
-            $("#addBtn_"+treeNode.tId).unbind().remove();
-        };
-		
-        //初始化树
-        $(document).ready(function () {
-            $.fn.zTree.init($("#treeDemo"), setting, treeNodes);
-        });
     </script>
 <% }; %>
-<% include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
+<% include("common.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
