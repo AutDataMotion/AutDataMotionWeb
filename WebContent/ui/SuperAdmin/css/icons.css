@@ -234,7 +234,6 @@
 }
 
 /* For Higher DPI */
-@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (   min--moz-device-pixel-ratio: 1.25), only screen and (     -o-min-device-pixel-ratio: 2/1), only screen and (        min-device-pixel-ratio: 1.25), only screen and (                min-resolution: 120dpi), only screen and (                min-resolution: 1.25dppx) {
 
     /* Left Menu */
     .sa-side-typography, .sa-side-widget, .sa-side-table, .sa-side-ui, .sa-side-folder {
@@ -521,4 +520,3 @@
         background-image: url('../img/shortcuts/systemConfig.ico');
         background-size: 25px 25px;
     }
-}
