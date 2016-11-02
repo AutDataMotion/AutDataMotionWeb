@@ -33,6 +33,8 @@ public class T7_backupfileController extends BaseController {
 	public static final String pthc = "/jf/datamotion/t7_backupfile/";
 	public static final String pthv = "/datamotion/t7_backupfile/";
 	public static final String pthvf = "/datamotion/f/";
+	
+	public static final String pthv10 = "/datamotion/t10_datastatistics/";
 	/**
 	 * 列表
 	 */
@@ -42,6 +44,7 @@ public class T7_backupfileController extends BaseController {
 //		renderWithPath(pthv+"list.html");
 
 		renderWithPath(pthv+"backupfile.html");
+		//renderWithPath(pthv10+"datastatistics.html");
 	}
 	
 	/**
