@@ -26,7 +26,15 @@ label {
 }
 
 .mylabel{
-   
+    width:110px;
+    font-weight: normal;
+    font-size: 13px;
+    line-height:30px;
+    text-align: right;
+    margin:6px;
+}
+.mylabel1{
+    width:120px;
     font-weight: normal;
     font-size: 13px;
     line-height:30px;
@@ -70,6 +78,7 @@ label {
     width:100%;
     height: 350px;
     border:1px solid rgba(255,255,255,0.15);
+    padding:10px;
 }
 
 .form-group {

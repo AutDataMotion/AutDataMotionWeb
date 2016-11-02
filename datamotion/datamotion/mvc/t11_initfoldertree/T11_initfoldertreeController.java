@@ -128,8 +128,6 @@ public class T11_initfoldertreeController extends BaseController {
 	public void getTreeNode(){
 		List<Record> res = Db.use(ConstantInitMy.db_dataSource_main)
 			.find("select key_ as id,parentkeys as pid,namechi as name from t11_initfoldertree");
-		log.debug("*****");
-		log.debug(res);
 		renderJson(res);
 	}
 	@Clear
