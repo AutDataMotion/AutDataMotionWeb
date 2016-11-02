@@ -20,7 +20,7 @@ function onClick(event, treeId, treeNode) {
 //初始化树
 function getTreeData () {
 	$.ajax({
-		url:'getTreeNode',
+		url:'t11_initfoldertree/getTreeNode',
 		asyn:false,
 		method:'post',  
 		dataType:'json',  

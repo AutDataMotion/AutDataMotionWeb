@@ -19,6 +19,7 @@
     <link href="${cxt!}/ui/SuperAdmin/css/form.css" rel="stylesheet">
     <link href="${cxt!}/ui/SuperAdmin/css/calendar.css" rel="stylesheet">
     <link href="${cxt!}/ui/SuperAdmin/css/style.css" rel="stylesheet">
+        <link href="${cxt!}/ui/SuperAdmin/css/style-my.css" rel="stylesheet">
     <link href="${cxt!}/ui/SuperAdmin/css/icons.css" rel="stylesheet">
     <link href="${cxt!}/ui/SuperAdmin/css/generics.css" rel="stylesheet">
     <link href="${cxt!}/ui/SuperAdmin/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
@@ -91,21 +92,15 @@
             </li>
             <li class="dropdown">
                 <a class="sa-side-download" href="">
-                    <span class="menu-item">数据采集下载</span>
+                    <span class="menu-item">数据下载管理</span>
                 </a>
-                <ul class="list-unstyled menu-item">
-                    <li><a href="">下载数据管理</a></li>
-                    <li><a href="http://127.0.0.1:8800/ui/SuperAdmin/download_config.html">配置管理</a></li>
-                </ul>
+                
             </li>
             <li class="dropdown">
                 <a class="sa-side-storage" href="">
-                    <span class="menu-item">数据存储备份</span>
+                    <span class="menu-item">数据备份管理</span>
                 </a>
-                <ul class="list-unstyled menu-item">
-                    <li><a href="">备份数据管理</a></li>
-                    <li><a href="">配置管理</a></li>
-                </ul>
+               
             </li>
             <li class="dropdown">
                 <a class="sa-side-file" href="">
@@ -122,10 +117,7 @@
                 <a class="sa-side-release" href="">
                     <span class="menu-item">数据检出发布</span>
                 </a>
-                <ul class="list-unstyled menu-item">
-                    <li><a href="">检出查询检索</a></li>
-                    <li><a href="">管理配置</a></li>
-                </ul>
+                
             </li>
             <li>
                 <a class="sa-side-sysConfig" href="http://127.0.0.1:8800/jf/datamotion/t11_initfoldertree/treeIndex">
@@ -135,32 +127,7 @@
         </ul>
     </aside>
     <section id="content" class="container">
-    <div class="block-area shortcut-area" style="text-align: center" ;>
-	    <a class="shortcut tile" href="">
-	        <img src="${cxt!}/ui/SuperAdmin/img/shortcuts/control_panel.ico" alt="">
-	        <small class="t-overflow">控制面板</small>
-	    </a>
-	    <a class="shortcut tile" href="">
-	        <img src="${cxt!}/ui/SuperAdmin/img/shortcuts/statistical_analysis.ico" alt="">
-	        <small class="t-overflow">统计分析</small>
-	    </a>
-	    <a class="shortcut tile" href="">
-	        <img src="${cxt!}/ui/SuperAdmin/img/shortcuts/monitor.ico" alt="">
-	        <small class="t-overflow">运行监控</small>
-	    </a>
-	    <a class="shortcut tile" href="">
-	        <img src="${cxt!}/ui/SuperAdmin/img/shortcuts/download.ico" alt="">
-	        <small class="t-overflow">下载管理</small>
-	    </a>
-	    <a class="shortcut tile" href="">
-	        <img src="${cxt!}/ui/SuperAdmin/img/shortcuts/archive.ico" alt="">
-	        <small class="t-overflow">归档管理</small>
-	    </a>
-	    <a class="shortcut tile" href="">
-	        <img src="${cxt!}/ui/SuperAdmin/img/shortcuts/release.ico" alt="">
-	        <small class="t-overflow">检出发布</small>
-	    </a>
-	</div>
+   <h4 class="page-title">菜单标题</h4> 
     <table>
     	<tr>
         	<td align="left" valign="top">
@@ -189,13 +156,6 @@
 <script src="${cxt!}/ui/SuperAdmin/js/charts/jquery.flot.animator.min.js"></script> <!-- Flot sub -->
 <script src="${cxt!}/ui/SuperAdmin/js/charts/jquery.flot.resize.min.js"></script> <!-- Flot sub - for repaint when resizing the screen -->
 
-<script src="${cxt!}/ui/SuperAdmin/js/sparkline.min.js"></script> <!-- Sparkline - Tiny charts -->
-<script src="${cxt!}/ui/SuperAdmin/js/easypiechart.js"></script> <!-- EasyPieChart - Animated Pie Charts -->
-<script src="${cxt!}/ui/SuperAdmin/js/charts.js"></script> <!-- All the above chart related functions -->
-
-<!-- Map -->
-<script src="${cxt!}/ui/SuperAdmin/js/maps/jvectormap.min.js"></script> <!-- jVectorMap main library -->
-<script src="${cxt!}/ui/SuperAdmin/js/maps/usa.js"></script> <!-- USA Map for jVectorMap -->
 
 <!--  Form Related -->
 <script src="${cxt!}/ui/SuperAdmin/js/select.min.js"></script> <!-- Custom Select -->
@@ -207,6 +167,7 @@
 
 <!-- Other -->
 <script src="${cxt!}/ui/SuperAdmin/js/calendar.min.js"></script> <!-- Calendar -->
+ <script src="${cxt!}/ui/SuperAdmin/js/datetimepicker.min.js"></script> <!-- Date & Time Picker -->
 <script src="${cxt!}/ui/SuperAdmin/js/feeds.min.js"></script> <!-- News Feeds -->
 <script src="${cxt!}/ui/SuperAdmin/js/jquery.cookie.js"></script>
 <script src="${cxt!}/ui/SuperAdmin/js/ztree/jquery.ztree.core.js"></script>

@@ -53,7 +53,11 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskTh
 	final Condition singalQue = lock.newCondition();// 读写条件
 
 	// 执行任务线程
-	private ConsumerTask consumerTask = null;
+	private ConsumerTask consumerTask;
+	// 内存回收线程
+	private TimerGCClear timerGCClear;
+	// 错误处理线程
+	private TimerRedoFailed timerRedoFailed;
 
 	/*
 	 * (non-Javadoc) <p>Description: <／p>
@@ -79,8 +83,20 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskTh
 	@Override
 	public boolean start() {
 		// TODO Auto-generated method stub
-
-		return false;
+		if (null == consumerTask) {
+			consumerTask = new ConsumerTask();
+		}
+		if (null == timerGCClear) {
+			timerGCClear = new TimerGCClear();
+		}
+		if (null == timerRedoFailed) {
+			timerRedoFailed = new TimerRedoFailed();
+		}
+		consumerTask.start();
+		timerGCClear.start();
+		timerRedoFailed.flagRun = true;
+		timerRedoFailed.start();
+		return true;
 	}
 
 	/*
@@ -108,7 +124,14 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskTh
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+	public abstract boolean isCorrectFile(F afile);
+	public abstract boolean doWorkSucAfter(F afile);
+	public abstract boolean doWorkFailAfter(F afile);
+	public abstract boolean dbAddFileInfo(F afile);
+	public abstract boolean dbUpdateFileInfo(F afile);
+	public abstract boolean notifyOthers(F afile);
+	
 	public abstract boolean reDo_WorkFail();
 	
 	class ConsumerTask extends Thread {
@@ -117,7 +140,6 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskTh
 		public void run() {
 			while (true) {
 				lock.lock();
-
 				timeTaskEnd = System.currentTimeMillis();
 				while (quefiles_undo.size() == 0) {
 					try {
@@ -136,13 +158,27 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskTh
 					log.debug("ConsumerTask run null == file");
 					continue;
 				}
-			
+				if (!isCorrectFile(file)) {
+					log.debug("ConsumerTask run not CorrectFile(file)");
+					continue;
+				}
+				if (!dbAddFileInfo(file)) {
+					log.debug("ConsumerTask run failed dbAddFileInfo(file)");
+					continue;
+				}
 				if (doWork(file)) {// queueTask 自带了同步代码 可以不放到Lock中
 					mapfiles_dosuc.put(file.namesrc, file);// 处理成功
+					//处理成功后续处理
+					doWorkSucAfter(file);
+					//通知其他系统
+					notifyOthers(file);
 				} else {
-					mapfiles_dofail.put(file.namesrc, file);// 处理失败等
+					mapfiles_dofail.put(file.namesrc, file);// 处理失败
+					//初始失败后续处理
+					doWorkFailAfter(file);
 				}
-
+				//更新数据库
+				dbUpdateFileInfo(file);
 			}
 		}
 
@@ -181,7 +217,6 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskTh
 	 * @date 2016年11月1日
 	 */
 	class TimerGCClear extends Timer {
-
 		public void start() {
 			this.schedule(new TimerTask() {
 				@Override
