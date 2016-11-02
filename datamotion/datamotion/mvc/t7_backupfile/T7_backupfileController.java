@@ -36,9 +36,11 @@ public class T7_backupfileController extends BaseController {
 	/**
 	 * 列表
 	 */
+	@Clear
 	public void index() {
-		paging(ConstantInitMy.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, T7_backupfile.sqlId_splitPage_from);
-		renderWithPath(pthv+"list.html");
+//		paging(ConstantInitMy.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, T7_backupfile.sqlId_splitPage_from);
+//		renderWithPath(pthv+"list.html");
+		renderWithPath(pthv+"backupfile.html");
 	}
 	
 	/**
@@ -95,7 +97,7 @@ public class T7_backupfileController extends BaseController {
 	@Clear
 	public void viewbackupfile()
 	{
-		render(pthv+"backupfile.html");
+		
 	}
 	public void setViewPath(){
 		setAttr(ConstantRender.PATH_CTL_NAME, pthc);
