@@ -368,6 +368,13 @@ $(document).ready(function(){
      Date Time Picker
      -----------------------------------------------------------*/
     (function(){
+    	//Date time
+    	if($('.date-time')[0]) {
+    	    $('.date-time').datetimepicker({
+    	    	pickDate: true,
+    	    	pickTime:true
+    	    });
+    	}
         //Date Only
 	if($('.date-only')[0]) {
 	    $('.date-only').datetimepicker({

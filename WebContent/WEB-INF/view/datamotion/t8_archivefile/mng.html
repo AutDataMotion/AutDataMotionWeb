@@ -1,14 +1,262 @@
-<% var cssSec={ %>
-
-<% }; %>
-
-<% var contSec={ %>
+<% var cssSec={ %> <% }; %> <% var contSec={ %>
 <div class="myPanel">
-	
-</div>
-<% }; %>
+	<br>
+	<div class="row">
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>飞行器：</label>
+		</div>
+		<div class="col-md-4  col-sm-4 form-group">
+			<select multiple class="select">
+				<option value="option1">option1</option>
+				<option value="option2">option2</option>
+				<option value="option3">option3</option>
+			</select>
+		</div>
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>载荷：</label>
+		</div>
+		<div class="col-md-4  col-sm-4 form-group">
+			<select multiple class="select">
+				<option value="option1">option1</option>
+				<option value="option2">option2</option>
+				<option value="option3">option3</option>
+			</select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>产品标识：</label>
+		</div>
+		<div class="col-md-4  col-sm-4 form-group">
+			<select multiple class="select">
+				<option value="option1">option1</option>
+				<option value="option2">option2</option>
+				<option value="option3">option3</option>
+			</select>
+		</div>
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>产品类别：</label>
+		</div>
+		<div class="col-md-4  col-sm-4 form-group">
+			<select multiple class="select">
+				<option value="option1">option1</option>
+				<option value="option2">option2</option>
+				<option value="option3">option3</option>
+			</select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>产品等级：</label>
+		</div>
+		<div class="col-md-4  col-sm-4 form-group">
+			<select multiple class="select">
+				<option value="option1">option1</option>
+				<option value="option2">option2</option>
+				<option value="option3">option3</option>
+			</select>
+		</div>
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>文件名后缀：</label>
+		</div>
+		<div class="col-md-4  col-sm-4 form-group">
+			<select multiple class="select">
+				<option value="option1">option1</option>
+				<option value="option2">option2</option>
+				<option value="option3">option3</option>
+			</select>
+		</div>
+	</div>
 
-<% var jsSec={ %>
-	
-<% }; %>
-<% include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
+	<div class="row">
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>采集开始时间：</label>
+		</div>
+		<div class="col-md-2 form-group">
+
+			<div class="input-icon datetime-pick date-only">
+				<input data-format="yyyy/MM/dd" type="text"
+					class="form-control input-sm" /> <span class="add-on"> <i
+					class="sa-plus"></i>
+				</span>
+			</div>
+		</div>
+		<div class="col-md-2 form-group">
+
+			<div class="input-icon datetime-pick time-only">
+				<input data-format="hh:mm:ss" type="text"
+					class="form-control input-sm" /> <span class="add-on"> <i
+					class="sa-plus"></i>
+				</span>
+			</div>
+		</div>
+
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>采集结束时间：</label>
+		</div>
+		<div class="col-md-2  col-sm-2form-group">
+
+			<div class="input-icon datetime-pick date-only">
+				<input data-format="yyyy/MM/dd" type="text"
+					class="form-control input-sm" /> <span class="add-on"> <i
+					class="sa-plus"></i>
+				</span>
+			</div>
+		</div>
+		<div class="col-md-2  col-sm-2 form-group">
+
+			<div class="input-icon datetime-pick time-only">
+				<input data-format="hh:mm:ss" type="text"
+					class="form-control input-sm" /> <span class="add-on"> <i
+					class="sa-plus"></i>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>入库开始时间：</label>
+		</div>
+		<div class="col-md-2  col-sm-2 form-group">
+
+			<div class="input-icon datetime-pick date-only">
+				<input data-format="yyyy/MM/dd" type="text"
+					class="form-control input-sm" /> <span class="add-on"> <i
+					class="sa-plus"></i>
+				</span>
+			</div>
+		</div>
+		<div class="col-md-2  col-sm-2 form-group">
+
+			<div class="input-icon datetime-pick time-only">
+				<input data-format="hh:mm:ss" type="text"
+					class="form-control input-sm" /> <span class="add-on"> <i
+					class="sa-plus"></i>
+				</span>
+			</div>
+		</div>
+
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>入库结束时间：</label>
+		</div>
+		<div class="col-md-2  col-sm-2 form-group">
+
+			<div class="input-icon datetime-pick date-only">
+				<input data-format="yyyy/MM/dd" type="text"
+					class="form-control input-sm" /> <span class="add-on"> <i
+					class="sa-plus"></i>
+				</span>
+			</div>
+		</div>
+		<div class="col-md-2 form-group">
+
+			<div class="input-icon datetime-pick time-only">
+				<input data-format="hh:mm:ss" type="text"
+					class="form-control input-sm" /> <span class="add-on"> <i
+					class="sa-plus"></i>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>接受时间：</label>
+		</div>
+		<div class="col-md-2  col-sm-2 form-group">
+
+			<div class="input-icon datetime-pick date-only">
+				<input data-format="yyyy/MM/dd" type="text"
+					class="form-control input-sm" /> <span class="add-on"> <i
+					class="sa-plus"></i>
+				</span>
+			</div>
+		</div>
+		<div class="col-md-2  col-sm-2form-group">
+
+			<div class="input-icon datetime-pick time-only">
+				<input data-format="hh:mm:ss" type="text"
+					class="form-control input-sm" /> <span class="add-on"> <i
+					class="sa-plus"></i>
+				</span>
+			</div>
+		</div>
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>检出状态：</label>
+		</div>
+		<div class="col-md-2  col-sm-2 form-group">
+			<select class="select">
+				<option value="option1">option1</option>
+				<option value="option2">option2</option>
+				<option value="option3">option3</option>
+			</select>
+		</div>
+		<div class="col-md-2  col-sm-2">
+			<a href="#" class="btn btn-sm btn-alt wid100">查询</a>
+
+		</div>
+	</div>
+	<hr class="whiter">
+	<br />
+	<div class="row">
+		<div class="col-md-4  col-sm-4">
+			<h3 class="block-title">总条数：10000条</h3>
+		</div>
+		<div class="col-md-4  col-sm-4"></div>
+		<div class="col-md-2  col-sm-2">
+			<a href="#" class="btn btn-sm btn-alt wid100">全部本地下载</a>
+		</div>
+		<div class="col-md-2  col-sm-2">
+			<a href="#" class="btn btn-sm btn-alt wid100">全部改名检出</a>
+		</div>
+
+	</div>
+	<p class="bottom_line"></p>
+	<div class="row">
+		<div class="list-container">
+			<table id="myTable" style="margin-left: 15px; line-height: 0px"
+				class="table table-bordered table-hover tile">
+				<thead>
+					<tr>
+						<th width="2%"><input type="checkbox"
+							class="pull-left list-parent-check" value="" /></th>
+						<th width="6%">序号</th>
+						<th width="21%">文件名匹配规则</th>
+						<th width="14%">是否自动下载</th>
+						<th width="22%">下载保存路径</th>
+						<th width="25%">备注说明</th>
+						<th width="10%">操作</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+		<div class="text-right">
+			<label>记录数：10</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label>页次：1/5</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button class="page_btn">首页</button>
+			<button  class="page_btn">上一页</button>
+			<button  class="page_btn">下一页</button>
+			<button  class="page_btn">尾页</button>
+			<label>每页<input class="smallText" type="text" />条
+			</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label>转到<input
+				class="smallText" type="text" />页
+			</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button class="page_btn">Go</button>
+		</div>
+		<div class="text-center" style="display: none">
+			<ul class="pagination">
+				<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+				<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+			</ul>
+		</div>
+
+	</div>
+</div>
+
+<% }; %> <% var jsSec={ %> <% }; %> <%
+include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){}
+%>
