@@ -1,5 +1,67 @@
-<% var cssSec={ %> <% }; %> <% var contSec={ %>
-<div class="myPanel">
+<% var cssSec={ %>
+<style>
+.myPanel_backupfile{
+	width: 945px;
+    height: 350px;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+.col-md-1_backupfile{
+ 	padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 7px;
+    float: left;
+}
+.mylabel_backupfile{
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 30px;
+    text-align: right;
+    color: #ffffff;
+}
+.col-md-4_backupfile{
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 7px;
+    width: 100%;
+    float: left;
+}
+.form-group_backupfile {
+    margin-bottom: 5px;
+}
+.time{
+	
+    padding-top: 10px;
+   width: 100%;
+    float:left;
+}
+.datainp {
+    width: 100%;
+    height: 30px;
+    border: 1px #ccc solid;
+    background-color: rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+.row_backupfile{
+	width:100%;
+	height:50px;
+}
+.column_label{
+width:11.1%;
+height:100%;
+float: left;
+}
+.column_input{
+width:22.2%;
+height:100%;
+float: left;
+}
+</style>
+<link href="${cxt!}/ui/jedate/skin/jedate.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="${cxt!}/ui/DataTables/datatables.min.css" />
+
+<% }; %> <% var contSec={ %>
+<div class="myPanel_backupfile">
 	<br>
 	<div class="row">
 		<div class="col-md-2  col-sm-2 mylabel">
@@ -72,114 +134,58 @@
 		<div class="col-md-2  col-sm-2 mylabel">
 			<label>采集开始时间：</label>
 		</div>
-		<div class="col-md-2 form-group">
-
-			<div class="input-icon datetime-pick date-only">
-				<input data-format="yyyy/MM/dd" type="text"
-					class="form-control input-sm" /> <span class="add-on"> <i
-					class="sa-plus"></i>
-				</span>
-			</div>
-		</div>
-		<div class="col-md-2 form-group">
-
-			<div class="input-icon datetime-pick time-only">
-				<input data-format="hh:mm:ss" type="text"
-					class="form-control input-sm" /> <span class="add-on"> <i
-					class="sa-plus"></i>
-				</span>
+		<div class="col-md-4 col-sm-4 form-group">
+			<div class="time">
+				<input class="datainp" id="dateinfo_collectStartTime" type="text"
+					placeholder="请选择">
 			</div>
 		</div>
 
 		<div class="col-md-2  col-sm-2 mylabel">
 			<label>采集结束时间：</label>
 		</div>
-		<div class="col-md-2  col-sm-2form-group">
-
-			<div class="input-icon datetime-pick date-only">
-				<input data-format="yyyy/MM/dd" type="text"
-					class="form-control input-sm" /> <span class="add-on"> <i
-					class="sa-plus"></i>
-				</span>
+		<div class="col-md-4  col-sm-4 form-group">
+			<div class="time">
+				<input class="datainp" id="dateinfo_collectEndTime" type="text"
+					placeholder="请选择">
 			</div>
 		</div>
-		<div class="col-md-2  col-sm-2 form-group">
 
-			<div class="input-icon datetime-pick time-only">
-				<input data-format="hh:mm:ss" type="text"
-					class="form-control input-sm" /> <span class="add-on"> <i
-					class="sa-plus"></i>
-				</span>
-			</div>
-		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-2  col-sm-2 mylabel">
 			<label>入库开始时间：</label>
 		</div>
-		<div class="col-md-2  col-sm-2 form-group">
-
-			<div class="input-icon datetime-pick date-only">
-				<input data-format="yyyy/MM/dd" type="text"
-					class="form-control input-sm" /> <span class="add-on"> <i
-					class="sa-plus"></i>
-				</span>
-			</div>
-		</div>
-		<div class="col-md-2  col-sm-2 form-group">
-
-			<div class="input-icon datetime-pick time-only">
-				<input data-format="hh:mm:ss" type="text"
-					class="form-control input-sm" /> <span class="add-on"> <i
-					class="sa-plus"></i>
-				</span>
+		<div class="col-md-4  col-sm-4  form-group">
+			<div class="time">
+				<input class="datainp" id="dateinfo_DBstartTime" type="text"
+					placeholder="请选择" >
 			</div>
 		</div>
 
 		<div class="col-md-2  col-sm-2 mylabel">
 			<label>入库结束时间：</label>
 		</div>
-		<div class="col-md-2  col-sm-2 form-group">
-
-			<div class="input-icon datetime-pick date-only">
-				<input data-format="yyyy/MM/dd" type="text"
-					class="form-control input-sm" /> <span class="add-on"> <i
-					class="sa-plus"></i>
-				</span>
+		<div class="col-md-4  col-sm-4  form-group">
+			<div class="time">
+				<input class="datainp" id="dateinfo_DBEndTime" type="text"
+					placeholder="请选择" >
 			</div>
 		</div>
-		<div class="col-md-2 form-group">
 
-			<div class="input-icon datetime-pick time-only">
-				<input data-format="hh:mm:ss" type="text"
-					class="form-control input-sm" /> <span class="add-on"> <i
-					class="sa-plus"></i>
-				</span>
-			</div>
-		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-2  col-sm-2 mylabel">
 			<label>接受时间：</label>
 		</div>
-		<div class="col-md-2  col-sm-2 form-group">
+		<div class="col-md-4  col-sm-4  form-group">
 
-			<div class="input-icon datetime-pick date-only">
-				<input data-format="yyyy/MM/dd" type="text"
-					class="form-control input-sm" /> <span class="add-on"> <i
-					class="sa-plus"></i>
-				</span>
+			<div class="time">
+				<input class="datainp" id="dateinfo_receiveTime" type="text"
+					placeholder="请选择" >
 			</div>
 		</div>
-		<div class="col-md-2  col-sm-2form-group">
 
-			<div class="input-icon datetime-pick time-only">
-				<input data-format="hh:mm:ss" type="text"
-					class="form-control input-sm" /> <span class="add-on"> <i
-					class="sa-plus"></i>
-				</span>
-			</div>
-		</div>
 		<div class="col-md-2  col-sm-2 mylabel">
 			<label>检出状态：</label>
 		</div>
@@ -212,51 +218,168 @@
 	</div>
 	<p class="bottom_line"></p>
 	<div class="row">
-		<div class="list-container">
-			<table id="myTable" style="margin-left: 15px; line-height: 0px"
-				class="table table-bordered table-hover tile">
-				<thead>
-					<tr>
-						<th width="2%"><input type="checkbox"
-							class="pull-left list-parent-check" value="" /></th>
-						<th width="6%">序号</th>
-						<th width="21%">文件名匹配规则</th>
-						<th width="14%">是否自动下载</th>
-						<th width="22%">下载保存路径</th>
-						<th width="25%">备注说明</th>
-						<th width="10%">操作</th>
-					</tr>
-				</thead>
-				<tbody></tbody>
-			</table>
+		<div class="doQueryResultTable">
+			<table id="myTable" class="display"
+				style="width: 100%; background-color: rgba(255, 255, 255, .15);"></table>
 		</div>
-		<div class="text-right">
-			<label>记录数：10</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label>页次：1/5</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button class="page_btn">首页</button>
-			<button  class="page_btn">上一页</button>
-			<button  class="page_btn">下一页</button>
-			<button  class="page_btn">尾页</button>
-			<label>每页<input class="smallText" type="text" />条
-			</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label>转到<input
-				class="smallText" type="text" />页
-			</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button class="page_btn">Go</button>
-		</div>
-		<div class="text-center" style="display: none">
-			<ul class="pagination">
-				<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-			</ul>
-		</div>
-
 	</div>
 </div>
 
-<% }; %> <% var jsSec={ %> <% }; %> <%
+<% }; %> <% var jsSec={ %>
+
+<script src="${cxt!}/ui/jedate/jedate.js"></script>
+<!-- DataTables -->
+<script type="text/javascript"
+	src="${cxt!}/ui/DataTables/datatables.min.js"></script>
+<script>
+	jeDate({
+		dateCell : "#dateinfo_receiveTime",
+		format : "YYYY年MM月DD日 hh:mm:ss",
+		isinitVal : true,
+		isTime : true, //isClear:false,
+		minDate : "2014-09-19 00:00:00",
+		okfun : function(val) {
+			alert(val)
+		}
+	})
+	jeDate({
+		dateCell : "#dateinfo_collectStartTime",
+		format : "YYYY年MM月DD日 hh:mm:ss",
+		isinitVal : true,
+		isTime : true, //isClear:false,
+		minDate : "2014-09-19 00:00:00",
+		okfun : function(val) {
+			alert(val)
+		}
+	})
+	jeDate({
+		dateCell : "#dateinfo_collectEndTime",
+		format : "YYYY年MM月DD日 hh:mm:ss",
+		isinitVal : true,
+		isTime : true, //isClear:false,
+		minDate : "2014-09-19 00:00:00",
+		okfun : function(val) {
+			alert(val)
+		}
+	})
+	jeDate({
+		dateCell : "#dateinfo_DBstartTime",
+		format : "YYYY年MM月DD日 hh:mm:ss",
+		isinitVal : true,
+		isTime : true, //isClear:false,
+		minDate : "2014-09-19 00:00:00",
+		okfun : function(val) {
+			alert(val)
+		}
+	})
+	jeDate({
+		dateCell : "#dateinfo_DBEndTime",
+		format : "YYYY年MM月DD日 hh:mm:ss",
+		isinitVal : true,
+		isTime : true, //isClear:false,
+		minDate : "2014-09-19 00:00:00",
+		okfun : function(val) {
+			alert(val)
+		}
+	})
+
+	var dataSet = [
+			[ "Tiger Nixon", "System Architect", "Edinburgh", "5421",
+					"2011/04/25", "$320,800" ],
+			[ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25",
+					"$170,750" ],
+			[ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562",
+					"2009/01/12", "$86,000" ],
+			[ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh",
+					"6224", "2012/03/29", "$433,060" ],
+			[ "Airi Satou", "Accountant", "Tokyo", "5407", "2008/11/28",
+					"$162,700" ],
+			[ "Brielle Williamson", "Integration Specialist", "New York",
+					"4804", "2012/12/02", "$372,000" ],
+			[ "Herrod Chandler", "Sales Assistant", "San Francisco", "9608",
+					"2012/08/06", "$137,500" ],
+			[ "Rhona Davidson", "Integration Specialist", "Tokyo", "6200",
+					"2010/10/14", "$327,900" ],
+			[ "Colleen Hurst", "Javascript Developer", "San Francisco", "2360",
+					"2009/09/15", "$205,500" ],
+			[ "Sonya Frost", "Software Engineer", "Edinburgh", "1667",
+					"2008/12/13", "$103,600" ],
+			[ "Jena Gaines", "Office Manager", "London", "3814", "2008/12/19",
+					"$90,560" ],
+			[ "Quinn Flynn", "Support Lead", "Edinburgh", "9497", "2013/03/03",
+					"$342,000" ],
+			[ "Charde Marshall", "Regional Director", "San Francisco", "6741",
+					"2008/10/16", "$470,600" ],
+			[ "Haley Kennedy", "Senior Marketing Designer", "London", "3597",
+					"2012/12/18", "$313,500" ],
+			[ "Tatyana Fitzpatrick", "Regional Director", "London", "1965",
+					"2010/03/17", "$385,750" ],
+			[ "Michael Silva", "Marketing Designer", "London", "1581",
+					"2012/11/27", "$198,500" ],
+			[ "Paul Byrd", "Chief Financial Officer (CFO)", "New York", "3059",
+					"2010/06/09", "$725,000" ],
+			[ "Gloria Little", "Systems Administrator", "New York", "1721",
+					"2009/04/10", "$237,500" ],
+			[ "Bradley Greer", "Software Engineer", "London", "2558",
+					"2012/10/13", "$132,000" ],
+			[ "Dai Rios", "Personnel Lead", "Edinburgh", "2290", "2012/09/26",
+					"$217,500" ],
+			[ "Jenette Caldwell", "Development Lead", "New York", "1937",
+					"2011/09/03", "$345,000" ],
+			[ "Yuri Berry", "Chief Marketing Officer (CMO)", "New York",
+					"6154", "2009/06/25", "$675,000" ],
+			[ "Caesar Vance", "Pre-Sales Support", "New York", "8330",
+					"2011/12/12", "$106,450" ],
+			[ "Doris Wilder", "Sales Assistant", "Sidney", "3023",
+					"2010/09/20", "$85,600" ],
+			[ "Angelica Ramos", "Chief Executive Officer (CEO)", "London",
+					"5797", "2009/10/09", "$1,200,000" ],
+			[ "Gavin Joyce", "Developer", "Edinburgh", "8822", "2010/12/22",
+					"$92,575" ],
+			[ "Jennifer Chang", "Regional Director", "Singapore", "9239",
+					"2010/11/14", "$357,650" ],
+			[ "Brenden Wagner", "Software Engineer", "San Francisco", "1314",
+					"2011/06/07", "$206,850" ],
+			[ "Fiona Green", "Chief Operating Officer (COO)", "San Francisco",
+					"2947", "2010/03/11", "$850,000" ],
+			[ "Shou Itou", "Regional Marketing", "Tokyo", "8899", "2011/08/14",
+					"$163,000" ],
+			[ "Michelle House", "Integration Specialist", "Sidney", "2769",
+					"2011/06/02", "$95,400" ],
+			[ "Suki Burks", "Developer", "London", "6832", "2009/10/22",
+					"$114,500" ],
+			[ "Prescott Bartlett", "Technical Author", "London", "3606",
+					"2011/05/07", "$145,000" ],
+			[ "Gavin Cortez", "Team Leader", "San Francisco", "2860",
+					"2008/10/26", "$235,500" ],
+			[ "Martena Mccray", "Post-Sales support", "Edinburgh", "8240",
+					"2011/03/09", "$324,050" ],
+			[ "Unity Butler", "Marketing Designer", "San Francisco", "5384",
+					"2009/12/09", "$85,675" ] ];
+
+	$(document).ready(function() {
+		$('#myTable').DataTable({
+			data : dataSet,
+			columns : [ {
+				title : "Name"
+			}, {
+				title : "Position"
+			}, {
+				title : "Office"
+			}, {
+				title : "Extn."
+			}, {
+				title : "Start date"
+			}, {
+				title : "Salary"
+			} ],
+			"language" : {
+				"url" : "${cxt!}/ui/DataTables/Chinese.json"
+			}
+		});
+	});
+</script>
+
+<% }; %> <%
 include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){}
 %>
