@@ -2,6 +2,14 @@
 # AutDataMotionWeb
 
 --------------------------------  
+##2016-11-02 19:16  
+* 修改了archive.html
+* fixed conflicts of css html
+* merge 云飞完成的backup.html
+* merge 张康treemode
+* 一个可用的前台版本
+
+--------------------------------  
 ##2016-11-01 14:39  
 * 修改了设计WebPages，更新到doc文件夹下
 * 添加了后端抽象类
