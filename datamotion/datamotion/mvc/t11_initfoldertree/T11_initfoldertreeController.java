@@ -1,14 +1,25 @@
 package datamotion.mvc.t11_initfoldertree;
 
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import jdk.nashorn.internal.objects.annotations.Where;
+
 import com.platform.constant.ConstantRender;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
 
 import org.apache.log4j.Logger;
+import org.beetl.ext.fn.ParseInt;
 
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 
+import csuduc.platform.util.JsonUtils;
 import datamotion.constant.ConstantInitMy;
 
 
@@ -42,9 +53,82 @@ public class T11_initfoldertreeController extends BaseController {
 		paging(ConstantInitMy.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, T11_initfoldertree.sqlId_splitPage_from);
 		renderWithPath(pthv+"list.html");
 	}
+	
 	@Clear
-	public void treeIndex() {
-		render(pthv+"treeConfig.html");
+	/*view tree*/
+	public void treeIndex() {  
+		List<Record> res = Db.use(ConstantInitMy.db_dataSource_main)
+				.find("select key_,parentkeys,namechi from t11_initfoldertree");
+		setAttr("resInit", res);
+		renderWithPath(pthv+"treeConfig.html");
+	}
+	
+	@Clear
+	/*add tree node*/
+	public void addTreeNode(){
+		String key_=getPara("key_");
+		String parentkeys=getPara("parentkeys");
+		String namechi=getPara("namechi");
+		String level=key_.split("_")[0];
+		if (key_ != null && (key_.length() > 0)) {
+			/*存储节点的基本信息*/
+			Record t11_initfoldertree=new Record()
+				.set("key_", key_)
+				.set("parentkeys", parentkeys)
+				.set("namechi", namechi)
+				.set("level", Integer.valueOf(level))
+				.set("timeadd", new Timestamp(System.currentTimeMillis()));
+			Db.use(ConstantInitMy.db_dataSource_main)
+				.save("t11_initfoldertree", t11_initfoldertree);
+			List<Record> childkeylist=Db.use(ConstantInitMy.db_dataSource_main)
+				.find("select childkeys from t11_initfoldertree where key_=?",parentkeys);
+			String childkeys = null;
+			if (childkeylist != null && childkeylist.size() != 0) {
+				childkeys=childkeylist.get(0).get("childkeys");
+				if(childkeys==null||childkeys.isEmpty())childkeys=key_;
+				else childkeys=childkeys+"-"+key_;
+			}
+			/*更新当前节点的父节点的子节点信息*/
+			Db.use(ConstantInitMy.db_dataSource_main)
+				.update("update t11_initfoldertree set childkeys=? where key_=?",childkeys,parentkeys);
+		}
+	}
+	
+	@Clear
+	/*modify tree node*/
+	public void modifyTreeNode(){
+		String key_=getPara("key_");
+		String newName=getPara("newName");
+		
+		/*更新当前节点的中文名称*/
+		Db.use(ConstantInitMy.db_dataSource_main)
+			.update("update t11_initfoldertree set namechi=?,timeupdate='"+new Timestamp(System.currentTimeMillis())+"' where key_=?",newName,key_);
+	}
+	
+	@Clear
+	/*delete tree node*/
+	public void delTreeNode(){
+		String key_=getPara("key_");
+		String childkeys=getPara("childkeys");
+		
+		/*根据key_更新该父节点的子节点信息*/
+		Db.use(ConstantInitMy.db_dataSource_main)
+			.update("update t11_initfoldertree set childkeys='"+childkeys+
+				"',timeupdate='"+new Timestamp(System.currentTimeMillis())+"' where key_=(select parentkeys from t11_initfoldertree"+
+				" where key_='"+key_+"')");
+		/*根据key_删除当前节点以及子节点*/
+		Db.use(ConstantInitMy.db_dataSource_main)
+			.update("delete from t11_initfoldertree where parentkeys=?",key_);
+		Db.use(ConstantInitMy.db_dataSource_main)
+			.update("delete from t11_initfoldertree where key_=?",key_);
+		
+	}
+	@Clear
+	/*get tree node*/
+	public void getTreeNode(){
+		List<Record> res = Db.use(ConstantInitMy.db_dataSource_main)
+			.find("select key_ as id,parentkeys as pid,namechi as name from t11_initfoldertree");
+		renderJson(res);
 	}
 	@Clear
 	public void show(){

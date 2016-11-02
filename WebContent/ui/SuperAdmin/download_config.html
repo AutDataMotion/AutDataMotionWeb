@@ -114,11 +114,11 @@
 </header>
 <section id="main" class="p-relative" role="main">
     <!-- Sidebar -->
-    <aside id="sidebar">
+   <aside id="sidebar">
         <!-- Side Menu -->
         <ul class="list-unstyled side-menu">
             <li class="active">
-                <a class="sa-side-process" href="project.html">
+                <a class="sa-side-process" href="http://127.0.0.1:8800/ui/SuperAdmin/project.html">
                     <span class="menu-item">运营流程面板</span>
                 </a>
             </li>
@@ -133,7 +133,7 @@
                 </a>
             </li>
             <li>
-                <a class="sa-side-monitor" href="visualization.html">
+                <a class="sa-side-monitor" href="http://127.0.0.1:8800/ui/SuperAdmin/visualization.html">
                     <span class="menu-item">系统运行监控</span>
                 </a>
             </li>
@@ -142,8 +142,8 @@
                     <span class="menu-item">数据采集下载</span>
                 </a>
                 <ul class="list-unstyled menu-item">
-                    <li><a href="form-elements.html">下载数据管理</a></li>
-                    <li><a href="form-components.html">配置管理</a></li>
+                    <li><a href="">下载数据管理</a></li>
+                    <li><a href="http://127.0.0.1:8800/ui/SuperAdmin/download_config.html">配置管理</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -151,8 +151,8 @@
                     <span class="menu-item">数据存储备份</span>
                 </a>
                 <ul class="list-unstyled menu-item">
-                    <li><a href="form-elements.html">备份数据管理</a></li>
-                    <li><a href="form-components.html">配置管理</a></li>
+                    <li><a href="">备份数据管理</a></li>
+                    <li><a href="">配置管理</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -160,11 +160,10 @@
                     <span class="menu-item">数据编目归档</span>
                 </a>
                 <ul class="list-unstyled menu-item">
-                    <li><a href="buttons.html">归档数据管理</a></li>
-                    <li><a href="labels.html">流程面板</a></li>
-                    <li><a href="images-icons.html">日志管理</a></li>
-                    <li><a href="alerts.html">配置管理</a></li>
-                    <li><a href="media.html">Media</a></li>
+                    <li><a href="">归档数据管理</a></li>
+                    <li><a href="">流程面板</a></li>
+                    <li><a href="">日志管理</a></li>
+                    <li><a href="">配置管理</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -172,17 +171,16 @@
                     <span class="menu-item">数据检出发布</span>
                 </a>
                 <ul class="list-unstyled menu-item">
-                    <li><a href="form-elements.html">检出查询检索</a></li>
-                    <li><a href="form-components.html">管理配置</a></li>
+                    <li><a href="">检出查询检索</a></li>
+                    <li><a href="">管理配置</a></li>
                 </ul>
             </li>
             <li>
-                <a class="sa-side-sysConfig" href="typography.html">
+                <a class="sa-side-sysConfig" href="http://127.0.0.1:8800/jf/datamotion/t11_initfoldertree/treeIndex">
                     <span class="menu-item">系统配置</span>
                 </a>
             </li>
         </ul>
-
     </aside>
 
     <!-- Content -->
@@ -602,7 +600,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" placeholder="保存路径" value="123445"/>
+                                    <input type="text" class="form-control" placeholder="保存路径" value=""/>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <textarea class="input-sm validate[required] form-control"
@@ -874,32 +872,27 @@
     };
 
     var zNodes = [
-        {id: 1, pId: 0, name: "父节点 1", open: true},
-        {id: 11, pId: 1, name: "父节点 1-1"},
-        {id: 111, pId: 11, name: "叶子节点 1-1-1"},
-        {id: 112, pId: 11, name: "叶子节点 1-1-2"},
-        {id: 12, pId: 1, name: "叶子节点 1-2"},
-        {id: 13, pId: 1, name: "叶子节点 1-3"},
-        {id: 2, pId: 0, name: "父节点 2", open: true},
-        {id: 21, pId: 2, name: "叶子节点 2-1"},
-        {id: 22, pId: 2, name: "叶子节点 2-2"},
-        {id: 23, pId: 2, name: "叶子节点 2-3"},
-        {id: 3, pId: 0, name: "父节点 3", open: true},
-        {id: 31, pId: 3, name: "叶子节点 3-1"},
-        {id: 32, pId: 3, name: "叶子节点 3-2"},
-        {id: 33, pId: 3, name: "叶子节点 3-3"},
-        {id: 4, pId: 0, name: "父节点 4", open: true},
-        {id: 31, pId: 4, name: "叶子节点 3-1"},
-        {id: 32, pId: 4, name: "叶子节点 3-2"},
-        {id: 33, pId: 4, name: "叶子节点 3-3"},
-        {id: 5, pId: 0, name: "父节点 5", open: true},
-        {id: 31, pId: 5, name: "叶子节点 3-1"},
-        {id: 32, pId: 5, name: "叶子节点 3-2"},
-        {id: 33, pId: 5, name: "叶子节点 3-3"},
-        {id: 6, pId: 0, name: "父节点 6", open: true},
-        {id: 31, pId: 6, name: "叶子节点 3-1"},
-        {id: 32, pId: 6, name: "叶子节点 3-2"},
-        {id: 33, pId: 6, name: "叶子节点 3-3"}
+        {id: 1, pid: 0, name: "父节点 1", open: true},
+        {id: 11, pid: 1, name: "父节点 1-1"},
+        {id: 111, pid: 11, name: "叶子节点 1-1-1"},
+        {id: 112, pid: 11, name: "叶子节点 1-1-2"},
+        {id: 12, pid: 1, name: "叶子节点 1-2"},
+        {id: 13, pid: 1, name: "叶子节点 1-3"},
+        {id: 2, pid: 0, name: "父节点 2", open: true},
+        {id: 21, pid: 2, name: "叶子节点 2-1"},
+        {id: 22, pid: 2, name: "叶子节点 2-2"},
+        {id: 23, pid: 2, name: "叶子节点 2-3"},
+        {id: 3, pid: 0, name: "父节点 3", open: true},
+        {id: 31, pid: 3, name: "叶子节点 3-1"},
+        {id: 32, pid: 3, name: "叶子节点 3-2"},
+        {id: 33, pid: 3, name: "叶子节点 3-3"},
+        {id: 4, pid: 0, name: "父节点 4", open: true},
+        {id: 31, pid: 4, name: "叶子节点 3-1"},
+        {id: 32, pid: 4, name: "叶子节点 3-2"},
+        {id: 33, pid: 4, name: "叶子节点 3-3"},
+        {id: 5, pid: 0, name: "父节点 5", open: true},
+        {id: 31, pid: 5, name: "叶子节点 3-1"},
+        {id: 32, pId: 5, name: "叶子节点 3-2"}
     ];
 
     function onMouseDown(event, treeId, treeNode) {

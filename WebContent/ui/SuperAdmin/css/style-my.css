@@ -53,3 +53,9 @@
 #divContent0,#divContent1,#divContent2,#divContent3,#divContent4 {
     padding: 5px;
 }
+ #header > .media-body{
+float:right;
+ }
+ #top-menu {
+    float:right;
+}

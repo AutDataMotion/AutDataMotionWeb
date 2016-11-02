@@ -1,0 +1,20 @@
+<% var cssSec={ %>
+
+<% }; %>
+
+<% var contSec={ %>
+	<h4 class="page-title" align="center">系统配置</h4>
+    <section id="content" class="container">
+	    <center>
+	    	<div id="treeDiv">
+		    	<ul id="treeDemo" class="ztree"></ul>
+		    </div>
+	    </center>
+	</section>
+<% }; %>
+
+<% var jsSec={ %>
+<script src="${cxt!}/ui/SuperAdmin/js/globalTree.js"></script>
+    </script>
+<% }; %>
+<% include("common.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
