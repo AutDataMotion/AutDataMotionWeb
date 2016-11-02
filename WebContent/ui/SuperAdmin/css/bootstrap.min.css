@@ -6075,7 +6075,8 @@ button.close {
 }
 
 .pull-right {
-    float: right !important
+    float: right !important;
+    font-size:20px;
 }
 
 .pull-left {
