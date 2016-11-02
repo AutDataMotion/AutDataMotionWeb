@@ -95,7 +95,7 @@ public class T7_backupfileController extends BaseController {
 	@Clear
 	public void viewbackupfile()
 	{
-		render(pthvf+"backupfile.html");
+		render(pthv+"backupfile.html");
 	}
 	public void setViewPath(){
 		setAttr(ConstantRender.PATH_CTL_NAME, pthc);
