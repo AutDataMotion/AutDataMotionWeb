@@ -38,7 +38,8 @@ import org.apache.log4j.Logger;
  * @author ZhongwengHao
  * @date 2016年10月30日
  */
-public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskThread {
+public abstract class AbsTaskThread<F extends MdlFileEvent> implements
+		InfTaskThread {
 	private static Logger log = Logger.getLogger(AbsTaskThread.class);
 	private volatile boolean flag_isDoingTask = false;
 	// 待处理任务 队列
@@ -84,7 +85,7 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskTh
 	public boolean start() {
 		// TODO Auto-generated method stub
 		if (null == consumerTask) {
-			consumerTask = new ConsumerTask();
+			consumerTask = new ConsumerTask("consumer task thread");
 		}
 		if (null == timerGCClear) {
 			timerGCClear = new TimerGCClear();
@@ -92,8 +93,11 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskTh
 		if (null == timerRedoFailed) {
 			timerRedoFailed = new TimerRedoFailed();
 		}
+		consumerTask.status = 1;// running
 		consumerTask.start();
+
 		timerGCClear.start();
+
 		timerRedoFailed.flagRun = true;
 		timerRedoFailed.start();
 		return true;
@@ -109,6 +113,15 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskTh
 	@Override
 	public boolean stop() {
 		// TODO Auto-generated method stub
+		if (consumerTask != null) {
+			consumerTask.setStop();
+		}
+		if (timerGCClear != null) {
+			timerGCClear.setStop();
+		}
+		if (null == timerRedoFailed) {
+			timerRedoFailed.setStop();
+		}
 		return false;
 	}
 
@@ -122,66 +135,104 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskTh
 	@Override
 	public boolean restart() {
 		// TODO Auto-generated method stub
+		stop();
+		init();
+		start();
 		return false;
 	}
-	
+
 	public abstract boolean isCorrectFile(F afile);
+
 	public abstract boolean doWorkSucAfter(F afile);
+
 	public abstract boolean doWorkFailAfter(F afile);
+
 	public abstract boolean dbAddFileInfo(F afile);
+
 	public abstract boolean dbUpdateFileInfo(F afile);
+
 	public abstract boolean notifyOthers(F afile);
-	
+
 	public abstract boolean reDo_WorkFail();
-	
+
 	class ConsumerTask extends Thread {
+
+		private final int STOP = -1;
+		private final int SUSPEND = 0;
+		private final int RUNNING = 1;
+		public volatile int status = 1;
+
+		public ConsumerTask(String aName) {
+			super(aName);
+		}
 
 		@Override
 		public void run() {
-			while (true) {
-				lock.lock();
-				timeTaskEnd = System.currentTimeMillis();
-				while (quefiles_undo.size() == 0) {
+			while (status != STOP) {
+				// 判断是否挂起
+				if (status == SUSPEND) {
 					try {
-						System.out.println("现有存档任务队列已处理完毕，等待新文件到来...");
-						flag_isDoingTask = false;
-						singalQue.await();
+						// 若线程挂起则阻塞自己
+						wait();
 					} catch (InterruptedException e) {
-						e.printStackTrace();
-						lock.unlock();
+						System.out.println("线程异常终止...");
 					}
-				}
-				flag_isDoingTask = true;
-				lock.unlock();// lock是同步锁的意思，不能锁住耗时较长的代码块不放
-				F file = quefiles_undo.poll();
-				if (null == file) {
-					log.debug("ConsumerTask run null == file");
-					continue;
-				}
-				if (!isCorrectFile(file)) {
-					log.debug("ConsumerTask run not CorrectFile(file)");
-					continue;
-				}
-				if (!dbAddFileInfo(file)) {
-					log.debug("ConsumerTask run failed dbAddFileInfo(file)");
-					continue;
-				}
-				if (doWork(file)) {// queueTask 自带了同步代码 可以不放到Lock中
-					mapfiles_dosuc.put(file.namesrc, file);// 处理成功
-					//处理成功后续处理
-					doWorkSucAfter(file);
-					//通知其他系统
-					notifyOthers(file);
 				} else {
-					mapfiles_dofail.put(file.namesrc, file);// 处理失败
-					//初始失败后续处理
-					doWorkFailAfter(file);
+					lock.lock();
+					timeTaskEnd = System.currentTimeMillis();
+					while (quefiles_undo.size() == 0) {
+						try {
+							System.out.println("现有存档任务队列已处理完毕，等待新文件到来...");
+							flag_isDoingTask = false;
+							singalQue.await();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+							lock.unlock();
+						}
+					}
+					flag_isDoingTask = true;
+					lock.unlock();// lock是同步锁的意思，不能锁住耗时较长的代码块不放
+					F file = quefiles_undo.poll();
+					if (null == file) {
+						log.debug("ConsumerTask run null == file");
+						continue;
+					}
+					if (!isCorrectFile(file)) {
+						log.debug("ConsumerTask run not CorrectFile(file)");
+						continue;
+					}
+					if (!dbAddFileInfo(file)) {
+						log.debug("ConsumerTask run failed dbAddFileInfo(file)");
+						continue;
+					}
+					if (doWork(file)) {// queueTask 自带了同步代码 可以不放到Lock中
+						mapfiles_dosuc.put(file.namesrc, file);// 处理成功
+						// 处理成功后续处理
+						doWorkSucAfter(file);
+						// 通知其他系统
+						notifyOthers(file);
+					} else {
+						mapfiles_dofail.put(file.namesrc, file);// 处理失败
+						// 初始失败后续处理
+						doWorkFailAfter(file);
+					}
+					// 更新数据库
+					dbUpdateFileInfo(file);
 				}
-				//更新数据库
-				dbUpdateFileInfo(file);
 			}
 		}
 
+		public void setStop() {
+			this.status = STOP;
+		}
+
+
+		public synchronized void myResume() {
+			// 修改状态
+			status = RUNNING;
+			// 唤醒
+			notifyAll();
+		}
 	}
 
 	// 清理定时器 间隔次数
@@ -194,9 +245,9 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskTh
 	private long timeIdleCopy = timeSpanHoure * 12;// 12小时过期
 	private long timeIdleTask = timeSpanHoure * 1;// 12小时过期
 
-	
 	protected abstract boolean clearData();
-	private void __ClearData(){
+
+	private void __ClearData() {
 		// 正在执行任务则直接返回
 		if (flag_isDoingTask) {
 			log.debug("任务正在执行，清理工作跳过...");
@@ -209,10 +260,13 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskTh
 			return;
 		}
 	}
-	
+
 	/**
-	 * <p>Title: TimerGCClear<／p>
-	 * <p>Description: <／p>
+	 * <p>
+	 * Title: TimerGCClear<／p>
+	 * <p>
+	 * Description: <／p>
+	 * 
 	 * @author ZhongwengHao
 	 * @date 2016年11月1日
 	 */
@@ -229,28 +283,28 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskTh
 		/**
 		 * 停止任务
 		 */
-		public void stop() {
+		public void setStop() {
 			this.cancel();
-			this.stop();
 		}
 	}
-	
+
 	protected abstract boolean reDoFailedWorks(F amdlWork);
-	
-	private boolean __RedoFailedWorks(){
+
+	private boolean __RedoFailedWorks() {
 		reDoFailedWorks(null);
 		return true;
 	}
+
 	class TimerRedoFailed extends Thread {
-		public boolean flagRun = true;
+		private volatile boolean flagRun = true;
 
 		@Override
 		public void run() {
 			while (flagRun) {
 				try {
-					
+
 					Thread.sleep(timeSpanMinute * 30);
-				
+
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -258,6 +312,10 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements InfTaskTh
 				__RedoFailedWorks();
 			}
 
+		}
+
+		public void setStop() {
+			flagRun = false;
 		}
 
 	}

@@ -273,7 +273,7 @@ blockquote small {
 
 /* Logo */
 .logo {
-    width: 1130px;
+    width: 100%;
     height: 50px;
     text-align: center;
     padding: 14px 0 12px 200px;

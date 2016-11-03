@@ -52,15 +52,22 @@ public class JfinalConfig extends JFinalConfig {
 	 */
 	public void configConstant(Constants constants) {
 		log.info("----------configConstant 缓存 properties");
-		//new PropertiesPlugin(loadPropertyFile("init.properties"),true).start();
-		//配置文件-------平台
-		com.platform.config.run.ConfMain.getInstance().setPropertyes(new PropertiesPlugin(loadPropertyFile("init.properties"), true));
+		// new
+		// PropertiesPlugin(loadPropertyFile("init.properties"),true).start();
+		// 配置文件-------平台
+		com.platform.config.run.ConfMain.getInstance()
+				.setPropertyes(
+						new PropertiesPlugin(
+								loadPropertyFile("init.properties"), true));
 		com.platform.config.run.ConfMain.getInstance().initProperties();
-		
-		//配置文件-------子系统
-		datamotion.config.ConfMain.getInstance().setPropertyes(new PropertiesInitMy(loadPropertyFile("init_autdatamotion.properties"), false));
+
+		// 配置文件-------子系统
+		datamotion.config.ConfMain.getInstance().setPropertyes(
+				new PropertiesInitMy(
+						loadPropertyFile("init_autdatamotion.properties"),
+						false));
 		datamotion.config.ConfMain.getInstance().initProperties();
-		
+
 		log.info("configConstant 设置字符集");
 		constants.setEncoding(ToolString.encoding);
 
@@ -89,7 +96,7 @@ public class JfinalConfig extends JFinalConfig {
 
 		log.info("configRoute 手动注册路由");
 		routes.add(new PlatformRoutes());
-		//路由设置 ---子系统
+		// 路由设置 ---子系统
 		routes.add(new datamotion.config.RoutePlugins());
 	}
 
@@ -98,11 +105,13 @@ public class JfinalConfig extends JFinalConfig {
 	 */
 	public void configPlugin(Plugins plugins) {
 		log.info("注册paltform ActiveRecordPlugin");
-		//数据库层设置初始化  ---平台
-		com.platform.config.run.ConfMain.getInstance().setDBMapping(new PlatformMapping());
+		// 数据库层设置初始化 ---平台
+		com.platform.config.run.ConfMain.getInstance().setDBMapping(
+				new PlatformMapping());
 		com.platform.config.run.ConfMain.getInstance().initDBMapping(plugins);
-		//数据库层设置初始化  ---子系统
-		datamotion.config.ConfMain.getInstance().setDBMapping(new DBMappingMy());
+		// 数据库层设置初始化 ---子系统
+		datamotion.config.ConfMain.getInstance()
+				.setDBMapping(new DBMappingMy());
 		datamotion.config.ConfMain.getInstance().initDBMapping(plugins);
 		log.info("I18NPlugin 国际化键值对加载");
 		plugins.add(new I18NPlugin());
@@ -170,49 +179,54 @@ public class JfinalConfig extends JFinalConfig {
 	 * 系统启动完成后执行
 	 */
 	public void afterJFinalStart() {
-		//加载信息----子系统
-//		wisefuse.mvc.cms.MainConf.GetInstance().init();
-//		wisefuse.mvc.cms.MainConf.GetInstance().start();
+		// 加载信息----子系统
+		// wisefuse.mvc.cms.MainConf.GetInstance().init();
+		// wisefuse.mvc.cms.MainConf.GetInstance().start();
 
-		//Zeroc Ice Util 初始化----------!!!最好增加配置文件开关？？？
-//		IceClientUtil.init( 180);
-		//初始化ftp地址-----------!!!最好增加配置文件开关？？？
+		// Zeroc Ice Util 初始化----------!!!最好增加配置文件开关？？？
+		// IceClientUtil.init( 180);
+		// 初始化ftp地址-----------!!!最好增加配置文件开关？？？
 		com.platform.config.run.ConfMain.getInstance().initFtp();
-		//初始化ftp地址-----------子系统  !!!最好增加配置文件开关？？？
-		//targrecog.config.ConfMain.getInstance().initFtp();
-		
+		// 初始化ftp地址-----------子系统 !!!最好增加配置文件开关？？？
+		// targrecog.config.ConfMain.getInstance().initFtp();
+
 		log.info("afterJFinalStart 启动操作日志入库线程");
-		ThreadSysLog.startSaveDBThread();//日志保存时间需要写入-------配置文件
+		ThreadSysLog.startSaveDBThread();// 日志保存时间需要写入-------配置文件
 
 		boolean luceneIndex = getPropertyToBoolean(
 				ConstantInit.config_luceneIndex, false);
 		if (luceneIndex) {
 			log.info("afterJFinalStart 创建自动回复lucene索引");
-			//new DocKeyword().run();
+			// new DocKeyword().run();
 		}
 
 		log.info("afterJFinalStart 系统负载");
-		TimerResources.start();	//----------有参数需写入配置文件
-		
+		TimerResources.start(); // ----------有参数需写入配置文件
+
 		log.info("afterJFinalStart 数据清理");
-		DataClear.start();//---------------有参数需写入配置文件
+		DataClear.start();// ---------------有参数需写入配置文件
+		// ====================系统初始化启动================
+		// 加载信息----子系统
+		datamotion.config.RunMain.GetInstance().init();
+		datamotion.config.RunMain.GetInstance().start();
+
 	}
 
 	/**
 	 * 系统关闭前调用
 	 */
 	public void beforeJFinalStop() {
-		
-		//Zeroc Ice Util 销毁
-//		IceClientUtil.closeCommunicator(true);
-		//释放资源----------子系统
-//		datamotion.mvc.cms.MainConf.GetInstance().stop();
-		
+
+		// Zeroc Ice Util 销毁
+		// IceClientUtil.closeCommunicator(true);
+		// 释放资源----------子系统
+		datamotion.config.RunMain.GetInstance().stop();
+
 		log.info("beforeJFinalStop 释放lucene索引资源");
 		boolean luceneIndex = getPropertyToBoolean(
 				ConstantInit.config_luceneIndex, false);
 		if (luceneIndex) {
-			//new DocKeyword().close();
+			// new DocKeyword().close();
 		}
 		log.info("beforeJFinalStop 释放日志入库线程");
 		ThreadSysLog.setThreadRun(false);

@@ -29,7 +29,7 @@ label {
     width:110px;
     font-weight: normal;
     font-size: 13px;
-    line-height:30px;
+    line-height:13px;
     text-align: right;
     margin:6px;
 }
@@ -77,6 +77,13 @@ label {
 .myPanel{
     width:100%;
     height: 350px;
+    border:1px solid rgba(255,255,255,0.15);
+    padding:10px;
+}
+
+.myPanelModelInfo{
+    width:100%;
+    height: 100%;
     border:1px solid rgba(255,255,255,0.15);
     padding:10px;
 }
