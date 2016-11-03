@@ -40,8 +40,8 @@ public class T7_backupfileController extends BaseController {
 //		paging(ConstantInitMy.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, T7_backupfile.sqlId_splitPage_from);
 //		renderWithPath(pthv+"list.html");
 
-		renderWithPath(pthv+"backupfile.html");
-		//renderWithPath(pthv10+"datastatistics.html");
+		//renderWithPath(pthv+"backupfile.html");
+		renderWithPath(pthv10+"datastatistics.html");
 	}
 	
 	/**
