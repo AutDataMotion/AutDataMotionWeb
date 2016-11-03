@@ -347,12 +347,18 @@ height:300px;
 	option = {
 		    title : {
 		        text: 'ECharts2 vs ECharts1',
-		        subtext: 'Chrome下测试数据'
+		        subtext: 'Chrome下测试数据',
+		        textStyle:{
+		        		color: '#fff'
+		        }
 		    },
 		    tooltip : {
 		        trigger: 'axis'
 		    },
 		    legend: {
+			    	textStyle:{
+		        		color: '#fff'
+		        		},
 		        data:[
 		            'ECharts1 - 2k数据','ECharts1 - 2w数据','ECharts1 - 20w数据','',
 		            'ECharts2 - 2k数据','ECharts2 - 2w数据','ECharts2 - 20w数据'
@@ -373,10 +379,20 @@ height:300px;
 		    xAxis : [
 		        {
 		            type : 'category',
+		            axisLabel:{
+		            		textStyle:{
+				        		color: '#fff'
+				        		}
+	            		},
 		            data : ['Line','Bar','Scatter','K','Map']
 		        },
 		        {
 		            type : 'category',
+		            axisLabel:{
+	            		textStyle:{
+			        		color: '#fff'
+			        		}
+            			},
 		            axisLine: {show:false},
 		            axisTick: {show:false},
 		            axisLabel: {show:false},
@@ -388,7 +404,12 @@ height:300px;
 		    yAxis : [
 		        {
 		            type : 'value',
-		            axisLabel:{formatter:'{value} ms'}
+		            axisLabel:{
+		            		formatter:'{value} ms',
+		            		textStyle:{
+				        		color: '#fff'
+				        }
+		            	}
 		        }
 		    ],
 		    series : [
