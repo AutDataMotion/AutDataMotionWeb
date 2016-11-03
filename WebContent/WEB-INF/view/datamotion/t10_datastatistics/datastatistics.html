@@ -1,0 +1,480 @@
+<% var cssSec={ %>
+<style>
+.myPanel_datastatistics{
+	width: 945px;
+    height: 350px;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+.col-md-1_datastatistics{
+ 	padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 7px;
+    float: left;
+}
+.mylabel_datastatistics{
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 30px;
+    text-align: right;
+    color: #ffffff;
+    float: right;
+}
+.col-md-4_datastatistics{
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 7px;
+    width: 100%;
+    float: left;
+}
+.form-group_datastatistics {
+    margin-bottom: 5px;
+}
+.time{
+	
+    padding-top: 10px;
+   width: 100%;
+    float:left;
+}
+.datainp {
+    width: 100%;
+    height: 30px;
+    border: 1px #ccc solid;
+    background-color: rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+.row_datastatistics{
+	width:100%;
+	height:50px;
+}
+.column_label{
+width:11.1%;
+height:100%;
+float: left;
+}
+.column_input{
+width:22.2%;
+height:100%;
+float: left;
+}
+#Charts1{
+width:945px;
+height:300px;
+}
+</style>
+<link href="${cxt!}/ui/jedate/skin/jedate.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${cxt!}/ui/DataTables/datatables.min.css"/>
+<% }; %>
+
+<% var contSec={ %>
+<div class="myPanel_datastatistics">
+	<div class="row_datastatistics">
+		<div class="column_label">
+			<div class="col-md-1_datastatistics mylabel_datastatistics">
+	        <label>飞行器：</label>
+	    		</div>
+		</div>
+		<div class="column_input">
+			<div class="col-md-4_datastatistics form-group_datastatistics">
+		       	<select multiple class="select" id="aircraft_datastatistics">
+		       	  
+		          <option value="option1">天宫一号</option>
+		          <option value="option2">天宫二号</option>
+		       	</select>
+	    		</div>
+		</div>
+		<div class="column_label">
+			<div class="col-md-1_datastatistics mylabel_datastatistics">
+	        <label>载荷名称：</label>
+	    		</div>
+		</div>
+		<div class="column_input">
+			<div class="col-md-4_datastatistics form-group_datastatistics">
+		       	<select multiple class="select" id="sensor_datastatistics">
+		       	  
+		          <option value="option1">宽波段</option>
+		          <option value="option2">高度计</option>
+		       	</select>
+	    		</div>
+		</div>
+		
+		<div class="column_label">
+			<div class="col-md-1_datastatistics mylabel_datastatistics">
+	        <label>产品类型：</label>
+	    		</div>
+		</div>
+		<div class="column_input">
+			<div class="col-md-4_datastatistics form-group_datastatistics">
+		       <select multiple class="select" id="producttype_datastatistics">
+		       	  
+		          <option value="option1">IMG</option>
+		          <option value="option2">AUX</option>
+		          <option value="option1">SCI</option>
+		          <option value="option2">ENG</option>
+		       </select>
+		    </div>
+		</div>
+	</div>
+	<div class="row_datastatistics">
+			<div class="column_label">
+				<div class="col-md-1_datastatistics mylabel_datastatistics">
+			        <label>产品级别：</label>
+			    </div>
+			</div>
+			<div class="column_input">
+				<div class="col-md-4_datastatistics form-group_datastatistics">
+			       <select multiple class="select" id="productlevel_datastatistics">
+			       	  <option value="option1">0B</option>
+			          <option value="option2">0C</option>
+			          <option value="option1">L0</option>
+			          <option value="option2">L1</option>
+			       </select>
+			    </div>
+			</div>
+			
+			<div class="column_label">
+				<div class="col-md-1_datastatistics mylabel_datastatistics">
+			        <label>产品标识：</label>
+			    </div>
+			</div>
+			<div class="column_input">
+				<div class="col-md-4_datastatistics form-group_datastatistics">
+			       <select multiple class="select" id="camera_datastatistics">
+			       	  <option value="option1">VNI</option>
+			          <option value="option2">INF</option>
+			        </select>
+			    </div>
+			</div>
+			
+			<div class="column_label">
+				<div class="col-md-1_datastatistics mylabel_datastatistics">
+			        <label>文件类型：</label>
+			    </div>
+			</div>
+			<div class="column_input">
+				<div class="col-md-4_datastatistics form-group_datastatistics">
+			       <select multiple class="select" id="filetype_datastatistics">
+			       	  <option value="option1">dat</option>
+			          <option value="option2">csv</option>
+			          <option value="option1">tif</option>
+			          <option value="option2">h5</option>
+			        </select>
+			    </div>
+			</div>
+	</div>
+	<div class="row_datastatistics">
+		<div class="column_label">
+			<div class="col-md-1_datastatistics mylabel_datastatistics">
+		        <label>接受时间：</label>
+		    </div>
+		</div>
+		<div class="column_input">
+			<div class="time">
+		       <input class="datainp" id="dateinfo_receiveTime_datastatistics" type="text" placeholder="请选择" readonly="">
+		    </div>
+		</div>
+		
+		<div class="column_label">
+			<div class="col-md-1_datastatistics mylabel_datastatistics">
+		        <label>采集开始时间：</label>
+		    </div>
+		</div>
+		<div class="column_input">
+			<div class="time">
+		       <input class="datainp" id="dateinfo_collectStartTime_datastatistics" type="text" placeholder="请选择" readonly="">
+		    </div>
+		</div>
+		<div class="column_label">
+			<div class="col-md-1_datastatistics mylabel_datastatistics">
+		        <label>采集结束时间：</label>
+		    </div>
+		</div>
+		<div class="column_input">
+			<div class="time">
+		       <input class="datainp" id="dateinfo_collectEndTime_datastatistics" type="text" placeholder="请选择" readonly="">
+		    </div>
+		</div>
+	</div>
+	<div class="row_datastatistics">
+			<div class="column_label">
+				<div class="col-md-1_datastatistics mylabel_datastatistics">
+			        <label>入库开始时间：</label>
+			    </div>
+			</div>
+			<div class="column_input">
+				<div class="time">
+			       <input class="datainp" id="dateinfo_intoDatabaseStartTime_datastatistics" type="text" placeholder="请选择" readonly="">
+			    </div>
+			</div>
+			
+			<div class="column_label">
+				<div class="col-md-1_datastatistics mylabel_datastatistics">
+			        <label>入库结束时间：</label>
+			    </div>
+			</div>
+			<div class="column_input">
+				<div class="time">
+			       <input class="datainp" id="dateinfo_intoDatabaseEndTime_datastatistics" type="text" placeholder="请选择" readonly="">
+			    </div>
+			</div>
+			
+			<div class="column_label">
+				<div class="col-md-1_datastatistics mylabel_datastatistics">
+			        <label>统计类别：</label>
+			    </div>
+			</div>
+			<div class="column_input">
+				<div class="col-md-4_datastatistics form-group_datastatistics">
+			       <select multiple class="select" id="datastatisticsKind">
+			       	  <option value="option1">下载</option>
+			          <option value="option2">备份</option>
+			          <option value="option1">归档</option>
+			          <option value="option2">检出</option>
+			       </select>
+			    </div>
+			</div>
+	</div>
+	<div class="row_datastatistics">
+			<div class="column_label">
+					<div class="col-md-1_datastatistics mylabel_datastatistics">
+				        <input id="doQuery_btn_datastatistics" name="doQuery_btn" type="button" value="查询统计" class="btn m-r-5"/>
+				    </div>
+			</div>
+	</div>
+	
+<div class="row">
+   <div class="col-md-4">
+
+             <div class="tile">
+                 <h2 class="tile-title">宽波段数据统计</h2>
+
+                 <div class="listview narrow">
+
+                     <div class="media">
+                     		<div class="pull-right">
+                             <div class="counts">367892</div>
+                         </div>
+                         <div class="media-body">
+                             <h4>总数量(个)：</h4>
+                         </div>
+                     </div>
+                     <div class="media">
+                         <div class="pull-right">
+                             <div class="counts">123545</div>
+                         </div>
+                         <div class="media-body">
+                             <h4>总容量(Mb)：</h4>
+                         </div>
+                     </div>
+                     
+                 </div>
+             </div>
+
+      </div>
+
+          <div class="col-md-4">
+
+              <div class="tile">
+                  <h2 class="tile-title">高度计数据统计</h2>
+
+                  <div class="listview narrow">
+
+                      <div class="media">
+                      		<div class="pull-right">
+                              <div class="counts">367892</div>
+                          </div>
+                          <div class="media-body">
+                              <h4>总数量(个)：</h4>
+                          </div>
+                      </div>
+                      <div class="media">
+                          <div class="pull-right">
+                              <div class="counts">123545</div>
+                          </div>
+                          <div class="media-body">
+                              <h4>总容量(Mb)：</h4>
+                          </div>
+                      </div>
+                 
+					</div>
+              </div>
+
+          </div>
+
+<div class="col-md-4">
+
+    <div class="tile">
+        <h2 class="tile-title">紫外数据统计</h2>
+
+        <div class="listview narrow">
+
+            <div class="media">
+            		<div class="pull-right">
+                    <div class="counts">367892</div>
+                </div>
+                <div class="media-body">
+                    <h4>总数量(个)：</h4>
+                </div>
+            </div>
+            <div class="media">
+                <div class="pull-right">
+                    <div class="counts">123545</div>
+                </div>
+                <div class="media-body">
+                    <h4>总容量(Mb)：</h4>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+	</div>
+</div>
+	<div class="row">
+		<div id="Charts1">
+		</div>
+	</div>		
+</div>
+<% }; %>
+
+<% var jsSec={ %>
+	<script src="${cxt!}/ui/jedate/jedate.js"></script>
+	<!-- DataTables -->
+<script type="text/javascript" src="${cxt!}/ui/DataTables/datatables.min.js"></script>
+<script src="${cxt!}/ui/SuperAdmin/js/echarts-all.js"></script>
+	<script>
+	var myChart = echarts.init(document.getElementById('Charts1'));
+	option = {
+		    title : {
+		        text: 'ECharts2 vs ECharts1',
+		        subtext: 'Chrome下测试数据'
+		    },
+		    tooltip : {
+		        trigger: 'axis'
+		    },
+		    legend: {
+		        data:[
+		            'ECharts1 - 2k数据','ECharts1 - 2w数据','ECharts1 - 20w数据','',
+		            'ECharts2 - 2k数据','ECharts2 - 2w数据','ECharts2 - 20w数据'
+		        ]
+		    },
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            mark : {show: true},
+		            dataView : {show: true, readOnly: false},
+		            magicType : {show: true, type: ['line', 'bar']},
+		            restore : {show: true},
+		            saveAsImage : {show: true}
+		        }
+		    },
+		    calculable : true,
+		    grid: {y: 70, y2:30, x2:20},
+		    xAxis : [
+		        {
+		            type : 'category',
+		            data : ['Line','Bar','Scatter','K','Map']
+		        },
+		        {
+		            type : 'category',
+		            axisLine: {show:false},
+		            axisTick: {show:false},
+		            axisLabel: {show:false},
+		            splitArea: {show:false},
+		            splitLine: {show:false},
+		            data : ['Line','Bar','Scatter','K','Map']
+		        }
+		    ],
+		    yAxis : [
+		        {
+		            type : 'value',
+		            axisLabel:{formatter:'{value} ms'}
+		        }
+		    ],
+		    series : [
+		        {
+		            name:'ECharts2 - 2k数据',
+		            type:'bar',
+		            itemStyle: {normal: {color:'rgba(193,35,43,1)', label:{show:true}}},
+		            data:[40,155,95,75, 0]
+		        },
+		        {
+		            name:'ECharts2 - 2w数据',
+		            type:'bar',
+		            itemStyle: {normal: {color:'rgba(181,195,52,1)', label:{show:true,textStyle:{color:'#27727B'}}}},
+		            data:[100,200,105,100,156]
+		        },
+		        {
+		            name:'ECharts2 - 20w数据',
+		            type:'bar',
+		            itemStyle: {normal: {color:'rgba(252,206,16,1)', label:{show:true,textStyle:{color:'#E87C25'}}}},
+		            data:[906,911,908,778,0]
+		        },
+		        {
+		            name:'ECharts1 - 2k数据',
+		            type:'bar',
+		            xAxisIndex:1,
+		            itemStyle: {normal: {color:'rgba(193,35,43,0.5)', label:{show:true,formatter:function(p){return p.value > 0 ? (p.value +'\n'):'';}}}},
+		            data:[96,224,164,124,0]
+		        },
+		        {
+		            name:'ECharts1 - 2w数据',
+		            type:'bar',
+		            xAxisIndex:1,
+		            itemStyle: {normal: {color:'rgba(181,195,52,0.5)', label:{show:true}}},
+		            data:[491,2035,389,955,347]
+		        },
+		        {
+		            name:'ECharts1 - 20w数据',
+		            type:'bar',
+		            xAxisIndex:1,
+		            itemStyle: {normal: {color:'rgba(252,206,16,0.5)', label:{show:true,formatter:function(p){return p.value > 0 ? (p.value +'+'):'';}}}},
+		            data:[3000,3000,2817,3000,0]
+		        }
+		    ]
+		};
+	myChart.setOption(option);
+	
+	jeDate({
+		dateCell:"#dateinfo_receiveTime_datastatistics",
+		format:"YYYY年MM月DD日 hh:mm:ss",
+		isinitVal:true,
+		isTime:true, //isClear:false,
+		minDate:"2014-09-19 00:00:00",
+		okfun:function(val){alert(val)}
+	})
+	jeDate({
+		dateCell:"#dateinfo_collectStartTime_datastatistics",
+		format:"YYYY年MM月DD日 hh:mm:ss",
+		isinitVal:true,
+		isTime:true, //isClear:false,
+		minDate:"2014-09-19 00:00:00",
+		okfun:function(val){alert(val)}
+	})
+	jeDate({
+		dateCell:"#dateinfo_collectEndTime_datastatistics",
+		format:"YYYY年MM月DD日 hh:mm:ss",
+		isinitVal:true,
+		isTime:true, //isClear:false,
+		minDate:"2014-09-19 00:00:00",
+		okfun:function(val){alert(val)}
+	})
+	jeDate({
+		dateCell:"#dateinfo_intoDatabaseStartTime_datastatistics",
+		format:"YYYY年MM月DD日 hh:mm:ss",
+		isinitVal:true,
+		isTime:true, //isClear:false,
+		minDate:"2014-09-19 00:00:00",
+		okfun:function(val){alert(val)}
+	})
+	jeDate({
+		dateCell:"#dateinfo_intoDatabaseEndTime_datastatistics",
+		format:"YYYY年MM月DD日 hh:mm:ss",
+		isinitVal:true,
+		isTime:true, //isClear:false,
+		minDate:"2014-09-19 00:00:00",
+		okfun:function(val){alert(val)}
+	})
+	</script>
+<% }; %>
+<% include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
