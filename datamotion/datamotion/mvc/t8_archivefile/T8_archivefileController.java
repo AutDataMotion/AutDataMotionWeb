@@ -40,9 +40,9 @@ public class T8_archivefileController extends BaseController {
 		// paging(ConstantInitMy.db_dataSource_main, splitPage,
 		// BaseModel.sqlId_splitPage_select,
 		// T8_archivefile.sqlId_splitPage_from);
-		renderWithPath(pthv+"list.html");
+		//renderWithPath(pthv+"list.html");
 
-		//renderWithPath(pthv + "mng.html");
+		renderWithPath(pthv + "mng.html");
 	}
 
 	@Clear
