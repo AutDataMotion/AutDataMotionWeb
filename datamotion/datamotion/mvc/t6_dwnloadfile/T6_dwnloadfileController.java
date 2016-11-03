@@ -5,7 +5,9 @@ import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
 
 import org.apache.log4j.Logger;
+
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Clear;
 
 import datamotion.constant.ConstantInitMy;
 
@@ -31,14 +33,23 @@ public class T6_dwnloadfileController extends BaseController {
 
 	public static final String pthc = "/jf/datamotion/t6_dwnloadfile/";
 	public static final String pthv = "/datamotion/t6_dwnloadfile/";
-
+	public static final String pthvf = "/datamotion/f/";
 	/**
 	 * 列表
 	 */
+	@Clear
 	public void index() {
-		paging(ConstantInitMy.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, T6_dwnloadfile.sqlId_splitPage_from);
-		renderWithPath(pthv+"list.html");
+		/*paging(ConstantInitMy.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, T6_dwnloadfile.sqlId_splitPage_from);
+		renderWithPath(pthv+"list.html");*/
+		
+		renderWithPath(pthv+"dwnloadfile.html");
 	}
+	
+	@Clear
+	public void viewControlPanel() {
+		renderWithPath(pthvf+"controlpanel.html");
+	}
+
 	
 	/**
 	 * 保存
