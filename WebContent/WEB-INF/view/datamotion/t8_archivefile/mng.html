@@ -28,15 +28,10 @@
 .form-group_backupfile {
     margin-bottom: 5px;
 }
-.time{
-	
-    padding-top: 10px;
-   width: 100%;
-    float:left;
-}
+
 .datainp {
     width: 100%;
-    height: 30px;
+    height: 26px;
     border: 1px #ccc solid;
     background-color: rgba(0, 0, 0, 0.2);
     text-align: center;
@@ -54,6 +49,9 @@ float: left;
 width:22.2%;
 height:100%;
 float: left;
+}
+.doQueryResultTable{
+margin:10px 10px 10px 10px;
 }
 </style>
 <link href="${cxt!}/ui/jedate/skin/jedate.css" rel="stylesheet">
@@ -361,17 +359,17 @@ float: left;
 		$('#myTable').DataTable({
 			data : dataSet,
 			columns : [ {
-				title : "Name"
+				title : "序号"
 			}, {
-				title : "Position"
+				title : "改名前"
 			}, {
-				title : "Office"
+				title : "改名后"
 			}, {
-				title : "Extn."
+				title : "入库时间"
 			}, {
-				title : "Start date"
+				title : "检出时间"
 			}, {
-				title : "Salary"
+				title : "操作"
 			} ],
 			"language" : {
 				"url" : "${cxt!}/ui/DataTables/Chinese.json"
