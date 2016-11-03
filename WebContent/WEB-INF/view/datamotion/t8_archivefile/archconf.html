@@ -10,123 +10,59 @@
 <% }; %> <% var contSec={ %>
 <div class="myPanel_backupfile">
 
-	<h4>参数配置列表</h4>
-	<div class="row">
+	<div class="row pad20">
 		<div class="doQueryResultTable">
-			<table id="myTable" class="display"
-				style="width: 100%; background-color: rgba(255, 255, 255, .15);"></table>
+			<table id="myTable" class="display"></table>
 		</div>
 	</div>
 
 	<div class="tile">
 
-	
-		<div class="form-group">
-			<label class="col-sm-2 control-label">流水线编号</label>
-			<div class="col-sm-7">
-				<input type="text" name="t_log_proc.fid_flow"
-					value="${t_log_proc.fid_flow!}" class="form-control"
-					maxlength="100" vMin="1" vType="length"
-					onblur="platform_verify.onblurVali(this);"> <span
-					class="help-inline col-sm-2"></span>
+		<div class="row">
+			<div class="col-lg-1 col-md-1 col-sm-1">
+				<h4 class="leftlabel">参数key</h4>
 			</div>
-			<span class="help-inline col-sm-2"> <i
-				class="fa fa-info-circle"></i> 1-100个任意字符
-			</span>
-		</div>
-
-		<div class="form-group">
-			<label class="col-sm-2 control-label">数据类型</label>
-			<div class="col-sm-7">
-				<input type="text" name="t_log_proc.datatype"
-					value="${escapeXml(t_log_proc.datatype!)}" class="form-control"
-					maxlength="100" vMin="1" vType="length"
-					onblur="platform_verify.onblurVali(this);"> <span
-					class="help-inline col-sm-2"></span>
+			<div class="col-lg-4 col-md-4 col-sm-4">
+				<input type="text" class="form-control m-b-10">
 			</div>
-			<span class="help-inline col-sm-2"> <i
-				class="fa fa-info-circle"></i> 1-100个任意字符
-			</span>
-		</div>
-
-		<div class="form-group">
-			<label class="col-sm-2 control-label">数据key</label>
-			<div class="col-sm-7">
-				<input type="text" name="t_log_proc.datakey"
-					value="${escapeXml(t_log_proc.datakey!)}" class="form-control"
-					maxlength="100" vMin="1" vType="length"
-					onblur="platform_verify.onblurVali(this);"> <span
-					class="help-inline col-sm-2"></span>
+			<div class="col-lg-1 col-md-1 col-sm-1">
+				<h4 class="leftlabel">参数名称</h4>
 			</div>
-			<span class="help-inline col-sm-2"> <i
-				class="fa fa-info-circle"></i> 1-100个任意字符
-			</span>
-		</div>
-
-		<div class="form-group">
-			<label class="col-sm-2 control-label">处理阶段</label>
-			<div class="col-sm-7">
-				<input type="text" name="t_log_proc.procstage"
-					value="${escapeXml(t_log_proc.procstage!)}" class="form-control"
-					maxlength="100" vMin="1" vType="length"
-					onblur="platform_verify.onblurVali(this);"> <span
-					class="help-inline col-sm-2"></span>
+			<div class="col-lg-4 col-md-4 col-sm-4">
+				<input type="text" class="form-control m-b-10">
 			</div>
-			<span class="help-inline col-sm-2"> <i
-				class="fa fa-info-circle"></i> 1-100个任意字符
-			</span>
-		</div>
 
-		<div class="form-group">
-			<label class="col-sm-2 control-label">处理状态</label>
-			<div class="col-sm-7">
-				<input type="text" name="t_log_proc.procstatus"
-					value="${escapeXml(t_log_proc.procstatus!)}" class="form-control"
-					maxlength="100" vMin="1" vType="length"
-					onblur="platform_verify.onblurVali(this);"> <span
-					class="help-inline col-sm-2"></span>
+		</div>
+		<div class="row">
+
+			<div class="col-lg-1 col-md-1 col-sm-1">
+				<h4 class="leftlabel">参数值</h4>
 			</div>
-			<span class="help-inline col-sm-2"> <i
-				class="fa fa-info-circle"></i> 1-100个任意字符
-			</span>
-		</div>
-
-		<div class="form-group">
-			<label class="col-sm-2 control-label">日志内容</label>
-			<div class="col-sm-7">
-				<textarea name="t_log_proc.content" class="autosize form-control">${escapeXml(t_log_proc.content!)}</textarea>
-				<span class="help-inline col-sm-2"></span>
+			<div class="col-lg-4 col-md-4 col-sm-4">
+				<input type="text" class="form-control m-b-10">
 			</div>
-			<span class="help-inline col-sm-2"> <i
-				class="fa fa-info-circle"></i> 1-100个任意字符
-			</span>
-		</div>
-
-		<div class="form-group">
-			<label class="col-sm-2 control-label">开始时间</label>
-			<div class="col-sm-7">
-				<div class="input-group">
-					<input type="text" name="t_log_proc.timebeg"
-						date-data-format="yyyy-mm-dd" data-data-viewmode="years"
-						class="form-control data-picker"
-						value="${t_log_proc.timebeg!, dateFormat=" yyyy-MM-ddHH:mm:ss"}">
-					<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-				</div>
-				<span class="help-inline col-sm-2"></span>
+			<div class="col-lg-1 col-md-1 col-sm-1">
+				<h4 class="leftlabel">默认值</h4>
 			</div>
-		</div>
+			<div class="col-lg-4 col-md-4 col-sm-4">
+				<input type="text" class="form-control m-b-10"">
+			</div>
 
-		<div class="form-group">
-			<label class="col-sm-2 control-label">结束时间</label>
-			<div class="col-sm-7">
-				<div class="input-group">
-					<input type="text" name="t_log_proc.timeend"
-						date-data-format="yyyy-mm-dd" data-data-viewmode="years"
-						class="form-control data-picker"
-						value="${t_log_proc.timeend!, dateFormat=" yyyy-MM-ddHH:mm:ss"}">
-					<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-				</div>
-				<span class="help-inline col-sm-2"></span>
+		</div>
+		
+		<div class="row">
+
+			<div class="col-lg-1 col-md-1 col-sm-1">
+				<h4 class="leftlabel">状态</h4>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4">
+				<input type="text" class="form-control m-b-10">
+			</div>
+			<div class="col-lg-1 col-md-1 col-sm-1">
+				<h4 class="leftlabel">备注</h4>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4">
+				<input type="text" class="form-control m-b-10">
 			</div>
 		</div>
 

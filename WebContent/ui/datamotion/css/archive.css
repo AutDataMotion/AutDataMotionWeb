@@ -51,3 +51,17 @@ float: left;
 .doQueryResultTable{
 margin:10px 10px 10px 10px;
 }
+.leftlabel{
+	float: right;
+    padding: 7px;
+}
+.pad20{
+	
+	padding: 20px;
+}
+table{
+	style="width: 100%; background-color: rgba(255, 255, 255, 0);
+}
+thead{
+	background-color: rgba(0, 0, 0, 0.28);
+}
