@@ -121,6 +121,10 @@ public class T11_initfoldertreeController extends BaseController {
 			.update("delete from t11_initfoldertree where parentkeys=?",key_);
 		Db.use(ConstantInitMy.db_dataSource_main)
 			.update("delete from t11_initfoldertree where key_=?",key_);
+		/*根据key_删除t12_initmodule中的信息*/
+		Db.use(ConstantInitMy.db_dataSource_main)
+		.update("delete from t12_initmodule where fkeystreenode=?",key_);
+		
 		
 	}
 	@Clear

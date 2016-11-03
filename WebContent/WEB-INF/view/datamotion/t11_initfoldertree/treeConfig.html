@@ -9,21 +9,21 @@
  	<table class="row">
 	    <tr>
 	        <td><label class="mylabel">飞行器：</label></td>
-	        <td width="200px">
+	        <td width="30%">
 		        <select id="aircraft" name="aircraft" class="select">
 		            <option value="天宫一号">天宫一号</option>
 		            <option value="天宫二号">天宫二号</option>
 		        </select>
 			</td>
 			<td><label class="mylabel">载荷：</label></td>
-	        <td width="200px">
+	        <td width="30%">
 		        <select id="sensor" name="sensor" class="select">
 		            <option value="高度计">高度计</option>
 		            <option value="宽波段">宽波段</option>
 		        </select>
 			</td>
 			<td><label class="mylabel">数据类型：</label></td>
-	        <td width="200px">
+	        <td width="30%">
 		        <select id="datatype" name="datatype" class="select">
 		            <option value="IMG">IMG</option>
 		            <option value="AUX">AUX</option>
@@ -32,16 +32,16 @@
 		        </select>
 			</td>
 	    </tr>
-	    <tr>
+	    <tr style="padding-top:6px ">
 	        <td><label class="mylabel">产品标识：</label></td>
-	        <td width="200px">
+	        <td width="30%">
 		        <select id="camera" name="camera" class="select">
 		            <option value="VNI">VNI</option>
 		            <option value="INF">INF</option>
 		        </select>
 			</td>
 			<td><label class="mylabel">产品等级：</label></td>
-	        <td width="200px">
+	        <td width="30%">
 		        <select id="datalevel" name="datalevel" class="select">
 		            <option value="0B">0B</option>
 		            <option value="0C">0C</option>
@@ -57,16 +57,18 @@
  	<table class="row">
 	    <tr>
 	        <td><label class="mylabel">是否下载：</label></td>
-	        <td width="200px">
+	        <td style="width:30%">
 		        <select id="isdwnload" name="isdwnload" class="select">
 		            <option value="true">是</option>
 		            <option value="false">否</option>
-		        </select>
+		        </select>		    
 			</td>
 			<td><label class="mylabel">FTP路径：</label></td>
-            <td><input id="pathftp" name="pathftp" type="text" class="form-control myinput"/></td>
+            <td><input style="width:400px" id="pathftp" name="pathftp" type="text" class="form-control myinput"/></td>
+		</tr>
+		<tr>
 			<td><label class="mylabel">下载路径：</label></td>
-            <td><input id="pathdwnload" name="pathdwnload" type="text" class="form-control myinput"/></td>
+            <td colspan="3"><input style="width:100%" id="pathdwnload" name="pathdwnload" type="text" class="form-control myinput"/></td>
 		</tr>
  	</table>
  	<h3 class="block-title">备份配置</h3>
@@ -74,7 +76,7 @@
  	<table class="row">
 	    <tr>
 	        <td><label class="mylabel">是否备份：</label></td>
-	        <td width="200px">
+	        <td width="30%">
 		        <select id="isbackup" name="isbackup" class="select">
 		            <option value="true">是</option>
 		            <option value="false">否</option>
@@ -89,7 +91,7 @@
  	<table class="row">
 	    <tr>
 	        <td><label class="mylabel">是否归档：</label></td>
-	        <td width="200px">
+	        <td width="30%">
 		        <select id="isarchive" name="isarchive" class="select">
 		            <option value="true">是</option>
 		            <option value="false">否</option>
@@ -104,22 +106,22 @@
  	<table class="row">
 	    <tr>
 	        <td><label class="mylabel1">是否检出：</label></td>
-	        <td width="200px">
+	        <td width="30%">
 		        <select id="ischeckout" name="ischeckout" class="select">
 		            <option value="true">是</option>
 		            <option value="false">否</option>
 		        </select>
 			</td>
-			<td><label class="mylabel1">检出路径：</label></td>
-            <td><input style="width:400px" id="pathcheckout" name="pathcheckout" type="text" class="form-control"/></td>
+			<td><label class="mylabel1">检出路径： </label></td>
+            <td><input style="width:402px" id="pathcheckout" name="pathcheckout" type="text" class="form-control"/></td>
          </tr>
          <tr>
             <td><label class="mylabel1">原文件名规则：</label></td>
-            <td colspan="3"><input style="width:600px" id="namemdlsrc" name="namemdlsrc" type="text" class="form-control"/></td>
+            <td colspan="3"><input style="width:100%" id="namemdlsrc" name="namemdlsrc" type="text" class="form-control"/></td>
          </tr>
          <tr>
             <td><label class="mylabel1">改名规则：</label></td>
-            <td colspan="3"><input style="width:600px" id="namemdldes" name="namemdldes" type="text" class="form-control"/></td>
+            <td colspan="3"><input style="width:100%" id="namemdldes" name="namemdldes" type="text" class="form-control"/></td>
 		</tr>
 		<tr>
 	        <td><label class="mylabel1">是否有辅助数据：</label></td>
@@ -130,7 +132,7 @@
 		        </select>
 			</td>
 			<td><label class="mylabel1">辅助数据格式：</label></td>
-            <td><input style="width:400px" id="auxfiletypes" name="auxfiletypes" type="text" class="form-control"/></td>
+            <td><input style="width:402px" id="auxfiletypes" name="auxfiletypes" type="text" class="form-control"/></td>
          </tr>
  	</table>
  	<br>
