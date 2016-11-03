@@ -178,23 +178,23 @@ function onClick(event, treeId, treeNode) {
     			pathftp,pathdwnload,isbackup,pathbackup,isarchive,patharchive,
     			ischeckout,pathcheckout,namemdlsrc,namemdldes,ishavaaux,auxfiletypes;
     			if(data.length==0){
-    				aircraft='';
-    				sensor='';
-    				datatype='';
-    				camera='';
-    				datalevel='';
-    				isdwnload='';
+    				aircraft='天宫一号';
+    				sensor='高度计';
+    				datatype='IMG';
+    				camera='VNI';
+    				datalevel='0B';
+    				isdwnload='是';
         			pathftp='';
         			pathdwnload='';
-        			isbackup='';
+        			isbackup='是';
         			pathbackup='';
-        			isarchive='';
+        			isarchive='是';
         			patharchive='';
-        			ischeckout='';
+        			ischeckout='是';
         			pathcheckout='';
         			namemdlsrc='';
         			namemdldes='';
-        			ishavaaux='';
+        			ishavaaux='是';
         			auxfiletypes='';
     			}
     			else {
