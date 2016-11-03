@@ -1,171 +1,56 @@
 <% var cssSec={ %>
-<style>
-
-</style>
 
 <link rel="stylesheet" type="text/css"
 	href="${cxt!}/ui/datamotion/css/archive.css" />
+	
 <link href="${cxt!}/ui/jedate/skin/jedate.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="${cxt!}/ui/DataTables/datatables.min.css" />
-
-<% }; %> <% var contSec={ %>
+	
+ <% }; %> <% var contSec={ %>
 <div class="myPanel_backupfile">
-	<br>
+	
 	<div class="row">
-		<div class="col-md-2  col-sm-2 mylabel">
-			<label>飞行器：</label>
+		<div class="col-md-1  col-sm-1 mylabel">
+			<label>开始时间：</label>
 		</div>
-		<div class="col-md-4  col-sm-4 form-group">
-			<select multiple class="select">
-				<option value="option1">option1</option>
-				<option value="option2">option2</option>
-				<option value="option3">option3</option>
-			</select>
-		</div>
-		<div class="col-md-2  col-sm-2 mylabel">
-			<label>载荷：</label>
-		</div>
-		<div class="col-md-4  col-sm-4 form-group">
-			<select multiple class="select">
-				<option value="option1">option1</option>
-				<option value="option2">option2</option>
-				<option value="option3">option3</option>
-			</select>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2  col-sm-2 mylabel">
-			<label>产品标识：</label>
-		</div>
-		<div class="col-md-4  col-sm-4 form-group">
-			<select multiple class="select">
-				<option value="option1">option1</option>
-				<option value="option2">option2</option>
-				<option value="option3">option3</option>
-			</select>
-		</div>
-		<div class="col-md-2  col-sm-2 mylabel">
-			<label>产品类别：</label>
-		</div>
-		<div class="col-md-4  col-sm-4 form-group">
-			<select multiple class="select">
-				<option value="option1">option1</option>
-				<option value="option2">option2</option>
-				<option value="option3">option3</option>
-			</select>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2  col-sm-2 mylabel">
-			<label>产品等级：</label>
-		</div>
-		<div class="col-md-4  col-sm-4 form-group">
-			<select multiple class="select">
-				<option value="option1">option1</option>
-				<option value="option2">option2</option>
-				<option value="option3">option3</option>
-			</select>
-		</div>
-		<div class="col-md-2  col-sm-2 mylabel">
-			<label>文件名后缀：</label>
-		</div>
-		<div class="col-md-4  col-sm-4 form-group">
-			<select multiple class="select">
-				<option value="option1">option1</option>
-				<option value="option2">option2</option>
-				<option value="option3">option3</option>
-			</select>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-2  col-sm-2 mylabel">
-			<label>采集开始时间：</label>
-		</div>
-		<div class="col-md-4 col-sm-4 form-group">
-			<div class="time">
-				<input class="datainp" id="dateinfo_collectStartTime" type="text"
-					placeholder="请选择">
-			</div>
-		</div>
-
-		<div class="col-md-2  col-sm-2 mylabel">
-			<label>采集结束时间：</label>
-		</div>
-		<div class="col-md-4  col-sm-4 form-group">
-			<div class="time">
-				<input class="datainp" id="dateinfo_collectEndTime" type="text"
-					placeholder="请选择">
-			</div>
-		</div>
-
-	</div>
-	<div class="row">
-		<div class="col-md-2  col-sm-2 mylabel">
-			<label>入库开始时间：</label>
-		</div>
-		<div class="col-md-4  col-sm-4  form-group">
+		<div class="col-md-2  col-sm-2  form-group">
 			<div class="time">
 				<input class="datainp" id="dateinfo_DBstartTime" type="text"
 					placeholder="请选择" >
 			</div>
 		</div>
 
-		<div class="col-md-2  col-sm-2 mylabel">
-			<label>入库结束时间：</label>
+		<div class="col-md-1  col-sm-1 mylabel">
+			<label>结束时间：</label>
 		</div>
-		<div class="col-md-4  col-sm-4  form-group">
+		<div class="col-md-2  col-sm-2  form-group">
 			<div class="time">
 				<input class="datainp" id="dateinfo_DBEndTime" type="text"
 					placeholder="请选择" >
 			</div>
 		</div>
-
-	</div>
-	<div class="row">
-		<div class="col-md-2  col-sm-2 mylabel">
-			<label>接受时间：</label>
-		</div>
-		<div class="col-md-4  col-sm-4  form-group">
-
-			<div class="time">
-				<input class="datainp" id="dateinfo_receiveTime" type="text"
-					placeholder="请选择" >
-			</div>
-		</div>
-
-		<div class="col-md-2  col-sm-2 mylabel">
-			<label>检出状态：</label>
+		<div class="col-md-1  col-sm-1 mylabel">
+			<label>处理状态：</label>
 		</div>
 		<div class="col-md-2  col-sm-2 form-group">
 			<select class="select">
 				<option value="option1">全部</option>
-				<option value="option2">检出成功</option>
-				<option value="option3">检出失败</option>
-				<option value="option3">未检出</option>
+				<option value="option2">处理成功</option>
+				<option value="option3">处理失败</option>
+				<option value="option3">正在处理</option>
 			</select>
 		</div>
 		<div class="col-md-2  col-sm-2">
 			<a href="#" class="btn btn-sm btn-alt wid100">查询</a>
 
 		</div>
-	</div>
-	<hr class="whiter">
-	<br />
-	<div class="row">
-		<div class="col-md-4  col-sm-4">
-			
-		</div>
-		<div class="col-md-4  col-sm-4"></div>
-		<div class="col-md-2  col-sm-2">
-			<a href="#" class="btn btn-sm btn-alt wid100">全部本地下载</a>
-		</div>
-		<div class="col-md-2  col-sm-2">
-			<a href="#" class="btn btn-sm btn-alt wid100">全部改名检出</a>
-		</div>
 
 	</div>
+	
+	<hr class="whiter">
+	<br />
+	
 	<p class="bottom_line"></p>
 	<div class="row">
 		<div class="doQueryResultTable">
@@ -175,43 +60,14 @@
 	</div>
 </div>
 
-<% }; %> <% var jsSec={ %>
+<% }; %> <% var jsSec={ %> 
 
 <script src="${cxt!}/ui/jedate/jedate.js"></script>
 <!-- DataTables -->
 <script type="text/javascript"
 	src="${cxt!}/ui/DataTables/datatables.min.js"></script>
 <script>
-	jeDate({
-		dateCell : "#dateinfo_receiveTime",
-		format : "YYYY年MM月DD日 hh:mm:ss",
-		isinitVal : true,
-		isTime : true, //isClear:false,
-		minDate : "2014-09-19 00:00:00",
-		okfun : function(val) {
-			alert(val)
-		}
-	})
-	jeDate({
-		dateCell : "#dateinfo_collectStartTime",
-		format : "YYYY年MM月DD日 hh:mm:ss",
-		isinitVal : true,
-		isTime : true, //isClear:false,
-		minDate : "2014-09-19 00:00:00",
-		okfun : function(val) {
-			alert(val)
-		}
-	})
-	jeDate({
-		dateCell : "#dateinfo_collectEndTime",
-		format : "YYYY年MM月DD日 hh:mm:ss",
-		isinitVal : true,
-		isTime : true, //isClear:false,
-		minDate : "2014-09-19 00:00:00",
-		okfun : function(val) {
-			alert(val)
-		}
-	})
+	
 	jeDate({
 		dateCell : "#dateinfo_DBstartTime",
 		format : "YYYY年MM月DD日 hh:mm:ss",
@@ -313,15 +169,15 @@
 			columns : [ {
 				title : "序号"
 			}, {
-				title : "改名前"
+				title : "流水线编号"
 			}, {
-				title : "改名后"
+				title : "数据类型"
 			}, {
-				title : "入库时间"
+				title : "处理阶段"
 			}, {
-				title : "检出时间"
+				title : "处理状态"
 			}, {
-				title : "操作"
+				title : "日志内容"
 			} ],
 			"language" : {
 				"url" : "${cxt!}/ui/DataTables/Chinese.json"
@@ -330,6 +186,7 @@
 	});
 </script>
 
-<% }; %> <%
-include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){}
+
+<% }; %><%
+include("../f/layout.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){}
 %>
