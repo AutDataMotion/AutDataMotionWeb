@@ -217,23 +217,23 @@ function onClick(event, treeId, treeNode) {
         			ishavaaux=data[0]['ishavaaux'];
         			auxfiletypes=data[0]['auxfiletypes'];
     			}
-				$("#aircraft").val(aircraft);
-				$("#sensor").val(sensor);
-				$("#datatype").val(datatype);
-				$("#camera").val(camera);
-				$("#datalevel").val(datalevel);
-				$("#isdwnload").val(isdwnload);
+    			$("button[data-id='aircraft']>div:first").text(aircraft);
+    			$("button[data-id='sensor']>div:first").text(sensor);
+    			$("button[data-id='datatype']>div:first").text(datatype);
+    			$("button[data-id='camera']>div:first").text(camera);
+    			$("button[data-id='datalevel']>div:first").text(datalevel);
+    			$("button[data-id='isdwnload']>div:first").text(isdwnload==true?'是':'否');
+    			$("button[data-id='isbackup']>div:first").text(isbackup==true?'是':'否');
+    			$("button[data-id='isarchive']>div:first").text(isarchive==true?'是':'否');
+    			$("button[data-id='ischeckout']>div:first").text(ischeckout==true?'是':'否');
+    			$("button[data-id='ishavaaux']>div:first").text(ishavaaux==true?'是':'否');
 				$("#pathftp").val(pathftp);
 				$("#pathdwnload").val(pathdwnload);
-				$("#isbackup").val(isbackup);
 			    $("#pathbackup").val(pathbackup);
-			    $("#isarchive").val(isarchive);
 				$("#patharchive").val(patharchive);
-				$("#ischeckout").val(ischeckout);
 				$("#pathcheckout").val(pathcheckout);
 				$("#namemdlsrc").val(namemdlsrc);
 				$("#namemdldes").val(namemdldes);
-				$("#ishavaaux").val(ishavaaux);
 				$("#auxfiletypes").val(auxfiletypes);
     		},
     		error:function(){
