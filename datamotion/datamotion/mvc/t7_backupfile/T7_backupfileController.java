@@ -41,7 +41,7 @@ public class T7_backupfileController extends BaseController {
 //		renderWithPath(pthv+"list.html");
 
 		//renderWithPath(pthv+"backupfile.html");
-		renderWithPath(pthv10+"datastatistics.html");
+		//renderWithPath(pthv10+"datastatistics.html");
 	}
 	
 	/**
@@ -96,8 +96,16 @@ public class T7_backupfileController extends BaseController {
 		redirect(pthc);
 	}
 	@Clear
-	public void viewbackupfile()
+	public void backup()
 	{
+		renderWithPath(pthv+"backupfile.html");
+		
+	}
+	@Clear
+	public void datastatistics()
+	{
+		
+		renderWithPath(pthv10+"datastatistics.html");
 	}
 	public void setViewPath(){
 		setAttr(ConstantRender.PATH_CTL_NAME, pthc);
