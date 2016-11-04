@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${cxt!}/ui/DataTables/datatables.min.css" />
 
-<% }; %> <% var contSec={ %>
+<% }; var contSec={ %>
 <div class="myPanel_backupfile">
 	<br>
 	<div class="row">
@@ -167,10 +167,9 @@
 
 	</div>
 	<p class="bottom_line"></p>
-	<div class="row">
+	<div class="row pad20">
 		<div class="doQueryResultTable">
-			<table id="myTable" class="display"
-				style="width: 100%; background-color: rgba(255, 255, 255, .15);"></table>
+			<table id="myTable" class="display"></table>
 		</div>
 	</div>
 </div>
@@ -330,6 +329,6 @@
 	});
 </script>
 
-<% }; %> <%
+<% }; 
 include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){}
 %>
