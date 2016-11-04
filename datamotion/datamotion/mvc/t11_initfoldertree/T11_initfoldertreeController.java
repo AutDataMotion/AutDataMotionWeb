@@ -69,7 +69,7 @@ public class T11_initfoldertreeController extends BaseController {
 		String key_=getPara("key_");
 		String parentkeys=getPara("parentkeys");
 		String namechi=getPara("namechi");
-		String level=key_.split("_")[0];
+		String level=getPara("level");
 		if (key_ != null && (key_.length() > 0)) {
 			/*存储节点的基本信息*/
 			Record t11_initfoldertree=new Record()
