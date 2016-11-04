@@ -95,11 +95,11 @@ function CreatePoint() { // 创建标注
             bounceDistance: 5,
             type: 'bounce'
         },
-        data: [PointAttr('远程文件系统', './img/cloud.png'),
-            PointAttr('数据归档管理服务器', './img/store.png'),
-            PointAttr('数据处理集群', './img/servers.png'),
-            PointAttr('数据库服务器', './img/DB.png'),
-            PointAttr('文件系统磁盘阵列', './img/file.png')]
+        data: [PointAttr('远程文件系统', cxt+'/ui/SuperAdmin/img/cloud.png'),
+            PointAttr('数据归档管理服务器', cxt+'/ui/SuperAdmin/img/store.png'),
+            PointAttr('数据处理集群', cxt+'/ui/SuperAdmin/img/servers.png'),
+            PointAttr('数据库服务器', cxt+'/ui/SuperAdmin/img/DB.png'),
+            PointAttr('文件系统磁盘阵列', cxt+'/ui/SuperAdmin/img/file.png')]
     };
     return objMarkP;
 }
@@ -387,8 +387,8 @@ function flushData() {
 }*/
 require.config({ // 路径配置
     paths: {
-        echarts: './js/echarts',
-        'echarts/chart/map': './js/chart/map'
+        echarts: cxt+'/ui/SuperAdmin/js/echarts',
+        'echarts/chart/map': cxt+'/ui/SuperAdmin/js/chart/map'
     }
 });
 function loadMyChartMap() {
@@ -400,7 +400,7 @@ function loadMyChartMap() {
             require('echarts/util/mapData/params').params.baiduBuilding = {
                 getGeoJson: function (callback) {
                     $.ajax({
-                        url: "svg/data.svg",
+                        url: cxt+"/ui/SuperAdmin/svg/data.svg",
                         dataType: 'xml',
                         success: function (xml) {
                             callback(xml)
@@ -444,41 +444,3 @@ function loadMyChartMap() {
         });
 }
 loadMyChartMap();
-
-//
-//$.fn.styles=function(){
-//    this.css("backgroundColor",'rgba(0,0,0,0.3)')
-//        .css("color","white");
-//    return this;
-//}
-//
-//$(function(){
-//    var mains=$("#mychart");
-//    mains.before("<input id='add' type='button' value='增加'/><input id='del' type='button' value='删除'/>");
-//    $("#add").styles();$("#del").styles();
-//    var tempData = dataArray[3];
-//    var start = tempData[0][0].geoCoord;
-//    var end = tempData[0][1].geoCoord;
-//    var Smooth = tempData[0][0].smoothness;
-//    var Name = tempData[0][0].name;
-//    var Color = tempData[0][0].itemStyle.normal.lineStyle.color;
-//    $("#add").click(function(){
-//        LineData = createData(
-//            start,
-//            end,
-//            Smooth,
-//            Name,
-//            effectLine(true, '#fff', 30),
-//            itemStyleSet(borderWidth, Color, 'solid')
-//        );
-//        myChart.addMarkLine(seriesIndex,{
-//            smooth: true,
-//            selectedMode: 'single',
-//            symbol: ['none'],
-//            data:[LineData]
-//        });
-//    });
-//    $("#del").click(function(){
-//        myChart.delMarkLine(4,Name);
-//    });
-//});

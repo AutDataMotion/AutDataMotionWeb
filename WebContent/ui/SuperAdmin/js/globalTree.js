@@ -1,22 +1,52 @@
 //全局变量
-var setting = {         
+var setting = {    
+	check: {
+		enable: true
+	},
     data: {
         simpleData: {
             enable: true
-        },
-        callback: {
-            onClick: onClick
-        }
+        }       
     }, 
+    callback: {
+        onClick: onClick,
+        onCheck:onCheck
+    }
 };
 
-//叶子节点的点击事件
+//节点的点击事件
 function onClick(event, treeId, treeNode) {
-	if(treeNode!=null&&treeNode.isParent==false){
-    	console.log(treeNode.name);
-    };	
+	console.log(treeNode.name);
+};	
+
+//复选框选中事件
+	
+function onCheck(event, treeId, treeNode){
+	//console.log($.fn.zTree.getZTreeObj(treeId).getCheckedNodes(true));
+	//console.log(treeNodes);
 }
 
+var dataNodeMdl={
+		id:"",
+		pid:"",
+		level:0,
+		name:""
+};
+var dataCheckedTreeNodes = new Array();
+function getCheckedTreeNodesArr(){
+	var rootTree = $.fn.zTree.getZTreeObj("treeDemo").getCheckedNodes(true);
+	console.log(rootTree);
+	for(var i = 0;i<rootTree.length;i++){
+		dataCheckedTreeNodes.push({
+			id:rootTree[i].id,
+			pid:rootTree[i].pid,
+			level:rootTree[i].level,
+			name:rootTree[i].name
+		});
+	}
+	console.log("==============");
+	console.log(dataCheckedTreeNodes);
+}
 //初始化树
 function getTreeData () {
 	$.ajax({

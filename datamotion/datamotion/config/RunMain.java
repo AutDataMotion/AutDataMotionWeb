@@ -51,6 +51,8 @@ public class RunMain implements InfMainConf{
 	@Override
 	public boolean init() {
 		// TODO Auto-generated method stub
+		//加载数据库的配置信息
+		
 		return false;
 	}
 
@@ -62,6 +64,8 @@ public class RunMain implements InfMainConf{
 	@Override
 	public boolean start() {
 		// TODO Auto-generated method stub
+		//启动各自的工作线程
+		
 		return false;
 	}
 
