@@ -71,7 +71,7 @@ float: left;
 		</div>
 		<div class="column_input">
 			<div class="col-md-4_backupfile form-group_backupfile">
-		       	<select multiple class="select" id="aircraft_backup">
+		       	<select multiple class="select">
 		       	  
 		          <option value="option1">天宫一号</option>
 		          <option value="option2">天宫二号</option>
@@ -85,7 +85,7 @@ float: left;
 		</div>
 		<div class="column_input">
 			<div class="col-md-4_backupfile form-group_backupfile">
-		       	<select multiple class="select" id="sensor_backup">
+		       	<select multiple class="select">
 		       	  
 		          <option value="option1">宽波段</option>
 		          <option value="option2">高度计</option>
@@ -96,11 +96,11 @@ float: left;
 		<div class="column_label">
 			<div class="col-md-1_backupfile mylabel_backupfile">
 	        <label>产品类型：</label>
-	    		</div>
+	    	</div>
 		</div>
 		<div class="column_input">
 			<div class="col-md-4_backupfile form-group_backupfile">
-		       <select multiple class="select" id="producttype_backup">
+		       <select multiple class="select">
 		       	  
 		          <option value="option1">IMG</option>
 		          <option value="option2">AUX</option>
@@ -118,7 +118,7 @@ float: left;
 			</div>
 			<div class="column_input">
 				<div class="col-md-4_backupfile form-group_backupfile">
-			       <select multiple class="select" id="productlevel_backup">
+			       <select multiple class="select">
 			       	  <option value="option1">0B</option>
 			          <option value="option2">0C</option>
 			          <option value="option1">L0</option>
@@ -134,7 +134,7 @@ float: left;
 			</div>
 			<div class="column_input">
 				<div class="col-md-4_backupfile form-group_backupfile">
-			       <select multiple class="select" id="camera_backup">
+			       <select multiple class="select">
 			       	  <option value="option1">VNI</option>
 			          <option value="option2">INF</option>
 			        </select>
@@ -148,7 +148,7 @@ float: left;
 			</div>
 			<div class="column_input">
 				<div class="col-md-4_backupfile form-group_backupfile">
-			       <select multiple class="select" id="filetype_backup">
+			       <select multiple class="select">
 			       	  <option value="option1">dat</option>
 			          <option value="option2">csv</option>
 			          <option value="option1">tif</option>
@@ -165,7 +165,7 @@ float: left;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_receiveTime_backup" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_receiveTime" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 		
@@ -176,7 +176,7 @@ float: left;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_collectStartTime_backup" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_collectStartTime" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 		<div class="column_label">
@@ -186,14 +186,14 @@ float: left;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_collectEndTime_backup" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_collectEndTime" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 	</div>
 	<div class="row_backupfile">
 			<div class="column_label">
 				<div class="col-md-1_backupfile mylabel_backupfile">
-			        <label>备份开始时间：</label>
+			        <label>下载开始时间：</label>
 			    </div>
 			</div>
 			<div class="column_input">
@@ -204,7 +204,7 @@ float: left;
 			
 			<div class="column_label">
 				<div class="col-md-1_backupfile mylabel_backupfile">
-			        <label>备份结束时间：</label>
+			        <label>下载结束时间：</label>
 			    </div>
 			</div>
 			<div class="column_input">
@@ -215,15 +215,16 @@ float: left;
 			
 			<div class="column_label">
 				<div class="col-md-1_backupfile mylabel_backupfile">
-			        <label>备份状态：</label>
+			        <label>下载状态：</label>
 			    </div>
 			</div>
 			<div class="column_input">
 				<div class="col-md-4_backupfile form-group_backupfile">
-			       <select  class="select" id="backupstatus">
-			       	  <option value="option1">未备份</option>
-			          <option value="option2">已备份</option>
-			          <option value="option1">备份失败</option>
+			       <select  class="select">
+			       	  <option value="" selected="true" disabled="true">选择类型</option>
+			          <option value="option1">未下载</option>
+			          <option value="option2">已下载</option>
+			          <option value="option1">下载失败</option>
 			          <option value="option2">已删除</option>
 			       </select>
 			    </div>
@@ -232,7 +233,7 @@ float: left;
 	<div class="row_backupfile">
 			<div class="column_label">
 					<div class="col-md-1_backupfile mylabel_backupfile">
-				        <input id="doQuery_btn_backup" name="doQuery_btn" type="button" value="查询" class="btn m-r-5"/>
+				        <input id="doQuery_btn" name="doQuery_btn" type="button" value="查询" class="btn m-r-5"/>
 				    </div>
 			</div>
 			<div class="column_input">
@@ -257,7 +258,7 @@ float: left;
 	</div>
 	
 	<div class="doQueryResultTable">
-		<table id="myTable" class="display nowrap" cellspacing="0" style="width:100%;background-color: rgba(255, 255, 255, .15);"></table>	
+		<table id="myTable" class="display" style="width:100%;background-color: rgba(255, 255, 255, .15);"></table>	
 	</div>
 			
 </div>
@@ -269,7 +270,7 @@ float: left;
 <script type="text/javascript" src="${cxt!}/ui/DataTables/datatables.min.js"></script>
 	<script>
 	jeDate({
-		dateCell:"#dateinfo_receiveTime_backup",
+		dateCell:"#dateinfo_receiveTime",
 		format:"YYYY年MM月DD日 hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -277,7 +278,7 @@ float: left;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_collectStartTime_backup",
+		dateCell:"#dateinfo_collectStartTime",
 		format:"YYYY年MM月DD日 hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -285,7 +286,7 @@ float: left;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_collectEndTime_backup",
+		dateCell:"#dateinfo_collectEndTime",
 		format:"YYYY年MM月DD日 hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -309,48 +310,38 @@ float: left;
 		okfun:function(val){alert(val)}
 	})
 	
+           
 	var dataSet = [
-               [0,"c://path","name","c://path","2015-12-12 08:20:59",100,"TS","TG-2","ZW","dat","L1","SCI","2015-12-12 08:20:59","2015-12-12 08:20:59","2015-12-12 08:20:59",1,"2015-12-12 08:20:59",""],
-               [1,"c://path","name","c://path","2015-12-12 08:20:59",100,"TS","TG-2","ZW","dat","L1","SCI","2015-12-12 08:20:59","2015-12-12 08:20:59","2015-12-12 08:20:59",1,"2015-12-12 08:20:59",""]
-               
-               ];
+               [ '<input type="checkbox" value="">', "0", "TT_TT02_MWI_VNI_IMG_20161102000000_20161102000000_20161102000000_000_0C.csv", "2016-11-03 00:00:00", "D://MWI//", "E://MWI//", "3.85MB", "已下载", '<p align="center"><input type="button" value="删除" class="btn m-r-5"/></p>'],
+               [ '<input type="checkbox" value="">', "1", "TT_TT02_ZW_ZWF_IMG_20161102000000_20161102000000_20161102000000_000_0C.csv", "2016-11-03 00:00:00", "D://MWI//", "E://MWI//", "3.85MB", "未下载", '<p align="center"><input type="button" value="本地下载" class="btn m-r-5"/></p>'],
+           ];
             
            $(document).ready(function() {
                $('#myTable').DataTable( {
                    data: dataSet,
                    columns: [
-                       { title: "id" },
-                       { title: "源文件路径" },
-                       { title: "备份文件名称" },
-                       { title: "备份文件路径" },
-                       { title: "备份时间" },
+                       { title: '<input type="checkbox" value="">' },//勾选框不显示
+					   { title: "序号" },
+                       { title: "文件名" },
+                       { title: "下载时间" },
+                       { title: "ftp文件路径" },
+                       { title: "下载本地路径" },
                        { title: "文件大小" },
-                       { title: "接收站名称" },
-                       { title: "飞行器" },
-                       { title: "载荷名称" },
-                       { title: "数据类型" },
-                       { title: "数据级别" },
-                       { title: "产品标识" },
-                       { title: "下传时间" },
-                       { title: "拍摄开始时间" },
-                       { title: "拍摄结束时间" },
                        { title: "状态" },
-                       { title: "添加时间" },
-                       { title: "操作" },
+                       { title: "操作" } 
                    ],
+                   scrollX:        200,
+                   scrollCollapse: true,//滚动条
+                   "aoColumnDefs":[//设置列的属性
+                                   {
+                                       "defaultContent": '<p align="center"><input type="button" value="删除" class="btn m-r-5"/></p>'
+                                   } 
+                               ],
                    "language": {
                        "url": "${cxt!}/ui/DataTables/Chinese.json"
-                   },
-                   "scrollX": true,
-                   "columnDefs": [ {
-                       "targets": -1,
-                       "data": null,
-                       "defaultContent": "<input id='doLocalDownload' name='doLocalDownload_btn' type='button' value='本地下载' class='btn m-r-5'/>"
-                       +"<input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新备份' class='btn m-r-5'/>"
-                       +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>"
-                   } ]
+                   }
                } );
-           } );
+           } ); 
 	</script>
 <% }; %>
 <% include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>

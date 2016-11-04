@@ -60,6 +60,10 @@ float: left;
 width:945px;
 height:300px;
 }
+#Charts2{
+width:945px;
+height:300px;
+}
 </style>
 <link href="${cxt!}/ui/jedate/skin/jedate.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${cxt!}/ui/DataTables/datatables.min.css"/>
@@ -333,7 +337,11 @@ height:300px;
 	<div class="row">
 		<div id="Charts1">
 		</div>
-	</div>		
+	</div>
+	<div class="row">
+		<div id="Charts2">
+		</div>
+	</div>			
 </div>
 <% }; %>
 
@@ -343,19 +351,24 @@ height:300px;
 <script type="text/javascript" src="${cxt!}/ui/DataTables/datatables.min.js"></script>
 <script src="${cxt!}/ui/SuperAdmin/js/echarts-all.js"></script>
 	<script>
-	var myChart = echarts.init(document.getElementById('Charts1'));
-	option = {
+	var myChart1 = echarts.init(document.getElementById('Charts1'));
+	option1 = {
 		    title : {
-		        text: 'ECharts2 vs ECharts1',
-		        subtext: 'Chrome下测试数据'
+		        text: '载荷数据总数量统计图',
+		        textStyle:{
+		        		color: '#fff'
+		        }
 		    },
 		    tooltip : {
 		        trigger: 'axis'
 		    },
 		    legend: {
+			    	textStyle:{
+		        		color: '#fff'
+		        		},
 		        data:[
-		            'ECharts1 - 2k数据','ECharts1 - 2w数据','ECharts1 - 20w数据','',
-		            'ECharts2 - 2k数据','ECharts2 - 2w数据','ECharts2 - 20w数据'
+		            
+		            'L0','L1','L2'
 		        ]
 		    },
 		    toolbox: {
@@ -373,67 +386,126 @@ height:300px;
 		    xAxis : [
 		        {
 		            type : 'category',
-		            data : ['Line','Bar','Scatter','K','Map']
-		        },
-		        {
-		            type : 'category',
-		            axisLine: {show:false},
-		            axisTick: {show:false},
-		            axisLabel: {show:false},
-		            splitArea: {show:false},
-		            splitLine: {show:false},
-		            data : ['Line','Bar','Scatter','K','Map']
+		            axisLabel:{
+		            		textStyle:{
+				        		color: '#fff'
+				        		}
+	            		},
+		            data : ['宽波段','高度计','紫外']
 		        }
 		    ],
 		    yAxis : [
 		        {
 		            type : 'value',
-		            axisLabel:{formatter:'{value} ms'}
+		            axisLabel:{
+		            		formatter:'{value} 个',
+		            		textStyle:{
+				        		color: '#fff'
+				        }
+		            	}
 		        }
 		    ],
 		    series : [
 		        {
-		            name:'ECharts2 - 2k数据',
+		            name:'L0',
 		            type:'bar',
-		            itemStyle: {normal: {color:'rgba(193,35,43,1)', label:{show:true}}},
-		            data:[40,155,95,75, 0]
+		            itemStyle: {normal: {color:'rgba(193,35,43,1)', label:{show:true,textStyle:{color:'#ffffff'}}}},
+		            data:[40,155,95]
 		        },
 		        {
-		            name:'ECharts2 - 2w数据',
+		            name:'L1',
 		            type:'bar',
-		            itemStyle: {normal: {color:'rgba(181,195,52,1)', label:{show:true,textStyle:{color:'#27727B'}}}},
-		            data:[100,200,105,100,156]
+		            itemStyle: {normal: {color:'rgba(181,195,52,1)', label:{show:true,textStyle:{color:'#ffffff'}}}},
+		            data:[100,200,105]
 		        },
 		        {
-		            name:'ECharts2 - 20w数据',
+		            name:'L2',
 		            type:'bar',
-		            itemStyle: {normal: {color:'rgba(252,206,16,1)', label:{show:true,textStyle:{color:'#E87C25'}}}},
-		            data:[906,911,908,778,0]
-		        },
-		        {
-		            name:'ECharts1 - 2k数据',
-		            type:'bar',
-		            xAxisIndex:1,
-		            itemStyle: {normal: {color:'rgba(193,35,43,0.5)', label:{show:true,formatter:function(p){return p.value > 0 ? (p.value +'\n'):'';}}}},
-		            data:[96,224,164,124,0]
-		        },
-		        {
-		            name:'ECharts1 - 2w数据',
-		            type:'bar',
-		            xAxisIndex:1,
-		            itemStyle: {normal: {color:'rgba(181,195,52,0.5)', label:{show:true}}},
-		            data:[491,2035,389,955,347]
-		        },
-		        {
-		            name:'ECharts1 - 20w数据',
-		            type:'bar',
-		            xAxisIndex:1,
-		            itemStyle: {normal: {color:'rgba(252,206,16,0.5)', label:{show:true,formatter:function(p){return p.value > 0 ? (p.value +'+'):'';}}}},
-		            data:[3000,3000,2817,3000,0]
+		            itemStyle: {normal: {color:'rgba(252,206,16,1)', label:{show:true,textStyle:{color:'#ffffff'}}}},
+		            data:[906,911,908]
 		        }
 		    ]
 		};
-	myChart.setOption(option);
+	myChart1.setOption(option1);
+	
+	var myChart2 = echarts.init(document.getElementById('Charts2'));
+	option2 = {
+			title : {
+		        text: '载荷数据总容量统计图',
+		        textStyle:{
+		        		color: '#fff'
+		        }
+		    },
+		    tooltip : {
+		        trigger: 'axis',
+		        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+		            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+		        }
+		    },
+		    legend: {
+			    	textStyle:{
+		        		color: '#fff'
+		        },
+		        data:['L0','L1','L2']
+		    },
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            mark : {show: true},
+		            dataView : {show: true, readOnly: false},
+		            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+		            restore : {show: true},
+		            saveAsImage : {show: true}
+		        }
+		    },
+		    calculable : true,
+		    xAxis : [
+		        {
+		            type : 'value',
+		            axisLabel:{
+	            		formatter:'{value} Mb',
+	            		textStyle:{
+			        		color: '#fff'
+			        }
+	            	}
+		        }
+		    ],
+		    yAxis : [
+		        {
+		            type : 'category',
+		            data : ['宽波段','高度计','紫外'],
+		            axisLabel:{
+	            		textStyle:{
+			        		color: '#fff'
+			        		}
+            			},
+		        }
+		    ],
+		    series : [
+		        {
+		            name:'L0',
+		            type:'bar',
+		            stack: '总量',
+		            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+		            data:[320, 302, 301]
+		        },
+		        {
+		            name:'L1',
+		            type:'bar',
+		            stack: '总量',
+		            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+		            data:[120, 132, 101]
+		        },
+		        {
+		            name:'L2',
+		            type:'bar',
+		            stack: '总量',
+		            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+		            data:[220, 182, 191]
+		        }
+		    ]
+		};
+	myChart2.setOption(option2);
 	
 	jeDate({
 		dateCell:"#dateinfo_receiveTime_datastatistics",

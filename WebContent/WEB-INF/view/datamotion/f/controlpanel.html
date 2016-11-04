@@ -1,0 +1,396 @@
+<% var cssSec={ %>
+	<style>
+        .block-area {
+            margin-left: 0px;
+        }
+
+		/* start 边框 */
+		.tab{
+			width: 100%;
+			height: 300px;
+			
+			border:1px solid rgba(255,255,255,0.15);
+		}
+
+		.tab-title{
+			width: 100%;
+			height: 10%;
+			border:1px solid rgba(255,255,255,0.15);
+		}
+		
+		.tab-title-location {
+		    width: 100%;
+		    font-weight: normal;
+		    font-size: 16px;
+		    line-height: 30px;
+		    text-align: center;
+		    background: rgba(0,0,0,0.35);
+		       
+		}
+
+		.tab-content{
+			width: 100%;
+			/* height: 90%; */
+			background: rgba(255,255,255,0.1); 
+			border:1px solid rgba(255,255,255,0.15);
+		}
+		
+		.tab-content-location{
+			 margin: 30px; 
+			
+		}
+		/* end 边框 */
+		
+		/* start 显示框（状态、已处理、待处理、失败数） */
+		.tableWord{
+			width: 60px;
+		}
+		.tableFrame {
+		    margin: 6px;
+		    height: 25px;
+		    width: 200px;
+		    padding: 1px 1px; 
+		    font-size: 14px;
+		    line-height: 1.42857143;
+		    background: rgba(0, 0, 0, 0.05); 
+		        
+		    border: 0px solid rgba(255, 255, 255, 0.3);
+		    border-radius: 4px;
+		    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+		    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+		    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+		    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+		}
+		/* end 显示框（状态、已处理、待处理、失败数） */
+    </style>
+<% }; %>
+
+<% var contSec={ %>
+	<section id="main" class="p-relative" role="main">
+        <!-- Shortcuts -->
+        <div class="block-area" id="text-input">
+            <table>
+                <tr>
+                    <td>
+                        <form id="myForm01" role="form" class="p-15" action="">
+                            <div class="tab" style="float: left">
+                            	<div class="tab-title">
+                            		<label class="tab-title-location">数据采集下载</label>
+                            	</div>
+                            	<div class="table-content">
+                            		<div class="tab-content-location">
+		                                <div>
+		                                	<table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">状态：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#f4d525">
+		                                				<label style="float:right">正在运行</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div>
+		                                    <table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">待处理：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#006db5">
+		                                				<label style="float:right">10000个</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div>
+		                                    <table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">已处理：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#29a753">
+		                                				<label style="float:right">100000个</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div>
+		                                    <table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">失败数：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#e33c36">
+		                                				<label style="float:right">10个</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div align="center">
+		                                	<label>启动时间：2016-10-10 10:10:10</label>
+		                                </div>
+		                                <div align="center">
+		                                    <input type="button" onclick="" value="启动" class="btn m-r-5"/>
+		                                    <input type="button" onclick="" value="重启" class="btn m-r-5"/>
+		                                    <input type="button" onclick="" value="查看" class="btn m-r-5"/>
+		                                </div>
+	                                </div>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                        
+                    <td>
+                    	<form id="myForm02" role="form" class="p-15" action="">
+                            <div class="tab" style="float: left">
+                            	<div class="tab-title">
+                            		<label class="tab-title-location">数据存储备份</label>
+                            	</div>
+                            	<div class="table-content">
+                            		<div class="tab-content-location">
+		                                <div>
+		                                	<table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">状态：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#f4d525">
+		                                				<label style="float:right">正在运行</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div>
+		                                    <table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">待处理：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#006db5">
+		                                				<label style="float:right">10000个</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div>
+		                                    <table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">已处理：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#29a753">
+		                                				<label style="float:right">100000个</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div>
+		                                    <table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">失败数：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#e33c36">
+		                                				<label style="float:right">10个</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div align="center">
+		                                	<label>启动时间：2016-10-10 10:10:10</label>
+		                                </div>
+		                                <div align="center">
+		                                    <input type="button" onclick="" value="启动" class="btn m-r-5"/>
+		                                    <input type="button" onclick="" value="重启" class="btn m-r-5"/>
+		                                    <input type="button" onclick="" value="查看" class="btn m-r-5"/>
+		                                </div>
+	                                </div>
+                                </div>
+                            </div>
+                        </form> 
+                    </td>
+                </tr>
+                <tr>
+                	<td>
+                        <form id="myForm03" role="form" class="p-15" action="">
+                            <div class="tab" style="float: left">
+                            	<div class="tab-title">
+                            		<label class="tab-title-location">数据编目归档</label>
+                            	</div>
+                            	<div class="table-content">
+                            		<div class="tab-content-location">
+		                                <div>
+		                                	<table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">状态：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#f4d525">
+		                                				<label style="float:right">正在运行</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div>
+		                                    <table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">待处理：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#006db5">
+		                                				<label style="float:right">10000个</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div>
+		                                    <table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">已处理：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#29a753">
+		                                				<label style="float:right">100000个</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div>
+		                                    <table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">失败数：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#e33c36">
+		                                				<label style="float:right">10个</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div align="center">
+		                                	<label>启动时间：2016-10-10 10:10:10</label>
+		                                </div>
+		                                <div align="center">
+		                                    <input type="button" onclick="" value="启动" class="btn m-r-5"/>
+		                                    <input type="button" onclick="" value="重启" class="btn m-r-5"/>
+		                                    <input type="button" onclick="" value="查看" class="btn m-r-5"/>
+		                                </div>
+	                                </div>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                        
+                    <td>
+                    	<form id="myForm04" role="form" class="p-15" action="">
+                            <div class="tab" style="float: left">
+                            	<div class="tab-title">
+                            		<label class="tab-title-location">数据检出发布</label>
+                            	</div>
+                            	<div class="table-content">
+                            		<div class="tab-content-location">
+		                                <div>
+		                                	<table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">状态：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#f4d525">
+		                                				<label style="float:right">正在运行</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div>
+		                                    <table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">待处理：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#006db5">
+		                                				<label style="float:right">10000个</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div>
+		                                    <table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">已处理：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#29a753">
+		                                				<label style="float:right">100000个</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div>
+		                                    <table>
+		                                		<tr>
+		                                			<td>
+		                                				<label class="tableWord">失败数：</label>
+		                                			</td>
+		                                			<td>
+		                                			<div class="tableFrame" style="background-color:#e33c36">
+		                                				<label style="float:right">10个</label>
+		                                			</div>
+		                                			</td>
+		                                		</tr>
+		                                	</table>
+		                                </div>
+		                                <div align="center">
+		                                	<label>启动时间：2016-10-10 10:10:10</label>
+		                                </div>
+		                                <div align="center">
+		                                    <input type="button" onclick="" value="启动" class="btn m-r-5"/>
+		                                    <input type="button" onclick="" value="重启" class="btn m-r-5"/>
+		                                    <input type="button" onclick="" value="查看" class="btn m-r-5"/>
+		                                </div>
+	                                </div>
+                                </div>
+                            </div>
+                        </form> 
+                    </td>
+                </tr>
+            </table>
+        </div>
+</section>
+<% }; %>
+
+<% var jsSec={ %>
+
+
+<% }; %>
+<% include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
