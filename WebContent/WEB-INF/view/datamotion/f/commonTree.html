@@ -32,8 +32,9 @@
         	margin-left: 0px;
         }
         #treeDemo {
-            width: 200px;
-            height: 300px;
+            min-width: 250px;
+            max-width:300px;
+            min-height: 600px;
             overflow-x: auto;
             overflow-y: scroll;
             border-right: 1px solid rgba(255, 255, 255, 0.15);
@@ -67,65 +68,7 @@
 </header>
 <section id="main" class="p-relative" role="main">
     <!-- Sidebar -->
-    <aside id="sidebar">
-        <!-- Side Menu -->
-        <ul class="list-unstyled side-menu">
-            <li class="active">
-                <a class="sa-side-process" href="http://127.0.0.1:8800/ui/SuperAdmin/project.html">
-                    <span class="menu-item">运营流程面板</span>
-                </a>
-            </li>
-            <li>
-                <a class="sa-side-control" href="#">
-                    <span class="menu-item">运营控制面板</span>
-                </a>
-            </li>
-            <li>
-                <a class="sa-side-statistical" href="#">
-                    <span class="menu-item">数据分析统计</span>
-                </a>
-            </li>
-            <li>
-                <a class="sa-side-monitor" href="http://127.0.0.1:8800/ui/SuperAdmin/visualization.html">
-                    <span class="menu-item">系统运行监控</span>
-                </a>
-            </li>
-            <li class="dropdown">
-                <a class="sa-side-download" href="">
-                    <span class="menu-item">数据下载管理</span>
-                </a>
-                
-            </li>
-            <li class="dropdown">
-                <a class="sa-side-storage" href="">
-                    <span class="menu-item">数据备份管理</span>
-                </a>
-               
-            </li>
-            <li class="dropdown">
-                <a class="sa-side-file" href="">
-                    <span class="menu-item">数据编目归档</span>
-                </a>
-                <ul class="list-unstyled menu-item">
-                    <li><a href="">归档数据管理</a></li>
-                    <li><a href="">流程面板</a></li>
-                    <li><a href="">日志管理</a></li>
-                    <li><a href="">配置管理</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a class="sa-side-release" href="">
-                    <span class="menu-item">数据检出发布</span>
-                </a>
-                
-            </li>
-            <li>
-                <a class="sa-side-sysConfig" href="http://127.0.0.1:8800/jf/datamotion/t11_initfoldertree/treeIndex">
-                    <span class="menu-item">系统配置</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
+   <% include("sidebar.html"){}%>
     <section id="content" class="container">
    <h4 class="page-title">菜单标题</h4> 
     <table >

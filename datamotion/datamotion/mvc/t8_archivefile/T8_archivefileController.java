@@ -31,6 +31,7 @@ public class T8_archivefileController extends BaseController {
 
 	public static final String pthc = "/jf/datamotion/t8_archivefile/";
 	public static final String pthv = "/datamotion/t8_archivefile/";
+	public static final String pthvf = "/datamotion/f/";
 
 	/**
 	 * 列表
@@ -44,6 +45,15 @@ public class T8_archivefileController extends BaseController {
 
 		renderWithPath(pthv + "mng.html");
 	}
+	@Clear
+	public void flow() {
+		// paging(ConstantInitMy.db_dataSource_main, splitPage,
+		// BaseModel.sqlId_splitPage_select,
+		// T8_archivefile.sqlId_splitPage_from);
+		//renderWithPath(pthv+"list.html");
+
+		renderWithPath(pthvf + "flow.html");
+	}
 
 	@Clear
 	public void log() {
@@ -56,7 +66,11 @@ public class T8_archivefileController extends BaseController {
 
 		renderWithPath(pthv + "archconf.html");
 	}
+	@Clear
+	public void watch() {
 
+		renderWithPath(pthvf + "visualization.html");
+	}
 	/**
 	 * 保存
 	 */
