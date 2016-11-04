@@ -44,6 +44,7 @@ public class T11_initfoldertreeController extends BaseController {
 
 	public static final String pthc = "/jf/datamotion/t11_initfoldertree/";
 	public static final String pthv = "/datamotion/t11_initfoldertree/";
+	public static final String pthvf = "/datamotion/f/";
 
 	/**
 	 * 列表
@@ -52,6 +53,16 @@ public class T11_initfoldertreeController extends BaseController {
 	public void index() {
 		paging(ConstantInitMy.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, T11_initfoldertree.sqlId_splitPage_from);
 		renderWithPath(pthv+"list.html");
+	}
+	
+	@Clear
+	public void visual() {
+		// paging(ConstantInitMy.db_dataSource_main, splitPage,
+		// BaseModel.sqlId_splitPage_select,
+		// T8_archivefile.sqlId_splitPage_from);
+		//renderWithPath(pthv+"list.html");
+
+		renderWithPath(pthvf + "visualization.html");
 	}
 	
 	@Clear
