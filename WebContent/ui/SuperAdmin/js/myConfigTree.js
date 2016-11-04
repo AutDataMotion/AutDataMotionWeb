@@ -74,7 +74,7 @@ function showRemoveBtn(treeId, treeNode) {
 	return true;
 }
 
-//叶子节点的点击事件（只有点击才显示新增按钮）
+//节点的点击事件（只有点击才显示新增按钮）
 function onClick(event, treeId, treeNode) {
 	var sObj = $("#" + treeNode.tId + "_span");
     if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
@@ -82,6 +82,16 @@ function onClick(event, treeId, treeNode) {
             + "' title='add node' onfocus='this.blur();'></span>";
     sObj.after(addStr);
     var btn = $("#addBtn_"+treeNode.tId);
+    
+    var treeNodeTemp=treeNode;
+	while(parseInt(treeNodeTemp.level)>=1){
+		$("#info0"+treeNodeTemp.level).val(treeNodeTemp.name);
+		treeNodeTemp=treeNodeTemp.getParentNode();
+	}
+	for(var i=parseInt(treeNode.level)+1;i<=5;i++){
+		$("#info0"+i).val("全部");
+	}
+    
     /*增加节点：点击事件*/
     if (btn) btn.bind("click", function(){   
         var zTree = $.fn.zTree.getZTreeObj("treeDemo");
@@ -105,7 +115,6 @@ function onClick(event, treeId, treeNode) {
         		idArray.push(childId[len-1]);
         	}	
         	var childNode=_.max(idArray);
-        	console.log(childId);
         	var restChild=childId.substring(0,childId.length-1);
         	currentId=restChild+(parseInt(childNode)+1);
         }
@@ -115,30 +124,32 @@ function onClick(event, treeId, treeNode) {
         	{//传入参数
         		key_:currentId,
         		parentkeys:treeNode.id,
+        		level:treeNode.level+1,
         		namechi:"new node"+currentId
         	}
         );
         return false;
     });
     
-    $("#aircraft").val('');
-	$("#sensor").val('');
-	$("#datatype").val('');
-	$("#camera").val('');
-	$("#datalevel").val('');
-	$("#isdwnload").val('');
-	$("#pathftp").val('');
-	$("#pathdwnload").val('');
-	$("#isbackup").val('');
-    $("#pathbackup").val('');
-    $("#isarchive").val('');
-	$("#patharchive").val('');
-	$("#ischeckout").val('');
-	$("#pathcheckout").val('');
-	$("#namemdlsrc").val('');
-	$("#namemdldes").val('');
-	$("#ishavaaux").val('');
-	$("#auxfiletypes").val('');
+    
+    //$("#aircraft").val('');
+	//$("#sensor").val('');
+//	$("#datatype").val('');
+//	$("#camera").val('');
+//	$("#datalevel").val('');
+//	$("#isdwnload").val('');
+//	$("#pathftp").val('');
+//	$("#pathdwnload").val('');
+//	$("#isbackup").val('');
+//    $("#pathbackup").val('');
+//    $("#isarchive").val('');
+//	$("#patharchive").val('');
+//	$("#ischeckout").val('');
+//	$("#pathcheckout").val('');
+//	$("#namemdlsrc").val('');
+//	$("#namemdldes").val('');
+//	$("#ishavaaux").val('');
+//	$("#auxfiletypes").val('');
 	if(treeNode!=null&&treeNode.isParent==false){
 		key_=treeNode.id;
     	$.ajax({
@@ -216,12 +227,20 @@ function onClick(event, treeId, treeNode) {
     };	
 }
         
+function beforeCheck(event, treeId, treeNode){
+	console.log("before");
+}
+function onCheck(event, treeId, treeNode){
+	console.log($.fn.zTree.getZTreeObj(treeId).getCheckedNodes(true));
+	//console.log(treeNodes);
+}
+
 function onRemove(e, treeId, treeNode) {
     console.log("delete:"+treeNode.id);
         }
   
-        function onRightClick(event, treeId, treeNode) {
-            console.log("rightClick dosomething.....");
+function onRightClick(event, treeId, treeNode) {
+    console.log("rightClick dosomething.....");
 }
 
 function beforeDrag(treeId, treeNodes) {
