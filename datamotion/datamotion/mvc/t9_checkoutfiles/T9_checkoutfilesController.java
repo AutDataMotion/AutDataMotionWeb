@@ -5,7 +5,9 @@ import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
 
 import org.apache.log4j.Logger;
+
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Clear;
 
 import datamotion.constant.ConstantInitMy;
 
@@ -35,9 +37,11 @@ public class T9_checkoutfilesController extends BaseController {
 	/**
 	 * 列表
 	 */
+	@Clear
 	public void index() {
-		paging(ConstantInitMy.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, T9_checkoutfiles.sqlId_splitPage_from);
-		renderWithPath(pthv+"list.html");
+//		paging(ConstantInitMy.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, T9_checkoutfiles.sqlId_splitPage_from);
+//		renderWithPath(pthv+"list.html");
+		renderWithPath(pthv + "mng.html");
 	}
 	
 	/**
