@@ -102,7 +102,9 @@ public class T11_initfoldertreeController extends BaseController {
 		
 		/*更新当前节点的中文名称*/
 		Db.use(ConstantInitMy.db_dataSource_main)
-			.update("update t11_initfoldertree set namechi=?,timeupdate='"+new Timestamp(System.currentTimeMillis())+"' where key_=?",newName,key_);
+			.update("update t11_initfoldertree set namechi=?,timeupdate='"
+		+new Timestamp(System.currentTimeMillis())+
+		"' where key_=?",newName,key_);
 	}
 	
 	@Clear
