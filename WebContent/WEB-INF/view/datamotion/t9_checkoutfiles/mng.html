@@ -72,11 +72,11 @@
 			<label>检出状态：</label>
 		</div>
 		<div class="col-md-2  col-sm-2 form-group">
-			<select class="select">
-				<option value="option1">全部</option>
-				<option value="option2">检出成功</option>
-				<option value="option3">检出失败</option>
-				<option value="option3">未检出</option>
+			<select id = "status" class="select">
+				<option value="5">全部</option>
+				<option value="1">检出成功</option>
+				<option value="2">检出失败</option>
+				<option value="0">未检出</option>
 			</select>
 		</div>
 		<div class="col-md-2  col-sm-2">
@@ -205,7 +205,7 @@ for(node in list){
 	//ajax 发送查询参数数据
 		
 </script>
-
+<script src="${cxt!}/ui/datamotion/js/checkout.js"></script>
 <% }; 
 include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){}
 %>

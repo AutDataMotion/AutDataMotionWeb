@@ -2,16 +2,12 @@ package datamotion.mvc.t9_checkoutfiles;
 
 import java.util.List;
 
-import com.platform.constant.ConstantRender;
-import com.platform.mvc.base.BaseController;
-import com.platform.mvc.base.BaseModel;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
-
-import datamotion.constant.ConstantInitMy;
+import com.platform.constant.ConstantRender;
+import com.platform.mvc.base.BaseController;
 
 /**
  * XXX 管理 描述：
@@ -51,7 +47,20 @@ public class T9_checkoutfilesController extends BaseController {
 	// 查询
 	@Clear
 	public void search() {
-
+		
+		//获得参数
+		String[] info = getParas("info");
+		
+		String timebegcollect = getPara("timebegcollect");
+		
+		log.debug(info);
+		log.debug(timebegcollect);
+		//遍历树结构，拼接SQL语句
+		
+		//数据库查询
+		
+		//返回结果
+		
 		// renderJson(null);
 	}
 
