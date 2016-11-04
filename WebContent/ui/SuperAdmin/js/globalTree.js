@@ -22,10 +22,31 @@ function onClick(event, treeId, treeNode) {
 //复选框选中事件
 	
 function onCheck(event, treeId, treeNode){
-	console.log($.fn.zTree.getZTreeObj(treeId).getCheckedNodes(true));
+	//console.log($.fn.zTree.getZTreeObj(treeId).getCheckedNodes(true));
 	//console.log(treeNodes);
 }
 
+var dataNodeMdl={
+		id:"",
+		pid:"",
+		level:0,
+		name:""
+};
+var dataCheckedTreeNodes = new Array();
+function getCheckedTreeNodesArr(){
+	var rootTree = $.fn.zTree.getZTreeObj("treeDemo").getCheckedNodes(true);
+	console.log(rootTree);
+	for(var i = 0;i<rootTree.length;i++){
+		dataCheckedTreeNodes.push({
+			id:rootTree[i].id,
+			pid:rootTree[i].pid,
+			level:rootTree[i].level,
+			name:rootTree[i].name
+		});
+	}
+	console.log("==============");
+	console.log(dataCheckedTreeNodes);
+}
 //初始化树
 function getTreeData () {
 	$.ajax({

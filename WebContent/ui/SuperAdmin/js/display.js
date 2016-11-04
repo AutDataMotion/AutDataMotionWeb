@@ -95,11 +95,11 @@ function CreatePoint() { // 创建标注
             bounceDistance: 5,
             type: 'bounce'
         },
-        data: [PointAttr('远程文件系统', './img/cloud.png'),
-            PointAttr('数据归档管理服务器', './img/store.png'),
-            PointAttr('数据处理集群', './img/servers.png'),
-            PointAttr('数据库服务器', './img/DB.png'),
-            PointAttr('文件系统磁盘阵列', './img/file.png')]
+        data: [PointAttr('远程文件系统', cxt+'/ui/SuperAdmin/img/cloud.png'),
+            PointAttr('数据归档管理服务器', cxt+'/ui/SuperAdmin/img/store.png'),
+            PointAttr('数据处理集群', cxt+'/ui/SuperAdmin/img/servers.png'),
+            PointAttr('数据库服务器', cxt+'/ui/SuperAdmin/img/DB.png'),
+            PointAttr('文件系统磁盘阵列', cxt+'/ui/SuperAdmin/img/file.png')]
     };
     return objMarkP;
 }
@@ -387,8 +387,8 @@ function flushData() {
 }*/
 require.config({ // 路径配置
     paths: {
-        echarts: './js/echarts',
-        'echarts/chart/map': './js/chart/map'
+        echarts: cxt+'/ui/SuperAdmin/js/echarts',
+        'echarts/chart/map': cxt+'/ui/SuperAdmin/js/chart/map'
     }
 });
 function loadMyChartMap() {
@@ -400,7 +400,7 @@ function loadMyChartMap() {
             require('echarts/util/mapData/params').params.baiduBuilding = {
                 getGeoJson: function (callback) {
                     $.ajax({
-                        url: "svg/data.svg",
+                        url: cxt+"/ui/SuperAdmin/svg/data.svg",
                         dataType: 'xml',
                         success: function (xml) {
                             callback(xml)
