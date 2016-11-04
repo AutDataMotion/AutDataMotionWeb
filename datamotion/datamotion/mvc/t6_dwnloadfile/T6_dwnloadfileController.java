@@ -47,11 +47,13 @@ public class T6_dwnloadfileController extends BaseController {
 	public void index() {
 		/*paging(ConstantInitMy.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, T6_dwnloadfile.sqlId_splitPage_from);
 		renderWithPath(pthv+"list.html");*/
+		String sql = "select * from t6_dwnloadfile order by id desc limit ?";
+		List<T6_dwnloadfile> list = T6_dwnloadfile.dao.find(sql, 100);//取数据库的前100条记录
 		
-		List<Record> res = Db.use(ConstantInitMy.db_dataSource_main)
-				.find("select * from t6_dwnloadfile");//id, key_, namesrc, timedo, pathsrc, pathdest, filesize, status_
-		setAttr("resInit", res);
-		System.out.println("res============"+res.toString());
+//		List<Record> res = Db.use(ConstantInitMy.db_dataSource_main)
+//				.find("select * from t6_dwnloadfile");//id, key_, namesrc, timedo, pathsrc, pathdest, filesize, status_
+		setAttr("resInit", list);
+		System.out.println("list============"+list.toString());
 		renderWithPath(pthv+"dwnloadfile.html");
 	}
 	

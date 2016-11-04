@@ -307,26 +307,25 @@ float: left;
 		minDate:"2014-09-19 00:00:00",
 		okfun:function(val){alert(val)}
 	})
-	var dataSet = new Array();
+ 	var dataSet=[];
+	var aData;
 	var indexNum = 0;
 	<% 
 	for(node in resInit){ %>
-		/* print("hello"); */
-		${node.status_!};
-		dataSet[indexNum++] = [ '<input type="checkbox" value="">', "${node.status_!}", "${node.namesrc!}", "${node.timedo!}", "${node.pathsrc!}", "${node.pathdest!}", ${node.filesize!}, "${node.status_!}", '<p align="center"><input type="button" value="删除" class="btn m-r-5"/></p>' ];
-	<%}%>			
-	//alert(temp);
-/* 	var node = resInit[0]; */
-	var dataSet = [
+		aData = [ '<input type="checkbox" value="">', ${node.id!},"${node.namesrc!}","${node.timedo!}","${node.pathsrc!}","${node.pathdest!}",${node.filesize!},${node.status_!},'<p align="center"><input type="button" value="删除" class="btn m-r-5"/></p>' ];
+		dataSet.push(aData);
+	<%}%>	
+	console.log(dataSet); 
+	/*  var dataSet = [
                [ '<input type="checkbox" value="">', "0", "TT_TT02_MWI_VNI_IMG_20161102000000_20161102000000_20161102000000_000_0C.csv", "2016-11-03 00:00:00", "D://MWI//", "E://MWI//", "3.85MB", "已下载", '<p align="center"><input type="button" value="删除" class="btn m-r-5"/></p>'],
                [ '<input type="checkbox" value="">', "1", "TT_TT02_ZW_ZWF_IMG_20161102000000_20161102000000_20161102000000_000_0C.csv", "2016-11-03 00:00:00", "D://MWI//", "E://MWI//", "3.85MB", "未下载", '<p align="center"><input type="button" value="本地下载" class="btn m-r-5"/></p>'],
-           ];
+           ];  */
             
            $(document).ready(function() {
                $('#myTable').DataTable( {
                    data: dataSet,
                    columns: [
-                       { title: '<input type="checkbox" value="">' },//勾选框不显示
+                       { title: "" },//勾选框不显示
 					   { title: "序号" },
                        { title: "文件名" },
                        { title: "下载时间" },
