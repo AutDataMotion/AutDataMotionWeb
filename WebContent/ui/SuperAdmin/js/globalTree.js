@@ -1,20 +1,29 @@
 //全局变量
-var setting = {         
+var setting = {    
+	check: {
+		enable: true
+	},
     data: {
         simpleData: {
             enable: true
-        },
-        callback: {
-            onClick: onClick
-        }
+        }       
     }, 
+    callback: {
+        onClick: onClick,
+        onCheck:onCheck
+    }
 };
 
-//叶子节点的点击事件
+//节点的点击事件
 function onClick(event, treeId, treeNode) {
-	if(treeNode!=null&&treeNode.isParent==false){
-    	console.log(treeNode.name);
-    };	
+	console.log(treeNode.name);
+};	
+
+//复选框选中事件
+	
+function onCheck(event, treeId, treeNode){
+	console.log($.fn.zTree.getZTreeObj(treeId).getCheckedNodes(true));
+	//console.log(treeNodes);
 }
 
 //初始化树

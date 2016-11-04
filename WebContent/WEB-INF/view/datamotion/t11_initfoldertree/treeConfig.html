@@ -10,46 +10,26 @@
 	    <tr>
 	        <td><label class="mylabel">飞行器：</label></td>
 	        <td width="30%">
-		        <select id="aircraft" name="aircraft" class="select">
-		            <option value="天宫一号">天宫一号</option>
-		            <option value="天宫二号">天宫二号</option>
-		        </select>
+	        	<input id="info01" name="aircraft" value="全部" type="text" class="form-control" readonly/>
 			</td>
 			<td><label class="mylabel">载荷：</label></td>
 	        <td width="30%">
-		        <select id="sensor" name="sensor" class="select">
-		            <option value="高度计">高度计</option>
-		            <option value="宽波段">宽波段</option>
-		        </select>
+		        <input id="info02" name="sensor" value="全部" type="text" class="form-control" readonly/>
 			</td>
 			<td><label class="mylabel">数据类型：</label></td>
 	        <td width="30%">
-		        <select id="datatype" name="datatype" class="select">
-		            <option value="IMG">IMG</option>
-		            <option value="AUX">AUX</option>
-		            <option value="SCI">SCI</option>
-		            <option value="ENG">ENG</option>
-		        </select>
+	        	<input id="info03" name="datatype" value="全部" type="text" class="form-control" readonly/>
 			</td>
 	    </tr>
 	    <tr style="padding-top:6px ">
 	        <td><label class="mylabel">产品标识：</label></td>
 	        <td width="30%">
-		        <select id="camera" name="camera" class="select">
-		            <option value="VNI">VNI</option>
-		            <option value="INF">INF</option>
-		        </select>
+	        	<input id="info04" name="camera" value="全部" type="text" class="form-control" readonly/>
 			</td>
 			<td><label class="mylabel">产品等级：</label></td>
 	        <td width="30%">
-		        <select id="datalevel" name="datalevel" class="select">
-		            <option value="0B">0B</option>
-		            <option value="0C">0C</option>
-		            <option value="L1">L1</option>
-		            <option value="L2">L2</option>
-		        </select>
+	        	<input id="info05" name="datalevel" value="全部" type="text" class="form-control" readonly/>
 			</td>
-			
 	    </tr>
 	</table>
  	<h3 class="block-title">下载配置</h3>
@@ -145,11 +125,15 @@
 <% }; %>
 
 <% var jsSec={ %>
+<script src="${cxt!}/ui/SuperAdmin/js/underscore.js"></script>
 <script src="${cxt!}/ui/SuperAdmin/js/myConfigTree.js"></script>
 	<script type="text/javascript">
     	//定义全局
     	var treeNodes;
         var setting = {
+       		check: {
+       			enable: true
+       		},
             view: {
                 //addHoverDom: addHoverDom,
                 removeHoverDom: removeHoverDom,
@@ -161,11 +145,14 @@
                 editNameSelectAll: true
             },
             data: {
+            	
                 simpleData: {
                     enable: true
                 }
             },
             callback: {
+            	beforeCheck:beforeCheck,
+    			onCheck:onCheck,
                 onClick: onClick,
                 onRightClick: onRightClick,
                 beforeEditName: beforeEditName,

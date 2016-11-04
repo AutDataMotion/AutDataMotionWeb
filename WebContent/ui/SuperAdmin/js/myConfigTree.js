@@ -1,42 +1,4 @@
 var key_;
-/*显示添加按钮*/
-function addHoverDom(treeId, treeNode) {   
-	var sObj = $("#" + treeNode.tId + "_span");
-	if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0)return;
-	var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
-		+ "' title='add node' onfocus='this.blur();'></span>";
-	sObj.after(addStr);
-	var btn = $("#addBtn_"+treeNode.tId);
-	/*增加节点：点击事件*/
-	if (btn) btn.bind("click", function(){   
-	    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-	    var parentNode=treeNode.id;
-	    parentNode=parentNode.split("_");
-	    var currentId;
-	    /*
-	    	如果当前节点不是父节点，则新增节点命名只需在level上加1;
-	    	如果当前节点事父节点，则新增节点的名称为父节点的最后一个孩子节点的名称加1
-	    */
-	    if(treeNode.isParent==false){
-	        currentId=(parseInt(parentNode[0])+1)+"_"+(parseInt(parentNode[1]));
-	    }else {
-	    	var childNode=treeNode.children[treeNode.children.length-1];//获取最后一个孩子节点
-	    	childNode=childNode.id.split("_");
-	    	currentId=(parseInt(parentNode[0])+1)+"_"+(parseInt(childNode[1])+1);
-	    }
-	    zTree.addNodes(treeNode, {id:currentId, pid:treeNode.id, name:"new node" + (currentId)});
-	    $.post(
-	    	'addTreeNode',
-	    	{//传入参数
-	    		key_:currentId,
-	    		parentkeys:treeNode.id,
-	    		namechi:"new node"+currentId
-	        	}
-	        );
-	        return false;
-	    });
-	};
-        
 /*修改节点：点击事件*/
 function beforeEditName(treeId, treeNode) {    
     var zTree = $.fn.zTree.getZTreeObj("treeDemo");
@@ -112,7 +74,7 @@ function showRemoveBtn(treeId, treeNode) {
 	return true;
 }
 
-//叶子节点的点击事件
+//节点的点击事件（只有点击才显示新增按钮）
 function onClick(event, treeId, treeNode) {
 	var sObj = $("#" + treeNode.tId + "_span");
     if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
@@ -120,22 +82,41 @@ function onClick(event, treeId, treeNode) {
             + "' title='add node' onfocus='this.blur();'></span>";
     sObj.after(addStr);
     var btn = $("#addBtn_"+treeNode.tId);
+    
+    var treeNodeTemp=treeNode;
+	while(parseInt(treeNodeTemp.level)>=1){
+		$("#info0"+treeNodeTemp.level).val(treeNodeTemp.name);
+		treeNodeTemp=treeNodeTemp.getParentNode();
+	}
+	for(var i=parseInt(treeNode.level)+1;i<=5;i++){
+		$("#info0"+i).val("全部");
+	}
+    
     /*增加节点：点击事件*/
     if (btn) btn.bind("click", function(){   
         var zTree = $.fn.zTree.getZTreeObj("treeDemo");
         var parentNode=treeNode.id;
-        parentNode=parentNode.split("_");
+        if(parentNode.indexOf==0)parentNode=['0'];
+        else parentNode=parentNode.split("_");
         var currentId;
         /*
-        	如果当前节点不是父节点，则新增节点命名只需在level上加1;
-        	如果当前节点事父节点，则新增节点的名称为父节点的最后一个孩子节点的名称加1
+         	树的命名规则：类似霍夫曼
+         	如果当前节点是父节点，则获取孩子节点编号最大的孩子节点，在该基础上编号+1
+         	如果当前节点不是父节点，则在该基础上加上'_1'
         */
         if(treeNode.isParent==false){
-            currentId=(parseInt(parentNode[0])+1)+"_"+(parseInt(parentNode[1]));
+            currentId=treeNode.id+"_1";
         }else {
-        	var childNode=treeNode.children[treeNode.children.length-1];//获取最后一个孩子节点
-        	childNode=childNode.id.split("_");
-        	currentId=(parseInt(parentNode[0])+1)+"_"+(parseInt(childNode[1])+1);
+        	//获取编号最大的一个孩子节点
+        	var idArray=[],len,childId;
+        	for(var i=0;i<treeNode.children.length;i++){
+        		childId=treeNode.children[i].id;
+        		len=childId.length;
+        		idArray.push(childId[len-1]);
+        	}	
+        	var childNode=_.max(idArray);
+        	var restChild=childId.substring(0,childId.length-1);
+        	currentId=restChild+(parseInt(childNode)+1);
         }
         zTree.addNodes(treeNode, {id:currentId, pid:treeNode.id, name:"new node" + (currentId)});
         $.post(
@@ -143,29 +124,32 @@ function onClick(event, treeId, treeNode) {
         	{//传入参数
         		key_:currentId,
         		parentkeys:treeNode.id,
+        		level:treeNode.level+1,
         		namechi:"new node"+currentId
         	}
         );
         return false;
     });
-    $("#aircraft").val('');
-	$("#sensor").val('');
-	$("#datatype").val('');
-	$("#camera").val('');
-	$("#datalevel").val('');
-	$("#isdwnload").val('');
-	$("#pathftp").val('');
-	$("#pathdwnload").val('');
-	$("#isbackup").val('');
-    $("#pathbackup").val('');
-    $("#isarchive").val('');
-	$("#patharchive").val('');
-	$("#ischeckout").val('');
-	$("#pathcheckout").val('');
-	$("#namemdlsrc").val('');
-	$("#namemdldes").val('');
-	$("#ishavaaux").val('');
-	$("#auxfiletypes").val('');
+    
+    
+    //$("#aircraft").val('');
+	//$("#sensor").val('');
+//	$("#datatype").val('');
+//	$("#camera").val('');
+//	$("#datalevel").val('');
+//	$("#isdwnload").val('');
+//	$("#pathftp").val('');
+//	$("#pathdwnload").val('');
+//	$("#isbackup").val('');
+//    $("#pathbackup").val('');
+//    $("#isarchive").val('');
+//	$("#patharchive").val('');
+//	$("#ischeckout").val('');
+//	$("#pathcheckout").val('');
+//	$("#namemdlsrc").val('');
+//	$("#namemdldes").val('');
+//	$("#ishavaaux").val('');
+//	$("#auxfiletypes").val('');
 	if(treeNode!=null&&treeNode.isParent==false){
 		key_=treeNode.id;
     	$.ajax({
@@ -243,12 +227,20 @@ function onClick(event, treeId, treeNode) {
     };	
 }
         
+function beforeCheck(event, treeId, treeNode){
+	console.log("before");
+}
+function onCheck(event, treeId, treeNode){
+	console.log($.fn.zTree.getZTreeObj(treeId).getCheckedNodes(true));
+	//console.log(treeNodes);
+}
+
 function onRemove(e, treeId, treeNode) {
     console.log("delete:"+treeNode.id);
         }
   
-        function onRightClick(event, treeId, treeNode) {
-            console.log("rightClick dosomething.....");
+function onRightClick(event, treeId, treeNode) {
+    console.log("rightClick dosomething.....");
 }
 
 function beforeDrag(treeId, treeNodes) {

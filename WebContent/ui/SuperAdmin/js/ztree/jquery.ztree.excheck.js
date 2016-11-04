@@ -10,7 +10,7 @@
  * email: hunter.z@263.net
  * Date: 2016-09-27
  */
-(function($){
+$(function(){
 	//default consts of excheck
 	var _consts = {
 		event: {
@@ -625,4 +625,4 @@
 		}
 		return html;
 	}
-})(jQuery);
+});

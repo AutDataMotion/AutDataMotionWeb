@@ -153,8 +153,6 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements
 
 	public abstract boolean notifyOthers(F afile);
 
-	public abstract boolean reDo_WorkFail();
-
 	class ConsumerTask extends Thread {
 
 		private final int STOP = -1;
