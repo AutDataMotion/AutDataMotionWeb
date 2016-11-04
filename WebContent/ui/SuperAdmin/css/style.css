@@ -1857,7 +1857,7 @@ a.list-group-item.active > .badge,
     background: #fff;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 960px) {
     /* --------------------------------------------------------
         Template Blur Skins for Desktop
     -----------------------------------------------------------*/
@@ -1914,6 +1914,49 @@ a.list-group-item.active > .badge,
         background-image: url(../img/body/kiwi.jpg);
     }
     
+     #skin-sky1 {
+        background-image: url(../img/body/skin-sky1.png);
+    }
+     #skin-2 {
+        background-image: url(../img/body/skin-2.png);
+    }
+     #skin-3 {
+        background-image: url(../img/body/skin-3.png);
+    }
+     #skin-4 {
+        background-image: url(../img/body/skin-4.png);
+    }
+     #skin-5 {
+        background-image: url(../img/body/skin-5.png);
+    }
+     #skin-6 {
+        background-image: url(../img/body/skin-6.png);
+    }
+     #skin-7 {
+        background-image: url(../img/body/skin-7.png);
+    }
+     #skin-8 {
+        background-image: url(../img/body/skin-8.png);
+    }
+     #skin-9 {
+        background-image: url(../img/body/skin-9.png);
+    }
+    
+     #skin-11 {
+        background-image: url(../img/body/skin-11.png);
+    }
+     #skin-12 {
+        background-image: url(../img/body/skin-12.png);
+    }
+     #skin-13 {
+        background-image: url(../img/body/skin-13.png);
+    }
+     #skin-14 {
+        background-image: url(../img/body/skin-14.png);
+    }
+    #skin-15 {
+        background-image: url(../img/body/skin-15.png);
+    }
     /* Sidebar */
     .side-menu > li > a:hover, .side-menu > li.active > a, .side-menu > li > a.active:hover, .side-menu > li.hovered > a {
         background-color: rgba(0,0,0,0.95);
