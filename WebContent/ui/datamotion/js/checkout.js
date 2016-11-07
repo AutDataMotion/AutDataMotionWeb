@@ -7,6 +7,8 @@ $('#btnsrch')
 						treecheckeds : [],
 						timebegcollect : '',
 						timeendcollect : '',
+						timebegreceive : '',
+						timeendreceive : '',
 						timebegdb : '',
 						timeenddb : '',
 						status : 0
@@ -16,6 +18,11 @@ $('#btnsrch')
 							.val();
 					datasrch.timeendcollect = $('#dateinfo_collectEndTime')
 							.val();
+					datasrch.timebegreceive = $('#dateinfo_receiveTimeBeg')
+							.val();
+					datasrch.timeendreceive = $('#dateinfo_receiveTimeEnd')
+							.val();
+
 					datasrch.timebegdb = $('#dateinfo_DBstartTime').val();
 					datasrch.timeenddb = $('#dateinfo_DBEndTime').val();
 					datasrch.status = $('#status').val();
@@ -25,8 +32,11 @@ $('#btnsrch')
 					$
 							.ajax({
 								type : "post",
-								url : encodeURI(encodeURI(cxt+ "/jf/datamotion/t9_checkoutfiles/search")),
-								data : {v:JSON.stringify(datasrch)},
+								url : encodeURI(encodeURI(cxt
+										+ "/jf/datamotion/t9_checkoutfiles/search")),
+								data : {
+									v : JSON.stringify(datasrch)
+								},
 								dataType : 'json',
 								contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 								crossDomain : false,
@@ -43,8 +53,8 @@ $('#btnsrch')
 									// parseJsonData(firstLoadHtml);
 									// }
 									// }
-									//遍历 json 更新 dataTable
-									
+									// 遍历 json 更新 dataTable
+
 								}
 							});
 				});
