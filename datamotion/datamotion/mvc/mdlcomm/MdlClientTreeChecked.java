@@ -22,12 +22,15 @@ import java.util.List;
  * 2016年11月6日     Zhongweng       1.0         1.0 Version   
  */
 /**
- * <p>Title: MdlClientTreeChecked<／p>
- * <p>Description: <／p>
+ * <p>
+ * Title: MdlClientTreeChecked<／p>
+ * <p>
+ * Description: <／p>
+ * 
  * @author ZhongwengHao
  * @date 2016年11月6日
  */
-public class MdlClientTreeChecked implements Serializable{
+public class MdlClientTreeChecked implements Serializable {
 	public String id;
 	public String pid;
 	public int level;
@@ -35,68 +38,91 @@ public class MdlClientTreeChecked implements Serializable{
 	public boolean isParent;
 	public transient List<MdlClientTreeChecked> children;
 	public transient MdlClientTreeChecked parent;
-	
-	public MdlClientTreeChecked(){}
+
+	public MdlClientTreeChecked() {
+	}
+
+	public void addChild(MdlClientTreeChecked aChild) {
+		
+	}
+
+	public void addChildren(List<MdlClientTreeChecked> aChildren) {
+
+	}
+
 	/**
 	 * @return the id
 	 */
 	public String getId() {
 		return id;
 	}
+
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	/**
 	 * @return the pid
 	 */
 	public String getPid() {
 		return pid;
 	}
+
 	/**
-	 * @param pid the pid to set
+	 * @param pid
+	 *            the pid to set
 	 */
 	public void setPid(String pid) {
 		this.pid = pid;
 	}
+
 	/**
 	 * @return the level
 	 */
 	public int getLevel() {
 		return level;
 	}
+
 	/**
-	 * @param level the level to set
+	 * @param level
+	 *            the level to set
 	 */
 	public void setLevel(int level) {
 		this.level = level;
 	}
+
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
+
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	/**
 	 * @return the isParent
 	 */
 	public boolean isParent() {
 		return isParent;
 	}
+
 	/**
-	 * @param isParent the isParent to set
+	 * @param isParent
+	 *            the isParent to set
 	 */
 	public void setParent(boolean isParent) {
 		this.isParent = isParent;
 	}
-	
-	
+
 }
