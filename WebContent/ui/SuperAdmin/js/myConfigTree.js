@@ -167,18 +167,18 @@ function onClick(event, treeId, treeNode) {
     				datatype='IMG';
     				camera='VNI';
     				datalevel='0B';
-    				isdwnload='是';
+    				isdwnload=true;
         			pathftp='';
         			pathdwnload='';
-        			isbackup='是';
+        			isbackup=true;
         			pathbackup='';
-        			isarchive='是';
+        			isarchive=true;
         			patharchive='';
-        			ischeckout='是';
+        			ischeckout=true;
         			pathcheckout='';
         			namemdlsrc='';
         			namemdldes='';
-        			ishavaaux='是';
+        			ishavaaux=true;
         			auxfiletypes='';
     			}
     			else {
