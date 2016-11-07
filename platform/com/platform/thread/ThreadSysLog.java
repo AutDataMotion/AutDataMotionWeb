@@ -63,7 +63,7 @@ public class ThreadSysLog {
 								// 取队列数据
 								Syslog sysLog = getSyslog();
 								if (null == sysLog) {
-									Thread.sleep(2000);// -----配置文件中应该设置该变量
+									Thread.sleep(360000);// -----配置文件中应该设置该变量
 								} else {
 									log.info("保存操作日志到数据库start......");
 									sysLog.save();// 日志入库

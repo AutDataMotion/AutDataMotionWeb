@@ -4,7 +4,7 @@ $('#btnsrch')
 					console.log("search click");
 					// 获取查询参数
 					var datasrch = {
-						info : {},
+						treecheckeds : [],
 						timebegcollect : '',
 						timeendcollect : '',
 						timebegdb : '',
@@ -19,15 +19,14 @@ $('#btnsrch')
 					datasrch.timebegdb = $('#dateinfo_DBstartTime').val();
 					datasrch.timeenddb = $('#dateinfo_DBEndTime').val();
 					datasrch.status = $('#status').val();
-					datasrch.info = dataCheckedTreeNodes;
+					datasrch.treecheckeds = dataCheckedTreeNodes;
 					console.log(datasrch);
 					// 发送查询请求
 					$
 							.ajax({
 								type : "post",
-								url : encodeURI(encodeURI(cxt
-										+ "/jf/datamotion/t9_checkoutfiles/search")),
-								data : datasrch,
+								url : encodeURI(encodeURI(cxt+ "/jf/datamotion/t9_checkoutfiles/search")),
+								data : {v:JSON.stringify(datasrch)},
 								dataType : 'json',
 								contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 								crossDomain : false,
