@@ -1,6 +1,12 @@
 package datamotion.mvc.t9_checkoutfiles;
 
+import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
@@ -8,6 +14,9 @@ import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.platform.constant.ConstantRender;
 import com.platform.mvc.base.BaseController;
+
+import csuduc.platform.util.JsonUtils;
+import datamotion.mvc.mdlcomm.MdlClientCheckout;
 
 /**
  * XXX 管理 描述：
@@ -47,27 +56,40 @@ public class T9_checkoutfilesController extends BaseController {
 	// 查询
 	@Clear
 	public void search() {
-		
-		//获得参数
-		String[] info = getParas("info");
-		
-		String timebegcollect = getPara("timebegcollect");
-		
-		log.debug(info);
-		log.debug(timebegcollect);
-		//遍历树结构，拼接SQL语句
-		
-		//数据库查询
-		
-		//返回结果
-		
+
+		// 获得参数
+		String strvalue = getPara("v");
+		if (null == strvalue || strvalue.isEmpty()) {
+			renderText("-1");//错误
+		}
+		//log.debug(strvalue);
+		try {
+			MdlClientCheckout mdlClient = JsonUtils.deserialize(strvalue, MdlClientCheckout.class);
+			if (null == mdlClient) {
+renderText("-1");//错误
+				return;
+			}
+			log.debug(JsonUtils.serialize(mdlClient));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			renderText("-1");//错误
+			return;
+		}
+
+		// 遍历树结构，拼接SQL语句
+
+		// 数据库查询
+
+		// 返回结果
+
 		// renderJson(null);
 	}
 
 	@Clear
 	public void download() {
 
-		return ;
+		return;
 	}
 
 	// 全部下载本地

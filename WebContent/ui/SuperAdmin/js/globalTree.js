@@ -36,15 +36,17 @@ var dataCheckedTreeNodes = new Array();
 function getCheckedTreeNodesArr(){
 	var rootTree = $.fn.zTree.getZTreeObj("treeDemo").getCheckedNodes(true);
 	console.log(rootTree);
+	dataCheckedTreeNodes.length = 0;
 	for(var i = 0;i<rootTree.length;i++){
 		dataCheckedTreeNodes.push({
 			id:rootTree[i].id,
 			pid:rootTree[i].pid,
 			level:rootTree[i].level,
-			name:rootTree[i].name
+			name:rootTree[i].name,
+			isParent:rootTree[i].isParent
 		});
 	}
-	console.log("==============");
+	//console.log("==============");
 	console.log(dataCheckedTreeNodes);
 }
 //初始化树
