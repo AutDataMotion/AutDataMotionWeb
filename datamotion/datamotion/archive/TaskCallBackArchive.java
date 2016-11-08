@@ -29,30 +29,7 @@ import datamotion.common.MdlFileEvent;
  */
 public class TaskCallBackArchive extends AbsTaskThread<MdlFileEvent>{
 
-	/* (non-Javadoc)
-	 * <p>Description: <／p>
-	 * @param amdl
-	 * @return
-	 * @see datamotion.common.InfTaskThread#addWork(java.lang.Object)
-	 */
-	@Override
-	public <F> boolean addWork(F amdl) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * <p>Description: <／p>
-	 * @param amdl
-	 * @return
-	 * @see datamotion.common.InfTaskThread#doWork(java.lang.Object)
-	 */
-	@Override
-	public <F> boolean doWork(F amdl) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	/* (non-Javadoc)
 	 * <p>Description: <／p>
 	 * @return
@@ -144,6 +121,30 @@ public class TaskCallBackArchive extends AbsTaskThread<MdlFileEvent>{
 	 */
 	@Override
 	public boolean notifyOthers(MdlFileEvent afile) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * <p>Description: <／p>
+	 * @param amdl
+	 * @return
+	 * @see datamotion.common.InfTaskThread#addWork(datamotion.common.MdlFileEvent)
+	 */
+	@Override
+	public boolean addWork(MdlFileEvent amdl) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * <p>Description: <／p>
+	 * @param amdl
+	 * @return
+	 * @see datamotion.common.InfTaskThread#doWork(datamotion.common.MdlFileEvent)
+	 */
+	@Override
+	public boolean doWork(MdlFileEvent amdl) {
 		// TODO Auto-generated method stub
 		return false;
 	}
