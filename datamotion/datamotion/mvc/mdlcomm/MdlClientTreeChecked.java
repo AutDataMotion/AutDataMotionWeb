@@ -36,7 +36,8 @@ public class MdlClientTreeChecked implements Serializable {
 	public int level;
 	public String name;
 	public boolean isParent;
-	public transient List<MdlClientTreeChecked> children;
+	public boolean isCompress;
+	public List<MdlClientTreeChecked> children;
 	public transient MdlClientTreeChecked parent;
 
 	public MdlClientTreeChecked() {

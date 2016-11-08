@@ -32,6 +32,7 @@ public class RunMain implements InfMainConf{
 	private static Logger log = Logger.getLogger(RunMain.class);
 	private final static RunMain INSTANCE = new RunMain();
 	
+	
 	 /**
 	 * 
 	 */

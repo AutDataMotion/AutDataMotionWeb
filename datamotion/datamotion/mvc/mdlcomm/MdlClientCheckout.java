@@ -10,8 +10,10 @@ package datamotion.mvc.mdlcomm;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 /**  
  * 创建时间：2016年11月6日 下午3:18:33  
@@ -35,7 +37,7 @@ import java.util.Map;
  */
 public class MdlClientCheckout implements Serializable {
 
-	public List<MdlClientTreeChecked> treecheckeds;
+	public MdlClientTreeChecked treecheckeds;
 	public String timebegcollect;
 	public String timeendcollect;
 	public String timebegreceive;
@@ -43,128 +45,79 @@ public class MdlClientCheckout implements Serializable {
 	public String timebegdb;
 	public String timeenddb;
 	public int status;
-	private transient MdlClientTreeChecked root;
 
 	public MdlClientCheckout() {
 	}
 
+	public void getSQLStrByNode(MdlClientTreeChecked aNode, StringBuilder aSbSQL){
+		String nameField=null;
+		switch (aNode.level) {
+
+		case 1:
+			// aircrafts 飞行器
+			nameField = "aircraft";
+			break;
+		case 2:
+			// sensors 载荷
+			nameField = "sensor";
+			break;
+		case 3:
+			// datatypes 产品类型
+			nameField = "datatype";
+			break;
+		case 4:
+			// datalevel 产品等级
+			nameField = "datalevel";
+			break;
+		case 5:
+			// camera 产品标识 最后的叶子节点
+			nameField = "camera";
+			break;
+		default:
+			
+			break;
+		}
+		if (aNode.children !=null && aNode.children.size() > 0) {
+			//有孩子
+			aSbSQL.append(String.format("( %s='%s' and (", nameField, aNode.name));
+			
+			int i = 0;
+			for (; i < aNode.children.size()-1; i++) {
+				getSQLStrByNode(aNode.children.get(i), aSbSQL);
+				aSbSQL.append(" or ");
+			}
+			//最后一个
+			getSQLStrByNode(aNode.children.get(i), aSbSQL);
+
+			aSbSQL.append("))");
+			
+		}else{
+			//没有孩子
+			aSbSQL.append(String.format(" %s='%s' ", nameField, aNode.name));
+		}
+		
+		return; 
+	}
 	public String getSQLStr(String aTableName) {
-		// 这里的SQL 需要优化，建议与数据库的树比对，以缩减查询条件
-		// 比如全选了某个载荷，则其下面的对于孩子的查询选项不必再写
+
 		// 多条件查询，数据库需要建立一些索引
-		StringBuilder sb = new StringBuilder();
-		MdlClientTreeChecked curaircraft;
-		MdlClientTreeChecked cursensor;
-		MdlClientTreeChecked curdatatype;
-		MdlClientTreeChecked curdatalevel;
-		MdlClientTreeChecked curcameras;
-		List<MdlClientTreeChecked> node_aircrafts = new ArrayList<MdlClientTreeChecked>(
-				2);
-		List<MdlClientTreeChecked> node_sensors = new ArrayList<MdlClientTreeChecked>(
-				20);
-		List<MdlClientTreeChecked> node_datatypes = new ArrayList<MdlClientTreeChecked>(
-				6);
-		List<MdlClientTreeChecked> node_datalevels = new ArrayList<MdlClientTreeChecked>(
-				6);
-		List<MdlClientTreeChecked> node_cameras = new ArrayList<MdlClientTreeChecked>(
-				30);
+		StringBuilder sbSQLTree = new StringBuilder();
 
-		Map<String, MdlClientTreeChecked> mapNodes = new HashMap<String, MdlClientTreeChecked>();
-		Map<String, List<String>> mapSQL = new HashMap<String, List<String>>();
-		// 初始化查询树
-		for (MdlClientTreeChecked item : treecheckeds) {
-			// 改用map
-			mapNodes.put(item.id, item);
-			switch (item.level) {
-			case 0:
-				// 根节点
-				root = item;
-				break;
-			case 1:
-				// aircrafts 飞行器
-				curaircraft = item;
-				root.addChild(curaircraft);
-				node_aircrafts.add(curaircraft);
-				break;
-			case 2:
-				// sensors 载荷
-				for (MdlClientTreeChecked mdlClientTreeChecked : node_cameras) {
-					
-				}
-				root = item;
-				break;
-			case 3:
-				// datatypes 产品类型
-				root = item;
-				break;
-			case 4:
-				// datalevel 产品等级
-				root = item;
-				break;
-			case 5:
-				// camera 产品标识 最后的叶子节点
-				root = item;
-				break;
-			default:
-				break;
-			}
-
+		//root 节点特殊处理一下
+		if (this.treecheckeds.children == null || this.treecheckeds.children.size()==0) {
+			sbSQLTree.append("select * from ").append(aTableName).append(" where aircraft='TG2' order by id desc limit 200");
+			return sbSQLTree.toString();
 		}
-
-		// 初始化查询树
-		for (MdlClientTreeChecked item : treecheckeds) {
-			// 改用map
-			mapNodes.put(item.id, item);
-			switch (item.level) {
-			case 0:
-				// 根节点
-				root = item;
-				break;
-			case 1:
-				// aircrafts 飞行器
-				node_aircrafts.add(item);
-				break;
-			case 2:
-				// sensors 载荷
-
-				root = item;
-				break;
-			case 3:
-				// datatypes 产品类型
-				root = item;
-				break;
-			case 4:
-				// datalevel 产品等级
-				root = item;
-				break;
-			case 5:
-				// camera 产品标识 最后的叶子节点
-				root = item;
-				break;
-			default:
-				break;
-			}
-
-		}
-
-		return sb.toString();
+//		//从root的第一个节点开始 拼接SQL
+		sbSQLTree.append("select * from ").append(aTableName).append(" where ");
+		getSQLStrByNode(this.treecheckeds.children.get(0), sbSQLTree);
+		
+		sbSQLTree.append(" order by id desc limit 200");
+		
+		return sbSQLTree.toString();
 	}
-
-	/**
-	 * @return the treecheckeds
-	 */
-	public List<MdlClientTreeChecked> getTreecheckeds() {
-		return treecheckeds;
-	}
-
-	/**
-	 * @param treecheckeds
-	 *            the treecheckeds to set
-	 */
-	public void setTreecheckeds(List<MdlClientTreeChecked> treecheckeds) {
-		this.treecheckeds = treecheckeds;
-	}
-
+	
+	
 	/**
 	 * @return the timebegcollect
 	 */

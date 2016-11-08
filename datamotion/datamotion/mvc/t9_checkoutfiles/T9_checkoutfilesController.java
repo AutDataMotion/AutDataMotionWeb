@@ -63,13 +63,15 @@ public class T9_checkoutfilesController extends BaseController {
 			renderText("-1");//错误
 		}
 		//log.debug(strvalue);
+		MdlClientCheckout mdlClient = null;
 		try {
-			MdlClientCheckout mdlClient = JsonUtils.deserialize(strvalue, MdlClientCheckout.class);
+			mdlClient = JsonUtils.deserialize(strvalue, MdlClientCheckout.class);
 			if (null == mdlClient) {
 renderText("-1");//错误
 				return;
 			}
 			log.debug(JsonUtils.serialize(mdlClient));
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -78,12 +80,20 @@ renderText("-1");//错误
 		}
 
 		// 遍历树结构，拼接SQL语句
-
+		String strSQL = mdlClient.getSQLStr("t9_checkoutfiles");
+		log.debug(strSQL);
 		// 数据库查询
-
+		List<T9_checkoutfiles> res = T9_checkoutfiles.dao.find(strSQL);
+		
 		// 返回结果
-
-		// renderJson(null);
+		if (null == res || res.size() <= 0) {
+			renderText("-1");
+			return;
+		}else {
+			 renderJson(res);
+			 return ;
+		}
+		
 	}
 
 	@Clear
