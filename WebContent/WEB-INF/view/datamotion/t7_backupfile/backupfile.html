@@ -47,12 +47,12 @@
 	height:50px;
 }
 .column_label{
-width:11.1%;
+width:15%;
 height:100%;
 float: left;
 }
 .column_input{
-width:22.2%;
+width:35%;
 height:100%;
 float: left;
 }
@@ -63,112 +63,30 @@ float: left;
 
 <% var contSec={ %>
 <div class="myPanel_backupfile">
+	
 	<div class="row_backupfile">
 		<div class="column_label">
 			<div class="col-md-1_backupfile mylabel_backupfile">
-	        <label>飞行器：</label>
-	    		</div>
-		</div>
-		<div class="column_input">
-			<div class="col-md-4_backupfile form-group_backupfile">
-		       	<select multiple class="select" id="aircraft_backup">
-		       	  
-		          <option value="option1">天宫一号</option>
-		          <option value="option2">天宫二号</option>
-		       	</select>
-	    		</div>
-		</div>
-		<div class="column_label">
-			<div class="col-md-1_backupfile mylabel_backupfile">
-	        <label>载荷名称：</label>
-	    		</div>
-		</div>
-		<div class="column_input">
-			<div class="col-md-4_backupfile form-group_backupfile">
-		       	<select multiple class="select" id="sensor_backup">
-		       	  
-		          <option value="option1">宽波段</option>
-		          <option value="option2">高度计</option>
-		       	</select>
-	    		</div>
-		</div>
-		
-		<div class="column_label">
-			<div class="col-md-1_backupfile mylabel_backupfile">
-	        <label>产品类型：</label>
-	    		</div>
-		</div>
-		<div class="column_input">
-			<div class="col-md-4_backupfile form-group_backupfile">
-		       <select multiple class="select" id="producttype_backup">
-		       	  
-		          <option value="option1">IMG</option>
-		          <option value="option2">AUX</option>
-		          <option value="option1">SCI</option>
-		          <option value="option2">ENG</option>
-		       </select>
-		    </div>
-		</div>
-	</div>
-	<div class="row_backupfile">
-			<div class="column_label">
-				<div class="col-md-1_backupfile mylabel_backupfile">
-			        <label>产品级别：</label>
-			    </div>
-			</div>
-			<div class="column_input">
-				<div class="col-md-4_backupfile form-group_backupfile">
-			       <select multiple class="select" id="productlevel_backup">
-			       	  <option value="option1">0B</option>
-			          <option value="option2">0C</option>
-			          <option value="option1">L0</option>
-			          <option value="option2">L1</option>
-			       </select>
-			    </div>
-			</div>
-			
-			<div class="column_label">
-				<div class="col-md-1_backupfile mylabel_backupfile">
-			        <label>产品标识：</label>
-			    </div>
-			</div>
-			<div class="column_input">
-				<div class="col-md-4_backupfile form-group_backupfile">
-			       <select multiple class="select" id="camera_backup">
-			       	  <option value="option1">VNI</option>
-			          <option value="option2">INF</option>
-			        </select>
-			    </div>
-			</div>
-			
-			<div class="column_label">
-				<div class="col-md-1_backupfile mylabel_backupfile">
-			        <label>文件类型：</label>
-			    </div>
-			</div>
-			<div class="column_input">
-				<div class="col-md-4_backupfile form-group_backupfile">
-			       <select multiple class="select" id="filetype_backup">
-			       	  <option value="option1">dat</option>
-			          <option value="option2">csv</option>
-			          <option value="option1">tif</option>
-			          <option value="option2">h5</option>
-			        </select>
-			    </div>
-			</div>
-	</div>
-	<div class="row_backupfile">
-		<div class="column_label">
-			<div class="col-md-1_backupfile mylabel_backupfile">
-		        <label>接受时间：</label>
+		        <label>接受开始时间：</label>
 		    </div>
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_receiveTime_backup" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_receiveStartTime_backup" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
-		
+		<div class="column_label">
+			<div class="col-md-1_backupfile mylabel_backupfile">
+		        <label>接受结束时间：</label>
+		    </div>
+		</div>
+		<div class="column_input">
+			<div class="time">
+		       <input class="datainp" id="dateinfo_receiveEndTime_backup" type="text" placeholder="请选择" readonly="">
+		    </div>
+		</div>
+	</div>
+	<div class="row_backupfile">
 		<div class="column_label">
 			<div class="col-md-1_backupfile mylabel_backupfile">
 		        <label>采集开始时间：</label>
@@ -212,7 +130,9 @@ float: left;
 			       <input class="datainp" id="dateinfo_backupEndTime" type="text" placeholder="请选择" readonly="">
 			    </div>
 			</div>
-			
+	</div>
+		
+	<div class="row_backupfile">
 			<div class="column_label">
 				<div class="col-md-1_backupfile mylabel_backupfile">
 			        <label>备份状态：</label>
@@ -221,10 +141,11 @@ float: left;
 			<div class="column_input">
 				<div class="col-md-4_backupfile form-group_backupfile">
 			       <select  class="select" id="backupstatus">
-			       	  <option value="option1">未备份</option>
-			          <option value="option2">已备份</option>
-			          <option value="option1">备份失败</option>
-			          <option value="option2">已删除</option>
+			       	  <option value="4">全部</option>
+			       	  <option value="0">未备份</option>
+			          <option value="1">已备份</option>
+			          <option value="2">备份失败</option>
+			          <option value="3">已删除</option>
 			       </select>
 			    </div>
 			</div>
@@ -238,12 +159,7 @@ float: left;
 			<div class="column_input">
 					
 			</div>
-			<div class="column_input">
-					
-			</div>
-			<div class="column_input">
-					
-			</div>
+			
 			<div class="column_label">
 					<div class="col-md-1_backupfile mylabel_backupfile">
 				        <input id="doAllLocalDownload_btn" name="doAllLocalDownload_btn" type="button" value="全部本地下载" class="btn m-r-5"/>
@@ -267,10 +183,20 @@ float: left;
 	<script src="${cxt!}/ui/jedate/jedate.js"></script>
 	<!-- DataTables -->
 <script type="text/javascript" src="${cxt!}/ui/DataTables/datatables.min.js"></script>
+
+<script src="${cxt!}/ui/datamotion/js/backup.js"></script>
 	<script>
 	jeDate({
-		dateCell:"#dateinfo_receiveTime_backup",
-		format:"YYYY年MM月DD日 hh:mm:ss",
+		dateCell:"#dateinfo_receiveStartTime_backup",
+		format:"YYYY-MM-DD hh:mm:ss",
+		isinitVal:true,
+		isTime:true, //isClear:false,
+		minDate:"2014-09-19 00:00:00",
+		okfun:function(val){alert(val)}
+	})
+	jeDate({
+		dateCell:"#dateinfo_receiveEndTime_backup",
+		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
 		minDate:"2014-09-19 00:00:00",
@@ -278,7 +204,7 @@ float: left;
 	})
 	jeDate({
 		dateCell:"#dateinfo_collectStartTime_backup",
-		format:"YYYY年MM月DD日 hh:mm:ss",
+		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
 		minDate:"2014-09-19 00:00:00",
@@ -286,7 +212,7 @@ float: left;
 	})
 	jeDate({
 		dateCell:"#dateinfo_collectEndTime_backup",
-		format:"YYYY年MM月DD日 hh:mm:ss",
+		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
 		minDate:"2014-09-19 00:00:00",
@@ -294,7 +220,7 @@ float: left;
 	})
 	jeDate({
 		dateCell:"#dateinfo_backupStartTime",
-		format:"YYYY年MM月DD日 hh:mm:ss",
+		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
 		minDate:"2014-09-19 00:00:00",
@@ -302,7 +228,7 @@ float: left;
 	})
 	jeDate({
 		dateCell:"#dateinfo_backupEndTime",
-		format:"YYYY年MM月DD日 hh:mm:ss",
+		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
 		minDate:"2014-09-19 00:00:00",
@@ -310,14 +236,32 @@ float: left;
 	})
 	
 	var dataSet = [
+<% 
+var cnt = 0;
+for(node in list){ 
+	cnt ++;
+	if(nodeLP.last){%>
+	[ "${cnt}","${node.pathsrc!}", "${node.namesrc!}", "${node.pathdest!}", "${node.timedo!}","${node.filesize!}","TS","${node.aircraft!}","ZW","dat","${node.datalevel!}","SCI","2015-12-12 08:20:59","2015-12-12 08:20:59","2015-12-12 08:20:59",1,"2015-12-12 08:20:59",""]
+	
+	<%}
+	else {%>
+	[ "${cnt}","${node.pathsrc!}", "${node.namesrc!}", "${node.pathdest!}", "${node.timedo!}","${node.filesize!}","TS","${node.aircraft!}","ZW","dat","${node.datalevel!}","SCI","2015-12-12 08:20:59","2015-12-12 08:20:59","2015-12-12 08:20:59",1,"2015-12-12 08:20:59",""],
+	<%}
+}%>			
+	];
+	
+	/*
+	var dataSet = [
                [0,"c://path","name","c://path","2015-12-12 08:20:59",100,"TS","TG-2","ZW","dat","L1","SCI","2015-12-12 08:20:59","2015-12-12 08:20:59","2015-12-12 08:20:59",1,"2015-12-12 08:20:59",""],
                [1,"c://path","name","c://path","2015-12-12 08:20:59",100,"TS","TG-2","ZW","dat","L1","SCI","2015-12-12 08:20:59","2015-12-12 08:20:59","2015-12-12 08:20:59",1,"2015-12-12 08:20:59",""]
                
                ];
-            
+          */  
+         var myTable;
            $(document).ready(function() {
-               $('#myTable').DataTable( {
+        	   myTable=$('#myTable').DataTable( {
                    data: dataSet,
+                   ajax: '',
                    columns: [
                        { title: "id" },
                        { title: "源文件路径" },
@@ -345,12 +289,31 @@ float: left;
                    "columnDefs": [ {
                        "targets": -1,
                        "data": null,
-                       "defaultContent": "<input id='doLocalDownload' name='doLocalDownload_btn' type='button' value='本地下载' class='btn m-r-5'/>"
+                       "defaultContent": "<input id='doLocalDownload' name='doLocalDownload_btn' type='button' value='本地下载' class='btn m-r-5' />"
                        +"<input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新备份' class='btn m-r-5'/>"
                        +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>"
+                      
                    } ]
                } );
+        	   
+        	   $('#myTable tbody').on( 'click', '#doLocalDownload', function () {
+       	        var data = myTable.row($(this).parents('tr')).data();
+       	        alert( data[0]+" doLocalDownload");
+       	    } );
+        	   
+        	   $('#myTable tbody').on( 'click', '#doNewBackup', function () {
+          	        var data = myTable.row($(this).parents('tr')).data();
+          	        alert( data[0]+" doNewBackup");
+          	    } );
+        	   
+        	   $('#myTable tbody').on( 'click', '#doDeleteSeleted', function () {
+         	        var data = myTable.row($(this).parents('tr')).data();
+         	        alert( data[0]+" doDeleteSeleted");
+         	    } );
+        	   
            } );
+            
+          
 	</script>
 <% }; %>
 <% include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
