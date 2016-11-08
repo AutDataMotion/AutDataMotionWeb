@@ -7,6 +7,8 @@
  */
 package datamotion.ftpdownload;
 
+import java.io.File;
+
 import datamotion.common.AbsTaskThread;
 import datamotion.common.MdlFileEvent;
 
@@ -52,7 +54,9 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 	public <F> boolean doWork(F amdl) {
 		// TODO Auto-generated method stub
 		//添加下载的代码
-
+		
+		Class<? extends Object> file = amdl.getClass();
+		System.out.println(file.getName().toString());
 		return false;
 	}
 
@@ -160,4 +164,10 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 		return false;
 	}
 
+	public static <F> void main(String[] args) {
+		File file = new File("D:\\test\\TS_TG02_QKDS_PRD1_ENG_20161027170746_20161027170746_20161028165342_0C.csv");
+		TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
+		taskCallBackDownload.doWork(file);// doWork(file);
+		
+	}
 }
