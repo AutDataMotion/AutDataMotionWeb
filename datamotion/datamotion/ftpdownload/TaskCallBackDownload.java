@@ -31,35 +31,7 @@ import datamotion.common.MdlFileEvent;
  */
 public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 
-	/* (non-Javadoc)
-	 * <p>Description: <／p>
-	 * @param amdl
-	 * @return
-	 * @see datamotion.common.InfTaskThread#addWork(java.lang.Object)
-	 */
-	@Override
-	public <F> boolean addWork(F amdl) {
-		// TODO Auto-generated method stub
-		//往队列里添加一个任务
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * <p>Description: <／p>
-	 * @param amdl
-	 * @return
-	 * @see datamotion.common.InfTaskThread#doWork(java.lang.Object)
-	 */
-	@Override
-	public <F> boolean doWork(F amdl) {
-		// TODO Auto-generated method stub
-		//添加下载的代码
-		
-		Class<? extends Object> file = amdl.getClass();
-		System.out.println(file.getName().toString());
-		return false;
-	}
-
+	
 	/* (non-Javadoc)
 	 * <p>Description: <／p>
 	 * @param afile
@@ -167,7 +139,31 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 	public static <F> void main(String[] args) {
 		File file = new File("D:\\test\\TS_TG02_QKDS_PRD1_ENG_20161027170746_20161027170746_20161028165342_0C.csv");
 		TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
-		taskCallBackDownload.doWork(file);// doWork(file);
+		//taskCallBackDownload.doWork(file);// doWork(file);
 		
+	}
+
+	/* (non-Javadoc)
+	 * <p>Description: <／p>
+	 * @param amdl
+	 * @return
+	 * @see datamotion.common.InfTaskThread#addWork(datamotion.common.MdlFileEvent)
+	 */
+	@Override
+	public boolean addWork(MdlFileEvent amdl) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * <p>Description: <／p>
+	 * @param amdl
+	 * @return
+	 * @see datamotion.common.InfTaskThread#doWork(datamotion.common.MdlFileEvent)
+	 */
+	@Override
+	public boolean doWork(MdlFileEvent amdl) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
