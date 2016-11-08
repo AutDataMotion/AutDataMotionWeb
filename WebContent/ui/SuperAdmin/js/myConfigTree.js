@@ -265,8 +265,8 @@ $("#modelSave").click(function(){
 	var aircraft=$("#info01").val();
 	var sensor=$("#info02").val();
 	var datatype=$("#info03").val();
-	var camera=$("#info04").val();
-	var datalevel=$("#info05").val();
+	var datalevel=$("#info04").val();
+	var camera=$("#info05").val();
 	console.log(aircraft);
 	//下载配置
 	var isdwnload=$("#isdwnload").val();
