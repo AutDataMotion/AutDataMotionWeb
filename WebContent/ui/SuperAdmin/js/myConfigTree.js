@@ -130,7 +130,7 @@ function onClick(event, treeId, treeNode) {
         );
         return false;
     });
-	if(treeNode!=null&&treeNode.isParent==false){
+	//if(treeNode!=null&&treeNode.isParent==false){
 		key_=treeNode.id;
     	$.ajax({
     		url:'../t12_initmodule/getModelInfo',
@@ -181,16 +181,16 @@ function onClick(event, treeId, treeNode) {
         			ishavaaux=data[0]['ishavaaux'];
         			auxfiletypes=data[0]['auxfiletypes'];
     			}
-    			$("button[data-id='aircraft']>div:first").text(aircraft);
-    			$("button[data-id='sensor']>div:first").text(sensor);
-    			$("button[data-id='datatype']>div:first").text(datatype);
-    			$("button[data-id='camera']>div:first").text(camera);
-    			$("button[data-id='datalevel']>div:first").text(datalevel);
-    			$("button[data-id='isdwnload']>div:first").text(isdwnload==true?'是':'否');
-    			$("button[data-id='isbackup']>div:first").text(isbackup==true?'是':'否');
-    			$("button[data-id='isarchive']>div:first").text(isarchive==true?'是':'否');
-    			$("button[data-id='ischeckout']>div:first").text(ischeckout==true?'是':'否');
-    			$("button[data-id='ishavaaux']>div:first").text(ishavaaux==true?'是':'否');
+//    			$("#info01").val(aircraft);
+//    			$("#info02").val(sensor);
+//    			$("#info03").val(datatype);
+//    			$("#info04").val(camera);
+//    			$("#info05").val(datalevel);
+    			$("#isdwnload").val(isdwnload+"");
+    			$("#isbackup").val(isbackup+"");
+    			$("#isarchive").val(isarchive+"");
+    			$("#ischeckout").val(ischeckout+"");
+    			$("#ishavaaux").val(ishavaaux+"");
 				$("#pathftp").val(pathftp);
 				$("#pathdwnload").val(pathdwnload);
 			    $("#pathbackup").val(pathbackup);
@@ -204,7 +204,7 @@ function onClick(event, treeId, treeNode) {
     			console.log("error");
     		}
     	});
-    };	
+    //};	
 }
         
 function beforeCheck(event, treeId, treeNode){
@@ -289,7 +289,7 @@ $("#modelSave").click(function(){
 		url:'../t12_initmodule/saveModelInfo',
 		asyn:false,
 		method:'post',  
-		dataType:'json', 
+//		dataType:'json', 
 		data:{
 			fkeystreenode:key_,
 			aircraft:aircraft,sensor:sensor,datatype:datatype,
@@ -333,8 +333,12 @@ $("#modelSave").click(function(){
 		success:function(data){
 			alert(data);
 		},
-		error:function(){
+		error:function(XMLHttpRequest, textStatus, errorThrown){
 			console.log("error");
+			console.log(XMLHttpRequest);
+			console.log(textStatus);
+			console.log(errorThrown);
+			
 		}
 	});
 });

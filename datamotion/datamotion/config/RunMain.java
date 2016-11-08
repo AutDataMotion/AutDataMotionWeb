@@ -53,7 +53,8 @@ public class RunMain implements InfMainConf{
 	public boolean init() {
 		// TODO Auto-generated method stub
 		//加载数据库的配置信息
-		
+	
+		//
 		return false;
 	}
 

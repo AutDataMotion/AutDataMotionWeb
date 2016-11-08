@@ -124,7 +124,7 @@ $(document)
 						if ($('.auto-size')[0]) {
 							$('.auto-size').autosize();
 						}
-
+//
 						// Select
 						if ($('.select')[0]) {
 							$('.select').selectpicker();

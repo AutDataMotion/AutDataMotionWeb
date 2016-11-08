@@ -100,7 +100,7 @@ public class T12_initmoduleController extends BaseController {
 			Db.use(ConstantInitMy.db_dataSource_main)
 			  .save("t12_initmodule", t12_initmodule);
 			Db.use(ConstantInitMy.db_dataSource_main)
-			.update("update t11_initfoldertree set fkeyinitmodule=?",key_);
+			.update("update t11_initfoldertree set fkeyinitmodule=? where key_=?",key_, fkeystreenode);
 		}else {
 			String key_=res.get(0).get("key_");
 			Db.use(ConstantInitMy.db_dataSource_main)
@@ -116,6 +116,8 @@ public class T12_initmoduleController extends BaseController {
 			",auxfiletypes='"+auxfiletypes+
 			"',timeupdate='"+new Timestamp(System.currentTimeMillis())+
 			"' where key_=?",key_);
+			Db.use(ConstantInitMy.db_dataSource_main)
+			.update("update t11_initfoldertree set fkeyinitmodule=? where key_=?",key_, fkeystreenode);
 		}
 		renderText("operate succeed");
 	}
