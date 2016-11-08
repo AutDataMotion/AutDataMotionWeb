@@ -21,7 +21,7 @@ package datamotion.common;
  * <p>Title: InfTaskThread<／p>
  * <p>Description: <／p>
  * 
- * 
+  
  * @author ZhongwengHao
  * @date 2016年10月30日
  */
@@ -35,6 +35,6 @@ public interface InfTaskThread {
 	
 	boolean restart();
 	
-	<F> boolean addWork(F amdl);
-	<F> boolean doWork(F amdl);
+	boolean addWork(MdlFileEvent amdl);
+	boolean doWork(MdlFileEvent amdl);
 }

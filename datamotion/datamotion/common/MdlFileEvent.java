@@ -9,6 +9,9 @@ package datamotion.common;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.hamcrest.core.Is;
@@ -103,13 +106,26 @@ public class MdlFileEvent implements Serializable {
 		if (nameTokens != null) {
 			return true;
 		}
-		nameTokens = StringUtil.split(namedest, split); 
+		nameTokens = StringUtil.split(namesrc, split); 
 		if (nameTokens == null || nameTokens.size()==0) {
 			nameTokens = null;
 			return false;
 		}
 		//根据文件名格式进行属性赋值
-		
+		DateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss"); 
+		this.station = nameTokens.get(NAMETOKE.PLAT.ordinal());
+		this.aircraft = nameTokens.get(NAMETOKE.AIRCRAFT.ordinal());
+		this.sensor = nameTokens.get(NAMETOKE.SENSOR.ordinal());
+		this.datatype = nameTokens.get(NAMETOKE.TYPE.ordinal());
+		this.datalevel = nameTokens.get(NAMETOKE.LEVEL.ordinal()-1);
+		this.camera = nameTokens.get(NAMETOKE.CAMERA.ordinal());
+//		String format = "";
+//		StringUtil.strToDate(nameTokens.get(NAMETOKE.DATE1.ordinal(), dateFormat), format);
+//		Date date = new Date();//将字符串转为时间格式
+//		String str = sdf.format(date);//时间存储为字符串
+//		this.timerecive = Timestamp.valueOf(str);
+//		this.timecollectstart = Timestamp.valueOf(sdf.format(nameTokens.get(NAMETOKE.DATE2.ordinal())));
+//		this.timecollectend = Timestamp.valueOf(sdf.format(nameTokens.get(NAMETOKE.DATE3.ordinal())));
 		return true;
 	}
 }
