@@ -54,7 +54,6 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 	public <F> boolean doWork(F amdl) {
 		// TODO Auto-generated method stub
 		//添加下载的代码
-		
 		Class<? extends Object> file = amdl.getClass();
 		System.out.println(file.getName().toString());
 		return false;
