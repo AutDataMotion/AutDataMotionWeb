@@ -130,26 +130,6 @@ function onClick(event, treeId, treeNode) {
         );
         return false;
     });
-    
-    
-    //$("#aircraft").val('');
-	//$("#sensor").val('');
-//	$("#datatype").val('');
-//	$("#camera").val('');
-//	$("#datalevel").val('');
-//	$("#isdwnload").val('');
-//	$("#pathftp").val('');
-//	$("#pathdwnload").val('');
-//	$("#isbackup").val('');
-//    $("#pathbackup").val('');
-//    $("#isarchive").val('');
-//	$("#patharchive").val('');
-//	$("#ischeckout").val('');
-//	$("#pathcheckout").val('');
-//	$("#namemdlsrc").val('');
-//	$("#namemdldes").val('');
-//	$("#ishavaaux").val('');
-//	$("#auxfiletypes").val('');
 	if(treeNode!=null&&treeNode.isParent==false){
 		key_=treeNode.id;
     	$.ajax({
@@ -162,11 +142,11 @@ function onClick(event, treeId, treeNode) {
     			pathftp,pathdwnload,isbackup,pathbackup,isarchive,patharchive,
     			ischeckout,pathcheckout,namemdlsrc,namemdldes,ishavaaux,auxfiletypes;
     			if(data.length==0){
-    				aircraft='天宫一号';
-    				sensor='高度计';
-    				datatype='IMG';
-    				camera='VNI';
-    				datalevel='0B';
+    				aircraft='全部';
+    				sensor='全部';
+    				datatype='全部';
+    				camera='全部';
+    				datalevel='全部';
     				isdwnload=true;
         			pathftp='';
         			pathdwnload='';
@@ -282,11 +262,12 @@ $(document).ready(function () {
 //系统配置的保存按钮
 $("#modelSave").click(function(){
 	//文件信息
-	var aircraft=$("#aircraft").val();
-	var sensor=$("#sensor").val();
-	var datatype=$("#datatype").val();
-	var camera=$("#camera").val();
-	var datalevel=$("#datalevel").val();
+	var aircraft=$("#info01").val();
+	var sensor=$("#info02").val();
+	var datatype=$("#info03").val();
+	var camera=$("#info04").val();
+	var datalevel=$("#info05").val();
+	console.log(aircraft);
 	//下载配置
 	var isdwnload=$("#isdwnload").val();
 	var pathftp=$("#pathftp").val();
@@ -304,7 +285,6 @@ $("#modelSave").click(function(){
 	var namemdldes=$("#namemdldes").val();
 	var ishavaaux=$("#ishavaaux").val();
 	var auxfiletypes=$("#auxfiletypes").val();
-	console.log(key_+" "+ishavaaux);
 	$.ajax({
 		url:'../t12_initmodule/saveModelInfo',
 		asyn:false,
