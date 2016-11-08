@@ -1,352 +1,239 @@
 <% var cssSec={ %>
 <style>
-.myPanel_backupfile{
-	width: 945px;
-    height: 350px;
-    border: 1px solid rgba(255,255,255,0.15);
-}
-.col-md-1_backupfile{
- 	padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 7px;
-    float: left;
-}
-.mylabel_backupfile{
-    font-weight: normal;
-    font-size: 13px;
-    line-height: 30px;
-    text-align: right;
-    color: #ffffff;
-    float: right;
-}
-.col-md-4_backupfile{
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 7px;
-    width: 100%;
-    float: left;
-}
-.form-group_backupfile {
-    margin-bottom: 5px;
-}
-.time{
-	
-    padding-top: 10px;
-   width: 100%;
-    float:left;
-}
-.datainp {
-    width: 100%;
-    height: 30px;
-    border: 1px #ccc solid;
-    background-color: rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
-.row_backupfile{
-	width:100%;
-	height:50px;
-}
-.column_label{
-width:11.1%;
-height:100%;
-float: left;
-}
-.column_input{
-width:22.2%;
-height:100%;
-float: left;
-}
+
 </style>
+
+<link rel="stylesheet" type="text/css"
+	href="${cxt!}/ui/datamotion/css/archive.css" />
 <link href="${cxt!}/ui/jedate/skin/jedate.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="${cxt!}/ui/DataTables/datatables.min.css"/>
-<% }; %>
+<link rel="stylesheet" type="text/css"
+	href="${cxt!}/ui/DataTables/datatables.min.css" />
 
-<% var contSec={ %>
+<% }; var contSec={ %>
 <div class="myPanel_backupfile">
-	<div class="row_backupfile">
-		<div class="column_label">
-			<div class="col-md-1_backupfile mylabel_backupfile">
-	        <label>飞行器：</label>
-	    		</div>
+	<br>
+	<div class="row">
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>采集开始时间：</label>
 		</div>
-		<div class="column_input">
-			<div class="col-md-4_backupfile form-group_backupfile">
-		       	<select multiple class="select">
-		          <option value="option1">天宫一号</option>
-		          <option value="option2">天宫二号</option>
-		       	</select>
-	    		</div>
-		</div>
-		<div class="column_label">
-			<div class="col-md-1_backupfile mylabel_backupfile">
-	        <label>载荷名称：</label>
-	    		</div>
-		</div>
-		<div class="column_input">
-			<div class="col-md-4_backupfile form-group_backupfile">
-		       	<select multiple class="select">
-		       	  
-		          <option value="option1">宽波段</option>
-		          <option value="option2">高度计</option>
-		       	</select>
-	    		</div>
-		</div>
-		
-		<div class="column_label">
-			<div class="col-md-1_backupfile mylabel_backupfile">
-	        <label>产品类型：</label>
-	    	</div>
-		</div>
-		<div class="column_input">
-			<div class="col-md-4_backupfile form-group_backupfile">
-		       <select multiple class="select">
-		       	  
-		          <option value="option1">IMG</option>
-		          <option value="option2">AUX</option>
-		          <option value="option1">SCI</option>
-		          <option value="option2">ENG</option>
-		       </select>
-		    </div>
-		</div>
-	</div>
-	<div class="row_backupfile">
-			<div class="column_label">
-				<div class="col-md-1_backupfile mylabel_backupfile">
-			        <label>产品级别：</label>
-			    </div>
-			</div>
-			<div class="column_input">
-				<div class="col-md-4_backupfile form-group_backupfile">
-			       <select multiple class="select">
-			       	  <option value="option1">0B</option>
-			          <option value="option2">0C</option>
-			          <option value="option1">L0</option>
-			          <option value="option2">L1</option>
-			       </select>
-			    </div>
-			</div>
-			
-			<div class="column_label">
-				<div class="col-md-1_backupfile mylabel_backupfile">
-			        <label>产品标识：</label>
-			    </div>
-			</div>
-			<div class="column_input">
-				<div class="col-md-4_backupfile form-group_backupfile">
-			       <select multiple class="select">
-			       	  <option value="option1">VNI</option>
-			          <option value="option2">INF</option>
-			        </select>
-			    </div>
-			</div>
-			
-			<div class="column_label">
-				<div class="col-md-1_backupfile mylabel_backupfile">
-			        <label>文件类型：</label>
-			    </div>
-			</div>
-			<div class="column_input">
-				<div class="col-md-4_backupfile form-group_backupfile">
-			       <select multiple class="select">
-			       	  <option value="option1">dat</option>
-			          <option value="option2">csv</option>
-			          <option value="option1">tif</option>
-			          <option value="option2">h5</option>
-			        </select>
-			    </div>
-			</div>
-	</div>
-	<div class="row_backupfile">
-		<div class="column_label">
-			<div class="col-md-1_backupfile mylabel_backupfile">
-		        <label>接受时间：</label>
-		    </div>
-		</div>
-		<div class="column_input">
+		<div class="col-md-4 col-sm-4 form-group">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_receiveTime" type="text" placeholder="请选择" readonly="">
-		    </div>
+				<input class="datainp" id="dateinfo_collectStartTime" type="text"
+					placeholder="请选择">
+			</div>
 		</div>
-		
-		<div class="column_label">
-			<div class="col-md-1_backupfile mylabel_backupfile">
-		        <label>采集开始时间：</label>
-		    </div>
-		</div>
-		<div class="column_input">
-			<div class="time">
-		       <input class="datainp" id="dateinfo_collectStartTime" type="text" placeholder="请选择" readonly="">
-		    </div>
-		</div>
-		<div class="column_label">
-			<div class="col-md-1_backupfile mylabel_backupfile">
-		        <label>采集结束时间：</label>
-		    </div>
-		</div>
-		<div class="column_input">
-			<div class="time">
-		       <input class="datainp" id="dateinfo_collectEndTime" type="text" placeholder="请选择" readonly="">
-		    </div>
-		</div>
-	</div>
-	<div class="row_backupfile">
-			<div class="column_label">
-				<div class="col-md-1_backupfile mylabel_backupfile">
-			        <label>下载开始时间：</label>
-			    </div>
-			</div>
-			<div class="column_input">
-				<div class="time">
-			       <input class="datainp" id="dateinfo_backupStartTime" type="text" placeholder="请选择" readonly="">
-			    </div>
-			</div>
-			
-			<div class="column_label">
-				<div class="col-md-1_backupfile mylabel_backupfile">
-			        <label>下载结束时间：</label>
-			    </div>
-			</div>
-			<div class="column_input">
-				<div class="time">
-			       <input class="datainp" id="dateinfo_backupEndTime" type="text" placeholder="请选择" readonly="">
-			    </div>
-			</div>
-			
-			<div class="column_label">
-				<div class="col-md-1_backupfile mylabel_backupfile">
-			        <label>下载状态：</label>
-			    </div>
-			</div>
-			<div class="column_input">
-				<div class="col-md-4_backupfile form-group_backupfile">
-			       <select  class="select">
-			       	  <option value="" selected="true" disabled="true">选择类型</option>
-			          <option value="option1">未下载</option>
-			          <option value="option2">已下载</option>
-			          <option value="option1">下载失败</option>
-			          <option value="option2">已删除</option>
-			       </select>
-			    </div>
-			</div>
-	</div>
-	<div class="row_backupfile">
-			<div class="column_label">
-					<div class="col-md-1_backupfile mylabel_backupfile">
-				        <input id="doQuery_btn" name="doQuery_btn" type="button" value="查询" class="btn m-r-5"/>
-				    </div>
-			</div>
-			<div class="column_input">
-			</div>
-			<div class="column_input">
-					
-			</div>
-			<div class="column_input">
-					
-			</div>
-			<div class="column_label">
-					<div class="col-md-1_backupfile mylabel_backupfile">
-				        <input id="doAllLocalDownload_btn" name="doAllLocalDownload_btn" type="button" value="全部本地下载" class="btn m-r-5"/>
-				    </div>
-			</div>
-			<div class="column_label">
-					<div class="col-md-1_backupfile mylabel_backupfile">
-				        <input id="doAllNewBackup_btn" name="doAllNewBackup_btn" type="button" value="全部重新备份" class="btn m-r-5"/>
-				    </div>
-			</div>
-	</div>
-	
-	<div class="doQueryResultTable">
-		<table id="myTable" class="display nowrap" cellspacing="0" style="width:100%;background-color: rgba(255, 255, 255, .15);"></table>	
-	</div>
-			
-</div>
-<% }; %>
 
-<% var jsSec={ %>
-	<script src="${cxt!}/ui/jedate/jedate.js"></script>
-	<!-- DataTables -->
-	<script type="text/javascript" src="${cxt!}/ui/DataTables/datatables.min.js"></script>
-	<script>
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>采集结束时间：</label>
+		</div>
+		<div class="col-md-4  col-sm-4 form-group">
+			<div class="time">
+				<input class="datainp" id="dateinfo_collectEndTime" type="text"
+					placeholder="请选择">
+			</div>
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>下载开始时间：</label>
+		</div>
+		<div class="col-md-4  col-sm-4  form-group">
+			<div class="time">
+				<input class="datainp" id="dateinfo_DBstartTime" type="text"
+					placeholder="请选择" >
+			</div>
+		</div>
+
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>下载结束时间：</label>
+		</div>
+		<div class="col-md-4  col-sm-4  form-group">
+			<div class="time">
+				<input class="datainp" id="dateinfo_DBEndTime" type="text"
+					placeholder="请选择" >
+			</div>
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>接受开始时间：</label>
+		</div>
+		<div class="col-md-4  col-sm-4  form-group">
+
+			<div class="time">
+				<input class="datainp" id="dateinfo_receiveTimeBeg" type="text"
+					placeholder="请选择">
+			</div>
+		</div>
+
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>接受结束时间：</label>
+		</div>
+		<div class="col-md-4  col-sm-4  form-group">
+
+			<div class="time">
+				<input class="datainp" id="dateinfo_receiveTimeEnd" type="text"
+					placeholder="请选择">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2  col-sm-2 mylabel"></div>
+		<div class="col-md-4  col-sm-4  form-group"></div>
+
+		<div class="col-md-2  col-sm-2 mylabel">
+			<label>下载状态：</label>
+		</div>
+		<div class="col-md-2  col-sm-2 form-group">
+			<select id="status" class="select">
+				<option value="5">全部</option>
+				<option value="1">下载成功</option>
+				<option value="2">下载失败</option>
+				<option value="3">未下载</option>
+				<option value="0">未检出</option>
+			</select>
+		</div>
+		<div class="col-md-2  col-sm-2">
+			<a id="btnsrch" href="javascript:void()"
+				class="btn btn-sm btn-alt wid100">查询</a>
+
+		</div>
+	</div>
+	<hr class="whiter">
+	<br />
+	<div class="row">
+		<div class="col-md-4  col-sm-4">
+			
+		</div>
+		<div class="col-md-4  col-sm-4"></div>
+		<div class="col-md-2  col-sm-2">
+			<a id="btndownload" href="javascript:void()" class="btn btn-sm btn-alt wid100">全部本地下载</a>
+		</div>
+		<div class="col-md-2  col-sm-2">
+			<a id="btncheckout" href="javascript:void()" class="btn btn-sm btn-alt wid100">全部重新下载</a>
+		</div>
+
+	</div>
+	<p class="bottom_line"></p>
+	<div class="row pad20">
+		<div class="doQueryResultTable">
+			<table id="myTable" class="display"></table>
+		</div>
+	</div>
+</div>
+
+<% }; %> <% var jsSec={ %>
+
+<script src="${cxt!}/ui/jedate/jedate.js"></script>
+<!-- DataTables -->
+<script type="text/javascript"
+	src="${cxt!}/ui/DataTables/datatables.min.js"></script>
+<script>
 	jeDate({
-		dateCell:"#dateinfo_receiveTime",
-		format:"YYYY年MM月DD日 hh:mm:ss",
-		isinitVal:true,
-		isTime:true, //isClear:false,
-		minDate:"2014-09-19 00:00:00",
-		okfun:function(val){alert(val)}
+		dateCell : "#dateinfo_receiveTimeBeg",
+		format : "YYYY-MM-DD hh:mm:ss",
+		isinitVal : true,
+		isTime : true, //isClear:false,
+		minDate : "2014-09-19 00:00:00",
+		okfun : function(val) {
+			alert(val)
+		}
 	})
 	jeDate({
-		dateCell:"#dateinfo_collectStartTime",
-		format:"YYYY年MM月DD日 hh:mm:ss",
-		isinitVal:true,
-		isTime:true, //isClear:false,
-		minDate:"2014-09-19 00:00:00",
-		okfun:function(val){alert(val)}
+		dateCell : "#dateinfo_receiveTimeEnd",
+		format : "YYYY-MM-DD hh:mm:ss",
+		isinitVal : true,
+		isTime : true, //isClear:false,
+		minDate : "2014-09-19 00:00:00",
+		okfun : function(val) {
+			alert(val)
+		}
 	})
 	jeDate({
-		dateCell:"#dateinfo_collectEndTime",
-		format:"YYYY年MM月DD日 hh:mm:ss",
-		isinitVal:true,
-		isTime:true, //isClear:false,
-		minDate:"2014-09-19 00:00:00",
-		okfun:function(val){alert(val)}
+		dateCell : "#dateinfo_collectStartTime",
+		format : "YYYY-MM-DD hh:mm:ss",
+		isinitVal : true,
+		isTime : true, //isClear:false,
+		minDate : "2014-09-19 00:00:00",
+		okfun : function(val) {
+			alert(val)
+		}
 	})
 	jeDate({
-		dateCell:"#dateinfo_backupStartTime",
-		format:"YYYY年MM月DD日 hh:mm:ss",
-		isinitVal:true,
-		isTime:true, //isClear:false,
-		minDate:"2014-09-19 00:00:00",
-		okfun:function(val){alert(val)}
+		dateCell : "#dateinfo_collectEndTime",
+		format : "YYYY-MM-DD hh:mm:ss",
+		isinitVal : true,
+		isTime : true, //isClear:false,
+		minDate : "2014-09-19 00:00:00",
+		okfun : function(val) {
+			alert(val)
+		}
 	})
 	jeDate({
-		dateCell:"#dateinfo_backupEndTime",
-		format:"YYYY年MM月DD日 hh:mm:ss",
-		isinitVal:true,
-		isTime:true, //isClear:false,
-		minDate:"2014-09-19 00:00:00",
-		okfun:function(val){alert(val)}
+		dateCell : "#dateinfo_DBstartTime",
+		format : "YYYY-MM-DD hh:mm:ss",
+		isinitVal : true,
+		isTime : true, //isClear:false,
+		minDate : "2014-09-19 00:00:00",
+		okfun : function(val) {
+			alert(val)
+		}
 	})
- 	var dataSet=[];
-	var aData;
-	var indexNum = 0;
-	<% 
-	for(node in resInit){ %>
-		aData = [ '<input type="checkbox" value="">', ${node.id!},"${node.namesrc!}","${node.timedo!}","${node.pathsrc!}","${node.pathdest!}",${node.filesize!},${node.status_!},'<p align="center"><input type="button" value="删除" class="btn m-r-5"/></p>' ];
-		dataSet.push(aData);
-	<%}%>	
-	console.log(dataSet); 
-	/*  var dataSet = [
-               [ '<input type="checkbox" value="">', "0", "TT_TT02_MWI_VNI_IMG_20161102000000_20161102000000_20161102000000_000_0C.csv", "2016-11-03 00:00:00", "D://MWI//", "E://MWI//", "3.85MB", "已下载", '<p align="center"><input type="button" value="删除" class="btn m-r-5"/></p>'],
-               [ '<input type="checkbox" value="">', "1", "TT_TT02_ZW_ZWF_IMG_20161102000000_20161102000000_20161102000000_000_0C.csv", "2016-11-03 00:00:00", "D://MWI//", "E://MWI//", "3.85MB", "未下载", '<p align="center"><input type="button" value="本地下载" class="btn m-r-5"/></p>'],
-           ];  */
-            
-           $(document).ready(function() {
-               $('#myTable').DataTable( {
-                   data: dataSet,
-                   columns: [
-                       { title: "" },//勾选框不显示
-					   { title: "序号" },
-                       { title: "文件名" },
-                       { title: "下载时间" },
-                       { title: "ftp文件路径" },
-                       { title: "下载本地路径" },
-                       { title: "文件大小" },
-                       { title: "状态" },
-                       { title: "操作" } 
-                   ],
-                   scrollX:        200,
-                   scrollCollapse: true,//滚动条
-                   "aoColumnDefs":[//设置列的属性
-                                   {
-                                       "defaultContent": '<p align="center"><input type="button" value="删除" class="btn m-r-5"/></p>'
-                                   } 
-                               ],
-                   "language": {
-                       "url": "${cxt!}/ui/DataTables/Chinese.json"
-                   }
-               } );
-           } ); 
-	</script>
-<% }; %>
-<% include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
+	jeDate({
+		dateCell : "#dateinfo_DBEndTime",
+		format : "YYYY-MM-DD hh:mm:ss",
+		isinitVal : true,
+		isTime : true, //isClear:false,
+		minDate : "2014-09-19 00:00:00",
+		okfun : function(val) {
+			alert(val)
+		}
+	})
+
+	
+	var dataSet = [
+<% 
+var cnt = 0;
+for(node in list){ 
+	cnt ++;
+	if(nodeLP.last){%>
+	[ "${cnt}", "${node.namesrc!}", "${node.pathsrc!}", "${node.pathdest!}", "${node.timedo!}", "${node.key_!}"]
+	
+	<%}
+	else {%>
+	[ "${cnt}", "${node.namesrc!}", "${node.pathsrc!}", "${node.pathdest!}", "${node.timedo!}", "${node.key_!}"],
+	<%}
+}%>			
+	];
+
+	$(document).ready(function() {
+		$('#myTable').DataTable({
+			data : dataSet,
+			columns : [ {
+				title : "序号"
+			}, {
+				title : "文件名"
+			}, {
+				title : "原路径"
+			}, {
+				title : "下载路径"
+			}, {
+				title : "下载时间"
+			}, {
+				title : "操作"
+			} ],
+			"language" : {
+				"url" : "${cxt!}/ui/DataTables/Chinese.json"
+			}
+		});
+	});
+	//ajax 发送查询参数数据
+		
+</script>
+<script src="${cxt!}/ui/datamotion/js/jquery-json.js"></script>
+<script src="${cxt!}/ui/datamotion/js/download.js"></script>
+<% }; 
+include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){}
+%>

@@ -7,6 +7,8 @@ import com.platform.constant.ConstantRender;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
 
+import oracle.net.aso.s;
+
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
@@ -14,8 +16,10 @@ import com.jfinal.aop.Clear;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 
+import csuduc.platform.util.JsonUtils;
 import csuduc.platform.util.generID.UUIDGener;
 import datamotion.constant.ConstantInitMy;
+import datamotion.mvc.mdlcomm.MdlClientCheckout;
 
 
 /**
@@ -47,20 +51,76 @@ public class T6_dwnloadfileController extends BaseController {
 	public void index() {
 		/*paging(ConstantInitMy.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, T6_dwnloadfile.sqlId_splitPage_from);
 		renderWithPath(pthv+"list.html");*/
+		
 		String sql = "select * from t6_dwnloadfile order by id desc limit ?";
 		List<T6_dwnloadfile> list = T6_dwnloadfile.dao.find(sql, 100);//取数据库的前100条记录
 		
-//		List<Record> res = Db.use(ConstantInitMy.db_dataSource_main)
-//				.find("select * from t6_dwnloadfile");//id, key_, namesrc, timedo, pathsrc, pathdest, filesize, status_
-		setAttr("resInit", list);
-		System.out.println("list============"+list.toString());
+		setAttr("list", list);
 		renderWithPath(pthv+"dwnloadfile.html");
 	}
 	
+	// 查询
+		@Clear
+		public void search() {
+
+			// 获得参数
+			String strvalue = getPara("v");
+			if (null == strvalue || strvalue.isEmpty()) {
+				renderText("-1");//错误
+			}
+			try {
+				MdlClientCheckout mdlClient = JsonUtils.deserialize(strvalue, MdlClientCheckout.class);
+				if (null == mdlClient) {
+	renderText("-1");//错误
+					return;
+				}
+				
+				// 遍历树结构，拼接SQL语句
+				String sqlString = "select * from tg2datastore.t6_dwnloadfile "
+						+ "where timedo > '" + mdlClient.getTimebegdb() + "' and timedo < '" + mdlClient.getTimeenddb() 
+						+ "' and timerecive > '" + mdlClient.timebegreceive + "' and timerecive < '" + mdlClient.timeendreceive 
+						+ "' and timecollectstart > '" + mdlClient.timebegcollect +"' and timecollectend < '" +mdlClient.timeendcollect + "'";
+				
+				// 数据库查询
+				List<T6_dwnloadfile> list = T6_dwnloadfile.dao.find(sqlString);//取数据库的前100条记录
+				log.debug("=========================="+list);
+				
+				// 返回结果
+				setAttr("list", list);
+				renderWithPath(pthv+"dwnloadfile.html");
+				
+				
+				log.debug(JsonUtils.serialize(mdlClient));
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				renderText("-1");//错误
+				return;
+			}
+
+			
+			
+
+			// renderJson(null);
+		}
+
+		@Clear
+		public void download() {
+
+			return;
+		}
+
+		// 全部下载本地
+		@Clear
+		public void downloadAll() {
+
+			// renderJson(null);
+		}
+
 	@Clear
 	public void add(){
 		String pathsrc="D://MWI//";
-		String namesrc="TT_TT02_MWI_VNI_IMG_20161102000000_20161102000000_20161102000000_000_0C.csv";
+		String namesrc="TT_TT02_MWI_VNI_IMG_20161031000000_20161021000000_20161030000000_000_0C.csv";
 		String[] namesStrings = namesrc.split("_");
 		String pathdest="E://MWI//";
 //		String timedo=getPara("datatype");
