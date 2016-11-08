@@ -24,8 +24,16 @@ function onClick(event, treeId, treeNode) {
 function onCheck(event, treeId, treeNode){
 	//console.log($.fn.zTree.getZTreeObj(treeId).getCheckedNodes(true));
 	//console.log(treeNodes);
+	alert(getPathText(treeNode))
 }
-
+function getPathText(node){//关键代码，通过treeNode遍历父亲节点，根节点再次调用getParentNode得到null终止循环
+    var s=node.name;
+    while(node=node.getParentNode()){
+    		s=node.name+'/'+s;
+    }
+    	
+    return s;
+ }
 var dataNodeMdl={
 		id:"",
 		pid:"",

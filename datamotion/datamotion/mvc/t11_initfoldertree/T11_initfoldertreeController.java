@@ -44,7 +44,6 @@ public class T11_initfoldertreeController extends BaseController {
 
 	public static final String pthc = "/jf/datamotion/t11_initfoldertree/";
 	public static final String pthv = "/datamotion/t11_initfoldertree/";
-	public static final String pthvf = "/datamotion/f/";
 
 	/**
 	 * 列表
@@ -53,16 +52,6 @@ public class T11_initfoldertreeController extends BaseController {
 	public void index() {
 		paging(ConstantInitMy.db_dataSource_main, splitPage, BaseModel.sqlId_splitPage_select, T11_initfoldertree.sqlId_splitPage_from);
 		renderWithPath(pthv+"list.html");
-	}
-	
-	@Clear
-	public void visual() {
-		// paging(ConstantInitMy.db_dataSource_main, splitPage,
-		// BaseModel.sqlId_splitPage_select,
-		// T8_archivefile.sqlId_splitPage_from);
-		//renderWithPath(pthv+"list.html");
-
-		renderWithPath(pthvf + "visualization.html");
 	}
 	
 	@Clear
@@ -80,7 +69,7 @@ public class T11_initfoldertreeController extends BaseController {
 		String key_=getPara("key_");
 		String parentkeys=getPara("parentkeys");
 		String namechi=getPara("namechi");
-		String level=getPara("level");
+		String level=key_.split("_")[0];
 		if (key_ != null && (key_.length() > 0)) {
 			/*存储节点的基本信息*/
 			Record t11_initfoldertree=new Record()
@@ -113,9 +102,7 @@ public class T11_initfoldertreeController extends BaseController {
 		
 		/*更新当前节点的中文名称*/
 		Db.use(ConstantInitMy.db_dataSource_main)
-			.update("update t11_initfoldertree set namechi=?,timeupdate='"
-		+new Timestamp(System.currentTimeMillis())+
-		"' where key_=?",newName,key_);
+			.update("update t11_initfoldertree set namechi=?,timeupdate='"+new Timestamp(System.currentTimeMillis())+"' where key_=?",newName,key_);
 	}
 	
 	@Clear

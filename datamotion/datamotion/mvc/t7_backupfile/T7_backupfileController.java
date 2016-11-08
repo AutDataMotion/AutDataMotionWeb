@@ -1,11 +1,17 @@
 package datamotion.mvc.t7_backupfile;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.platform.constant.ConstantRender;
 import com.platform.mvc.base.BaseController;
+
+import csuduc.platform.util.JsonUtils;
+import datamotion.mvc.mdlcomm.MdlClientCheckout;
+import datamotion.mvc.t9_checkoutfiles.T9_checkoutfiles;
 
 
 /**
@@ -53,8 +59,13 @@ public class T7_backupfileController extends BaseController {
 		//other set 
 		
 		//t7_backupfile.save();		//guiid
+		
 		t7_backupfile.saveGenIntId();	//serial int id
 		renderWithPath(pthv+"add.html");
+		
+//		T7_backupfile t7_backupfile1 = new T7_backupfile();
+//		t7_backupfile1.setKey_("");
+//		t7_backupfile1.saveGenIntId();
 	}
 	
 	/**
@@ -98,6 +109,9 @@ public class T7_backupfileController extends BaseController {
 	@Clear
 	public void backup()
 	{
+		List<T7_backupfile> list = T7_backupfile.dao.find(
+				"select * from t7_backupfile order by id desc limit ?", 100);
+		setAttr("list", list);
 		renderWithPath(pthv+"backupfile.html");
 		
 	}
@@ -111,5 +125,55 @@ public class T7_backupfileController extends BaseController {
 		setAttr(ConstantRender.PATH_CTL_NAME, pthc);
 		setAttr(ConstantRender.PATH_VIEW_NAME, pthv);
 	}
-	
+	@Clear
+	public void addData2Database()
+	{
+		
+	}
+	// 查询
+	@Clear
+	public void doQuery() {
+		
+		// 获得参数
+		String info = getPara("info");
+		if (null == info || info.isEmpty()) {
+			renderText("-1");//错误
+		}
+		//log.debug(strvalue);
+		try {
+			MdlClientCheckout mdlClient = JsonUtils.deserialize(info, MdlClientCheckout.class);
+			if (null == mdlClient) {
+renderText("-1");//错误
+				return;
+			}
+			log.debug(JsonUtils.serialize(mdlClient));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			renderText("-1");//错误
+			return;
+		}
+
+		
+		//遍历树结构，拼接SQL语句
+		
+		//数据库查询
+		
+		//返回结果
+		
+		// renderJson(null);
+	}
+	//全部本地下载
+	@Clear
+	public void doAllLocalDownload() {
+		
+		
+	}
+	//全部重新备份
+	@Clear
+	public void doAllNewBackup() {
+		
+		
+	}
+
 }
