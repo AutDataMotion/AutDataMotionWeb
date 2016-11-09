@@ -130,27 +130,7 @@ function onClick(event, treeId, treeNode) {
         );
         return false;
     });
-    
-    
-    //$("#aircraft").val('');
-	//$("#sensor").val('');
-//	$("#datatype").val('');
-//	$("#camera").val('');
-//	$("#datalevel").val('');
-//	$("#isdwnload").val('');
-//	$("#pathftp").val('');
-//	$("#pathdwnload").val('');
-//	$("#isbackup").val('');
-//    $("#pathbackup").val('');
-//    $("#isarchive").val('');
-//	$("#patharchive").val('');
-//	$("#ischeckout").val('');
-//	$("#pathcheckout").val('');
-//	$("#namemdlsrc").val('');
-//	$("#namemdldes").val('');
-//	$("#ishavaaux").val('');
-//	$("#auxfiletypes").val('');
-	if(treeNode!=null&&treeNode.isParent==false){
+	//if(treeNode!=null&&treeNode.isParent==false){
 		key_=treeNode.id;
     	$.ajax({
     		url:'../t12_initmodule/getModelInfo',
@@ -162,11 +142,11 @@ function onClick(event, treeId, treeNode) {
     			pathftp,pathdwnload,isbackup,pathbackup,isarchive,patharchive,
     			ischeckout,pathcheckout,namemdlsrc,namemdldes,ishavaaux,auxfiletypes;
     			if(data.length==0){
-    				aircraft='天宫一号';
-    				sensor='高度计';
-    				datatype='IMG';
-    				camera='VNI';
-    				datalevel='0B';
+    				aircraft='全部';
+    				sensor='全部';
+    				datatype='全部';
+    				camera='全部';
+    				datalevel='全部';
     				isdwnload=true;
         			pathftp='';
         			pathdwnload='';
@@ -201,16 +181,16 @@ function onClick(event, treeId, treeNode) {
         			ishavaaux=data[0]['ishavaaux'];
         			auxfiletypes=data[0]['auxfiletypes'];
     			}
-    			$("button[data-id='aircraft']>div:first").text(aircraft);
-    			$("button[data-id='sensor']>div:first").text(sensor);
-    			$("button[data-id='datatype']>div:first").text(datatype);
-    			$("button[data-id='camera']>div:first").text(camera);
-    			$("button[data-id='datalevel']>div:first").text(datalevel);
-    			$("button[data-id='isdwnload']>div:first").text(isdwnload==true?'是':'否');
-    			$("button[data-id='isbackup']>div:first").text(isbackup==true?'是':'否');
-    			$("button[data-id='isarchive']>div:first").text(isarchive==true?'是':'否');
-    			$("button[data-id='ischeckout']>div:first").text(ischeckout==true?'是':'否');
-    			$("button[data-id='ishavaaux']>div:first").text(ishavaaux==true?'是':'否');
+//    			$("#info01").val(aircraft);
+//    			$("#info02").val(sensor);
+//    			$("#info03").val(datatype);
+//    			$("#info04").val(camera);
+//    			$("#info05").val(datalevel);
+    			$("#isdwnload").val(isdwnload+"");
+    			$("#isbackup").val(isbackup+"");
+    			$("#isarchive").val(isarchive+"");
+    			$("#ischeckout").val(ischeckout+"");
+    			$("#ishavaaux").val(ishavaaux+"");
 				$("#pathftp").val(pathftp);
 				$("#pathdwnload").val(pathdwnload);
 			    $("#pathbackup").val(pathbackup);
@@ -224,7 +204,7 @@ function onClick(event, treeId, treeNode) {
     			console.log("error");
     		}
     	});
-    };	
+    //};	
 }
         
 function beforeCheck(event, treeId, treeNode){
@@ -282,11 +262,12 @@ $(document).ready(function () {
 //系统配置的保存按钮
 $("#modelSave").click(function(){
 	//文件信息
-	var aircraft=$("#aircraft").val();
-	var sensor=$("#sensor").val();
-	var datatype=$("#datatype").val();
-	var camera=$("#camera").val();
-	var datalevel=$("#datalevel").val();
+	var aircraft=$("#info01").val();
+	var sensor=$("#info02").val();
+	var datatype=$("#info03").val();
+	var datalevel=$("#info04").val();
+	var camera=$("#info05").val();
+	console.log(aircraft);
 	//下载配置
 	var isdwnload=$("#isdwnload").val();
 	var pathftp=$("#pathftp").val();
@@ -304,12 +285,11 @@ $("#modelSave").click(function(){
 	var namemdldes=$("#namemdldes").val();
 	var ishavaaux=$("#ishavaaux").val();
 	var auxfiletypes=$("#auxfiletypes").val();
-	console.log(key_+" "+ishavaaux);
 	$.ajax({
 		url:'../t12_initmodule/saveModelInfo',
 		asyn:false,
 		method:'post',  
-		dataType:'json', 
+//		dataType:'json', 
 		data:{
 			fkeystreenode:key_,
 			aircraft:aircraft,sensor:sensor,datatype:datatype,
@@ -353,8 +333,12 @@ $("#modelSave").click(function(){
 		success:function(data){
 			alert(data);
 		},
-		error:function(){
+		error:function(XMLHttpRequest, textStatus, errorThrown){
 			console.log("error");
+			console.log(XMLHttpRequest);
+			console.log(textStatus);
+			console.log(errorThrown);
+			
 		}
 	});
 });

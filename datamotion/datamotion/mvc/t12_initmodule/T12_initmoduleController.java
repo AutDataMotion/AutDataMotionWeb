@@ -74,8 +74,9 @@ public class T12_initmoduleController extends BaseController {
 				.find("select * from t12_initmodule where fkeystreenode=?",fkeystreenode);
 		
 		if(res.size()==0||res.isEmpty()){
+			String key_=UUIDGener.getUUIDShort();
 			Record t12_initmodule=new Record()
-			.set("key_", UUIDGener.getUUIDShort())
+			.set("key_",key_)
 			.set("fkeystreenode", fkeystreenode)
 			.set("aircraft", aircraft)
 			.set("sensor", sensor)
@@ -98,6 +99,8 @@ public class T12_initmoduleController extends BaseController {
 			.set("timeadd", new Timestamp(System.currentTimeMillis()));
 			Db.use(ConstantInitMy.db_dataSource_main)
 			  .save("t12_initmodule", t12_initmodule);
+			Db.use(ConstantInitMy.db_dataSource_main)
+			.update("update t11_initfoldertree set fkeyinitmodule=? where key_=?",key_, fkeystreenode);
 		}else {
 			String key_=res.get(0).get("key_");
 			Db.use(ConstantInitMy.db_dataSource_main)
@@ -113,6 +116,8 @@ public class T12_initmoduleController extends BaseController {
 			",auxfiletypes='"+auxfiletypes+
 			"',timeupdate='"+new Timestamp(System.currentTimeMillis())+
 			"' where key_=?",key_);
+			Db.use(ConstantInitMy.db_dataSource_main)
+			.update("update t11_initfoldertree set fkeyinitmodule=? where key_=?",key_, fkeystreenode);
 		}
 		renderText("operate succeed");
 	}

@@ -10,6 +10,8 @@ package datamotion.mvc.mdlcomm;
 import java.io.Serializable;
 import java.util.List;
 
+import datamotion.mvc.t12_initmodule.T12_initmodule;
+
 /**  
  * 创建时间：2016年11月6日 下午3:20:29  
  * 项目名称：AutDataMotion   
@@ -39,7 +41,11 @@ public class MdlClientTreeChecked implements Serializable {
 	public boolean isCompress;
 	public List<MdlClientTreeChecked> children;
 	public transient MdlClientTreeChecked parent;
-
+	public transient String key_;
+	public transient String nameEng;
+	public transient String fkeyModule;
+	public transient T12_initmodule property;
+	
 	public MdlClientTreeChecked() {
 	}
 
