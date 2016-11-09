@@ -81,10 +81,10 @@ renderText("-1");//错误
 
 		// 遍历树结构，拼接SQL语句
 		String strSQL = mdlClient.getSQLStr("t9_checkoutfiles");
-		log.debug(strSQL);
+		
 		// 数据库查询
 		List<T9_checkoutfiles> res = T9_checkoutfiles.dao.find(strSQL);
-		
+		log.debug(strSQL);
 		// 返回结果
 		if (null == res || res.size() <= 0) {
 			renderText("-1");

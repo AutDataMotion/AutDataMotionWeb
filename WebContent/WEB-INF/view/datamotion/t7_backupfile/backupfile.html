@@ -56,6 +56,10 @@ width:35%;
 height:100%;
 float: left;
 }
+
+.dataTables_length select{
+	    background-color: rgba(255,255,255,0.15);
+}
 </style>
 <link href="${cxt!}/ui/jedate/skin/jedate.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${cxt!}/ui/DataTables/datatables.min.css"/>
@@ -72,7 +76,7 @@ float: left;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_receiveStartTime_backup" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_receiveTimeBeg" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 		<div class="column_label">
@@ -82,7 +86,7 @@ float: left;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_receiveEndTime_backup" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_receiveTimeEnd" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 	</div>
@@ -94,7 +98,7 @@ float: left;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_collectStartTime_backup" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_collectStartTime" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 		<div class="column_label">
@@ -104,7 +108,7 @@ float: left;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_collectEndTime_backup" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_collectEndTime" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 	</div>
@@ -116,7 +120,7 @@ float: left;
 			</div>
 			<div class="column_input">
 				<div class="time">
-			       <input class="datainp" id="dateinfo_backupStartTime" type="text" placeholder="请选择" readonly="">
+			       <input class="datainp" id="dateinfo_DBstartTime" type="text" placeholder="请选择" readonly="">
 			    </div>
 			</div>
 			
@@ -127,7 +131,7 @@ float: left;
 			</div>
 			<div class="column_input">
 				<div class="time">
-			       <input class="datainp" id="dateinfo_backupEndTime" type="text" placeholder="请选择" readonly="">
+			       <input class="datainp" id="dateinfo_DBEndTime" type="text" placeholder="请选择" readonly="">
 			    </div>
 			</div>
 	</div>
@@ -140,7 +144,7 @@ float: left;
 			</div>
 			<div class="column_input">
 				<div class="col-md-4_backupfile form-group_backupfile">
-			       <select  class="select" id="backupstatus">
+			       <select  class="select" id="status">
 			       	  <option value="4">全部</option>
 			       	  <option value="0">未备份</option>
 			          <option value="1">已备份</option>
@@ -187,7 +191,7 @@ float: left;
 <script src="${cxt!}/ui/datamotion/js/backup.js"></script>
 	<script>
 	jeDate({
-		dateCell:"#dateinfo_receiveStartTime_backup",
+		dateCell:"#dateinfo_receiveTimeBeg",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -195,7 +199,7 @@ float: left;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_receiveEndTime_backup",
+		dateCell:"#dateinfo_receiveTimeEnd",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -203,7 +207,7 @@ float: left;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_collectStartTime_backup",
+		dateCell:"#dateinfo_collectStartTime",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -211,7 +215,7 @@ float: left;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_collectEndTime_backup",
+		dateCell:"#dateinfo_collectEndTime",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -219,7 +223,7 @@ float: left;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_backupStartTime",
+		dateCell:"#dateinfo_DBstartTime",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -227,28 +231,13 @@ float: left;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_backupEndTime",
+		dateCell:"#dateinfo_DBEndTime",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
 		minDate:"2014-09-19 00:00:00",
 		okfun:function(val){alert(val)}
 	})
-	
-	var dataSet = [
-<% 
-var cnt = 0;
-for(node in list){ 
-	cnt ++;
-	if(nodeLP.last){%>
-	[ "${cnt}","${node.pathsrc!}", "${node.namesrc!}", "${node.pathdest!}", "${node.timedo!}","${node.filesize!}","TS","${node.aircraft!}","ZW","dat","${node.datalevel!}","SCI","2015-12-12 08:20:59","2015-12-12 08:20:59","2015-12-12 08:20:59",1,"2015-12-12 08:20:59",""]
-	
-	<%}
-	else {%>
-	[ "${cnt}","${node.pathsrc!}", "${node.namesrc!}", "${node.pathdest!}", "${node.timedo!}","${node.filesize!}","TS","${node.aircraft!}","ZW","dat","${node.datalevel!}","SCI","2015-12-12 08:20:59","2015-12-12 08:20:59","2015-12-12 08:20:59",1,"2015-12-12 08:20:59",""],
-	<%}
-}%>			
-	];
 	
 	/*
 	var dataSet = [
@@ -260,8 +249,19 @@ for(node in list){
          var myTable;
            $(document).ready(function() {
         	   myTable=$('#myTable').DataTable( {
-                   data: dataSet,
-                   ajax: '',
+                   //data: dataSet,
+                   //ajax: '',
+                "processing": true,
+        			"serverSide": true,
+        			"bFilter" : false, //过滤功能
+        			"bSort" : false,// 排序  
+                 /* "bDestroy" : true,
+            		"bProcessing" : true,
+	            "sAjaxSource" : encodeURI(encodeURI(cxt
+						+ "/jf/datamotion/t7_backupfile/getDataFromDatabase")),
+	            "bServerSide" : true, 
+	            "fnServerData": retrieveData,*/
+	            "ajax":retrieveDataAjax,
                    columns: [
                        { title: "id" },
                        { title: "源文件路径" },
@@ -278,7 +278,7 @@ for(node in list){
                        { title: "下传时间" },
                        { title: "拍摄开始时间" },
                        { title: "拍摄结束时间" },
-                       { title: "状态" },
+                       { title: "状态"},
                        { title: "添加时间" },
                        { title: "操作" },
                    ],
@@ -286,7 +286,31 @@ for(node in list){
                        "url": "${cxt!}/ui/DataTables/Chinese.json"
                    },
                    "scrollX": true,
-                   "columnDefs": [ {
+                   "columnDefs": 
+                	   [ {
+	                	    "targets": -3,
+	                	    "data": null,
+	                	    "render": function ( data, type, full, meta ) {
+	                	    	
+	                	    	  if(data[15]=="0")
+	                	    	  {
+	                	    	  	return "未备份";
+	                	    	  }
+	                	      else if(data[15]=="1")
+	                	    	  {
+	                	    	  	return "已备份";
+	                	    	  }
+	                	      else if(data[15]=="2")
+	                	    	  {
+	                	    	  	return "备份失败";
+	                	    	  }
+	                	      else{
+	                	    	  	return "已删除";
+	                	      }
+	                	      
+	                	    	}
+                	  	} ,
+                    {
                        "targets": -1,
                        "data": null,
                        "defaultContent": "<input id='doLocalDownload' name='doLocalDownload_btn' type='button' value='本地下载' class='btn m-r-5' />"
@@ -312,8 +336,83 @@ for(node in list){
          	    } );
         	   
            } );
-            
-          
+           function retrieveDataAjax(data, callback,settings)
+            {
+        	   		//console.log(data);
+        	   	var draw = data["draw"];
+        	   	
+        	   	var start = data["start"];
+        	   	var length = data["length"];
+        	   	
+        	   	//alert(draw+","+start+","+length);
+        	   	 $.ajax( {    
+         	        "type": "get",     
+         	        "contentType": "application/json",    
+         	        "url": encodeURI(encodeURI(cxt
+ 							+ "/jf/datamotion/t7_backupfile/getDataFromDatabase")),     
+         	        "dataType": "json",    
+         	        "data": {"draw":draw,"start":start,"length":length}, // 以json格式传递  
+         	        "success": function(res) {    
+         	            //fnCallback(resp.aaData); 
+         	            /* alert(resp);
+         	        		console.log(resp); */
+         	        	//封装返回数据，这里仅演示了修改属性名
+         	        		//console.log(res);
+                        var returnData = {};
+                        returnData.draw = res.draw;//这里直接自行返回了draw计数器,应该由后台返回
+                        returnData.recordsTotal = res.recordsTotal;
+                        returnData.recordsFiltered = res.recordsFiltered;//后台不实现过滤功能，每次查询均视作全部结果
+                        returnData.data = res.data;
+                        
+                        //关闭遮罩
+                        //$wrapper.spinModal(false);
+                        //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
+                        //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
+                        callback(returnData);
+         	        }    
+         	    });    
+            }
+           function retrieveData( sSource, aoData, fnCallback ) {    
+        	    // 将客户名称加入参数数组  
+        	   //aoData.push( { "name": "customerName", "value": "asdas" } );//添加自己的额外参数  
+        	     //alert(aoData[0].name);  
+        	     //alert(JSON.stringify(aoData));
+        	     var sEcho="";
+        	     var iDisplayStart="";
+        	     var iDisplayLength="";
+        	     for(var i=0;i<aoData.length;i++)
+        	    	 {
+        	    	 	if(aoData[i].name=="sEcho")
+      	    	 	{
+        	    	 		sEcho=aoData[i].value;
+      	    	 	}
+        	    	 	if(aoData[i].name=="iDisplayStart")
+         	    	{
+        	    	 		iDisplayStart=aoData[i].value;
+         	    	}
+        	    	 	if(aoData[i].name=="iDisplayLength")
+             	{
+        	    	 		iDisplayLength=aoData[i].value;
+             	}
+        	    	 	if(sEcho!=""&&iDisplayStart!=""&&iDisplayLength!="")
+        	    	 	{
+        	    	 		break;
+        	    	 	}
+        	    	 }
+        	    $.ajax( {    
+        	        "type": "get",     
+        	        "contentType": "application/json",    
+        	        "url": encodeURI(encodeURI(cxt
+							+ "/jf/datamotion/t7_backupfile/getDataFromDatabase")),     
+        	        "dataType": "json",    
+        	        "data": {"sEcho":sEcho,"iDisplayStart":iDisplayStart,"iDisplayLength":iDisplayLength}, // 以json格式传递  
+        	        "success": function(resp) {    
+        	            //fnCallback(resp.aaData); 
+        	            alert(resp);
+        	        		console.log(resp);
+        	        }    
+        	    });    
+        	}    
 	</script>
 <% }; %>
 <% include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>

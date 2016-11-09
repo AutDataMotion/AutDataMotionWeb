@@ -1,8 +1,11 @@
 package datamotion.mvc.t7_backupfile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
@@ -107,11 +110,90 @@ public class T7_backupfileController extends BaseController {
 		redirect(pthc);
 	}
 	@Clear
+	public void getDataFromDatabase()
+	{
+		/*
+		// 获得参数
+		String sEcho=getPara("sEcho");
+		String iDisplayStart=getPara("iDisplayStart");
+		String iDisplayLength=getPara("iDisplayLength");
+		//JSONArray jsonarray=new JSONArray(jsondata);
+		
+		log.debug(sEcho+","+iDisplayStart+","+iDisplayLength);
+		List<T7_backupfile> list = T7_backupfile.dao.find(
+				"select * from t7_backupfile order by id desc");
+		List<T7_backupfile> sublist = list.subList(Integer.parseInt(iDisplayStart), Integer.parseInt(iDisplayStart)+Integer.parseInt(iDisplayLength));
+		int count = list.size();
+		log.debug(sublist);
+		JSONObject jsonObject2 = new JSONObject();
+		jsonObject2.put("sEcho", sEcho);
+		jsonObject2.put("iTotalRecords", count);
+		jsonObject2.put("iTotalDisplayRecords", count);
+		jsonObject2.put("aaData", sublist.toString());
+		//String json = "{\"sEcho\":"+sEcho+",\"iTotalRecords\":"+count+",\"iTotalDisplayRecords\":"+count+",\"aaData\":"+sublist+"}";  
+		*/
+		// 获得参数
+		String draw=getPara("draw");
+		String start=getPara("start");
+		String length=getPara("length");
+		
+		List<T7_backupfile> list = T7_backupfile.dao.find(
+				"select * from t7_backupfile order by id desc");
+		int toindex = Integer.parseInt(start)+Integer.parseInt(length);
+		List<T7_backupfile> sublist=null;
+		if(toindex<=list.size())
+		{
+			sublist = list.subList(Integer.parseInt(start), Integer.parseInt(start)+Integer.parseInt(length));
+		}
+		else{
+			sublist = list.subList(Integer.parseInt(start), list.size());
+		}
+		
+		int count = list.size();
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("draw", draw);
+		jsonObject.put("recordsTotal", count);
+		jsonObject.put("recordsFiltered", count);
+		
+		ArrayList<ArrayList> data = new ArrayList<ArrayList>();
+		for(int i=0;i<sublist.size();i++)
+		{
+			ArrayList<String> subdata = new ArrayList<String>();
+			subdata.add(sublist.get(i).get("id").toString());
+			subdata.add(sublist.get(i).get("pathsrc").toString());
+			subdata.add(sublist.get(i).get("namesrc").toString());
+			subdata.add(sublist.get(i).get("pathdest").toString());
+			subdata.add(sublist.get(i).get("timedo").toString());
+			subdata.add(sublist.get(i).get("filesize").toString());
+			subdata.add(sublist.get(i).get("station").toString());
+			subdata.add(sublist.get(i).get("aircraft").toString());
+			subdata.add(sublist.get(i).get("sensor").toString());
+			subdata.add(sublist.get(i).get("datatype").toString());
+			subdata.add(sublist.get(i).get("datalevel").toString());
+			subdata.add("");
+			subdata.add("");
+			subdata.add("");
+			subdata.add("");
+			subdata.add(sublist.get(i).get("status_").toString());
+			subdata.add("");
+			subdata.add("");
+			//subdata.add(sublist.get(0).get("labelids").toString());
+			data.add(subdata);
+		}
+		jsonObject.put("data", data);
+		log.debug(jsonObject);
+		renderJson(jsonObject.toString());
+	}
+	@Clear
 	public void backup()
 	{
-		List<T7_backupfile> list = T7_backupfile.dao.find(
-				"select * from t7_backupfile order by id desc limit ?", 100);
-		setAttr("list", list);
+		// 获得参数
+//		String jsondata = getPara("aoData");
+//				
+//		List<T7_backupfile> list = T7_backupfile.dao.find(
+//				"select * from t7_backupfile order by id desc limit ?", 100);
+//		setAttr("list", list);
+		
 		renderWithPath(pthv+"backupfile.html");
 		
 	}
