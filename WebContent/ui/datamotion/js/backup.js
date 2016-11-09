@@ -42,53 +42,59 @@ var testData=[
 		
 ];
 
+//var dataSet1 = [
+//	               [0,"c://path","name","c://path","2015-12-12 08:20:59",100,"TS","TG-2","ZW","dat","L1","SCI","2015-12-12 08:20:59","2015-12-12 08:20:59","2015-12-12 08:20:59",1,"2015-12-12 08:20:59",""],
+//	               [1,"c://path","name","c://path","2015-12-12 08:20:59",100,"TS","TG-2","ZW","dat","L1","SCI","2015-12-12 08:20:59","2015-12-12 08:20:59","2015-12-12 08:20:59",1,"2015-12-12 08:20:59",""]
+//	               
+//	               ];
+//	var table = $('#myTable').DataTable();
+//	table.clear().draw();
+//	table.rows.add(dataSet1).draw();
+	
 $('#doQuery_btn_backup')
 .click(
 		function() {
-			alert("oooo");
+			//alert("oooo");
 			console.log("search click");
-			
-			var dataSet1 = [
-			               [0,"c://path","name","c://path","2015-12-12 08:20:59",100,"TS","TG-2","ZW","dat","L1","SCI","2015-12-12 08:20:59","2015-12-12 08:20:59","2015-12-12 08:20:59",1,"2015-12-12 08:20:59",""],
-			               [1,"c://path","name","c://path","2015-12-12 08:20:59",100,"TS","TG-2","ZW","dat","L1","SCI","2015-12-12 08:20:59","2015-12-12 08:20:59","2015-12-12 08:20:59",1,"2015-12-12 08:20:59",""]
-			               
-			               ];
-			var table = $('#myTable').DataTable();
-			table.clear().draw();
-			table.rows.add(dataSet1).draw();
-			/*
+			if(!getCheckedTreeNodes()){
+				
+				return false;
+			}
 			// 获取查询参数
 			var datasrch = {
-					treecheckeds : [],
-					timebegcollect : '',
-					timeendcollect : '',
-					timebegreceive : '',
-					timeendreceive : '',
-					timebegdb : '',
-					timeenddb : '',
-					status : 0
+				treecheckeds : {},
+				timebegcollect : '',
+				timeendcollect : '',
+				timebegreceive : '',
+				timeendreceive : '',
+				timebegdb : '',
+				timeenddb : '',
+				status : 0
 			};
-			getCheckedTreeNodesArr();
-			datasrch.timebegcollect = $('#dateinfo_collectStartTime_backup')
+
+			datasrch.timebegcollect = $('#dateinfo_collectStartTime')
 					.val();
-			datasrch.timeendcollect = $('#dateinfo_collectEndTime_backup')
+			datasrch.timeendcollect = $('#dateinfo_collectEndTime')
 					.val();
-			datasrch.timebegreceive = $('#dateinfo_receiveStartTime_backup')
+			datasrch.timebegreceive = $('#dateinfo_receiveTimeBeg')
 					.val();
-			datasrch.timeendreceive = $('#dateinfo_receiveEndTime_backup')
+			datasrch.timeendreceive = $('#dateinfo_receiveTimeEnd')
 					.val();
 
-			datasrch.timebegdb = $('#dateinfo_backupStartTime').val();
-			datasrch.timeenddb = $('#dateinfo_backupEndTime').val();
-			datasrch.status = $('#backupstatus').val();
-			datasrch.treecheckeds = dataCheckedTreeNodes;
-			console.log(datasrch);
+			datasrch.timebegdb = $('#dateinfo_DBstartTime').val();
+			datasrch.timeenddb = $('#dateinfo_DBEndTime').val();
+			datasrch.status = $('#status').val();
+			datasrch.treecheckeds = dataRoot;
+			// console.log(datasrch);
 			// 发送查询请求
-			$.ajax({
+			$
+					.ajax({
 						type : "post",
 						url : encodeURI(encodeURI(cxt
-								+ "/jf/datamotion/t7_backupfile/doQuery")),
-						data : {info:JSON.stringify(datasrch)},
+								+ "/jf/datamotion/t9_checkoutfiles/search")),
+						data : {
+							v : JSON.stringify(datasrch)
+						},
 						dataType : 'json',
 						contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 						crossDomain : false,
@@ -96,20 +102,19 @@ $('#doQuery_btn_backup')
 						async : false,
 						cache : false,
 						success : function(response) {
-							// if (response.length > 1 && response !=
-							// '1') {
-							// for ( var ind in response) {
-							// g_BackData = response[ind];
-							// g_StepData[g_BackData.number] =
-							// g_BackData;
-							// parseJsonData(firstLoadHtml);
-							// }
-							// }
-							//遍历 json 更新 dataTable
-							
+							console.log(response);
+							 if (response.length >= 3) {
+//								 for ( var ind in response) {
+//									 g_BackData = response[ind];
+//									 g_StepData[g_BackData.number] =
+//										 g_BackData;
+//									 parseJsonData(firstLoadHtml);
+//								 }
+							 }
+							 //遍历 json 更新 dataTable
+
 						}
 					});
-			*/
 		});
 /*
 $('#doQuery_btn_backup')

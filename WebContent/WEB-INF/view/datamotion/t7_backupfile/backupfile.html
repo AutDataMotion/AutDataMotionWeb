@@ -76,7 +76,7 @@ float: left;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_receiveStartTime_backup" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_receiveTimeBeg" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 		<div class="column_label">
@@ -86,7 +86,7 @@ float: left;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_receiveEndTime_backup" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_receiveTimeEnd" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 	</div>
@@ -98,7 +98,7 @@ float: left;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_collectStartTime_backup" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_collectStartTime" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 		<div class="column_label">
@@ -108,7 +108,7 @@ float: left;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_collectEndTime_backup" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_collectEndTime" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 	</div>
@@ -120,7 +120,7 @@ float: left;
 			</div>
 			<div class="column_input">
 				<div class="time">
-			       <input class="datainp" id="dateinfo_backupStartTime" type="text" placeholder="请选择" readonly="">
+			       <input class="datainp" id="dateinfo_DBstartTime" type="text" placeholder="请选择" readonly="">
 			    </div>
 			</div>
 			
@@ -131,7 +131,7 @@ float: left;
 			</div>
 			<div class="column_input">
 				<div class="time">
-			       <input class="datainp" id="dateinfo_backupEndTime" type="text" placeholder="请选择" readonly="">
+			       <input class="datainp" id="dateinfo_DBEndTime" type="text" placeholder="请选择" readonly="">
 			    </div>
 			</div>
 	</div>
@@ -144,7 +144,7 @@ float: left;
 			</div>
 			<div class="column_input">
 				<div class="col-md-4_backupfile form-group_backupfile">
-			       <select  class="select" id="backupstatus">
+			       <select  class="select" id="status">
 			       	  <option value="4">全部</option>
 			       	  <option value="0">未备份</option>
 			          <option value="1">已备份</option>
@@ -191,7 +191,7 @@ float: left;
 <script src="${cxt!}/ui/datamotion/js/backup.js"></script>
 	<script>
 	jeDate({
-		dateCell:"#dateinfo_receiveStartTime_backup",
+		dateCell:"#dateinfo_receiveTimeBeg",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -199,7 +199,7 @@ float: left;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_receiveEndTime_backup",
+		dateCell:"#dateinfo_receiveTimeEnd",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -207,7 +207,7 @@ float: left;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_collectStartTime_backup",
+		dateCell:"#dateinfo_collectStartTime",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -215,7 +215,7 @@ float: left;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_collectEndTime_backup",
+		dateCell:"#dateinfo_collectEndTime",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -223,7 +223,7 @@ float: left;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_backupStartTime",
+		dateCell:"#dateinfo_DBstartTime",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -231,7 +231,7 @@ float: left;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_backupEndTime",
+		dateCell:"#dateinfo_DBEndTime",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -278,7 +278,7 @@ float: left;
                        { title: "下传时间" },
                        { title: "拍摄开始时间" },
                        { title: "拍摄结束时间" },
-                       { title: "状态" },
+                       { title: "状态"},
                        { title: "添加时间" },
                        { title: "操作" },
                    ],
@@ -286,7 +286,31 @@ float: left;
                        "url": "${cxt!}/ui/DataTables/Chinese.json"
                    },
                    "scrollX": true,
-                   "columnDefs": [ {
+                   "columnDefs": 
+                	   [ {
+	                	    "targets": -3,
+	                	    "data": null,
+	                	    "render": function ( data, type, full, meta ) {
+	                	    	
+	                	    	  if(data[15]=="0")
+	                	    	  {
+	                	    	  	return "未备份";
+	                	    	  }
+	                	      else if(data[15]=="1")
+	                	    	  {
+	                	    	  	return "已备份";
+	                	    	  }
+	                	      else if(data[15]=="2")
+	                	    	  {
+	                	    	  	return "备份失败";
+	                	    	  }
+	                	      else{
+	                	    	  	return "已删除";
+	                	      }
+	                	      
+	                	    	}
+                	  	} ,
+                    {
                        "targets": -1,
                        "data": null,
                        "defaultContent": "<input id='doLocalDownload' name='doLocalDownload_btn' type='button' value='本地下载' class='btn m-r-5' />"
@@ -333,7 +357,7 @@ float: left;
          	            /* alert(resp);
          	        		console.log(resp); */
          	        	//封装返回数据，这里仅演示了修改属性名
-         	        		console.log(res);
+         	        		//console.log(res);
                         var returnData = {};
                         returnData.draw = res.draw;//这里直接自行返回了draw计数器,应该由后台返回
                         returnData.recordsTotal = res.recordsTotal;
