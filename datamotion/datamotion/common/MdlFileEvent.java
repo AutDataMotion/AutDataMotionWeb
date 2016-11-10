@@ -14,8 +14,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.jetty.util.log.Log;
 import org.hamcrest.core.Is;
 
+import sun.util.logging.resources.logging;
 import csuduc.platform.util.StringUtil;
 
 /**  
@@ -51,6 +53,7 @@ public class MdlFileEvent implements Serializable {
 	public enum NAMETOKE {
 		PLAT, AIRCRAFT, SENSOR, CAMERA, TYPE, DATE1, DATE2, DATE3, NUM, LEVEL
 	};
+	//NUM圈数
 
 	public Integer id;
 	public String key_;
@@ -112,20 +115,20 @@ public class MdlFileEvent implements Serializable {
 			return false;
 		}
 		//根据文件名格式进行属性赋值
-		DateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss"); 
+		//枚举类型：PLAT, AIRCRAFT, SENSOR, CAMERA, TYPE, DATE1, DATE2, DATE3, NUM, LEVEL
 		this.station = nameTokens.get(NAMETOKE.PLAT.ordinal());
 		this.aircraft = nameTokens.get(NAMETOKE.AIRCRAFT.ordinal());
 		this.sensor = nameTokens.get(NAMETOKE.SENSOR.ordinal());
-		this.datatype = nameTokens.get(NAMETOKE.TYPE.ordinal());
-		this.datalevel = nameTokens.get(NAMETOKE.LEVEL.ordinal()-1);
 		this.camera = nameTokens.get(NAMETOKE.CAMERA.ordinal());
-//		String format = "";
-//		StringUtil.strToDate(nameTokens.get(NAMETOKE.DATE1.ordinal(), dateFormat), format);
-//		Date date = new Date();//将字符串转为时间格式
-//		String str = sdf.format(date);//时间存储为字符串
-//		this.timerecive = Timestamp.valueOf(str);
-//		this.timecollectstart = Timestamp.valueOf(sdf.format(nameTokens.get(NAMETOKE.DATE2.ordinal())));
-//		this.timecollectend = Timestamp.valueOf(sdf.format(nameTokens.get(NAMETOKE.DATE3.ordinal())));
+		this.datatype = nameTokens.get(NAMETOKE.TYPE.ordinal());
+		//拆分级别和后缀名
+		String last = nameTokens.get(NAMETOKE.LEVEL.ordinal());
+		String[] lasts = last.split("\\.");
+		this.datalevel = lasts[0];
+		this.suffix = lasts[1];
+		this.timerecive = StringUtil.strToTimeStamp(nameTokens.get(NAMETOKE.DATE1.ordinal()), dateFormat);
+		this.timecollectstart = StringUtil.strToTimeStamp(nameTokens.get(NAMETOKE.DATE2.ordinal()), dateFormat);
+		this.timecollectend = StringUtil.strToTimeStamp(nameTokens.get(NAMETOKE.DATE3.ordinal()), dateFormat);
 		return true;
 	}
 }
