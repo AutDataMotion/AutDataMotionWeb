@@ -1,6 +1,7 @@
 package datamotion.mvc.t6_dwnloadfile;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.platform.constant.ConstantRender;
@@ -10,6 +11,7 @@ import com.platform.mvc.base.BaseModel;
 import oracle.net.aso.s;
 
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
@@ -22,6 +24,8 @@ import datamotion.common.MdlFileEvent;
 import datamotion.constant.ConstantInitMy;
 import datamotion.ftpdownload.TaskCallBackDownload;
 import datamotion.mvc.mdlcomm.MdlClientCheckout;
+import datamotion.mvc.mdlcomm.MdlClientDownLoad;
+import datamotion.mvc.t7_backupfile.T7_backupfile;
 
 
 /**
@@ -65,21 +69,69 @@ public class T6_dwnloadfileController extends BaseController {
 	}
 	
 	//测试后台代码TaskCallBackDownload/update
-		@Clear
-		public void testUpdate(){
-			MdlFileEvent mdlFileEvent = new MdlFileEvent();
-//			mdlFileEvent.namesrc = "TS_TG02_QKDS_PRD1_ENG_20161027170746_20161027170746_20161028165342_000_0C.csv";
-//			mdlFileEvent.pathsrc = "//testData";
-//			mdlFileEvent.pathdest = "D:\\test";
-//			mdlFileEvent.timedo = new Timestamp(System.currentTimeMillis());
-//			mdlFileEvent.filesize = (long) 3333;
-			mdlFileEvent.status_ = 1;//未下载
-			mdlFileEvent.id = 1;
-//			mdlFileEvent.initProperties();
-			TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
-			taskCallBackDownload.dbUpdateFileInfo(mdlFileEvent);
-			renderWithPath(pthc+"dwnloadfile.html");
+	@Clear
+	public void testUpdate(){
+		MdlFileEvent mdlFileEvent = new MdlFileEvent();
+//		mdlFileEvent.namesrc = "TS_TG02_QKDS_PRD1_ENG_20161027170746_20161027170746_20161028165342_000_0C.csv";
+//		mdlFileEvent.pathsrc = "//testData";
+//		mdlFileEvent.pathdest = "D:\\test";
+//		mdlFileEvent.timedo = new Timestamp(System.currentTimeMillis());
+//		mdlFileEvent.filesize = (long) 3333;
+		mdlFileEvent.status_ = 1;//未下载
+		mdlFileEvent.id = 1;
+//		mdlFileEvent.initProperties();
+		TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
+		taskCallBackDownload.dbUpdateFileInfo(mdlFileEvent);
+		renderWithPath(pthc+"dwnloadfile.html");
+	}	
+	
+	@Clear
+	public String getPagedata(List<T6_dwnloadfile> list)
+	{
+		JSONObject jsonObject = new JSONObject();
+		ArrayList<ArrayList> data = new ArrayList<ArrayList>();
+		for(int i=0;i<list.size();i++)
+		{
+			ArrayList<String> subdata = new ArrayList<String>();
+			subdata.add(list.get(i).get("id").toString());
+			subdata.add(list.get(i).get("pathsrc").toString());
+			subdata.add(list.get(i).get("namesrc").toString());
+			subdata.add(list.get(i).get("pathdest").toString());
+			subdata.add(list.get(i).get("timedo").toString());
+			subdata.add(list.get(i).get("filesize").toString());
+			subdata.add(list.get(i).get("station").toString());
+			subdata.add(list.get(i).get("aircraft").toString());
+			subdata.add(list.get(i).get("sensor").toString());
+			subdata.add(list.get(i).get("datatype").toString());
+			subdata.add(list.get(i).get("datalevel").toString());
+			subdata.add("");
+			subdata.add("");
+			subdata.add("");
+			subdata.add("");
+			subdata.add(list.get(i).get("status_").toString());
+			subdata.add("");
+			subdata.add("buttons");
+			//subdata.add(sublist.get(0).get("labelids").toString());
+			data.add(subdata);
 		}
+		jsonObject.put("data", data);
+		
+		return jsonObject.toString();
+	}
+	@Clear
+	public void getDataFromDatabase()
+	{
+		
+		// 获得参数
+//		String draw=getPara("draw");
+//		String start=getPara("start");
+//		String length=getPara("length");
+		
+		List<T6_dwnloadfile> list = T6_dwnloadfile.dao.find(
+				"select * from T6_dwnloadfile order by id desc");
+		String Jsondata = getPagedata(list);
+		renderJson(Jsondata);
+	}	
 	/**
 	 * 列表
 	 */
@@ -96,63 +148,58 @@ public class T6_dwnloadfileController extends BaseController {
 	}
 	
 	// 查询
-		@Clear
-		public void search() {
-
-			// 获得参数
-			String strvalue = getPara("v");
-			if (null == strvalue || strvalue.isEmpty()) {
-				renderText("-1");//错误
-			}
-			try {
-				MdlClientCheckout mdlClient = JsonUtils.deserialize(strvalue, MdlClientCheckout.class);
-				if (null == mdlClient) {
-	renderText("-1");//错误
-					return;
-				}
-				
-				// 遍历树结构，拼接SQL语句
-				String sqlString = "select * from tg2datastore.t6_dwnloadfile "
-						+ "where timedo > '" + mdlClient.getTimebegdb() + "' and timedo < '" + mdlClient.getTimeenddb() 
-						+ "' and timerecive > '" + mdlClient.timebegreceive + "' and timerecive < '" + mdlClient.timeendreceive 
-						+ "' and timecollectstart > '" + mdlClient.timebegcollect +"' and timecollectend < '" +mdlClient.timeendcollect + "'";
-				
-				// 数据库查询
-				List<T6_dwnloadfile> list = T6_dwnloadfile.dao.find(sqlString);//取数据库的前100条记录
-				log.debug("=========================="+list);
-				
-				// 返回结果
-				setAttr("list", list);
-				renderWithPath(pthv+"dwnloadfile.html");
-				
-				
-				log.debug(JsonUtils.serialize(mdlClient));
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-				renderText("-1");//错误
+	@Clear
+	public void search() {
+		System.out.println("running here!");
+		// 获得参数
+		String strvalue = getPara("v");
+		if (null == strvalue || strvalue.isEmpty()) {
+			renderText("-1");//错误
+		}
+		try {
+			MdlClientDownLoad mdlClient = JsonUtils.deserialize(strvalue, MdlClientDownLoad.class);
+			if (null == mdlClient) {
+renderText("-1");//错误
 				return;
 			}
-
 			
+			// 遍历树结构，拼接SQL语句
+			String strSQL = mdlClient.getSQLStr("t6_dwnloadfile");
+
+			// 数据库查询
+			List<T6_dwnloadfile> res = T6_dwnloadfile.dao.find(strSQL);//取数据库的前100条记录
+			log.debug("=========================="+res);
 			
-
-			// renderJson(null);
-		}
-
-		@Clear
-		public void download() {
-
+			// 返回结果
+			if (null == res || res.size() <= 0) {
+				renderText("-1");
+				return;
+			}else {
+				String Jsondata = getPagedata(res);
+				renderJson(Jsondata);
+				return ;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			renderText("-1");//错误
 			return;
 		}
+	}	
 
-		// 全部下载本地
-		@Clear
-		public void downloadAll() {
+	@Clear
+	public void download() {
 
-			// renderJson(null);
-		}
+		return;
+	}
 
+	// 全部下载本地
+	@Clear
+	public void downloadAll() {
+
+		// renderJson(null);
+	}
+	
 	@Clear
 	public void add(){
 		String pathsrc="D://MWI//";
@@ -195,12 +242,12 @@ public class T6_dwnloadfileController extends BaseController {
 		Db.use(ConstantInitMy.db_dataSource_main)
 		  .save("t6_dwnloadfile", t6_dwnloadfileRecord);
 	}
+	
 	@Clear
 	public void viewControlPanel() {
 		renderWithPath(pthvf+"controlpanel.html");
 	}
 
-	
 	/**
 	 * 保存
 	 */
