@@ -131,7 +131,8 @@ function getTreeData () {
 		dataType:'json',  
 		success:function(data){
 			for(var i=0;i<data.length;i++){
-				data[i]['open']=true;
+				if(data[i]['level']>2)data[i]['open']=false;
+				else data[i]['open']=true;
 			}
 			$.fn.zTree.init($("#treeDemo"), setting, data);
 		},
