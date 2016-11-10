@@ -112,77 +112,65 @@ public class T7_backupfileController extends BaseController {
 	@Clear
 	public void getDataFromDatabase()
 	{
-		/*
-		// 获得参数
-		String sEcho=getPara("sEcho");
-		String iDisplayStart=getPara("iDisplayStart");
-		String iDisplayLength=getPara("iDisplayLength");
-		//JSONArray jsonarray=new JSONArray(jsondata);
 		
-		log.debug(sEcho+","+iDisplayStart+","+iDisplayLength);
-		List<T7_backupfile> list = T7_backupfile.dao.find(
-				"select * from t7_backupfile order by id desc");
-		List<T7_backupfile> sublist = list.subList(Integer.parseInt(iDisplayStart), Integer.parseInt(iDisplayStart)+Integer.parseInt(iDisplayLength));
-		int count = list.size();
-		log.debug(sublist);
-		JSONObject jsonObject2 = new JSONObject();
-		jsonObject2.put("sEcho", sEcho);
-		jsonObject2.put("iTotalRecords", count);
-		jsonObject2.put("iTotalDisplayRecords", count);
-		jsonObject2.put("aaData", sublist.toString());
-		//String json = "{\"sEcho\":"+sEcho+",\"iTotalRecords\":"+count+",\"iTotalDisplayRecords\":"+count+",\"aaData\":"+sublist+"}";  
-		*/
 		// 获得参数
-		String draw=getPara("draw");
-		String start=getPara("start");
-		String length=getPara("length");
+//		String draw=getPara("draw");
+//		String start=getPara("start");
+//		String length=getPara("length");
 		
 		List<T7_backupfile> list = T7_backupfile.dao.find(
 				"select * from t7_backupfile order by id desc");
-		int toindex = Integer.parseInt(start)+Integer.parseInt(length);
-		List<T7_backupfile> sublist=null;
-		if(toindex<=list.size())
-		{
-			sublist = list.subList(Integer.parseInt(start), Integer.parseInt(start)+Integer.parseInt(length));
-		}
-		else{
-			sublist = list.subList(Integer.parseInt(start), list.size());
-		}
+		String Jsondata = getPagedata(list);
+		renderJson(Jsondata);
+	}
+	@Clear
+	public String getPagedata(List<T7_backupfile> list)
+	{
+//		int toindex = Integer.parseInt(start)+Integer.parseInt(length);
+//		List<T7_backupfile> sublist=null;
+//		if(toindex<=list.size())
+//		{
+//			sublist = list.subList(Integer.parseInt(start), Integer.parseInt(start)+Integer.parseInt(length));
+//		}
+//		else{
+//			sublist = list.subList(Integer.parseInt(start), list.size());
+//		}
 		
-		int count = list.size();
+		//int count = list.size();
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("draw", draw);
-		jsonObject.put("recordsTotal", count);
-		jsonObject.put("recordsFiltered", count);
 		
+//		jsonObject.put("draw", draw);
+//		jsonObject.put("recordsTotal", count);
+//		jsonObject.put("recordsFiltered", count);
+//		
 		ArrayList<ArrayList> data = new ArrayList<ArrayList>();
-		for(int i=0;i<sublist.size();i++)
+		for(int i=0;i<list.size();i++)
 		{
 			ArrayList<String> subdata = new ArrayList<String>();
-			subdata.add(sublist.get(i).get("id").toString());
-			subdata.add(sublist.get(i).get("pathsrc").toString());
-			subdata.add(sublist.get(i).get("namesrc").toString());
-			subdata.add(sublist.get(i).get("pathdest").toString());
-			subdata.add(sublist.get(i).get("timedo").toString());
-			subdata.add(sublist.get(i).get("filesize").toString());
-			subdata.add(sublist.get(i).get("station").toString());
-			subdata.add(sublist.get(i).get("aircraft").toString());
-			subdata.add(sublist.get(i).get("sensor").toString());
-			subdata.add(sublist.get(i).get("datatype").toString());
-			subdata.add(sublist.get(i).get("datalevel").toString());
+			subdata.add(list.get(i).get("id").toString());
+			subdata.add(list.get(i).get("pathsrc").toString());
+			subdata.add(list.get(i).get("namesrc").toString());
+			subdata.add(list.get(i).get("pathdest").toString());
+			subdata.add(list.get(i).get("timedo").toString());
+			subdata.add(list.get(i).get("filesize").toString());
+			subdata.add(list.get(i).get("station").toString());
+			subdata.add(list.get(i).get("aircraft").toString());
+			subdata.add(list.get(i).get("sensor").toString());
+			subdata.add(list.get(i).get("datatype").toString());
+			subdata.add(list.get(i).get("datalevel").toString());
 			subdata.add("");
 			subdata.add("");
 			subdata.add("");
 			subdata.add("");
-			subdata.add(sublist.get(i).get("status_").toString());
+			subdata.add(list.get(i).get("status_").toString());
 			subdata.add("");
-			subdata.add("");
+			subdata.add("buttons");
 			//subdata.add(sublist.get(0).get("labelids").toString());
 			data.add(subdata);
 		}
 		jsonObject.put("data", data);
-		log.debug(jsonObject);
-		renderJson(jsonObject.toString());
+		
+		return jsonObject.toString();
 	}
 	@Clear
 	public void backup()
@@ -217,33 +205,42 @@ public class T7_backupfileController extends BaseController {
 	public void doQuery() {
 		
 		// 获得参数
-		String info = getPara("info");
-		if (null == info || info.isEmpty()) {
-			renderText("-1");//错误
-		}
-		//log.debug(strvalue);
-		try {
-			MdlClientCheckout mdlClient = JsonUtils.deserialize(info, MdlClientCheckout.class);
-			if (null == mdlClient) {
-renderText("-1");//错误
-				return;
-			}
-			log.debug(JsonUtils.serialize(mdlClient));
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			renderText("-1");//错误
-			return;
-		}
+				String strvalue = getPara("v");
+				if (null == strvalue || strvalue.isEmpty()) {
+					renderText("-1");//错误
+				}
+				log.debug(strvalue);
+				MdlClientCheckout mdlClient = null;
+				try {
+					mdlClient = JsonUtils.deserialize(strvalue, MdlClientCheckout.class);
+					if (null == mdlClient) {
+		renderText("-1");//错误
+						return;
+					}
+					log.debug(JsonUtils.serialize(mdlClient));
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+					renderText("-1");//错误
+					return;
+				}
 
-		
-		//遍历树结构，拼接SQL语句
-		
-		//数据库查询
-		
-		//返回结果
-		
-		// renderJson(null);
+				// 遍历树结构，拼接SQL语句
+				String strSQL = mdlClient.getSQLStr("t7_backupfile");
+				
+				// 数据库查询
+				List<T7_backupfile> res = T7_backupfile.dao.find(strSQL);
+				log.debug(strSQL);
+				// 返回结果
+				if (null == res || res.size() <= 0) {
+					renderText("-1");
+					return;
+				}else {
+					String Jsondata = getPagedata(res);
+					 renderJson(Jsondata);
+					 return ;
+				}
 	}
 	//全部本地下载
 	@Clear

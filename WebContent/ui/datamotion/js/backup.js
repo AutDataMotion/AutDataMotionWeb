@@ -55,7 +55,7 @@ $('#doQuery_btn_backup')
 .click(
 		function() {
 			//alert("oooo");
-			console.log("search click");
+			//console.log("search click");
 			if(!getCheckedTreeNodes()){
 				
 				return false;
@@ -91,7 +91,7 @@ $('#doQuery_btn_backup')
 					.ajax({
 						type : "post",
 						url : encodeURI(encodeURI(cxt
-								+ "/jf/datamotion/t9_checkoutfiles/search")),
+								+ "/jf/datamotion/t7_backupfile/doQuery")),
 						data : {
 							v : JSON.stringify(datasrch)
 						},
@@ -102,15 +102,22 @@ $('#doQuery_btn_backup')
 						async : false,
 						cache : false,
 						success : function(response) {
-							console.log(response);
-							 if (response.length >= 3) {
+							//console.log(response);
+							
+							var returnData = response.data;
+							
+							var table = $('#myTable').DataTable();
+							table.clear().draw();
+							table.rows.add(returnData).draw();
+							
+//							 if (response.length >= 3) {
 //								 for ( var ind in response) {
 //									 g_BackData = response[ind];
 //									 g_StepData[g_BackData.number] =
 //										 g_BackData;
 //									 parseJsonData(firstLoadHtml);
 //								 }
-							 }
+//							 }
 							 //遍历 json 更新 dataTable
 
 						}
