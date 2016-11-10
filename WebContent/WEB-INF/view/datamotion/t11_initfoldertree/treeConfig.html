@@ -22,13 +22,14 @@
 			</td>
 	    </tr>
 	    <tr style="padding-top:6px ">
-	        <td><label class="mylabel">产品标识：</label></td>
-	        <td width="30%">
-	        	<input id="info04" name="camera" value="全部" type="text" class="form-control" readonly/>
-			</td>
+	       
 			<td><label class="mylabel">产品等级：</label></td>
 	        <td width="30%">
-	        	<input id="info05" name="datalevel" value="全部" type="text" class="form-control" readonly/>
+	        	<input id="info04" name="datalevel" value="全部" type="text" class="form-control" readonly/>
+			</td>
+			 <td><label class="mylabel">产品标识：</label></td>
+	        <td width="30%">
+	        	<input id="info05" name="camera" value="全部" type="text" class="form-control" readonly/>
 			</td>
 	    </tr>
 	</table>
@@ -38,7 +39,7 @@
 	    <tr>
 	        <td><label class="mylabel">是否下载：</label></td>
 	        <td style="width:30%">
-		        <select id="isdwnload" name="isdwnload" class="select">
+		        <select id="isdwnload" name="isdwnload" class="form-control btn-sm">
 		            <option value="true">是</option>
 		            <option value="false">否</option>
 		        </select>		    
@@ -57,7 +58,7 @@
 	    <tr>
 	        <td><label class="mylabel">是否备份：</label></td>
 	        <td width="30%">
-		        <select id="isbackup" name="isbackup" class="select">
+		        <select id="isbackup" name="isbackup" class="form-control btn-sm">
 		            <option value="true">是</option>
 		            <option value="false">否</option>
 		        </select>
@@ -72,7 +73,7 @@
 	    <tr>
 	        <td><label class="mylabel">是否归档：</label></td>
 	        <td width="30%">
-		        <select id="isarchive" name="isarchive" class="select">
+		        <select id="isarchive" name="isarchive" class="form-control btn-sm">
 		            <option value="true">是</option>
 		            <option value="false">否</option>
 		        </select>
@@ -87,7 +88,7 @@
 	    <tr>
 	        <td><label class="mylabel1">是否检出：</label></td>
 	        <td width="30%">
-		        <select id="ischeckout" name="ischeckout" class="select">
+		        <select id="ischeckout" name="ischeckout" class="form-control btn-sm">
 		            <option value="true">是</option>
 		            <option value="false">否</option>
 		        </select>
@@ -106,7 +107,7 @@
 		<tr>
 	        <td><label class="mylabel1">是否有辅助数据：</label></td>
 	        <td width="200px">
-		        <select id="ishavaaux" name="ishavaaux" class="select">
+		        <select id="ishavaaux" name="ishavaaux" class="form-control btn-sm">
 		            <option value="true">是</option>
 		            <option value="false">否</option>
 		        </select>
@@ -168,7 +169,7 @@
 						id: "${node.key_!}", 
 						pid: "${node.parentkeys!}", 
 						name: "${node.namechi!}", 
-						open: true
+						open: ${node.level!}<=2?true:false
 					}
 				
 				<%}
@@ -177,7 +178,7 @@
 						id: "${node.key_!}", 
 						pid: "${node.parentkeys!}", 
 						name: "${node.namechi!}", 
-						open: true
+						open: ${node.level!}<=2?true:false
 					},
 				<%}
 			}%>			

@@ -10,8 +10,10 @@ import datamotion.mvc.t6_dwnloadfile.T6_dwnloadfileController;
 import datamotion.mvc.t7_backupfile.T7_backupfileController;
 import datamotion.mvc.t8_archivefile.T8_archivefileController;
 import datamotion.mvc.t9_checkoutfiles.T9_checkoutfilesController;
+import datamotion.mvc.t_kvalue.T_kvalueController;
 import datamotion.mvc.t11_initfoldertree.T11_initfoldertreeController;
 import datamotion.mvc.t12_initmodule.T12_initmoduleController;
+
 import com.jfinal.config.Routes;
 /**
  * 创建时间：2016年1月28日 下午2:15:23
@@ -41,5 +43,6 @@ public class RoutePlugins extends Routes {
 		add("/jf/datamotion/t9_checkoutfiles", T9_checkoutfilesController.class);
 		add("/jf/datamotion/t11_initfoldertree", T11_initfoldertreeController.class);
 		add("/jf/datamotion/t12_initmodule", T12_initmoduleController.class);
+		add("/jf/datamotion/t_kvalue", T_kvalueController.class);
 	}
 }

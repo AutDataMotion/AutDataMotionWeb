@@ -1,11 +1,20 @@
 package datamotion.mvc.t7_backupfile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.platform.constant.ConstantRender;
 import com.platform.mvc.base.BaseController;
+
+import csuduc.platform.util.JsonUtils;
+import datamotion.mvc.mdlcomm.MdlClientCheckout;
+import datamotion.mvc.t9_checkoutfiles.T9_checkoutfiles;
 
 
 /**
@@ -53,8 +62,13 @@ public class T7_backupfileController extends BaseController {
 		//other set 
 		
 		//t7_backupfile.save();		//guiid
+		
 		t7_backupfile.saveGenIntId();	//serial int id
 		renderWithPath(pthv+"add.html");
+		
+//		T7_backupfile t7_backupfile1 = new T7_backupfile();
+//		t7_backupfile1.setKey_("");
+//		t7_backupfile1.saveGenIntId();
 	}
 	
 	/**
@@ -96,8 +110,78 @@ public class T7_backupfileController extends BaseController {
 		redirect(pthc);
 	}
 	@Clear
+	public void getDataFromDatabase()
+	{
+		
+		// 获得参数
+//		String draw=getPara("draw");
+//		String start=getPara("start");
+//		String length=getPara("length");
+		
+		List<T7_backupfile> list = T7_backupfile.dao.find(
+				"select * from t7_backupfile order by id desc");
+		String Jsondata = getPagedata(list);
+		renderJson(Jsondata);
+	}
+	@Clear
+	public String getPagedata(List<T7_backupfile> list)
+	{
+//		int toindex = Integer.parseInt(start)+Integer.parseInt(length);
+//		List<T7_backupfile> sublist=null;
+//		if(toindex<=list.size())
+//		{
+//			sublist = list.subList(Integer.parseInt(start), Integer.parseInt(start)+Integer.parseInt(length));
+//		}
+//		else{
+//			sublist = list.subList(Integer.parseInt(start), list.size());
+//		}
+		
+		//int count = list.size();
+		JSONObject jsonObject = new JSONObject();
+		
+//		jsonObject.put("draw", draw);
+//		jsonObject.put("recordsTotal", count);
+//		jsonObject.put("recordsFiltered", count);
+//		
+		ArrayList<ArrayList> data = new ArrayList<ArrayList>();
+		for(int i=0;i<list.size();i++)
+		{
+			ArrayList<String> subdata = new ArrayList<String>();
+			subdata.add(list.get(i).get("id").toString());
+			subdata.add(list.get(i).get("pathsrc").toString());
+			subdata.add(list.get(i).get("namesrc").toString());
+			subdata.add(list.get(i).get("pathdest").toString());
+			subdata.add(list.get(i).get("timedo").toString());
+			subdata.add(list.get(i).get("filesize").toString());
+			subdata.add(list.get(i).get("station").toString());
+			subdata.add(list.get(i).get("aircraft").toString());
+			subdata.add(list.get(i).get("sensor").toString());
+			subdata.add(list.get(i).get("datatype").toString());
+			subdata.add(list.get(i).get("datalevel").toString());
+			subdata.add("");
+			subdata.add("");
+			subdata.add("");
+			subdata.add("");
+			subdata.add(list.get(i).get("status_").toString());
+			subdata.add("");
+			subdata.add("buttons");
+			//subdata.add(sublist.get(0).get("labelids").toString());
+			data.add(subdata);
+		}
+		jsonObject.put("data", data);
+		
+		return jsonObject.toString();
+	}
+	@Clear
 	public void backup()
 	{
+		// 获得参数
+//		String jsondata = getPara("aoData");
+//				
+//		List<T7_backupfile> list = T7_backupfile.dao.find(
+//				"select * from t7_backupfile order by id desc limit ?", 100);
+//		setAttr("list", list);
+		
 		renderWithPath(pthv+"backupfile.html");
 		
 	}
@@ -111,5 +195,64 @@ public class T7_backupfileController extends BaseController {
 		setAttr(ConstantRender.PATH_CTL_NAME, pthc);
 		setAttr(ConstantRender.PATH_VIEW_NAME, pthv);
 	}
-	
+	@Clear
+	public void addData2Database()
+	{
+		
+	}
+	// 查询
+	@Clear
+	public void doQuery() {
+		
+		// 获得参数
+				String strvalue = getPara("v");
+				if (null == strvalue || strvalue.isEmpty()) {
+					renderText("-1");//错误
+				}
+				log.debug(strvalue);
+				MdlClientCheckout mdlClient = null;
+				try {
+					mdlClient = JsonUtils.deserialize(strvalue, MdlClientCheckout.class);
+					if (null == mdlClient) {
+		renderText("-1");//错误
+						return;
+					}
+					log.debug(JsonUtils.serialize(mdlClient));
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+					renderText("-1");//错误
+					return;
+				}
+
+				// 遍历树结构，拼接SQL语句
+				String strSQL = mdlClient.getSQLStr("t7_backupfile");
+				
+				// 数据库查询
+				List<T7_backupfile> res = T7_backupfile.dao.find(strSQL);
+				log.debug(strSQL);
+				// 返回结果
+				if (null == res || res.size() <= 0) {
+					renderText("-1");
+					return;
+				}else {
+					String Jsondata = getPagedata(res);
+					 renderJson(Jsondata);
+					 return ;
+				}
+	}
+	//全部本地下载
+	@Clear
+	public void doAllLocalDownload() {
+		
+		
+	}
+	//全部重新备份
+	@Clear
+	public void doAllNewBackup() {
+		
+		
+	}
+
 }

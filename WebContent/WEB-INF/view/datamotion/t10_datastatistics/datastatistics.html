@@ -47,12 +47,12 @@
 	height:50px;
 }
 .column_label{
-width:11.1%;
+width:15%;
 height:100%;
 float: left;
 }
 .column_input{
-width:22.2%;
+width:35%;
 height:100%;
 float: left;
 }
@@ -71,7 +71,7 @@ height:300px;
 
 <% var contSec={ %>
 <div class="myPanel_datastatistics">
-	<div class="row_datastatistics">
+	<!--div class="row_datastatistics">
 		<div class="column_label">
 			<div class="col-md-1_datastatistics mylabel_datastatistics">
 	        <label>飞行器：</label>
@@ -164,19 +164,31 @@ height:300px;
 			        </select>
 			    </div>
 			</div>
-	</div>
+	</div-->
 	<div class="row_datastatistics">
 		<div class="column_label">
 			<div class="col-md-1_datastatistics mylabel_datastatistics">
-		        <label>接受时间：</label>
+		        <label>接受开始时间：</label>
 		    </div>
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_receiveTime_datastatistics" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_receiveStartTime_datastatistics" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 		
+		<div class="column_label">
+			<div class="col-md-1_datastatistics mylabel_datastatistics">
+		        <label>接受结束时间：</label>
+		    </div>
+		</div>
+		<div class="column_input">
+			<div class="time">
+		       <input class="datainp" id="dateinfo_receiveEndTime_datastatistics" type="text" placeholder="请选择" readonly="">
+		    </div>
+		</div>
+	</div>
+	<div class="row_datastatistics">
 		<div class="column_label">
 			<div class="col-md-1_datastatistics mylabel_datastatistics">
 		        <label>采集开始时间：</label>
@@ -220,7 +232,8 @@ height:300px;
 			       <input class="datainp" id="dateinfo_intoDatabaseEndTime_datastatistics" type="text" placeholder="请选择" readonly="">
 			    </div>
 			</div>
-			
+	</div>
+	<div class="row_datastatistics">
 			<div class="column_label">
 				<div class="col-md-1_datastatistics mylabel_datastatistics">
 			        <label>统计类别：</label>
@@ -228,11 +241,11 @@ height:300px;
 			</div>
 			<div class="column_input">
 				<div class="col-md-4_datastatistics form-group_datastatistics">
-			       <select multiple class="select" id="datastatisticsKind">
-			       	  <option value="option1">下载</option>
-			          <option value="option2">备份</option>
-			          <option value="option1">归档</option>
-			          <option value="option2">检出</option>
+			       <select  class="select" id="datastatisticsKind">
+			       	  <option value="0">下载</option>
+			          <option value="1">备份</option>
+			          <option value="2">归档</option>
+			          <option value="3">检出</option>
 			       </select>
 			    </div>
 			</div>
@@ -508,8 +521,16 @@ height:300px;
 	myChart2.setOption(option2);
 	
 	jeDate({
-		dateCell:"#dateinfo_receiveTime_datastatistics",
-		format:"YYYY年MM月DD日 hh:mm:ss",
+		dateCell:"#dateinfo_receiveStartTime_datastatistics",
+		format:"YYYY-MM-DD hh:mm:ss",
+		isinitVal:true,
+		isTime:true, //isClear:false,
+		minDate:"2014-09-19 00:00:00",
+		okfun:function(val){alert(val)}
+	})
+	jeDate({
+		dateCell:"#dateinfo_receiveEndTime_datastatistics",
+		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
 		minDate:"2014-09-19 00:00:00",
@@ -517,7 +538,7 @@ height:300px;
 	})
 	jeDate({
 		dateCell:"#dateinfo_collectStartTime_datastatistics",
-		format:"YYYY年MM月DD日 hh:mm:ss",
+		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
 		minDate:"2014-09-19 00:00:00",
@@ -525,7 +546,7 @@ height:300px;
 	})
 	jeDate({
 		dateCell:"#dateinfo_collectEndTime_datastatistics",
-		format:"YYYY年MM月DD日 hh:mm:ss",
+		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
 		minDate:"2014-09-19 00:00:00",
@@ -533,7 +554,7 @@ height:300px;
 	})
 	jeDate({
 		dateCell:"#dateinfo_intoDatabaseStartTime_datastatistics",
-		format:"YYYY年MM月DD日 hh:mm:ss",
+		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
 		minDate:"2014-09-19 00:00:00",
@@ -541,7 +562,7 @@ height:300px;
 	})
 	jeDate({
 		dateCell:"#dateinfo_intoDatabaseEndTime_datastatistics",
-		format:"YYYY年MM月DD日 hh:mm:ss",
+		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
 		minDate:"2014-09-19 00:00:00",
