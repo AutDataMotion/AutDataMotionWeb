@@ -144,7 +144,7 @@ public class T11_initfoldertreeController extends BaseController {
 	/*get tree node*/
 	public void getTreeNode(){
 		List<Record> res = Db.use(ConstantInitMy.db_dataSource_main)
-			.find("select key_ as id,parentkeys as pid,namechi as name from t11_initfoldertree");
+			.find("select key_ as id,parentkeys as pid,namechi as name,level from t11_initfoldertree");
 		renderJson(res);
 	}
 	@Clear
