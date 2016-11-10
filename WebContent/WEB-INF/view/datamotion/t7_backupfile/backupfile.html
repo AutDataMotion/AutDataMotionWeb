@@ -251,10 +251,11 @@ float: left;
         	   myTable=$('#myTable').DataTable( {
                    //data: dataSet,
                    //ajax: '',
-                "processing": true,
+                 //"lengthMenu": [[1, -1], [1, "All"]],
+                /* "processing": true,
         			"serverSide": true,
         			"bFilter" : false, //过滤功能
-        			"bSort" : false,// 排序  
+        			"bSort" : false,// 排序   */
                  /* "bDestroy" : true,
             		"bProcessing" : true,
 	            "sAjaxSource" : encodeURI(encodeURI(cxt
@@ -287,7 +288,8 @@ float: left;
                    },
                    "scrollX": true,
                    "columnDefs": 
-                	   [ {
+                	   [ 
+                	     {
 	                	    "targets": -3,
 	                	    "data": null,
 	                	    "render": function ( data, type, full, meta ) {
@@ -313,11 +315,35 @@ float: left;
                     {
                        "targets": -1,
                        "data": null,
-                       "defaultContent": "<input id='doLocalDownload' name='doLocalDownload_btn' type='button' value='本地下载' class='btn m-r-5' />"
+                       "render": function ( data, type, full, meta ) {
+                    	   	//console.log(data);
+	             	    	  if(data[15]=="0")//未备份
+	             	    	  {
+	             	    	  	return "<input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新备份' class='btn m-r-5'/>"
+	                            +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
+	             	    	  }
+	             	      else if(data[15]=="1")//"已备份"
+	             	    	  {
+	             	    	  	return "<input id='doLocalDownload' name='doLocalDownload_btn' type='button' value='本地下载' class='btn m-r-5' />"
+	                            +"<input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新备份' class='btn m-r-5'/>"
+	                            +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
+	             	    	  }
+	             	      else if(data[15]=="2")//"备份失败"
+	             	    	  {
+	             	    	  	return "<input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新备份' class='btn m-r-5'/>"
+	                            +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
+	             	    	  }
+	             	      else{//"已删除"
+	             	    	  	return "";
+	             	      }
+	             	      
+	             	    	}
+                      /*  "defaultContent": "<input id='doLocalDownload' name='doLocalDownload_btn' type='button' value='本地下载' class='btn m-r-5' />"
                        +"<input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新备份' class='btn m-r-5'/>"
                        +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>"
-                      
-                   } ]
+                       */
+                   } 
+                	  	]
                } );
         	   
         	   $('#myTable tbody').on( 'click', '#doLocalDownload', function () {
@@ -338,12 +364,14 @@ float: left;
            } );
            function retrieveDataAjax(data, callback,settings)
             {
-        	   		//console.log(data);
+        	   
+        	   	//
+        	  	/* console.log(data);
         	   	var draw = data["draw"];
         	   	
         	   	var start = data["start"];
         	   	var length = data["length"];
-        	   	
+        	   	 */
         	   	//alert(draw+","+start+","+length);
         	   	 $.ajax( {    
          	        "type": "get",     
@@ -351,7 +379,7 @@ float: left;
          	        "url": encodeURI(encodeURI(cxt
  							+ "/jf/datamotion/t7_backupfile/getDataFromDatabase")),     
          	        "dataType": "json",    
-         	        "data": {"draw":draw,"start":start,"length":length}, // 以json格式传递  
+         	        //"data": {"draw":draw,"start":start,"length":length}, // 以json格式传递  
          	        "success": function(res) {    
          	            //fnCallback(resp.aaData); 
          	            /* alert(resp);
@@ -359,9 +387,9 @@ float: left;
          	        	//封装返回数据，这里仅演示了修改属性名
          	        		//console.log(res);
                         var returnData = {};
-                        returnData.draw = res.draw;//这里直接自行返回了draw计数器,应该由后台返回
+                        /* returnData.draw = res.draw;//这里直接自行返回了draw计数器,应该由后台返回
                         returnData.recordsTotal = res.recordsTotal;
-                        returnData.recordsFiltered = res.recordsFiltered;//后台不实现过滤功能，每次查询均视作全部结果
+                        returnData.recordsFiltered = res.recordsFiltered;/ *///后台不实现过滤功能，每次查询均视作全部结果
                         returnData.data = res.data;
                         
                         //关闭遮罩
@@ -372,47 +400,7 @@ float: left;
          	        }    
          	    });    
             }
-           function retrieveData( sSource, aoData, fnCallback ) {    
-        	    // 将客户名称加入参数数组  
-        	   //aoData.push( { "name": "customerName", "value": "asdas" } );//添加自己的额外参数  
-        	     //alert(aoData[0].name);  
-        	     //alert(JSON.stringify(aoData));
-        	     var sEcho="";
-        	     var iDisplayStart="";
-        	     var iDisplayLength="";
-        	     for(var i=0;i<aoData.length;i++)
-        	    	 {
-        	    	 	if(aoData[i].name=="sEcho")
-      	    	 	{
-        	    	 		sEcho=aoData[i].value;
-      	    	 	}
-        	    	 	if(aoData[i].name=="iDisplayStart")
-         	    	{
-        	    	 		iDisplayStart=aoData[i].value;
-         	    	}
-        	    	 	if(aoData[i].name=="iDisplayLength")
-             	{
-        	    	 		iDisplayLength=aoData[i].value;
-             	}
-        	    	 	if(sEcho!=""&&iDisplayStart!=""&&iDisplayLength!="")
-        	    	 	{
-        	    	 		break;
-        	    	 	}
-        	    	 }
-        	    $.ajax( {    
-        	        "type": "get",     
-        	        "contentType": "application/json",    
-        	        "url": encodeURI(encodeURI(cxt
-							+ "/jf/datamotion/t7_backupfile/getDataFromDatabase")),     
-        	        "dataType": "json",    
-        	        "data": {"sEcho":sEcho,"iDisplayStart":iDisplayStart,"iDisplayLength":iDisplayLength}, // 以json格式传递  
-        	        "success": function(resp) {    
-        	            //fnCallback(resp.aaData); 
-        	            alert(resp);
-        	        		console.log(resp);
-        	        }    
-        	    });    
-        	}    
+             
 	</script>
 <% }; %>
 <% include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
