@@ -104,12 +104,13 @@ public abstract class GenerateBase {
 //		{null, "t_initparameter", null, "T_initparameter","参数设置"},
 //		{null, "t_log_proc", null, "T_log_proc","处理日志"},
 		
-		{null, "t6_dwnloadfile", null, "T6_dwnloadfile","下载文件"},
-		{null, "t7_backupfile", null, "T7_backupfile","备份文件"},
-		{null, "t8_archivefile", null, "T8_archivefile","归档文件"},
-		{null, "t9_checkoutfiles", null, "T9_checkoutfiles","检出文件"},
-		{null, "t11_initfoldertree", null, "T11_initfoldertree","产品树配置"},
-		{null, "t12_initmodule", null, "T12_initmodule","模块配置"}
+//		{null, "t6_dwnloadfile", null, "T6_dwnloadfile","下载文件"},
+//		{null, "t7_backupfile", null, "T7_backupfile","备份文件"},
+//		{null, "t8_archivefile", null, "T8_archivefile","归档文件"},
+//		{null, "t9_checkoutfiles", null, "T9_checkoutfiles","检出文件"},
+//		{null, "t11_initfoldertree", null, "T11_initfoldertree","产品树配置"},
+//		{null, "t12_initmodule", null, "T12_initmodule","模块配置"},
+		{null, "t_kvalue", null, "T_kvalue","键值配置"}
 		
 	};
 	

@@ -24,6 +24,6 @@ public class T12_initmoduleService extends BaseService {
 
 	public List<T12_initmodule> getList() {
 
-		return T12_initmodule.dao.find("select * from t12_initmodule ");
+		return T12_initmodule.dao.find("select * from t12_initmodule order by id asc limit 1000");
 	}
 }

@@ -23,6 +23,6 @@ public class T11_initfoldertreeService extends BaseService {
 	}
 	public List<T11_initfoldertree> getList() {
 
-		return T11_initfoldertree.dao.find("select * from t11_initfoldertree order by id asc");
+		return T11_initfoldertree.dao.find("select * from t11_initfoldertree order by id asc limit 1000");
 	}
 }

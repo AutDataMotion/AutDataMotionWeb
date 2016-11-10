@@ -8,12 +8,15 @@
 package datamotion.config;
 
 import org.apache.log4j.Logger;
+
 import datamotion.mvc.t6_dwnloadfile.T6_dwnloadfile;
 import datamotion.mvc.t7_backupfile.T7_backupfile;
 import datamotion.mvc.t8_archivefile.T8_archivefile;
 import datamotion.mvc.t9_checkoutfiles.T9_checkoutfiles;
+import datamotion.mvc.t_kvalue.T_kvalue;
 import datamotion.mvc.t11_initfoldertree.T11_initfoldertree;
 import datamotion.mvc.t12_initmodule.T12_initmodule;
+
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 /**
  * 创建时间：2016年3月12日 上午10:11:42
@@ -45,6 +48,7 @@ public class MappingTable {
 		arp.addMapping("t9_checkoutfiles", "id", T9_checkoutfiles.class);
 		arp.addMapping("t11_initfoldertree", "id", T11_initfoldertree.class);
 		arp.addMapping("t12_initmodule", "id", T12_initmodule.class);
+		arp.addMapping("t_kvalue", "id", T_kvalue.class);
 		log.info("datamotion MappingTable 表手工注册-----end");
 		
 	}
