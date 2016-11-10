@@ -9,10 +9,15 @@ package datamotion.common;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import org.eclipse.jetty.util.log.Log;
 import org.hamcrest.core.Is;
 
+import sun.util.logging.resources.logging;
 import csuduc.platform.util.StringUtil;
 
 /**  
@@ -48,6 +53,7 @@ public class MdlFileEvent implements Serializable {
 	public enum NAMETOKE {
 		PLAT, AIRCRAFT, SENSOR, CAMERA, TYPE, DATE1, DATE2, DATE3, NUM, LEVEL
 	};
+	//NUM圈数
 
 	public Integer id;
 	public String key_;
@@ -103,13 +109,26 @@ public class MdlFileEvent implements Serializable {
 		if (nameTokens != null) {
 			return true;
 		}
-		nameTokens = StringUtil.split(namedest, split); 
+		nameTokens = StringUtil.split(namesrc, split); 
 		if (nameTokens == null || nameTokens.size()==0) {
 			nameTokens = null;
 			return false;
 		}
 		//根据文件名格式进行属性赋值
-		
+		//枚举类型：PLAT, AIRCRAFT, SENSOR, CAMERA, TYPE, DATE1, DATE2, DATE3, NUM, LEVEL
+		this.station = nameTokens.get(NAMETOKE.PLAT.ordinal());
+		this.aircraft = nameTokens.get(NAMETOKE.AIRCRAFT.ordinal());
+		this.sensor = nameTokens.get(NAMETOKE.SENSOR.ordinal());
+		this.camera = nameTokens.get(NAMETOKE.CAMERA.ordinal());
+		this.datatype = nameTokens.get(NAMETOKE.TYPE.ordinal());
+		//拆分级别和后缀名
+		String last = nameTokens.get(NAMETOKE.LEVEL.ordinal());
+		String[] lasts = last.split("\\.");
+		this.datalevel = lasts[0];
+		this.suffix = lasts[1];
+		this.timerecive = StringUtil.strToTimeStamp(nameTokens.get(NAMETOKE.DATE1.ordinal()), dateFormat);
+		this.timecollectstart = StringUtil.strToTimeStamp(nameTokens.get(NAMETOKE.DATE2.ordinal()), dateFormat);
+		this.timecollectend = StringUtil.strToTimeStamp(nameTokens.get(NAMETOKE.DATE3.ordinal()), dateFormat);
 		return true;
 	}
 }

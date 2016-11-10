@@ -18,7 +18,9 @@ import com.jfinal.plugin.activerecord.Record;
 
 import csuduc.platform.util.JsonUtils;
 import csuduc.platform.util.generID.UUIDGener;
+import datamotion.common.MdlFileEvent;
 import datamotion.constant.ConstantInitMy;
+import datamotion.ftpdownload.TaskCallBackDownload;
 import datamotion.mvc.mdlcomm.MdlClientCheckout;
 
 
@@ -44,6 +46,40 @@ public class T6_dwnloadfileController extends BaseController {
 	public static final String pthc = "/jf/datamotion/t6_dwnloadfile/";
 	public static final String pthv = "/datamotion/t6_dwnloadfile/";
 	public static final String pthvf = "/datamotion/f/";
+	
+	//测试后台代码TaskCallBackDownload/add
+	@Clear
+	public void testAdd(){
+		MdlFileEvent mdlFileEvent = new MdlFileEvent();
+		mdlFileEvent.namesrc = "TS_TG02_QKDS_PRD1_ENG_20161027170746_20161027170746_20161028165342_000_0C.csv";
+		mdlFileEvent.pathsrc = "//testData";
+		mdlFileEvent.pathdest = "D:\\test";
+		mdlFileEvent.timedo = new Timestamp(System.currentTimeMillis());
+		mdlFileEvent.filesize = (long) 3333;
+		mdlFileEvent.status_ = 0;//未下载
+
+		mdlFileEvent.initProperties();
+		TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
+		taskCallBackDownload.dbAddFileInfo(mdlFileEvent);
+		renderWithPath(pthc+"dwnloadfile.html");
+	}
+	
+	//测试后台代码TaskCallBackDownload/update
+		@Clear
+		public void testUpdate(){
+			MdlFileEvent mdlFileEvent = new MdlFileEvent();
+//			mdlFileEvent.namesrc = "TS_TG02_QKDS_PRD1_ENG_20161027170746_20161027170746_20161028165342_000_0C.csv";
+//			mdlFileEvent.pathsrc = "//testData";
+//			mdlFileEvent.pathdest = "D:\\test";
+//			mdlFileEvent.timedo = new Timestamp(System.currentTimeMillis());
+//			mdlFileEvent.filesize = (long) 3333;
+			mdlFileEvent.status_ = 1;//未下载
+			mdlFileEvent.id = 1;
+//			mdlFileEvent.initProperties();
+			TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
+			taskCallBackDownload.dbUpdateFileInfo(mdlFileEvent);
+			renderWithPath(pthc+"dwnloadfile.html");
+		}
 	/**
 	 * 列表
 	 */
