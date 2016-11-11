@@ -7,6 +7,7 @@
  */
 package datamotion.common;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,7 @@ import datamotion.mvc.t12_initmodule.T12_initmodule;
  * @author ZhongwengHao
  * @date 2016年11月10日
  */
-public class MdlTreeProperty {
+public class MdlTreeProperty implements Serializable{
 	// 父节点
 	public MdlTreeProperty parent;
 	// 本身属性
