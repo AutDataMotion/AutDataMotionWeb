@@ -236,10 +236,12 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 			//更新数据库信息
 			String sql = "update t6_dwnloadfile set status_ = " + afile.status_ + " where id = " + afile.id;
 			Db.use(ConstantInitMy.db_dataSource_main).update(sql);
+			System.out.println("数据库更新成功");
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			System.out.println("数据库更新失败");
 			return false;
 		}
 		
