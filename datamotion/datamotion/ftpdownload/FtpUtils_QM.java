@@ -60,6 +60,11 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 public class FtpUtils_QM {
 	private static Logger logger = Logger.getLogger(FtpUtils.class);
 	static int index = 0;//下载文件列表中的第几个元素
+	
+	private String ftpHost = "192.168.199.204";
+	private int ftpPort = 21;
+	private String ftpNameString = "anonymous";
+	private String ftpPasswordString = "anonymous";
 	/**
 	 * 获取FTPClient对象
 	 * 
@@ -134,6 +139,9 @@ public class FtpUtils_QM {
 			String ftpPath, String fileName,String localfilePath, String localfileName) {
 		OutputStream output = null;
 		try {
+			if(ftpClient == null){
+				ftpClient = connectFtp(ftpHost, ftpPort, ftpNameString, ftpPasswordString);
+			}
 			ftpClient.changeWorkingDirectory(ftpPath);
 			FTPFile[] remoteFiles;
 			remoteFiles = ftpClient.listFiles();
