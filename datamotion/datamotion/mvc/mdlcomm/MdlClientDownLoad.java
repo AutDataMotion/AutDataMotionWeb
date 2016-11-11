@@ -16,26 +16,26 @@ import java.util.Map;
 import java.util.Stack;
 
 /**  
- * 创建时间：2016年11月6日 下午3:18:33  
+ * 创建时间：2016年11月10日 下午4:18:33  
  * 项目名称：AutDataMotion   
- * 文件名称：MdlClientCheckout.java  
+ * 文件名称：MdlClientDownLoad.java  
  * 类说明：  
  *
  * Modification History:   
  * Date        Author         Version      Description   
  * ----------------------------------------------------------------- 
- * 2016年11月6日     Zhongweng       1.0         1.0 Version   
+ * 2016年11月6日     Qinman       1.0         1.0 Version   
  */
 /**
  * <p>
- * Title: MdlClientCheckout<／p>
+ * Title: MdlClientDownLoad<／p>
  * <p>
  * Description: <／p>
  * 
- * @author ZhongwengHao
- * @date 2016年11月6日
+ * @author Qinman
+ * @date 2016年11月10日
  */
-public class MdlClientCheckout implements Serializable {
+public class MdlClientDownLoad implements Serializable {
 
 	public MdlClientTreeChecked treecheckeds;
 	public String timebegcollect;
@@ -46,7 +46,7 @@ public class MdlClientCheckout implements Serializable {
 	public String timeenddb;
 	public int status;
 
-	public MdlClientCheckout() {
+	public MdlClientDownLoad() {
 	}
 
 	public void getSQLStrByNode(MdlClientTreeChecked aNode, StringBuilder aSbSQL){
@@ -89,7 +89,10 @@ public class MdlClientCheckout implements Serializable {
 			//最后一个
 			getSQLStrByNode(aNode.children.get(i), aSbSQL);
 
-			aSbSQL.append("))");
+			//其他字段筛选
+			aSbSQL.append(")");
+			getOthersStr(aSbSQL);
+			aSbSQL.append(")");
 			
 		}else{
 			//没有孩子
@@ -98,6 +101,17 @@ public class MdlClientCheckout implements Serializable {
 		
 		return; 
 	}
+	//拼接其他查询条件的字段
+	public void getOthersStr(StringBuilder aSbSQL){
+		if(status != 5)
+			aSbSQL.append(" and status_ = "+ status);
+		aSbSQL.append(" and timecollectstart > '" + timebegcollect + "'");
+		aSbSQL.append(" and timecollectend < '" + timeendcollect + "'");
+		aSbSQL.append(" and timerecive > '" + timebegreceive + "'");
+		aSbSQL.append(" and timerecive < '" + timeendreceive + "'");
+		aSbSQL.append(" and timeadd > '" + timebegdb + "'");
+		aSbSQL.append(" and timeadd < '" + timeenddb + "'");
+	}
 	public String getSQLStr(String aTableName) {
 
 		// 多条件查询，数据库需要建立一些索引
@@ -105,13 +119,15 @@ public class MdlClientCheckout implements Serializable {
 
 		//root 节点特殊处理一下
 		if (this.treecheckeds.children == null || this.treecheckeds.children.size()==0) {
-			sbSQLTree.append("select * from ").append(aTableName).append(" where aircraft='TG02' order by id desc limit 200");
+			sbSQLTree.append("select * from ").append(aTableName).append(" where aircraft='TG02'");
+			getOthersStr(sbSQLTree);
+			sbSQLTree.append(" order by id desc limit 200");
 			return sbSQLTree.toString();
 		}
 //		//从root的第一个节点开始 拼接SQL
 		sbSQLTree.append("select * from ").append(aTableName).append(" where ");
 		getSQLStrByNode(this.treecheckeds.children.get(0), sbSQLTree);
-		
+
 		sbSQLTree.append(" order by id desc limit 200");
 		
 		return sbSQLTree.toString();

@@ -2,6 +2,10 @@ $('#btnsrch')
 		.click(
 				function() {
 					console.log("search click");
+					if(!getCheckedTreeNodes()){
+						
+						return false;
+					}
 					// 获取查询参数
 					var datasrch = {
 						treecheckeds : [],
@@ -13,7 +17,6 @@ $('#btnsrch')
 						timeenddb : '',
 						status : 0
 					};
-					getCheckedTreeNodesArr();
 					datasrch.timebegcollect = $('#dateinfo_collectStartTime')
 							.val();
 					datasrch.timeendcollect = $('#dateinfo_collectEndTime')
@@ -26,7 +29,7 @@ $('#btnsrch')
 					datasrch.timebegdb = $('#dateinfo_DBstartTime').val();
 					datasrch.timeenddb = $('#dateinfo_DBEndTime').val();
 					datasrch.status = $('#status').val();
-					datasrch.treecheckeds = dataCheckedTreeNodes;
+					datasrch.treecheckeds = dataRoot;
 					console.log(datasrch);
 					// 发送查询请求
 					$
@@ -55,6 +58,11 @@ $('#btnsrch')
 									// }
 									// 遍历 json 更新 dataTable
 
+									var returnData = response.data;
+									
+									var table = $('#myTable').DataTable();
+									table.clear().draw();
+									table.rows.add(returnData).draw();
 								}
 							});
 				});
