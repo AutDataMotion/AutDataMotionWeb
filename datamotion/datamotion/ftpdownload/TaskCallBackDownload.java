@@ -47,7 +47,6 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 	
 	private static Logger log = Logger.getLogger(TaskCallBackDownload.class);
 	FtpUtils_QM ftpUtils = new FtpUtils_QM();
-	FTPClient ftpClient = new FTPClient();
 	private String ftpHost = "192.168.199.204";
 	private int ftpPort = 21;
 	private String ftpNameString = "anonymous";
@@ -74,7 +73,7 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 	public boolean doWork(MdlFileEvent amdl) {
 		// TODO Auto-generated method stub
 		try {
-//			FTPClient ftpClient = ftpUtils.connectFtp(ftpHost, ftpPort, ftpNameString, ftpPasswordString);
+			FTPClient ftpClient = ftpUtils.connectFtp(ftpHost, ftpPort, ftpNameString, ftpPasswordString);
 			ftpUtils.downloadFile(ftpClient, amdl.pathsrc, amdl.namesrc, amdl.pathdest, amdl.namesrc);
 			ftpUtils.disconnectFtp(ftpClient);
 			System.out.println(amdl.namesrc + "下载成功");
