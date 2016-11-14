@@ -32,6 +32,9 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.log4j.Logger;
 
+import csuduc.platform.util.networkCom.FTPClientConfigure;
+import csuduc.platform.util.networkCom.FTPClientFactory;
+import csuduc.platform.util.networkCom.FTPClientPool;
 import csuduc.platform.util.networkCom.FtpUtils;
 import static java.nio.file.StandardCopyOption.COPY_ATTRIBUTES;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
@@ -61,6 +64,9 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 public class FtpUtils_QM {
 	private static Logger logger = Logger.getLogger(FtpUtils.class);
 	static int index = 0;//下载文件列表中的第几个元素
+	FTPClientFactory factory;
+	FTPClientPool pool;
+	FTPClient ftpClient;
 	/**
 	 * 获取FTPClient对象
 	 * 
@@ -74,6 +80,11 @@ public class FtpUtils_QM {
 	 *            FTP端口 默认为21
 	 * @return
 	 */
+	
+	public FtpUtils_QM(){
+		
+	}
+	
 	
 	public static FTPClient getFTPClient(String ftpHost, String ftpPassword,
 			String ftpUserName, int ftpPort) {
@@ -125,50 +136,56 @@ public class FtpUtils_QM {
 	/*
 	 * 使用连接池创建ftpClient
 	 */
-	public static FTPClient getFTPClientByPool(String ftpHost, int ftpPort, String ftpNameString,
+	public void getFTPClientByPool(String ftpHost, int ftpPort, String ftpNameString,
 			String ftpPasswordString) {
-		FTPClientConfigure config = new FTPClientConfigure(); 
-		FTPClient ftpClient = null;
-        config.setHost(ftpHost);  
-        config.setPort(ftpPort);
-        config.setUsername(ftpNameString);  
-        config.setPassword(ftpPasswordString);  
-        config.setEncoding("utf-8");  
-        config.setPassiveMode("false");  
-        config.setClientTimeout(30 * 1000);  
-          
-        FTPClientFactory factory = new FTPClientFactory(config);  
-        FTPClientPool pool;
 		try {
-			pool = new FTPClientPool(factory);
-			ftpClient = pool.borrowObject();  
+			FTPClientConfigure config = new FTPClientConfigure(); 
+	        config.setHost(ftpHost);  
+	        config.setPort(ftpPort);
+	        config.setUsername(ftpNameString);  
+	        config.setPassword(ftpPasswordString);  
+	        config.setEncoding("utf-8");  
+	        config.setPassiveMode("false");  
+	        config.setClientTimeout(30 * 1000);  
+	        this.factory = new FTPClientFactory(config); 
+			this.pool = new FTPClientPool(factory);
+			this.ftpClient = pool.borrowObject();  
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
-        return ftpClient;
 	}
+	
 	/*
 	 * 使用连接池连接ftpClient
 	 */
-	public FTPClient connectFtpByPool(String ftpHost, int ftpPort, String ftpNameString, String ftpPasswordString){
-		FTPClient ftpClient = null;
+	public void connectFtpByPool(String ftpHost, int ftpPort, String ftpNameString, String ftpPasswordString){
 		try {
-			ftpClient = getFTPClientByPool(ftpHost, ftpPort, ftpNameString, ftpPasswordString);
-			if (null == ftpClient) {
+			getFTPClientByPool(ftpHost, ftpPort, ftpNameString, ftpPasswordString);
+			if (null == this.ftpClient) {
 				System.out.println("登录失败！！！");
-				return null;
 			}
-			ftpClient.setControlEncoding("UTF-8"); // 中文支持
-			ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
-			ftpClient.enterLocalPassiveMode();
-			ftpClient.setBufferSize(1024*8);
-			return ftpClient;
+			this.ftpClient.setControlEncoding("UTF-8"); // 中文支持
+			this.ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+			this.ftpClient.enterLocalPassiveMode();
+			this.ftpClient.setBufferSize(1024*8);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
 		}	
+	}
+	/*
+	 * 返还一个连接
+	 */
+	public void disconnectFtpByPool(){
+		try {
+			this.pool.returnObject(this.ftpClient);
+			System.out.println("断开连接!");
+			ftpClient = null;
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	
 	/**
@@ -180,20 +197,18 @@ public class FtpUtils_QM {
 	 * @param FTPServer
 	 * @return
 	 */
-	public boolean downloadFile(FTPClient ftpClient,
-			String ftpPath, String fileName,String localfilePath, String localfileName) {
+	public boolean downloadFile(String ftpPath, String fileName,String localfilePath, String localfileName) {
 		OutputStream output = null;
 		try {
-			ftpClient.changeWorkingDirectory(ftpPath);
+			this.ftpClient.changeWorkingDirectory(ftpPath);
 			FTPFile[] remoteFiles;
-			remoteFiles = ftpClient.listFiles();
+			remoteFiles = this.ftpClient.listFiles();
 			int indexFile = -1;
 			if (remoteFiles != null) {
 				System.out.println("---" + remoteFiles.length);
 				for (int i = 0; i < remoteFiles.length; i++) {
 					System.out.println("---"+remoteFiles[i].getName());
 					if (remoteFiles[i].getName().equals(fileName)) {
-
 						indexFile = i;
 						break;
 					}
@@ -211,7 +226,7 @@ public class FtpUtils_QM {
 
 			output = new FileOutputStream(localFile);
 			System.out.println(ftpPath + fileName + "---" + sizeFile);
-			ftpClient.retrieveFile(fileName, output);
+			this.ftpClient.retrieveFile(fileName, output);
 			output.flush();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -541,9 +556,9 @@ public class FtpUtils_QM {
 		final String ftpFileName = "TS_TG02_QKDS_PRD1_ENG_20161027170746_20161027170746_20161028165342_0C.csv";
 		final String localfilePath = "D:\\test";
 		final FtpUtils_QM ftpUtils = new FtpUtils_QM();
-		final FTPClient ftpClient = ftpUtils.connectFtp(ftpHost, ftpPort, ftpNameString, ftpPasswordString);
-		ftpUtils.downloadFile(ftpClient, ftpPath, ftpFileName, localfilePath, ftpFileName);
-		ftpUtils.disconnectFtp(ftpClient);
+//		final FTPClient ftpClient = ftpUtils.connectFtp(ftpHost, ftpPort, ftpNameString, ftpPasswordString);
+//		ftpUtils.downloadFile(ftpClient, ftpPath, ftpFileName, localfilePath, ftpFileName);
+//		ftpUtils.disconnectFtp(ftpClient);
 //		final String localPath = "D:\\testData1031\\";//本地存储路径
 //		final String copyPath = "D:\\testDataDest";
 //		ftpUtils.copyFolder(localPath, copyPath);
