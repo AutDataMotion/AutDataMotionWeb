@@ -70,7 +70,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ice-3.6.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/UtilZW"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DUCRPC"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/UtilZW"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>

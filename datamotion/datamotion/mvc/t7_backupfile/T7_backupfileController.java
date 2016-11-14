@@ -1,5 +1,6 @@
 package datamotion.mvc.t7_backupfile;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,10 @@ import com.platform.constant.ConstantRender;
 import com.platform.mvc.base.BaseController;
 
 import csuduc.platform.util.JsonUtils;
+import datamotion.backup.TaskCallBackBackup;
+import datamotion.common.MdlFileEvent;
 import datamotion.mvc.mdlcomm.MdlClientCheckout;
+import datamotion.mvc.mdlcomm.MdlClientDownLoad;
 import datamotion.mvc.t9_checkoutfiles.T9_checkoutfiles;
 
 
@@ -182,6 +186,8 @@ public class T7_backupfileController extends BaseController {
 //				"select * from t7_backupfile order by id desc limit ?", 100);
 //		setAttr("list", list);
 		
+		addData2Database();
+		
 		renderWithPath(pthv+"backupfile.html");
 		
 	}
@@ -196,8 +202,19 @@ public class T7_backupfileController extends BaseController {
 		setAttr(ConstantRender.PATH_VIEW_NAME, pthv);
 	}
 	@Clear
-	public void addData2Database()
+	public void addData2Database()//测试后台自动备份
 	{
+		MdlFileEvent mdlFileEvent = new MdlFileEvent();
+		mdlFileEvent.namesrc = "TS_TG02_QKDS_PRD1_ENG_20161027170746_20161027170746_20161028165342_000_0C.csv";
+		mdlFileEvent.pathsrc = "//testData";
+		mdlFileEvent.pathdest = "D:\\test";
+		mdlFileEvent.timedo = new Timestamp(System.currentTimeMillis());
+		mdlFileEvent.filesize = (long) 3333;
+		mdlFileEvent.status_ = 0;//未备份
+		
+		mdlFileEvent.initProperties();
+		TaskCallBackBackup taskCallBackBackup = new TaskCallBackBackup();
+		taskCallBackBackup.dbAddFileInfo(mdlFileEvent);
 		
 	}
 	// 查询
@@ -210,9 +227,9 @@ public class T7_backupfileController extends BaseController {
 					renderText("-1");//错误
 				}
 				log.debug(strvalue);
-				MdlClientCheckout mdlClient = null;
+				MdlClientDownLoad mdlClient = null;
 				try {
-					mdlClient = JsonUtils.deserialize(strvalue, MdlClientCheckout.class);
+					mdlClient = JsonUtils.deserialize(strvalue, MdlClientDownLoad.class);
 					if (null == mdlClient) {
 		renderText("-1");//错误
 						return;
