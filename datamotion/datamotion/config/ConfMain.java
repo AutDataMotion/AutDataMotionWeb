@@ -43,17 +43,24 @@ import datamotion.mvc.t_kvalue.T_kvalueService;
 public class ConfMain extends BaseConfMain {
 	private static Logger log = Logger.getLogger(ConfMain.class);
 	private final static ConfMain single = new ConfMain();
-	public static MdlTreeProperty treeRoot ;
+	//最原始的初始化数据
 	public static Map<String, T11_initfoldertree> mapInitfoldertrees = new HashMap<String, T11_initfoldertree>();
 	public static Map<String, T12_initmodule> mapInitmodules = new HashMap<String, T12_initmodule>();
 	public static Map<String, T_kvalue> mapKValues = new HashMap<String, T_kvalue>();
 	public static Map<String, T12_initmodule> mapProperty = new HashMap<String, T12_initmodule>();
+
+	//生成的树形结构
+	public static MdlTreeProperty treeRoot ;
+	//以树路径生成的Map
 	public static Map<String, MdlTreeProperty> mapTreeProperty = new HashMap<String, MdlTreeProperty>();
 
 	public static ConfMain getInstance() {
 		return single;
 	}
 
+	public static Map<String, MdlTreeProperty> getTreePropertyMap(){
+		return mapTreeProperty;
+	}
 	/**
 	 * <p>
 	 * Title: buildProperties<／p>

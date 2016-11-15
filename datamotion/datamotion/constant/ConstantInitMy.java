@@ -16,4 +16,8 @@ import com.platform.constant.ConstantInit;
 
 public interface ConstantInitMy extends ConstantInit{
 	public static final String db_dataSource_main = "db.dataSource.datamotion";
+	final static int timeSpanSecond = 1000;// 1分钟
+	final static int timeSpanMinute = timeSpanSecond * 60;// 1分钟
+	final static int timeSpanHoure = timeSpanMinute * 60;// 1小时
+	final static long TIME_BEG = System.currentTimeMillis();
 }

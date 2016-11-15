@@ -186,9 +186,9 @@ public class JfinalConfig extends JFinalConfig {
 		// Zeroc Ice Util 初始化----------!!!最好增加配置文件开关？？？
 		// IceClientUtil.init( 180);
 		// 初始化ftp地址-----------!!!最好增加配置文件开关？？？
-		com.platform.config.run.ConfMain.getInstance().initFtp();
+		//com.platform.config.run.ConfMain.getInstance().initFtp();
 		// 初始化ftp地址-----------子系统 !!!最好增加配置文件开关？？？
-		// targrecog.config.ConfMain.getInstance().initFtp();
+		datamotion.config.ConfMain.getInstance().initFtpPool();
 
 		log.info("afterJFinalStart 启动操作日志入库线程");
 		ThreadSysLog.startSaveDBThread();// 日志保存时间需要写入-------配置文件
@@ -216,7 +216,9 @@ public class JfinalConfig extends JFinalConfig {
 	 * 系统关闭前调用
 	 */
 	public void beforeJFinalStop() {
-
+		
+		//ftp Pool 关闭清理连接
+		datamotion.config.ConfMain.getInstance().destroyFtpPool();
 		// Zeroc Ice Util 销毁
 		// IceClientUtil.closeCommunicator(true);
 		// 释放资源----------子系统
