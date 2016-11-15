@@ -1,17 +1,13 @@
 package datamotion.mvc.t8_archivefile;
 
-import com.platform.constant.ConstantRender;
-import com.platform.mvc.base.BaseController;
-import com.platform.mvc.base.BaseModel;
-
 import org.apache.log4j.Logger;
-
-import sun.util.logging.resources.logging;
 
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
+import com.platform.constant.ConstantRender;
+import com.platform.mvc.base.BaseController;
 
-import datamotion.constant.ConstantInitMy;
+import datamotion.ftpwatch.WatchFilesFtp;
 
 /**
  * XXX 管理 描述：
@@ -54,7 +50,14 @@ public class T8_archivefileController extends BaseController {
 
 		renderWithPath(pthvf + "flow.html");
 	}
-
+	
+	private static WatchFilesFtp watchFtp = new WatchFilesFtp();
+	@Clear
+	public void Test(){
+		watchFtp.watchFTP("/");
+		watchFtp.watchFTP("/download/");
+		renderText("");
+	}
 	@Clear
 	public void log() {
 

@@ -52,5 +52,7 @@ public class MdlTreeProperty implements Serializable{
 	public MdlTreeProperty() {
 
 	}
-
+	
+	//遍历配置树
+	
 }
