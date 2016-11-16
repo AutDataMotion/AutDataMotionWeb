@@ -11,7 +11,11 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import csuduc.platform.util.ComUtil;
 import csuduc.platform.util.StringUtil;
+import datamotion.ftpwatch.WatchFilesFtp;
 
 /**  
  * 创建时间：2016年10月31日 下午8:38:26  
@@ -34,7 +38,7 @@ import csuduc.platform.util.StringUtil;
  * @date 2016年10月31日
  */
 public class MdlFileEvent implements Serializable {
-
+	private static Logger log = Logger.getLogger(MdlFileEvent.class);
 	/**
 	 * serialVersionUID
 	 */
@@ -46,7 +50,8 @@ public class MdlFileEvent implements Serializable {
 	public enum NAMETOKE {
 		PLAT, AIRCRAFT, SENSOR, CAMERA, TYPE, DATE1, DATE2, DATE3, NUM, LEVEL
 	};
-	//NUM圈数
+
+	// NUM圈数
 
 	public Integer id;
 	public String key_;
@@ -56,7 +61,7 @@ public class MdlFileEvent implements Serializable {
 	public String namedest;
 	public Timestamp timedo;
 	public Long filesize;
-	
+
 	public String station;
 	public String aircraft;
 	public String sensor;
@@ -67,61 +72,117 @@ public class MdlFileEvent implements Serializable {
 	public Timestamp timecollectstart;
 	public Timestamp timecollectend;
 	public String suffix;
+	
 	public Boolean ismain;
 	public String auxkeys;
 	public Integer cntdo;
 	public Integer status_;
-	
+
+	//扫描时的文件状态 0 未就绪  1就绪  2 已分发
+	public int flagWatch;
 	//
 	// 文件名解析token
 	public List<String> nameTokens;
 	private boolean isInit = false;
+
+	//文件处理的属性
+	public transient MdlTreeProperty property;
 	
-	public MdlFileEvent() {
-	}
+	public MdlFileEvent(){}
 	
 	public MdlFileEvent(String aPathsrc, String aNamesrc) {
-		this();
 		pathsrc = aPathsrc;
 		namesrc = aNamesrc;
 	}
-	
-	public MdlFileEvent(String aPathsrc, String aNamesrc, String aPathdest, String aNamedest) {
+
+	public MdlFileEvent(String aPathsrc, String aNamesrc, String aPathdest,
+			String aNamedest) {
 		this(aPathsrc, aNamesrc);
 		pathdest = aPathdest;
 		namedest = aNamedest;
 	}
-	/**
-	 * <p>Title: initProperties<／p>
-	 * <p>Description:
-	 * 解析文件名，初始化文件属性
-	 *  <／p>
-	 * @return
-	 */
+
 	public boolean initProperties(){
-		if (nameTokens != null) {
-			return true;
-		}
-		nameTokens = StringUtil.split(namesrc, split); 
-		if (nameTokens == null || nameTokens.size()==0) {
-			nameTokens = null;
+		if (null == property) {
 			return false;
 		}
-		//根据文件名格式进行属性赋值
-		//枚举类型：PLAT, AIRCRAFT, SENSOR, CAMERA, TYPE, DATE1, DATE2, DATE3, NUM, LEVEL
-		this.station = nameTokens.get(NAMETOKE.PLAT.ordinal());
-		this.aircraft = nameTokens.get(NAMETOKE.AIRCRAFT.ordinal());
-		this.sensor = nameTokens.get(NAMETOKE.SENSOR.ordinal());
-		this.camera = nameTokens.get(NAMETOKE.CAMERA.ordinal());
-		this.datatype = nameTokens.get(NAMETOKE.TYPE.ordinal());
-		//拆分级别和后缀名
-		String last = nameTokens.get(NAMETOKE.LEVEL.ordinal());
-		String[] lasts = last.split("\\.");
-		this.datalevel = lasts[0];
-		this.suffix = lasts[1];
-		this.timerecive = StringUtil.strToTimeStamp(nameTokens.get(NAMETOKE.DATE1.ordinal()), dateFormat);
-		this.timecollectstart = StringUtil.strToTimeStamp(nameTokens.get(NAMETOKE.DATE2.ordinal()), dateFormat);
-		this.timecollectend = StringUtil.strToTimeStamp(nameTokens.get(NAMETOKE.DATE3.ordinal()), dateFormat);
+		
+		return initProperties(property);
+	}
+	
+	/**
+	 * <p>
+	 * Title: initProperties<／p>
+	 * <p>
+	 * Description: 解析文件名，初始化文件属性 <／p>
+	 * 
+	 * @return
+	 */
+	public boolean initProperties(MdlTreeProperty aProperty) {
+		
+		if (ComUtil.isEmptyStr(namesrc)) {
+			return false;
+		}
+		nameTokens = StringUtil.split(namesrc, split);
+		return initProperties(nameTokens, aProperty);
+	}
+
+	public boolean initProperties(List<String> aNameTokens, MdlTreeProperty aProperty) {
+		if (ComUtil.isEmptyList(aNameTokens)) {
+			log.debug("ComUtil.isEmptyList(aaNameToken)");
+			return false;
+		}
+		if (aNameTokens.size() < 10) {
+			log.debug("CaNameTokens.size < 10");
+			return false;
+		}
+		nameTokens = aNameTokens;
+		// 根据文件名格式进行属性赋值
+		// 枚举类型：PLAT, AIRCRAFT, SENSOR, CAMERA, TYPE, DATE1, DATE2, DATE3, NUM,
+		// LEVEL
+		try {
+			this.station = nameTokens.get(NAMETOKE.PLAT.ordinal());
+			this.aircraft = nameTokens.get(NAMETOKE.AIRCRAFT.ordinal());
+			this.sensor = nameTokens.get(NAMETOKE.SENSOR.ordinal());
+			this.camera = nameTokens.get(NAMETOKE.CAMERA.ordinal());
+			this.datatype = nameTokens.get(NAMETOKE.TYPE.ordinal());
+			// 拆分级别和后缀名
+			String last = nameTokens.get(NAMETOKE.LEVEL.ordinal());
+			String[] lasts = last.split("\\.");
+			this.datalevel = lasts[0];
+			this.suffix = lasts[1];
+			this.timerecive = StringUtil.strToTimeStamp(
+					nameTokens.get(NAMETOKE.DATE1.ordinal()), dateFormat);
+			this.timecollectstart = StringUtil.strToTimeStamp(
+					nameTokens.get(NAMETOKE.DATE2.ordinal()), dateFormat);
+			this.timecollectend = StringUtil.strToTimeStamp(
+					nameTokens.get(NAMETOKE.DATE3.ordinal()), dateFormat);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			log.error("error:init Properties");
+			return false;
+		}
+		property = aProperty;
 		return true;
+	}
+
+	public synchronized static String getFileNameFilterStr(
+			List<String> aFileNameTokens) {
+		if (ComUtil.isEmptyList(aFileNameTokens)) {
+			log.debug("ComUtil.isEmptyList(aFileNameTokens)");
+			return null;
+		}
+		if (aFileNameTokens.size() < 10) {
+			log.debug("aFileNameTokens.size < 10");
+			return null;
+		}
+		// 这个需要修改
+		return String.format("_%s_%s_%s_%s",
+				aFileNameTokens.get(NAMETOKE.AIRCRAFT.ordinal()),
+				aFileNameTokens.get(NAMETOKE.SENSOR.ordinal()),
+				aFileNameTokens.get(NAMETOKE.TYPE.ordinal()),
+				aFileNameTokens.get(NAMETOKE.CAMERA.ordinal()));
 	}
 }

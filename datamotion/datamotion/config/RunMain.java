@@ -12,6 +12,11 @@ import org.apache.log4j.Logger;
 import com.platform.interf.InfMainConf;
 
 import csuduc.platform.util.JsonUtils;
+import datamotion.archive.TaskCallBackArchive;
+import datamotion.backup.TaskCallBackBackup;
+import datamotion.checkout.TaskCallBackCheckout;
+import datamotion.ftpdownload.TaskCallBackDownload;
+import datamotion.ftpwatch.WatchFilesFtp;
 
 /**  
  * 创建时间：2016年11月2日 下午9:09:59  
@@ -34,6 +39,19 @@ public class RunMain implements InfMainConf{
 	private static Logger log = Logger.getLogger(RunMain.class);
 	private final static RunMain INSTANCE = new RunMain();
 	
+	//================FTP Watch
+	public static WatchFilesFtp ftpWatch = new WatchFilesFtp();
+	//=================下载
+	public static TaskCallBackDownload downloadWorker = new TaskCallBackDownload();
+
+	//=================备份
+	public static TaskCallBackBackup backupWorker = new TaskCallBackBackup();
+	
+	//==================归档
+	public static TaskCallBackArchive archiveWorker  = new TaskCallBackArchive();
+	
+	//==================检出
+	public static TaskCallBackCheckout checkoutWorker = new TaskCallBackCheckout();
 	
 	 /**
 	 * 
@@ -59,7 +77,7 @@ public class RunMain implements InfMainConf{
 			log.error("error: RunMain ConfMain.buildProperties ");
 			return false;
 		}
-		log.debug(ConfMain.treeRoot);
+		//log.debug(ConfMain.treeRoot);
 		//
 		return true;
 	}
