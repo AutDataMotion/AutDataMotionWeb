@@ -170,7 +170,7 @@ public class WatchFilesFtp {
 					continue;
 				}
 				//跳转到固定目录
-				ftpClient.changeWorkingDirectory(proModule.getPathftp());
+				ftpClient.changeWorkingDirectory(proModule.getPathftp().toString());
 				
 				
 			}
