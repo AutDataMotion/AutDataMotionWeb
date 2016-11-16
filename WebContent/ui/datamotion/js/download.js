@@ -66,7 +66,68 @@ $('#btnsrch')
 								}
 							});
 				});
+//本地下载
+function localDownLoad(index,data){//选中的记录状态更新
+	// 发送查询请求
+	alert("下载成功");
+//	table.row(index).remove().draw( false );
+//	table.row.add(data).draw(false);
+}
+// 重新下载
+function reDownLoad(index,data){//选中的记录重新下载（修改status_＝1）
+	// 发送查询请求
+	$.ajax( {    
+	        "type": "get",     
+	        "contentType": "application/json",    
+	        "url": encodeURI(encodeURI(cxt
+					+ "/jf/datamotion/t6_dwnloadfile/reDownLoad")),     
+	        "dataType": "json",    
+	        "data": {"id": data[0], "pathsrc": data[1], "namesrc": data[2], "pathdest": data[3]}, // 以json格式传递  
+	        "success": function(response) {    
+             var returnData = response;
+             var table = $('#myTable').DataTable();
+            
+             if(returnData=="1")//下载成功
+				{
+					data[15]="1";
+					alert("下载成功");
+					table.row(index).remove().draw( false );
+					table.row.add(data).draw(false);
+				}
+             if(returnData=="-1")//下载失败
+				{
+            	 alert("下载失败");
+				}
+	        }    
+	    });   
+}
 
-// 重新下载在dwnloadfile.html中
-
-//删除在dwnloadfile.html中
+//删除
+function doDeleteSeleted(index,data){//选中的记录删除（修改status_＝3）
+	// 发送查询请求
+	$.ajax( {    
+	        "type": "get",     
+	        "contentType": "application/json",    
+	        "url": encodeURI(encodeURI(cxt
+					+ "/jf/datamotion/t6_dwnloadfile/doDeleteSeleted")),     
+	        "dataType": "json",    
+	        "data": {"id": data[0], "pathsrc": data[1], "namesrc": data[2], "pathdest": data[3]}, // 以json格式传递  
+	        "success": function(response) {    
+             var returnData = response;
+             var table = $('#myTable').DataTable();
+            
+             if(returnData=="1")//删除成功
+				{
+					data[15]="3";
+					table.row(index).remove().draw( false );
+					table.row.add(data).draw(false);
+					alert("删除成功");
+				}
+				if(returnData=="-1")//下载失败
+				{
+            	 alert("删除失败");
+				}
+	        }    
+	    });   
+}
+			

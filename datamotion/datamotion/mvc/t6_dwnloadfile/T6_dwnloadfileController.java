@@ -1,5 +1,6 @@
 package datamotion.mvc.t6_dwnloadfile;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -148,22 +149,37 @@ public class T6_dwnloadfileController extends BaseController {
 	{
 		// 获得参数
 		String id=getPara("id");
+		if (null == id || id.isEmpty()) {
+			renderText("-1");//错误
+		}
 		int id_ = Integer.parseInt(id);
 		String pathsrc=getPara("pathsrc");
 		String namesrc=getPara("namesrc");
 		String pathdest=getPara("pathdest");
-		//初始化参数
-		MdlFileEvent amdl = new MdlFileEvent(pathsrc,namesrc,pathdest,namesrc);
-		amdl.initProperties();
-		//下载文件
-		TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
-		taskCallBackDownload.doWork(amdl);
 		
-		/*更新状态为已下载*/
-		Db.use(ConstantInitMy.db_dataSource_main)
-			.update("update t6_dwnloadfile set status_=? where id=?",MdlStatusDownLoad.success,id_);
+		try {
+			//初始化参数
+			MdlFileEvent amdl = new MdlFileEvent(pathsrc,namesrc,pathdest,namesrc);
+			amdl.initProperties();
+			//下载文件
+			TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
+			boolean result = taskCallBackDownload.doWork(amdl);
+			
+			if(result){
+				/*更新状态为已下载*/
+				Db.use(ConstantInitMy.db_dataSource_main)
+					.update("update t6_dwnloadfile set status_=? where id=?",MdlStatusDownLoad.success,id_);
 
-		renderWithPath(pthc+"dwnloadfile.html");
+				renderText("1");//成功
+			}
+			else {
+				renderText("-1");//失败
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			//return false;
+		}
 	}
 
 	/**
@@ -173,13 +189,56 @@ public class T6_dwnloadfileController extends BaseController {
 	public void doDeleteSeleted(){
 		// 获得参数
 		String id=getPara("id");
+		if (null == id || id.isEmpty()) {
+			renderText("-1");//错误
+		}
 		int id_ = Integer.parseInt(id);
+		String pathsrc=getPara("pathsrc");
+		String namesrc=getPara("namesrc");
+		String pathdest=getPara("pathdest");
 		
-		/*更新状态为已下载*/
-		Db.use(ConstantInitMy.db_dataSource_main)
-			.update("update t6_dwnloadfile set status_=? where id=?",MdlStatusDownLoad.delete,id_);
-		renderWithPath(pthc+"dwnloadfile.html");
+		try {
+			boolean result = deleteFile(pathdest, namesrc);
+			if(result){
+				/*更新状态为已删除*/
+				Db.use(ConstantInitMy.db_dataSource_main)
+					.update("update t6_dwnloadfile set status_=? where id=?",MdlStatusDownLoad.delete,id_);
+				//return true;
+				renderText("1");//成功
+			}
+			else{
+				renderText("-1");//失败
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			//return false;
+		}
 	}
+	
+	/** 
+	  * 删除单个文件 
+	  *  
+	  * @param fileName 
+	  *            要删除的文件的文件名 
+	  * @return 单个文件删除成功返回true，否则返回false 
+	  */  
+	 public static boolean deleteFile(String path,String fileName) {  
+	  File file = new File(path+"\\"+fileName);  
+	  // 如果文件路径所对应的文件存在，并且是一个文件，则直接删除  
+	  if (file.exists() && file.isFile()) {  
+	   if (file.delete()) {  
+	    System.out.println("删除单个文件" + fileName + "成功！");  
+	    return true;  
+	   } else {  
+	    System.out.println("删除单个文件" + fileName + "失败！");  
+	    return false;  
+	   }  
+	  } else {  
+	   System.out.println("删除单个文件失败：" + fileName + "不存在！");  
+	   return false;  
+	  }  
+	 }  
 	/**
 	 * 列表
 	 */

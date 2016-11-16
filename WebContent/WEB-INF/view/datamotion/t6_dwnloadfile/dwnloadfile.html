@@ -262,7 +262,7 @@ float: left;
                 { title: "下载文件路径" },
                 { title: "下载时间" },
                 { title: "文件大小" },
-              /*   { title: "接收站名称" },
+                { title: "接收站名称" },
                 { title: "飞行器" },
                 { title: "载荷名称" },
                 { title: "数据类型" },
@@ -270,7 +270,7 @@ float: left;
                 { title: "产品标识" },
                 { title: "下传时间" },
                 { title: "拍摄开始时间" },
-                { title: "拍摄结束时间" }, */
+                { title: "拍摄结束时间" }, 
                 { title: "状态"},
                 { title: "添加时间" },
                 { title: "操作" },
@@ -339,43 +339,21 @@ float: left;
         } );
  	   
  	   $('#myTable tbody').on( 'click', '#doLocalDownload', function () {
-	        var data = myTable.row($(this).parents('tr')).data();
+ 		  var index = $(this).parents('tr');
+ 	  	  var data = myTable.row(index).data();
+ 	  	  localDownLoad(index,data);
 	    } );
  	   
  	   $('#myTable tbody').on( 'click', '#reDownLoad', function () {
-   	        var data = myTable.row($(this).parents('tr')).data();
-   	     $.ajax( {    
-    	        "type": "get",     
-    	        "contentType": "application/json",    
-    	        "url": encodeURI(encodeURI(cxt
-  						+ "/jf/datamotion/t6_dwnloadfile/reDownLoad")),     
-    	        "dataType": "json",    
-    	        "data": {"id": data[0], "pathsrc": data[1], "namesrc": data[2], "pathdest": data[3]}, // 以json格式传递  
-    	        "success": function(res) {    
-    	        		//console.log(res);
-                   var returnData = {};
-                   returnData.data = res.data;
-                   callback(returnData);
-    	        }    
-    	    });    
+ 		var index = $(this).parents('tr');
+  	    var data = myTable.row(index).data();
+  	    reDownLoad(index,data);
    	    } );
  	   
  	   $('#myTable tbody').on( 'click', '#doDeleteSeleted', function () {
-  	        var data = myTable.row($(this).parents('tr')).data();
-  	      $.ajax( {    
-  	        "type": "get",     
-  	        "contentType": "application/json",    
-  	        "url": encodeURI(encodeURI(cxt
-						+ "/jf/datamotion/t6_dwnloadfile/doDeleteSeleted")),     
-  	        "dataType": "json",    
-  	        "data": {"id": data[0], "pathsrc": data[1], "namesrc": data[2], "pathdest": data[3]}, // 以json格式传递  
-  	        "success": function(res) {    
-  	        		//console.log(res);
-                 var returnData = {};
-                 returnData.data = res.data;
-                 callback(returnData);
-  	        }    
-  	    });    
+ 		  var index = $(this).parents('tr');
+  	      var data = myTable.row(index).data();
+  	      doDeleteSeleted(index,data);
   	    } );
  	   
     } );

@@ -227,6 +227,7 @@ public class FtpUtils_QM {
 			output = new FileOutputStream(localFile);
 			System.out.println(ftpPath + fileName + "---" + sizeFile);
 			this.ftpClient.retrieveFile(fileName, output);
+//			ftpClient.deleteFile(ftpPath + fileName);
 			output.flush();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
