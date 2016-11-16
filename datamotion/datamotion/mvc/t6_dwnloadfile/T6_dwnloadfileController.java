@@ -1,7 +1,9 @@
 package datamotion.mvc.t6_dwnloadfile;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.platform.constant.ConstantRender;
@@ -20,11 +22,13 @@ import com.jfinal.plugin.activerecord.Record;
 
 import csuduc.platform.util.JsonUtils;
 import csuduc.platform.util.generID.UUIDGener;
+import datamotion.backup.TaskCallBackBackup;
 import datamotion.common.MdlFileEvent;
 import datamotion.constant.ConstantInitMy;
 import datamotion.ftpdownload.TaskCallBackDownload;
 import datamotion.mvc.mdlcomm.MdlClientCheckout;
 import datamotion.mvc.mdlcomm.MdlClientDownLoad;
+import datamotion.mvc.mdlcomm.MdlControlPanel;
 import datamotion.mvc.t7_backupfile.T7_backupfile;
 
 
@@ -118,10 +122,10 @@ public class T6_dwnloadfileController extends BaseController {
 		
 		return jsonObject.toString();
 	}
+	
 	@Clear
 	public void getDataFromDatabase()
 	{
-		
 		// 获得参数
 //		String draw=getPara("draw");
 //		String start=getPara("start");
@@ -131,6 +135,28 @@ public class T6_dwnloadfileController extends BaseController {
 				"select * from T6_dwnloadfile order by id desc");
 		String Jsondata = getPagedata(list);
 		renderJson(Jsondata);
+	}	
+	/*
+	 * 重新下载
+	 */
+	@Clear
+	public void reDownLoad()
+	{
+		// 获得参数
+//		String id=getPara("id");
+		String pathsrc=getPara("pathsrc");
+		String namesrc=getPara("namesrc");
+//		List<T6_dwnloadfile> list = T6_dwnloadfile.dao.find(
+//				"select * from T6_dwnloadfile where id = " + id);
+//		System.out.println(list.toString());
+		//初始化参数
+		MdlFileEvent amdl = new MdlFileEvent(pathsrc,namesrc);
+		amdl.initProperties();
+		//下载文件
+		TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
+		taskCallBackDownload.doWork(amdl);
+//		String Jsondata = getPagedata(list);
+//		renderJson(Jsondata);
 	}	
 	/**
 	 * 列表
@@ -168,7 +194,6 @@ renderText("-1");//错误
 
 			// 数据库查询
 			List<T6_dwnloadfile> res = T6_dwnloadfile.dao.find(strSQL);//取数据库的前100条记录
-			log.debug("=========================="+res);
 			
 			// 返回结果
 			if (null == res || res.size() <= 0) {
@@ -305,4 +330,128 @@ renderText("-1");//错误
 		setAttr(ConstantRender.PATH_VIEW_NAME, pthv);
 	}
 	
+	//------------------start 控制面板---------------------//
+
+	//初始化控制面板数据
+	@Clear
+	public void initControlPanel(){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		MdlControlPanel mdlControlPanelDownload = new MdlControlPanel();
+		mdlControlPanelDownload.setUndoNum_download(10);
+		mdlControlPanelDownload.setDosucNum_download(1000);
+		mdlControlPanelDownload.setDofailNum_download(100);
+		mdlControlPanelDownload.setTimeStart_download(df.format(new Date()));
+		mdlControlPanelDownload.setStatus_download(0);
+		
+		mdlControlPanelDownload.setUndoNum_backup(10);
+		mdlControlPanelDownload.setDosucNum_backup(1000);
+		mdlControlPanelDownload.setDofailNum_backup(100);
+		mdlControlPanelDownload.setTimeStart_backup(df.format(new Date()));
+		mdlControlPanelDownload.setStatus_backup(0);
+		
+		mdlControlPanelDownload.setUndoNum_archive(10);
+		mdlControlPanelDownload.setDosucNum_archive(1000);
+		mdlControlPanelDownload.setDofailNum_archive(100);
+		mdlControlPanelDownload.setTimeStart_archive(df.format(new Date()));
+		mdlControlPanelDownload.setStatus_archive(0);
+		
+		mdlControlPanelDownload.setUndoNum_checkout(10);
+		mdlControlPanelDownload.setDosucNum_checkout(1000);
+		mdlControlPanelDownload.setDofailNum_checkout(100);
+		mdlControlPanelDownload.setTimeStart_checkout(df.format(new Date()));
+		mdlControlPanelDownload.setStatus_checkout(0);
+		
+		String jsonString = JsonUtils.serialize(mdlControlPanelDownload);
+		if (null == jsonString) {
+			renderText("-1");//错误
+			return;
+			}
+		renderJson(jsonString);
+		System.out.println("returnJson=="+jsonString);
+		return ;
+	}
+	//------------------start 下载---------------------//
+	//启动下载线程
+	@Clear
+	public void start_Download() {
+		TaskCallBackDownload download = new TaskCallBackDownload();
+		download.start();
+	}
+	//重启下载线程
+	@Clear
+	public void restart_Download() {
+		TaskCallBackDownload download = new TaskCallBackDownload();
+		download.restart();
+	}
+	//停止下载线程
+	@Clear
+	public void stop_Download() {
+		TaskCallBackDownload download = new TaskCallBackDownload();
+		download.stop();
+	}
+	//------------------end 下载---------------------//
+	
+	//------------------start 备份---------------------//
+	//启动 备份线程
+	@Clear
+	public void start_BackUp() {
+		TaskCallBackBackup backBackup = new TaskCallBackBackup();
+		backBackup.start();
+	}
+	//重启 备份线程
+	@Clear
+	public void restart_BackUp() {
+		TaskCallBackBackup backBackup = new TaskCallBackBackup();
+		backBackup.restart();
+	}
+	//停止 备份线程
+	@Clear
+	public void stop_BackUp() {
+		TaskCallBackBackup backBackup = new TaskCallBackBackup();
+		backBackup.stop();
+	}
+	//------------------end 备份---------------------//
+	
+	//------------------start 归档---------------------//
+	//启动归档线程
+	@Clear
+	public void start_ArchiveFile() {
+		TaskCallBackBackup backBackup = new TaskCallBackBackup();
+		backBackup.start();
+	}
+	//重启归档线程
+	@Clear
+	public void restart_ArchiveFile() {
+		TaskCallBackBackup backBackup = new TaskCallBackBackup();
+		backBackup.restart();
+	}
+	//停止归档线程
+	@Clear
+	public void stop_ArchiveFile() {
+		TaskCallBackBackup backBackup = new TaskCallBackBackup();
+		backBackup.stop();
+	}
+	//------------------end 归档---------------------//
+	
+	//------------------start 检出---------------------//
+	//启动检出线程
+	@Clear
+	public void start_CheckOutFile() {
+		TaskCallBackBackup backBackup = new TaskCallBackBackup();
+		backBackup.start();
+	}
+	//重启检出线程
+	@Clear
+	public void restart_CheckOutFile() {
+		TaskCallBackBackup backBackup = new TaskCallBackBackup();
+		backBackup.restart();
+	}
+	//停止检出线程
+	@Clear
+	public void stop_CheckOutFile() {
+		TaskCallBackBackup backBackup = new TaskCallBackBackup();
+		backBackup.stop();
+	}
+	//------------------end 检出---------------------//
+	//------------------end 控制面板---------------------//
 }

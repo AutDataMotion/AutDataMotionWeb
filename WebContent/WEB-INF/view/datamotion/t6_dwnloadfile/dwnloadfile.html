@@ -350,7 +350,7 @@ for(node in list){
              	   	//console.log(data);
           	    	  if(data[15]=="0")//未下载
           	    	  {
-          	    	  	return "<input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新下载' class='btn m-r-5'/>"
+          	    	  	return "<input id='reDownLoad' name='reDownLoad_btn' type='button' value='重新下载' class='btn m-r-5'/>"
                          +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
           	    	  }
           	      else if(data[15]=="1")//"已下载"
@@ -360,7 +360,7 @@ for(node in list){
           	    	  }
           	      else if(data[15]=="2")//"下载失败"
           	    	  {
-          	    	  	return "<input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新下载' class='btn m-r-5'/>"
+          	    	  	return "<input id='reDownLoad' name='reDownLoad_btn' type='button' value='重新下载' class='btn m-r-5'/>"
                          +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
           	    	  }
           	      else{//"已删除"
@@ -381,9 +381,23 @@ for(node in list){
 	        alert( data[0]+" doLocalDownload");
 	    } );
  	   
- 	   $('#myTable tbody').on( 'click', '#doNewBackup', function () {
+ 	   $('#myTable tbody').on( 'click', '#reDownLoad', function () {
    	        var data = myTable.row($(this).parents('tr')).data();
-   	        alert( data[0]+" doNewBackup");
+   	        alert( data[0]+" reDownLoad");
+   	     $.ajax( {    
+    	        "type": "get",     
+    	        "contentType": "application/json",    
+    	        "url": encodeURI(encodeURI(cxt
+  						+ "/jf/datamotion/t6_dwnloadfile/reDownLoad")),     
+    	        "dataType": "json",    
+    	        "data": {"id": data[0], "pathsrc": data[1], "namesrc": data[2]}, // 以json格式传递  
+    	        "success": function(res) {    
+    	        		//console.log(res);
+                   var returnData = {};
+                   returnData.data = res.data;
+                   callback(returnData);
+    	        }    
+    	    });    
    	    } );
  	   
  	   $('#myTable tbody').on( 'click', '#doDeleteSeleted', function () {
