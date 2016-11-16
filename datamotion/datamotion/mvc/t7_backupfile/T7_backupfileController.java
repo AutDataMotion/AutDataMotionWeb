@@ -18,6 +18,7 @@ import csuduc.platform.util.JsonUtils;
 import datamotion.backup.TaskCallBackBackup;
 import datamotion.common.MdlFileEvent;
 import datamotion.constant.ConstantInitMy;
+import datamotion.ftpdownload.FtpUtils_QM;
 import datamotion.mvc.mdlcomm.MdlClientCheckout;
 import datamotion.mvc.mdlcomm.MdlClientDownLoad;
 import datamotion.mvc.mdlcomm.MdlKeys;
@@ -48,6 +49,9 @@ public class T7_backupfileController extends BaseController {
 	public static final String pthvf = "/datamotion/f/";
 	
 	public static final String pthv10 = "/datamotion/t10_datastatistics/";
+	
+	FtpUtils_QM ftpUtils = new FtpUtils_QM();
+	
 	/**
 	 * 列表
 	 */
@@ -258,7 +262,7 @@ public class T7_backupfileController extends BaseController {
 					return;
 				}else {
 					String Jsondata = getPagedata(res);
-					 renderJson(Jsondata);
+					renderJson(Jsondata);
 					 return ;
 				}
 	}
@@ -406,8 +410,12 @@ public class T7_backupfileController extends BaseController {
 				renderText("-1");
 				return;
 			}else {
-				//执行本地下载
-				res.get(0).get("id").toString();
+				//执行重新备份
+				String pathsrc=res.get(0).get("pathsrc").toString();//源文件路径
+				String namesrc=res.get(0).get("namesrc").toString();//备份文件名称
+				String pathdest=res.get(0).get("pathdest").toString();//备份文件路径
+				
+				//ftpUtils.copyFile("oldPath", "newPath");
 				
 				renderText("1");
 			}
@@ -432,8 +440,26 @@ public class T7_backupfileController extends BaseController {
 			//更新数据库信息
 			String sql = "update t7_backupfile set status_ = 3"+ " where id = " +id;
 			Db.use(ConstantInitMy.db_dataSource_main).update(sql);
-			//return true;
-			renderText("1");//成功
+			//拼接SQL语句
+			String strSQL = "select * from t7_backupfile where id = "+id;
+			// 数据库查询
+			List<T7_backupfile> res = T7_backupfile.dao.find(strSQL);
+			// 返回结果
+			if (null == res || res.size() <= 0) {
+				renderText("-1");
+				return;
+			}else {
+				//执行删除文件操作
+				String pathsrc=res.get(0).get("pathsrc").toString();//源文件路径
+				String namesrc=res.get(0).get("namesrc").toString();//备份文件名称
+				String pathdest=res.get(0).get("pathdest").toString();//备份文件路径
+				
+				//删除文件;
+				
+				renderText("1");
+			}
+			
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

@@ -29,7 +29,11 @@ import datamotion.mvc.t7_backupfile.T7_backupfile;
 	public boolean doWork(MdlFileEvent amdl) {
 		// TODO Auto-generated method stub
 		try {
-			ftpUtils.copyFile("oldPath", "newPath");
+			String pathsrc=amdl.pathsrc;//源文件路径
+			String namesrc=amdl.namesrc;//备份文件名称
+			String pathdest=amdl.pathdest;//备份文件路径
+			
+			//ftpUtils.copyFile("oldPath", "newPath");
 			
 			System.out.println(amdl.namesrc + "备份成功");
 			return true;

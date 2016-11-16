@@ -64,9 +64,9 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 	public boolean doWork(MdlFileEvent amdl) {
 		// TODO Auto-generated method stub
 		try {
-			FTPClient ftpClient = ftpUtils.connectFtp(ftpHost, ftpPort, ftpNameString, ftpPasswordString);
-			ftpUtils.downloadFile(ftpClient, amdl.pathsrc, amdl.namesrc, amdl.pathdest, amdl.namesrc);
-			ftpUtils.disconnectFtp(ftpClient);
+			ftpUtils.connectFtpByPool(ftpHost, ftpPort, ftpNameString, ftpPasswordString);
+			ftpUtils.downloadFile(amdl.pathsrc, amdl.namesrc, amdl.pathdest, amdl.namesrc);
+			ftpUtils.disconnectFtpByPool();
 			System.out.println(amdl.namesrc + "下载成功");
 			return true;
 		} catch (Exception e) {
@@ -287,8 +287,8 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 
 		mdlFileEvent.initProperties();
 		TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
-		taskCallBackDownload.dbAddFileInfo(mdlFileEvent);
-//		taskCallBackDownload.doWork(mdlFileEvent);
+//		taskCallBackDownload.dbAddFileInfo(mdlFileEvent);
+		taskCallBackDownload.doWork(mdlFileEvent);
 	}
 
 	/* (non-Javadoc)

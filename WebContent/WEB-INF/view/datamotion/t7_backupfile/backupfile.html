@@ -324,7 +324,7 @@ float: left;
 	             	    	  }
 	             	      else if(data[15]=="1")//"已备份"
 	             	    	  {
-	             	    	  	return "<input id='doLocalDownload' name='doLocalDownload_btn' type='button' value='本地下载' class='btn m-r-5' />"
+	             	    	  	return "<a href='http://localhost:8800/files/upload/"+data[2]+"'><input id='doLocalDownload' name='doLocalDownload_btn' type='button' value='本地下载' class='btn m-r-5' />"
 	                            +"<input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新备份' class='btn m-r-5'/>"
 	                            +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
 	             	    	  }

@@ -5,4 +5,8 @@
   <fixed facet="jst.web"/>
   <installed facet="wst.jsdt.web" version="1.0"/>
   <installed facet="java" version="1.7"/>
+<<<<<<< HEAD
+  <installed facet="jst.web" version="3.1"/>
+=======
+>>>>>>> 8933e444e4946040a1a1e8d10d4c618803c852f8
 </faceted-project>
