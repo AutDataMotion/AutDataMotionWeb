@@ -126,17 +126,6 @@ public class TaskCallBackArchive extends AbsTaskThread<MdlFileEvent>{
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * <p>Description: <／p>
-	 * @param amdl
-	 * @return
-	 * @see datamotion.common.InfTaskThread#addWork(datamotion.common.MdlFileEvent)
-	 */
-	@Override
-	public boolean addWork(MdlFileEvent amdl) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	/* (non-Javadoc)
 	 * <p>Description: <／p>
@@ -148,6 +137,18 @@ public class TaskCallBackArchive extends AbsTaskThread<MdlFileEvent>{
 	public boolean doWork(MdlFileEvent amdl) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	/* (non-Javadoc)
+	 * <p>Description: <／p>
+	 * @return
+	 * @see datamotion.common.AbsTaskThread#getFlowStatus()
+	 */
+	@Override
+	public StatusMy getFlowStatus() {
+		// TODO Auto-generated method stub
+		
+		return StatusMy.FLOW_ARCHIVE;
 	}
 
 	

@@ -21,14 +21,6 @@ import datamotion.mvc.t7_backupfile.T7_backupfile;
  public class TaskCallBackBackup extends AbsTaskThread<MdlFileEvent>{
 	 private static Logger log = Logger.getLogger(TaskCallBackBackup.class);
 	 FtpUtils_QM ftpUtils = new FtpUtils_QM();
-	/* (non-Javadoc)
-	 * @see datamotion.common.InfTaskThread#addWork(datamotion.common.MdlFileEvent)
-	 */
-	@Override
-	public boolean addWork(MdlFileEvent amdl) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	/* (non-Javadoc)
 	 * @see datamotion.common.InfTaskThread#doWork(datamotion.common.MdlFileEvent)
@@ -166,5 +158,17 @@ import datamotion.mvc.t7_backupfile.T7_backupfile;
 		return false;
 	}
 
-	
+
+	/* (non-Javadoc)
+	 * <p>Description: <／p>
+	 * @return
+	 * @see datamotion.common.AbsTaskThread#getFlowStatus()
+	 */
+	@Override
+	public StatusMy getFlowStatus() {
+		// TODO Auto-generated method stub
+		
+		return StatusMy.FLOW_BACKUP;
+	}
+
 }
