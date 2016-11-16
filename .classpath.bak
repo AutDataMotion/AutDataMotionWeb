@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+<<<<<<< HEAD
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+=======
 	<classpathentry kind="src" path="platform"/>
 	<classpathentry kind="src" path="jfinal20"/>
 	<classpathentry kind="src" path="junit"/>
@@ -69,14 +72,16 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ice-3.6.2.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DUCRPC"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/UtilZW"/>
+	<classpathentry kind="lib" path="/UtilZW/refLib/commons-net-3.3.jar" sourcepath="C:/Users/zhongweng/.m2/repository/commons-net/commons-net/3.3/commons-net-3.3-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+>>>>>>> 8933e444e4946040a1a1e8d10d4c618803c852f8
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
-		<accessrules>
-			<accessrule kind="accessible" pattern="**"/>
-		</accessrules>
 	</classpathentry>
-	<classpathentry kind="lib" path="/UtilZW/refLib/commons-net-3.3.jar"/>
+<<<<<<< HEAD
+	<classpathentry kind="output" path="bin"/>
+=======
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
+>>>>>>> 8933e444e4946040a1a1e8d10d4c618803c852f8
 </classpath>

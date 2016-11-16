@@ -69,6 +69,7 @@
 	<section id="main" class="p-relative" role="main">
         <!-- Shortcuts -->
         <div class="block-area" id="text-input">
+         	
             <table>
                 <tr>
                     <td>
@@ -87,7 +88,7 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#f4d525">
-		                                				<label style="float:right">正在运行</label>
+		                                				<label id="download_status" name="download_status" style="float:right">未初始化</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
@@ -101,7 +102,7 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#006db5">
-		                                				<label style="float:right">10000个</label>
+		                                				<label id="download_undoNum" name="download_undoNum" style="float:right">0个</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
@@ -115,7 +116,7 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#29a753">
-		                                				<label style="float:right">100000个</label>
+		                                				<label id="download_dosucNum" name="download_dosucNum" style="float:right">0个</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
@@ -129,19 +130,19 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#e33c36">
-		                                				<label style="float:right">10个</label>
+		                                				<label id="download_dofailNum" name="download_dofailNum" style="float:right">0个</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
 		                                	</table>
 		                                </div>
 		                                <div align="center">
-		                                	<label>启动时间：2016-10-10 10:10:10</label>
+		                                	<label id="download_timeStart" name="download_timeStart" >启动时间：2016-10-10 10:10:10</label>
 		                                </div>
 		                                <div align="center">
-		                                    <input type="button" onclick="" value="启动" class="btn m-r-5"/>
-		                                    <input type="button" onclick="" value="重启" class="btn m-r-5"/>
-		                                    <input type="button" onclick="" value="查看" class="btn m-r-5"/>
+		                                    <input id="start_Download" type="button" onclick="" value="启动" class="btn m-r-5"/>
+		                                    <input id="restart_Download" type="button" onclick="" value="重启" class="btn m-r-5"/>
+		                                    <input id="stop_Download" type="button" onclick="" value="停止" class="btn m-r-5"/>
 		                                </div>
 	                                </div>
                                 </div>
@@ -165,7 +166,7 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#f4d525">
-		                                				<label style="float:right">正在运行</label>
+		                                				<label id="backup_status" name="backup_status" style="float:right">未初始化</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
@@ -179,7 +180,7 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#006db5">
-		                                				<label style="float:right">10000个</label>
+		                                				<label id="backup_undoNum" name="backup_undoNum" style="float:right">0个</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
@@ -193,7 +194,7 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#29a753">
-		                                				<label style="float:right">100000个</label>
+		                                				<label id="backup_dosucNum" name="backup_dosucNum" style="float:right">0个</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
@@ -207,19 +208,19 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#e33c36">
-		                                				<label style="float:right">10个</label>
+		                                				<label id="backup_dofailNum" name="backup_dofailNum" style="float:right">0个</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
 		                                	</table>
 		                                </div>
 		                                <div align="center">
-		                                	<label>启动时间：2016-10-10 10:10:10</label>
+		                                	<label id="backup_timeStart" name="backup_timeStart">启动时间：2016-10-10 10:10:10</label>
 		                                </div>
 		                                <div align="center">
-		                                    <input type="button" onclick="" value="启动" class="btn m-r-5"/>
-		                                    <input type="button" onclick="" value="重启" class="btn m-r-5"/>
-		                                    <input type="button" onclick="" value="查看" class="btn m-r-5"/>
+		                                    <input id="start_BackUp" type="button" onclick="" value="启动" class="btn m-r-5"/>
+		                                    <input id="restart_BackUp" type="button" onclick="" value="重启" class="btn m-r-5"/>
+		                                    <input id="stop_BackUp" type="button" onclick="" value="停止" class="btn m-r-5"/>
 		                                </div>
 	                                </div>
                                 </div>
@@ -244,7 +245,7 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#f4d525">
-		                                				<label style="float:right">正在运行</label>
+		                                				<label id="archiveFile_status" name="archiveFile_status" style="float:right">未初始化</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
@@ -258,7 +259,7 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#006db5">
-		                                				<label style="float:right">10000个</label>
+		                                				<label id="archiveFile_undoNum" name="archiveFile_undoNum" style="float:right">0个</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
@@ -272,7 +273,7 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#29a753">
-		                                				<label style="float:right">100000个</label>
+		                                				<label id="archiveFile_dosucNum" name="archiveFile_dosucNum" style="float:right">0个</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
@@ -286,19 +287,19 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#e33c36">
-		                                				<label style="float:right">10个</label>
+		                                				<label id="archiveFile_dofailNum" name="archiveFile_dofailNum" style="float:right">0个</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
 		                                	</table>
 		                                </div>
 		                                <div align="center">
-		                                	<label>启动时间：2016-10-10 10:10:10</label>
+		                                	<label id="archiveFile_timeStart" name="archiveFile_timeStart">启动时间：2016-10-10 10:10:10</label>
 		                                </div>
 		                                <div align="center">
-		                                    <input type="button" onclick="" value="启动" class="btn m-r-5"/>
-		                                    <input type="button" onclick="" value="重启" class="btn m-r-5"/>
-		                                    <input type="button" onclick="" value="查看" class="btn m-r-5"/>
+		                                    <input id="start_ArchiveFile" type="button" onclick="" value="启动" class="btn m-r-5"/>
+		                                    <input id="restart_ArchiveFile" type="button" onclick="" value="重启" class="btn m-r-5"/>
+		                                    <input id="stop_ArchiveFile" type="button" onclick="" value="停止" class="btn m-r-5"/>
 		                                </div>
 	                                </div>
                                 </div>
@@ -322,7 +323,7 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#f4d525">
-		                                				<label style="float:right">正在运行</label>
+		                                				<label id="checkOutFile_status" name="checkOutFile_status" style="float:right">未初始化</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
@@ -336,7 +337,7 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#006db5">
-		                                				<label style="float:right">10000个</label>
+		                                				<label id="checkOutFile_undoNum" name="checkOutFile_undoNum" style="float:right">0个</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
@@ -350,7 +351,7 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#29a753">
-		                                				<label style="float:right">100000个</label>
+		                                				<label id="checkOutFile_dosucNum" name="checkOutFile_dosucNum" style="float:right">0个</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
@@ -364,19 +365,19 @@
 		                                			</td>
 		                                			<td>
 		                                			<div class="tableFrame" style="background-color:#e33c36">
-		                                				<label style="float:right">10个</label>
+		                                				<label id="checkOutFile_dofailNum" name="checkOutFile_dofailNum" style="float:right">0个</label>
 		                                			</div>
 		                                			</td>
 		                                		</tr>
 		                                	</table>
 		                                </div>
 		                                <div align="center">
-		                                	<label>启动时间：2016-10-10 10:10:10</label>
+		                                	<label id="checkOutFile_timeStart" name="checkOutFile_timeStart">启动时间：2016-10-10 10:10:10</label>
 		                                </div>
 		                                <div align="center">
-		                                    <input type="button" onclick="" value="启动" class="btn m-r-5"/>
-		                                    <input type="button" onclick="" value="重启" class="btn m-r-5"/>
-		                                    <input type="button" onclick="" value="查看" class="btn m-r-5"/>
+		                                    <input id="start_CheckOutFile" type="button" onclick="" value="启动" class="btn m-r-5"/>
+		                                    <input id="restart_CheckOutFile" type="button" onclick="" value="重启" class="btn m-r-5"/>
+		                                    <input id="stop_CheckOutFile" type="button" onclick="" value="停止" class="btn m-r-5"/>
 		                                </div>
 	                                </div>
                                 </div>
@@ -385,12 +386,94 @@
                     </td>
                 </tr>
             </table>
+        	<input id="init" type="button" onclick="" value="刷新" class="btn m-r-5"/>
         </div>
 </section>
 <% }; %>
 
 <% var jsSec={ %>
-
-
+<script>
+	jQuery(document).ready(function() {       
+		<!--- ajax start-->
+				$.ajax({
+					type : "post",
+					url : encodeURI(encodeURI(cxt
+							+ "/jf/datamotion/t6_dwnloadfile/initControlPanel")),
+					dataType : 'json',
+					contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+					crossDomain : false,
+					// 是否使用异步发送
+					async : false,
+					cache : false,
+					success : function(response) {
+						var undoNum_download = response.undoNum_download;
+						var dosucNum_download = response.dosucNum_download;
+						var dofailNum_download = response.dofailNum_download;
+						var timeStart_download = response.timeStart_download;
+						var status_download = response.status_download;
+						$("#download_undoNum").html(undoNum_download);
+						$("#download_dosucNum").html(dosucNum_download);
+						$("#download_dofailNum").html(dofailNum_download);
+						$("#download_timeStart").html(timeStart_download);
+						if(status_download == 1){
+							$("#download_status").html("正在运行");
+						}
+						else if(status_download == 0){
+							$("#download_status").html("停止");
+						}
+						
+						var undoNum_backup = response.undoNum_backup;
+						var dosucNum_backup = response.dosucNum_backup;
+						var dofailNum_backup = response.dofailNum_backup;
+						var timeStart_backup = response.timeStart_backup;
+						var status_backup = response.status_backup;
+						$("#backup_undoNum").html(undoNum_backup);
+						$("#backup_dosucNum").html(dosucNum_backup);
+						$("#backup_dofailNum").html(dofailNum_backup);
+						$("#backup_timeStart").html(timeStart_backup);
+						if(status_backup == 1){
+							$("#backup_status").html("正在运行");
+						}
+						else if(status_backup == 0){
+							$("#backup_status").html("停止");
+						}
+						
+						var undoNum_archive = response.undoNum_archive;
+						var dosucNum_archive = response.dosucNum_archive;
+						var dofailNum_archive = response.dofailNum_archive;
+						var timeStart_archive = response.timeStart_archive;
+						var status_archive = response.status_archive;
+						$("#archiveFile_undoNum").html(undoNum_archive);
+						$("#archiveFile_dosucNum").html(dosucNum_archive);
+						$("#archiveFile_dofailNum").html(dofailNum_archive);
+						$("#archiveFile_timeStart").html(timeStart_archive);
+						if(status_archive == 1){
+							$("#archiveFile_status").html("正在运行");
+						}
+						else if(status_archive == 0){
+							$("#archiveFile_status").html("停止");
+						}
+						
+						var undoNum_checkout = response.undoNum_checkout;
+						var dosucNum_checkout = response.dosucNum_checkout;
+						var dofailNum_checkout = response.dofailNum_checkout;
+						var timeStart_checkout = response.timeStart_checkout;
+						var status_checkout = response.status_checkout;
+						$("#checkOutFile_undoNum").html(undoNum_checkout);
+						$("#checkOutFile_dosucNum").html(dosucNum_checkout);
+						$("#checkOutFile_dofailNum").html(dofailNum_checkout);
+						$("#checkOutFile_timeStart").html(timeStart_checkout);
+						if(status_checkout == 1){
+							$("#checkOutFile_status").html("正在运行");
+						}
+						else if(status_checkout == 0){
+							$("#checkOutFile_status").html("停止");
+						}
+					}
+				}); 
+		<!--- ajax end-->
+		}); 
+</script>
+<script src="${cxt!}/ui/datamotion/js/controlpanel.js"></script>
 <% }; %>
 <% include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
