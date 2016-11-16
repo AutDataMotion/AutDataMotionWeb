@@ -9,6 +9,7 @@ package datamotion.checkout;
 
 import datamotion.common.AbsTaskThread;
 import datamotion.common.MdlFileEvent;
+import datamotion.constant.StatusMy;
 
 /**  
  * 创建时间：2016年11月16日 下午2:30:02  
@@ -28,18 +29,6 @@ import datamotion.common.MdlFileEvent;
  * @date 2016年11月16日
  */
 public class TaskCallBackCheckout extends AbsTaskThread<MdlFileEvent>{
-
-	/* (non-Javadoc)
-	 * <p>Description: <／p>
-	 * @param amdl
-	 * @return
-	 * @see datamotion.common.InfTaskThread#addWork(datamotion.common.MdlFileEvent)
-	 */
-	@Override
-	public boolean addWork(MdlFileEvent amdl) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	/* (non-Javadoc)
 	 * <p>Description: <／p>
@@ -146,6 +135,18 @@ public class TaskCallBackCheckout extends AbsTaskThread<MdlFileEvent>{
 	protected boolean reDoFailedWorks(MdlFileEvent amdlWork) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	/* (non-Javadoc)
+	 * <p>Description: <／p>
+	 * @return
+	 * @see datamotion.common.AbsTaskThread#getFlowStatus()
+	 */
+	@Override
+	public StatusMy getFlowStatus() {
+		// TODO Auto-generated method stub
+		
+		return StatusMy.FLOW_CHECKOUT;
 	}
 
 }

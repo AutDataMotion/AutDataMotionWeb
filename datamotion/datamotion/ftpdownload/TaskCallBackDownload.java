@@ -23,6 +23,7 @@ import datamotion.common.AbsTaskThread;
 import datamotion.common.MdlFileEvent;
 import datamotion.common.MdlFileEvent.NAMETOKE;
 import datamotion.constant.ConstantInitMy;
+import datamotion.constant.StatusMy;
 import datamotion.mvc.t6_dwnloadfile.T6_dwnloadfile;
 import datamotion.mvc.t6_dwnloadfile.T6_dwnloadfileController;
 
@@ -51,17 +52,7 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 	private int ftpPort = 21;
 	private String ftpNameString = "anonymous";
 	private String ftpPasswordString = "anonymous";
-	/* (non-Javadoc)
-	 * <p>Description: <／p>
-	 * @param amdl
-	 * @return
-	 * @see datamotion.common.InfTaskThread#addWork(datamotion.common.MdlFileEvent)
-	 */
-	@Override
-	public boolean addWork(MdlFileEvent amdl) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 	/* (non-Javadoc)
 	 * <p>Description: <／p>
@@ -298,6 +289,18 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 		TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
 		taskCallBackDownload.dbAddFileInfo(mdlFileEvent);
 //		taskCallBackDownload.doWork(mdlFileEvent);
+	}
+
+	/* (non-Javadoc)
+	 * <p>Description: <／p>
+	 * @return
+	 * @see datamotion.common.AbsTaskThread#getFlowStatus()
+	 */
+	@Override
+	public StatusMy getFlowStatus() {
+		// TODO Auto-generated method stub
+		
+		return StatusMy.FLOW_DOWNLAD;
 	}
 
 
