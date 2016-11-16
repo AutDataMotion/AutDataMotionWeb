@@ -161,21 +161,21 @@ float: left;
 		</div>
 	</div>
 	<hr class="whiter">
-	<br />
+<!-- 	<br />
 	<div class="row">
 		<div class="col-md-4  col-sm-4">
 			
 		</div>
 		<div class="col-md-4  col-sm-4"></div>
 		<div class="col-md-2  col-sm-2">
-			<a id="btndownload" href="javascript:void()" class="btn btn-sm btn-alt wid100">全部本地下载</a>
+			<a id="btnLocalDownload" href="javascript:void()" class="btn btn-sm btn-alt wid100">全部本地下载</a>
 		</div>
 		<div class="col-md-2  col-sm-2">
-			<a id="btncheckout" href="javascript:void()" class="btn btn-sm btn-alt wid100">全部重新下载</a>
+			<a id="btnReDownload" href="javascript:void()" class="btn btn-sm btn-alt wid100">全部重新下载</a>
 		</div>
 
 	</div>
-	<p class="bottom_line"></p>
+	<p class="bottom_line"></p> -->
 	<div class="row pad20">
 		<div class="doQueryResultTable">
 			<table id="myTable" class="display"></table>
@@ -250,44 +250,6 @@ float: left;
 			alert(val)
 		}
 	})
-
-	/* 
-	var dataSet = [
-<% 
-var cnt = 0;
-for(node in list){ 
-	cnt ++;
-	if(nodeLP.last){%>
-	[ "${cnt}", "${node.namesrc!}", "${node.pathsrc!}", "${node.pathdest!}", "${node.timedo!}", "${node.key_!}"]
-	
-	<%}
-	else {%>
-	[ "${cnt}", "${node.namesrc!}", "${node.pathsrc!}", "${node.pathdest!}", "${node.timedo!}", "${node.key_!}"],
-	<%}
-}%>			
-	];
-
-	$(document).ready(function() {
-		$('#myTable').DataTable({
-			data : dataSet,
-			columns : [ {
-				title : "序号"
-			}, {
-				title : "文件名"
-			}, {
-				title : "原路径"
-			}, {
-				title : "下载路径"
-			}, {
-				title : "下载时间"
-			}, {
-				title : "操作"
-			} ],
-			"language" : {
-				"url" : "${cxt!}/ui/DataTables/Chinese.json"
-			}
-		});
-	}); */
 	//ajax 发送查询参数数据
 	var myTable;
 	$(document).ready(function() {
@@ -300,7 +262,7 @@ for(node in list){
                 { title: "下载文件路径" },
                 { title: "下载时间" },
                 { title: "文件大小" },
-                { title: "接收站名称" },
+              /*   { title: "接收站名称" },
                 { title: "飞行器" },
                 { title: "载荷名称" },
                 { title: "数据类型" },
@@ -308,7 +270,7 @@ for(node in list){
                 { title: "产品标识" },
                 { title: "下传时间" },
                 { title: "拍摄开始时间" },
-                { title: "拍摄结束时间" },
+                { title: "拍摄结束时间" }, */
                 { title: "状态"},
                 { title: "添加时间" },
                 { title: "操作" },
@@ -350,18 +312,18 @@ for(node in list){
              	   	//console.log(data);
           	    	  if(data[15]=="0")//未下载
           	    	  {
-          	    	  	return "<input id='reDownLoad' name='reDownLoad_btn' type='button' value='重新下载' class='btn m-r-5'/>"
-                         +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
+          	    	  	return "<input id='reDownLoad' name='reDownLoad' type='button' value='重新下载' class='btn m-r-5'/>"
+                         +"<input id='doDeleteSeleted' name='doDeleteSeleted' type='button' value='删除' class='btn m-r-5'/>";
           	    	  }
           	      else if(data[15]=="1")//"已下载"
           	    	  {
-          	    	  	return "<input id='doLocalDownload' name='doLocalDownload_btn' type='button' value='本地下载' class='btn m-r-5' />"
-                         +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
+          	    	  	return "<a href='http://localhost:8800/files/upload/TS_TG02_QKDS_PRD1_ENG_20161027170746_20161027170746_20161028165342_000_0C.csv'><input id='doLocalDownload' name='doLocalDownload' type='button' value='本地下载' class='btn m-r-5' /></a> "
+                         +"<input id='doDeleteSeleted' name='doDeleteSeleted' type='button' value='删除' class='btn m-r-5'/>";
           	    	  }
           	      else if(data[15]=="2")//"下载失败"
           	    	  {
-          	    	  	return "<input id='reDownLoad' name='reDownLoad_btn' type='button' value='重新下载' class='btn m-r-5'/>"
-                         +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
+          	    	  	return "<input id='reDownLoad' name='reDownLoad' type='button' value='重新下载' class='btn m-r-5'/>"
+                         +"<input id='doDeleteSeleted' name='doDeleteSeleted' type='button' value='删除' class='btn m-r-5'/>";
           	    	  }
           	      else{//"已删除"
           	    	  	return "";
@@ -378,19 +340,17 @@ for(node in list){
  	   
  	   $('#myTable tbody').on( 'click', '#doLocalDownload', function () {
 	        var data = myTable.row($(this).parents('tr')).data();
-	        alert( data[0]+" doLocalDownload");
 	    } );
  	   
  	   $('#myTable tbody').on( 'click', '#reDownLoad', function () {
    	        var data = myTable.row($(this).parents('tr')).data();
-   	        alert( data[0]+" reDownLoad");
    	     $.ajax( {    
     	        "type": "get",     
     	        "contentType": "application/json",    
     	        "url": encodeURI(encodeURI(cxt
   						+ "/jf/datamotion/t6_dwnloadfile/reDownLoad")),     
     	        "dataType": "json",    
-    	        "data": {"id": data[0], "pathsrc": data[1], "namesrc": data[2]}, // 以json格式传递  
+    	        "data": {"id": data[0], "pathsrc": data[1], "namesrc": data[2], "pathdest": data[3]}, // 以json格式传递  
     	        "success": function(res) {    
     	        		//console.log(res);
                    var returnData = {};
@@ -402,7 +362,20 @@ for(node in list){
  	   
  	   $('#myTable tbody').on( 'click', '#doDeleteSeleted', function () {
   	        var data = myTable.row($(this).parents('tr')).data();
-  	        alert( data[0]+" doDeleteSeleted");
+  	      $.ajax( {    
+  	        "type": "get",     
+  	        "contentType": "application/json",    
+  	        "url": encodeURI(encodeURI(cxt
+						+ "/jf/datamotion/t6_dwnloadfile/doDeleteSeleted")),     
+  	        "dataType": "json",    
+  	        "data": {"id": data[0], "pathsrc": data[1], "namesrc": data[2], "pathdest": data[3]}, // 以json格式传递  
+  	        "success": function(res) {    
+  	        		//console.log(res);
+                 var returnData = {};
+                 returnData.data = res.data;
+                 callback(returnData);
+  	        }    
+  	    });    
   	    } );
  	   
     } );

@@ -29,6 +29,7 @@ import datamotion.ftpdownload.TaskCallBackDownload;
 import datamotion.mvc.mdlcomm.MdlClientCheckout;
 import datamotion.mvc.mdlcomm.MdlClientDownLoad;
 import datamotion.mvc.mdlcomm.MdlControlPanel;
+import datamotion.mvc.mdlcomm.MdlStatusDownLoad;
 import datamotion.mvc.t7_backupfile.T7_backupfile;
 
 
@@ -108,12 +109,12 @@ public class T6_dwnloadfileController extends BaseController {
 			subdata.add(list.get(i).get("sensor").toString());
 			subdata.add(list.get(i).get("datatype").toString());
 			subdata.add(list.get(i).get("datalevel").toString());
-			subdata.add("");
-			subdata.add("");
-			subdata.add("");
-			subdata.add("");
+			subdata.add(list.get(i).get("camera").toString());
+			subdata.add(list.get(i).get("timerecive").toString());
+			subdata.add(list.get(i).get("timecollectstart").toString());
+			subdata.add(list.get(i).get("timecollectend").toString());
 			subdata.add(list.get(i).get("status_").toString());
-			subdata.add("");
+			subdata.add(list.get(i).get("timeadd").toString());
 			subdata.add("buttons");
 			//subdata.add(sublist.get(0).get("labelids").toString());
 			data.add(subdata);
@@ -126,16 +127,19 @@ public class T6_dwnloadfileController extends BaseController {
 	@Clear
 	public void getDataFromDatabase()
 	{
-		// 获得参数
-//		String draw=getPara("draw");
-//		String start=getPara("start");
-//		String length=getPara("length");
-		
 		List<T6_dwnloadfile> list = T6_dwnloadfile.dao.find(
 				"select * from T6_dwnloadfile order by id desc");
 		String Jsondata = getPagedata(list);
 		renderJson(Jsondata);
 	}	
+	/*
+	 * 本地下载
+	 */
+	@Clear
+	public void localDownLoad()
+	{
+	}	
+	
 	/*
 	 * 重新下载
 	 */
@@ -143,21 +147,39 @@ public class T6_dwnloadfileController extends BaseController {
 	public void reDownLoad()
 	{
 		// 获得参数
-//		String id=getPara("id");
+		String id=getPara("id");
+		int id_ = Integer.parseInt(id);
 		String pathsrc=getPara("pathsrc");
 		String namesrc=getPara("namesrc");
-//		List<T6_dwnloadfile> list = T6_dwnloadfile.dao.find(
-//				"select * from T6_dwnloadfile where id = " + id);
-//		System.out.println(list.toString());
+		String pathdest=getPara("pathdest");
 		//初始化参数
-		MdlFileEvent amdl = new MdlFileEvent(pathsrc,namesrc);
+		MdlFileEvent amdl = new MdlFileEvent(pathsrc,namesrc,pathdest,namesrc);
 		amdl.initProperties();
 		//下载文件
 		TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
 		taskCallBackDownload.doWork(amdl);
-//		String Jsondata = getPagedata(list);
-//		renderJson(Jsondata);
-	}	
+		
+		/*更新状态为已下载*/
+		Db.use(ConstantInitMy.db_dataSource_main)
+			.update("update t6_dwnloadfile set status_=? where id=?",MdlStatusDownLoad.success,id_);
+
+		renderWithPath(pthc+"dwnloadfile.html");
+	}
+
+	/**
+	 * 删除
+	 */
+	@Clear
+	public void doDeleteSeleted(){
+		// 获得参数
+		String id=getPara("id");
+		int id_ = Integer.parseInt(id);
+		
+		/*更新状态为已下载*/
+		Db.use(ConstantInitMy.db_dataSource_main)
+			.update("update t6_dwnloadfile set status_=? where id=?",MdlStatusDownLoad.delete,id_);
+		renderWithPath(pthc+"dwnloadfile.html");
+	}
 	/**
 	 * 列表
 	 */
@@ -218,9 +240,15 @@ renderText("-1");//错误
 		return;
 	}
 
-	// 全部下载本地
+	// 全部本地下载
 	@Clear
-	public void downloadAll() {
+	public void localDownloadAll() {
+
+		// renderJson(null);
+	}
+	// 全部重新下载
+	@Clear
+	public void reDownloadAll() {
 
 		// renderJson(null);
 	}
@@ -231,7 +259,6 @@ renderText("-1");//错误
 		String namesrc="TT_TT02_MWI_VNI_IMG_20161031000000_20161021000000_20161030000000_000_0C.csv";
 		String[] namesStrings = namesrc.split("_");
 		String pathdest="E://MWI//";
-//		String timedo=getPara("datatype");
 		int filesize= 3333;
 		String station=namesStrings[0];
 		String aircraft=namesStrings[1];
@@ -240,11 +267,8 @@ renderText("-1");//错误
 		String datalevel=namesStrings[9];
 		String camera=namesStrings[4];
 		Timestamp timerecive=new Timestamp(System.currentTimeMillis());
-//		String timecollectstart=getPara("patharchive");
-//		String timecollectend=getPara("ischeckout");
 		String suffix=".csv";
 		int status_=1;
-//		String timeadd=getPara("namemdldes");
 		Record t6_dwnloadfileRecord=new Record()
 		.set("key_", UUIDGener.getUUIDShort())
 		.set("pathsrc", pathsrc)
