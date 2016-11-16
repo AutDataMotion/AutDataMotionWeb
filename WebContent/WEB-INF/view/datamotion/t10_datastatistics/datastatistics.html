@@ -173,7 +173,7 @@ height:300px;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_receiveStartTime_datastatistics" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_receiveTimeBeg" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 		
@@ -184,7 +184,7 @@ height:300px;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_receiveEndTime_datastatistics" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_receiveTimeEnd" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 	</div>
@@ -196,7 +196,7 @@ height:300px;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_collectStartTime_datastatistics" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_collectStartTime" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 		<div class="column_label">
@@ -206,7 +206,7 @@ height:300px;
 		</div>
 		<div class="column_input">
 			<div class="time">
-		       <input class="datainp" id="dateinfo_collectEndTime_datastatistics" type="text" placeholder="请选择" readonly="">
+		       <input class="datainp" id="dateinfo_collectEndTime" type="text" placeholder="请选择" readonly="">
 		    </div>
 		</div>
 	</div>
@@ -218,7 +218,7 @@ height:300px;
 			</div>
 			<div class="column_input">
 				<div class="time">
-			       <input class="datainp" id="dateinfo_intoDatabaseStartTime_datastatistics" type="text" placeholder="请选择" readonly="">
+			       <input class="datainp" id="dateinfo_DBstartTime" type="text" placeholder="请选择" readonly="">
 			    </div>
 			</div>
 			
@@ -229,7 +229,7 @@ height:300px;
 			</div>
 			<div class="column_input">
 				<div class="time">
-			       <input class="datainp" id="dateinfo_intoDatabaseEndTime_datastatistics" type="text" placeholder="请选择" readonly="">
+			       <input class="datainp" id="dateinfo_DBEndTime" type="text" placeholder="请选择" readonly="">
 			    </div>
 			</div>
 	</div>
@@ -241,11 +241,11 @@ height:300px;
 			</div>
 			<div class="column_input">
 				<div class="col-md-4_datastatistics form-group_datastatistics">
-			       <select  class="select" id="datastatisticsKind">
-			       	  <option value="0">下载</option>
-			          <option value="1">备份</option>
-			          <option value="2">归档</option>
-			          <option value="3">检出</option>
+			       <select  class="select" id="status">
+			       	  <option value="10">下载</option>
+			          <option value="11">备份</option>
+			          <option value="12">归档</option>
+			          <option value="13">检出</option>
 			       </select>
 			    </div>
 			</div>
@@ -363,6 +363,7 @@ height:300px;
 	<!-- DataTables -->
 <script type="text/javascript" src="${cxt!}/ui/DataTables/datatables.min.js"></script>
 <script src="${cxt!}/ui/SuperAdmin/js/echarts-all.js"></script>
+<script src="${cxt!}/ui/datamotion/js/datastatistics.js"></script>
 	<script>
 	var myChart1 = echarts.init(document.getElementById('Charts1'));
 	option1 = {
@@ -521,7 +522,7 @@ height:300px;
 	myChart2.setOption(option2);
 	
 	jeDate({
-		dateCell:"#dateinfo_receiveStartTime_datastatistics",
+		dateCell:"#dateinfo_receiveTimeBeg",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -529,7 +530,7 @@ height:300px;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_receiveEndTime_datastatistics",
+		dateCell:"#dateinfo_receiveTimeEnd",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -537,7 +538,7 @@ height:300px;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_collectStartTime_datastatistics",
+		dateCell:"#dateinfo_collectStartTime",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -545,7 +546,7 @@ height:300px;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_collectEndTime_datastatistics",
+		dateCell:"#dateinfo_collectEndTime",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -553,7 +554,7 @@ height:300px;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_intoDatabaseStartTime_datastatistics",
+		dateCell:"#dateinfo_DBstartTime",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,
@@ -561,7 +562,7 @@ height:300px;
 		okfun:function(val){alert(val)}
 	})
 	jeDate({
-		dateCell:"#dateinfo_intoDatabaseEndTime_datastatistics",
+		dateCell:"#dateinfo_DBEndTime",
 		format:"YYYY-MM-DD hh:mm:ss",
 		isinitVal:true,
 		isTime:true, //isClear:false,

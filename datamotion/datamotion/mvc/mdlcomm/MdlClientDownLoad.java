@@ -103,7 +103,7 @@ public class MdlClientDownLoad implements Serializable {
 	}
 	//拼接其他查询条件的字段
 	public void getOthersStr(StringBuilder aSbSQL){
-		if(status != 5)
+		if(status != 5&&status < 10)
 			aSbSQL.append(" and status_ = "+ status);
 		aSbSQL.append(" and timecollectstart > '" + timebegcollect + "'");
 		aSbSQL.append(" and timecollectend < '" + timeendcollect + "'");

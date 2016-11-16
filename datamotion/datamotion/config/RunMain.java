@@ -11,6 +11,8 @@ import org.apache.log4j.Logger;
 
 import com.platform.interf.InfMainConf;
 
+import csuduc.platform.util.JsonUtils;
+
 /**  
  * 创建时间：2016年11月2日 下午9:09:59  
  * 项目名称：AutDataMotion   
@@ -53,9 +55,13 @@ public class RunMain implements InfMainConf{
 	public boolean init() {
 		// TODO Auto-generated method stub
 		//加载数据库的配置信息
-	
+		if (!ConfMain.buildProperties()) {
+			log.error("error: RunMain ConfMain.buildProperties ");
+			return false;
+		}
+		log.debug(ConfMain.treeRoot);
 		//
-		return false;
+		return true;
 	}
 
 	/* (non-Javadoc)

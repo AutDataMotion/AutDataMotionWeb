@@ -9,15 +9,8 @@ package datamotion.common;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-import org.eclipse.jetty.util.log.Log;
-import org.hamcrest.core.Is;
-
-import sun.util.logging.resources.logging;
 import csuduc.platform.util.StringUtil;
 
 /**  
