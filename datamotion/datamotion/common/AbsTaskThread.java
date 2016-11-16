@@ -18,6 +18,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
+import datamotion.constant.StatusMy;
+
 /**  
  * 创建时间：2016年10月30日 下午8:11:29  
  * 项目名称：AutDataMotion   
@@ -53,6 +55,7 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements
 	final Lock lock = new ReentrantLock();// 锁对象
 	final Condition singalQue = lock.newCondition();// 读写条件
 
+	private StatusMy flowStatus = StatusMy.FLOW_UNKNOWN;
 	// 执行任务线程
 	private ConsumerTask consumerTask;
 	// 内存回收线程
@@ -141,6 +144,34 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc) <p>Description: <／p>
+	 * 
+	 * @param amdl
+	 * 
+	 * @return
+	 * 
+	 * @see
+	 * datamotion.common.InfTaskThread#addWork(datamotion.common.MdlFileEvent)
+	 */
+	@Override
+	public boolean addWork(MdlFileEvent amdl) {
+		// TODO Auto-generated method stub
+		//根据配置文件设置路径
+		amdl.changeFileEvent(amdl.pathdest, amdl.namedest, flowStatus);
+		//添加到待处理队列
+		quefiles_undo.add((F) amdl);
+		lock.lock();
+		try {
+			singalQue.signal();
+		} finally {
+			lock.unlock();
+		}
+		return true;
+	}
+
+	public abstract boolean setFlowStatus(StatusMy aStatusFlow);
+
 	public abstract boolean isCorrectFile(F afile);
 
 	public abstract boolean doWorkSucAfter(F afile);
@@ -223,7 +254,6 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements
 		public void setStop() {
 			this.status = STOP;
 		}
-
 
 		public synchronized void myResume() {
 			// 修改状态
