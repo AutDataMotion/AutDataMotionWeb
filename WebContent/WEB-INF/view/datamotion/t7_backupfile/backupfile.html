@@ -145,7 +145,7 @@ float: left;
 			<div class="column_input">
 				<div class="col-md-4_backupfile form-group_backupfile">
 			       <select  class="select" id="status">
-			       	  <option value="4">全部</option>
+			       	  <option value="5">全部</option>
 			       	  <option value="0">未备份</option>
 			          <option value="1">已备份</option>
 			          <option value="2">备份失败</option>
@@ -348,17 +348,22 @@ float: left;
         	   
         	   $('#myTable tbody').on( 'click', '#doLocalDownload', function () {
        	        var data = myTable.row($(this).parents('tr')).data();
-       	        alert( data[0]+" doLocalDownload");
+       	        //alert( data[0]+" doLocalDownload");
+       	     	doLocalDownload(data[0]);
        	    } );
         	   
         	   $('#myTable tbody').on( 'click', '#doNewBackup', function () {
           	        var data = myTable.row($(this).parents('tr')).data();
-          	        alert( data[0]+" doNewBackup");
+          	      	doNewBackup(data[0]);
+          	        //alert( data[0]+" doNewBackup");
           	    } );
         	   
         	   $('#myTable tbody').on( 'click', '#doDeleteSeleted', function () {
-         	        var data = myTable.row($(this).parents('tr')).data();
-         	        alert( data[0]+" doDeleteSeleted");
+        		   //console.log($(this).parents('tr'));
+	        		   var index = $(this).parents('tr');
+	        		   var data = myTable.row(index).data();
+         	       	doDeleteSeleted(index,data);
+         	        //alert( data[0]+" doDeleteSeleted");
          	    } );
         	   
            } );

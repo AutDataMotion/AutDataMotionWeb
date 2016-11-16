@@ -4,6 +4,8 @@ import com.platform.annotation.Table;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
 
+import datamotion.mvc.mdlcomm.InfMdlCom;
+
 import java.sql.Timestamp; 
 
 import org.apache.log4j.Logger;
@@ -14,7 +16,7 @@ import org.apache.log4j.Logger;
  */
 @SuppressWarnings("unused")
 //@Table(tableName = "t6_dwnloadfile")
-public class T6_dwnloadfile extends BaseModel<T6_dwnloadfile> {
+public class T6_dwnloadfile extends BaseModel<T6_dwnloadfile> implements InfMdlCom{
 
 	private static final long serialVersionUID = 6761767368352810428L;
 
