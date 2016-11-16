@@ -151,5 +151,4 @@ public class TaskCallBackArchive extends AbsTaskThread<MdlFileEvent>{
 		return StatusMy.FLOW_ARCHIVE;
 	}
 
-	
 }

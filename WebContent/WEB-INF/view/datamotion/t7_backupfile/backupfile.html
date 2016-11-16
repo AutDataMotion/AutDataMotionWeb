@@ -179,43 +179,7 @@ float: left;
 	<div class="doQueryResultTable">
 		<table id="myTable" class="display nowrap" cellspacing="0" style="width:100%;background-color: rgba(255, 255, 255, .15);"></table>	
 	</div>
-	 <!-- Modal -->
-                    <div class="modal fade" id="form-modal" tabindex="-1" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title">确认?</h4>
-                                </div>
-                                <!-- div class="modal-body">
-                                    <form class="form-horizontal" role="form">
-                                        <div class="form-group">
-                                            <label for="inputName4" class="col-md-2 control-label">Name</label>
-                                            <div class="col-md-9">
-                                                <input type="text" class="form-control input-sm" id="inputName4" placeholder="...">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputEmail4" class="col-md-2 control-label">Email</label>
-                                            <div class="col-md-9">
-                                                <input type="email" class="form-control input-sm" id="inputEmail4" placeholder="...">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputMessage3" class="col-md-2 control-label">Message</label>
-                                            <div class="col-md-9">
-                                                <textarea class="form-control auto-size input-sm" id="inputMessage3" placeholder="..."></textarea>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div-->
-                                <div class="modal-footer">
-                                    <button onclick="YesButton()" type="button" class="btn btn-sm btn-alt">YES</button>
-                                    <button type="button" class="btn btn-sm btn-alt" data-dismiss="modal">NO</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>		
+			
 </div>
 <% }; %>
 
@@ -355,19 +319,19 @@ float: left;
                     	   	//console.log(data);
 	             	    	  if(data[15]=="0")//未备份
 	             	    	  {
-	             	    	  	return "<a data-toggle='modal' href='#form-modal'/><input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新备份' class='btn m-r-5'/>"
-	                            +"<a data-toggle='modal' href='#form-modal'/><input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
+	             	    	  	return "<input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新备份' class='btn m-r-5'/>"
+	                            +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
 	             	    	  }
 	             	      else if(data[15]=="1")//"已备份"
 	             	    	  {
 	             	    	  	return "<a href='http://localhost:8800/files/upload/"+data[2]+"'><input id='doLocalDownload' name='doLocalDownload_btn' type='button' value='本地下载' class='btn m-r-5' />"
-	                            +"<a data-toggle='modal' href='#form-modal'/><input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新备份' class='btn m-r-5'/>"
-	                            +"<a data-toggle='modal' href='#form-modal'/><input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
+	                            +"<input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新备份' class='btn m-r-5'/>"
+	                            +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
 	             	    	  }
 	             	      else if(data[15]=="2")//"备份失败"
 	             	    	  {
-	             	    	  	return "<a data-toggle='modal' href='#form-modal'/><input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新备份' class='btn m-r-5'/>"
-	                            +"<a data-toggle='modal' href='#form-modal'/><input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
+	             	    	  	return "<input id='doNewBackup' name='doNewBackup_btn' type='button' value='重新备份' class='btn m-r-5'/>"
+	                            +"<input id='doDeleteSeleted' name='doDeleteSeleted_btn' type='button' value='删除' class='btn m-r-5'/>";
 	             	    	  }
 	             	      else{//"已删除"
 	             	    	  	return "";
@@ -381,11 +345,15 @@ float: left;
                    } 
                 	  	]
                } );
+<<<<<<< HEAD
         	   var Yes=false;
         	   function YesButton()
         	   {
         		   Yes=true;
         	   }
+=======
+        	   
+>>>>>>> parent of 5411840... update again
         	   $('#myTable tbody').on( 'click', '#doLocalDownload', function () {
        	        var data = myTable.row($(this).parents('tr')).data();
        	        //alert( data[0]+" doLocalDownload");

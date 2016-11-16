@@ -294,6 +294,7 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 	}
 
 
+
 	/* (non-Javadoc)
 	 * <p>Description: <／p>
 	 * @return
@@ -305,6 +306,7 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 		
 		return StatusMy.FLOW_DOWNLAD;
 	}
+
 
 
 
