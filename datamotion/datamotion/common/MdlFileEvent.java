@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 
 import csuduc.platform.util.ComUtil;
 import csuduc.platform.util.StringUtil;
+import datamotion.constant.StatusMy;
 import datamotion.ftpwatch.WatchFilesFtp;
 
 /**  
@@ -79,6 +80,7 @@ public class MdlFileEvent implements Serializable {
 	public Integer status_;
 
 	//扫描时的文件状态 0 未就绪  1就绪  2 已分发
+	
 	public int flagWatch;
 	//
 	// 文件名解析token
@@ -86,6 +88,7 @@ public class MdlFileEvent implements Serializable {
 	private boolean isInit = false;
 
 	//文件处理的属性
+	public StatusMy flowStatus;
 	public transient MdlTreeProperty property;
 	
 	public MdlFileEvent(){}
@@ -169,6 +172,7 @@ public class MdlFileEvent implements Serializable {
 	}
 
 	public synchronized static String getFileNameFilterStr(
+
 			List<String> aFileNameTokens) {
 		if (ComUtil.isEmptyList(aFileNameTokens)) {
 			log.debug("ComUtil.isEmptyList(aFileNameTokens)");
@@ -184,5 +188,35 @@ public class MdlFileEvent implements Serializable {
 				aFileNameTokens.get(NAMETOKE.SENSOR.ordinal()),
 				aFileNameTokens.get(NAMETOKE.TYPE.ordinal()),
 				aFileNameTokens.get(NAMETOKE.CAMERA.ordinal()));
+	}
+
+	public boolean changeFileEvent(String aPathSrc, String aNameSrc, StatusMy aStatus){
+		//更改路径 文件名
+		pathsrc = aPathSrc;
+		namesrc = aNameSrc;
+		
+		switch (aStatus) {
+		case FLOW_DOWNLAD:
+			pathdest = property.property.getPathdwnload();
+			namedest = namesrc;
+			break;
+		case FLOW_BACKUP:
+			pathdest = property.property.getPathbackup();
+			namedest = namesrc;
+			break;
+		case FLOW_ARCHIVE:
+			pathdest = property.property.getPatharchive();
+			namedest = namesrc;
+			break;
+		case FLOW_CHECKOUT:
+			pathdest = property.property.getPathcheckout();
+			//修改文件名
+			namedest = namesrc;
+			break;
+		default:
+			return false;
+		}
+		
+		return true;
 	}
 }
