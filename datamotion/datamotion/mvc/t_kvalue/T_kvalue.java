@@ -4,6 +4,8 @@ import com.platform.annotation.Table;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
 
+import datamotion.mvc.t7_backupfile.T7_backupfile;
+
 import java.sql.Timestamp; 
 
 import org.apache.log4j.Logger;

@@ -268,7 +268,7 @@ height:300px;
 
                      <div class="media">
                      		<div class="pull-right">
-                             <div class="counts">367892</div>
+                             <div id="K_num" class="counts"></div>
                          </div>
                          <div class="media-body">
                              <h4>总数量(个)：</h4>
@@ -276,7 +276,7 @@ height:300px;
                      </div>
                      <div class="media">
                          <div class="pull-right">
-                             <div class="counts">123545</div>
+                             <div id="K_vol" class="counts"></div>
                          </div>
                          <div class="media-body">
                              <h4>总容量(Mb)：</h4>
@@ -297,7 +297,7 @@ height:300px;
 
                       <div class="media">
                       		<div class="pull-right">
-                              <div class="counts">367892</div>
+                              <div id="G_num" class="counts"></div>
                           </div>
                           <div class="media-body">
                               <h4>总数量(个)：</h4>
@@ -305,7 +305,7 @@ height:300px;
                       </div>
                       <div class="media">
                           <div class="pull-right">
-                              <div class="counts">123545</div>
+                              <div id="G_vol" class="counts"></div>
                           </div>
                           <div class="media-body">
                               <h4>总容量(Mb)：</h4>
@@ -326,7 +326,7 @@ height:300px;
 
             <div class="media">
             		<div class="pull-right">
-                    <div class="counts">367892</div>
+                    <div id="Z_num" class="counts"></div>
                 </div>
                 <div class="media-body">
                     <h4>总数量(个)：</h4>
@@ -334,7 +334,7 @@ height:300px;
             </div>
             <div class="media">
                 <div class="pull-right">
-                    <div class="counts">123545</div>
+                    <div id="Z_vol" class="counts"></div>
                 </div>
                 <div class="media-body">
                     <h4>总容量(Mb)：</h4>
@@ -365,6 +365,9 @@ height:300px;
 <script src="${cxt!}/ui/SuperAdmin/js/echarts-all.js"></script>
 <script src="${cxt!}/ui/datamotion/js/datastatistics.js"></script>
 	<script>
+	
+	initPage();
+	
 	var myChart1 = echarts.init(document.getElementById('Charts1'));
 	option1 = {
 		    title : {
@@ -380,10 +383,8 @@ height:300px;
 			    	textStyle:{
 		        		color: '#fff'
 		        		},
-		        data:[
-		            
-		            'L0','L1','L2'
-		        ]
+		        //data:['L0','L1','L2']
+		        	data:['0B','0C','L0','L1','L2','L3','L4','L5']
 		    },
 		    toolbox: {
 		        show : true,
@@ -395,6 +396,11 @@ height:300px;
 		            saveAsImage : {show: true}
 		        }
 		    },
+		    dataZoom: {
+		        show: true,
+		        start : 0,
+		        end : 100
+		    },
 		    calculable : true,
 		    grid: {y: 70, y2:30, x2:20},
 		    xAxis : [
@@ -405,7 +411,8 @@ height:300px;
 				        		color: '#fff'
 				        		}
 	            		},
-		            data : ['宽波段','高度计','紫外']
+		            //data : ['宽波段','高度计','紫外']
+	            		data : ['宽波段']
 		        }
 		    ],
 		    yAxis : [
@@ -421,22 +428,68 @@ height:300px;
 		    ],
 		    series : [
 		        {
+		            name:'0B',
+		            type:'bar',
+		            stack: '个数',
+		            //itemStyle: {normal: {color:'rgba(193,35,43,1)', label:{show:true,textStyle:{color:'#ffffff'}}}},
+		            itemStyle: {normal: {label:{show:false, position:'inside',textStyle:{color:'#ffffff'}}}},
+		            data:[0]
+		        },
+		        {
+		            name:'0C',
+		            type:'bar',
+		            stack: '个数',
+		            //itemStyle: {normal: {color:'rgba(193,35,43,1)', label:{show:true,textStyle:{color:'#ffffff'}}}},
+		            itemStyle: {normal: {label:{show:false,position:'inside',textStyle:{color:'#ffffff'}}}},
+		            data:[0]
+		        },
+		        {
 		            name:'L0',
 		            type:'bar',
-		            itemStyle: {normal: {color:'rgba(193,35,43,1)', label:{show:true,textStyle:{color:'#ffffff'}}}},
-		            data:[40,155,95]
+		            stack: '个数',
+		            //itemStyle: {normal: {color:'rgba(193,35,43,1)', label:{show:true,textStyle:{color:'#ffffff'}}}},
+		            itemStyle: {normal: {label:{show:false,position:'inside',textStyle:{color:'#ffffff'}}}},
+		            data:[0]
 		        },
 		        {
 		            name:'L1',
 		            type:'bar',
-		            itemStyle: {normal: {color:'rgba(181,195,52,1)', label:{show:true,textStyle:{color:'#ffffff'}}}},
-		            data:[100,200,105]
+		            stack: '个数',
+		            //itemStyle: {normal: {color:'rgba(193,35,43,1)', label:{show:true,textStyle:{color:'#ffffff'}}}},
+		            itemStyle: {normal: {label:{show:false,position:'inside',textStyle:{color:'#ffffff'}}}},
+		            data:[0]
 		        },
 		        {
 		            name:'L2',
 		            type:'bar',
-		            itemStyle: {normal: {color:'rgba(252,206,16,1)', label:{show:true,textStyle:{color:'#ffffff'}}}},
-		            data:[906,911,908]
+		            stack: '个数',
+		            //itemStyle: {normal: {color:'rgba(193,35,43,1)', label:{show:true,textStyle:{color:'#ffffff'}}}},
+		            itemStyle: {normal: {label:{show:false,position:'inside',textStyle:{color:'#ffffff'}}}},
+		            data:[0]
+		        },
+		        {
+		            name:'L3',
+		            type:'bar',
+		            stack: '个数',
+		            //itemStyle: {normal: {color:'rgba(193,35,43,1)', label:{show:true,textStyle:{color:'#ffffff'}}}},
+		            itemStyle: {normal: {label:{show:false,position:'inside',textStyle:{color:'#ffffff'}}}},
+		            data:[0]
+		        },
+		        {
+		            name:'L4',
+		            type:'bar',
+		            stack: '个数',
+		            //itemStyle: {normal: {color:'rgba(193,35,43,1)', label:{show:true,textStyle:{color:'#ffffff'}}}},
+		            itemStyle: {normal: {label:{show:false,position:'inside',textStyle:{color:'#ffffff'}}}},
+		            data:[0]
+		        },
+		        {
+		            name:'L5',
+		            type:'bar',
+		            stack: '个数',
+		            //itemStyle: {normal: {color:'rgba(193,35,43,1)', label:{show:true,textStyle:{color:'#ffffff'}}}},
+		            itemStyle: {normal: {label:{show:false,position:'inside',textStyle:{color:'#ffffff'}}}},
+		            data:[0]
 		        }
 		    ]
 		};
@@ -460,8 +513,10 @@ height:300px;
 			    	textStyle:{
 		        		color: '#fff'
 		        },
-		        data:['L0','L1','L2']
+		        //data:['L0','L1','L2']
+		        data:['0B','0C','L0','L1','L2','L3','L4','L5']
 		    },
+		    grid: {x:130,y: 70, y2:30, x2:30},
 		    toolbox: {
 		        show : true,
 		        feature : {
@@ -487,7 +542,8 @@ height:300px;
 		    yAxis : [
 		        {
 		            type : 'category',
-		            data : ['宽波段','高度计','紫外'],
+		            //data : ['宽波段','高度计','紫外'],
+		            data : ['宽波段'],
 		            axisLabel:{
 	            		textStyle:{
 			        		color: '#fff'
@@ -497,25 +553,68 @@ height:300px;
 		    ],
 		    series : [
 		        {
+		            name:'0B',
+		            type:'bar',
+		            stack: '总量',
+		            itemStyle : { normal: {label : {show: false, position: 'insideRight'}}},
+		            //data:[320, 302, 301]
+		            data:[0]
+		        },
+		        {
+		            name:'0C',
+		            type:'bar',
+		            stack: '总量',
+		            itemStyle : { normal: {label : {show: false, position: 'insideRight'}}},
+		            //data:[120, 132, 101]
+		            data:[0]
+		        },
+		        {
 		            name:'L0',
 		            type:'bar',
 		            stack: '总量',
-		            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
-		            data:[320, 302, 301]
+		            itemStyle : { normal: {label : {show: false, position: 'insideRight'}}},
+		            //data:[220, 182, 191]
+		            data:[0]
 		        },
 		        {
 		            name:'L1',
 		            type:'bar',
 		            stack: '总量',
-		            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
-		            data:[120, 132, 101]
+		            itemStyle : { normal: {label : {show: false, position: 'insideRight'}}},
+		            //data:[220, 182, 191]
+		            data:[0]
 		        },
 		        {
 		            name:'L2',
 		            type:'bar',
 		            stack: '总量',
-		            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
-		            data:[220, 182, 191]
+		            itemStyle : { normal: {label : {show: false, position: 'insideRight'}}},
+		            //data:[220, 182, 191]
+		            data:[0]
+		        },
+		        {
+		            name:'L3',
+		            type:'bar',
+		            stack: '总量',
+		            itemStyle : { normal: {label : {show: false, position: 'insideRight'}}},
+		            //data:[220, 182, 191]
+		            data:[0]
+		        },
+		        {
+		            name:'L4',
+		            type:'bar',
+		            stack: '总量',
+		            itemStyle : { normal: {label : {show: false, position: 'insideRight'}}},
+		            //data:[220, 182, 191]
+		            data:[0]
+		        },
+		        {
+		            name:'L5',
+		            type:'bar',
+		            stack: '总量',
+		            itemStyle : { normal: {label : {show: false, position: 'insideRight'}}},
+		            //data:[220, 182, 191]
+		            data:[0]
 		        }
 		    ]
 		};
