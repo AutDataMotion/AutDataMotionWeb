@@ -170,7 +170,7 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements
 		return true;
 	}
 
-	public abstract boolean setFlowStatus(StatusMy aStatusFlow);
+	public abstract StatusMy getFlowStatus();
 
 	public abstract boolean isCorrectFile(F afile);
 
