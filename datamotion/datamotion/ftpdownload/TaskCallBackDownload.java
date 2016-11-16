@@ -23,6 +23,7 @@ import datamotion.common.AbsTaskThread;
 import datamotion.common.MdlFileEvent;
 import datamotion.common.MdlFileEvent.NAMETOKE;
 import datamotion.constant.ConstantInitMy;
+import datamotion.constant.StatusMy;
 import datamotion.mvc.t6_dwnloadfile.T6_dwnloadfile;
 import datamotion.mvc.t6_dwnloadfile.T6_dwnloadfileController;
 
@@ -298,6 +299,12 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 		TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
 //		taskCallBackDownload.dbAddFileInfo(mdlFileEvent);
 		taskCallBackDownload.doWork(mdlFileEvent);
+	}
+
+	@Override
+	public boolean setFlowStatus(StatusMy aStatusFlow) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

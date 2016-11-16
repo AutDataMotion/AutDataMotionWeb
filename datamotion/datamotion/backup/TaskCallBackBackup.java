@@ -10,6 +10,7 @@ import csuduc.platform.util.generID.UUIDGener;
 import datamotion.common.AbsTaskThread;
 import datamotion.common.MdlFileEvent;
 import datamotion.constant.ConstantInitMy;
+import datamotion.constant.StatusMy;
 import datamotion.ftpdownload.FtpUtils_QM;
 import datamotion.ftpdownload.TaskCallBackDownload;
 import datamotion.mvc.t7_backupfile.T7_backupfile;
@@ -161,6 +162,12 @@ import datamotion.mvc.t7_backupfile.T7_backupfile;
 	 */
 	@Override
 	protected boolean reDoFailedWorks(MdlFileEvent amdlWork) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean setFlowStatus(StatusMy aStatusFlow) {
 		// TODO Auto-generated method stub
 		return false;
 	}
