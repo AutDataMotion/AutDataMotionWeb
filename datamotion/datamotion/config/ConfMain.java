@@ -1,6 +1,7 @@
 package datamotion.config;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -47,12 +48,15 @@ public class ConfMain extends BaseConfMain {
 	public static Map<String, T11_initfoldertree> mapInitfoldertrees = new HashMap<String, T11_initfoldertree>();
 	public static Map<String, T12_initmodule> mapInitmodules = new HashMap<String, T12_initmodule>();
 	public static Map<String, T_kvalue> mapKValues = new HashMap<String, T_kvalue>();
-	public static Map<String, T12_initmodule> mapProperty = new HashMap<String, T12_initmodule>();
-
+	
 	//生成的树形结构
 	public static MdlTreeProperty treeRoot ;
-	//以树路径生成的Map
+	//以key_ 为map key
 	public static Map<String, MdlTreeProperty> mapTreeProperty = new HashMap<String, MdlTreeProperty>();
+	//以树路径生成的Map
+	public static Map<String, MdlTreeProperty> mapFilterProperty = new HashMap<String, MdlTreeProperty>();
+	//以下载目录为key的配置map
+	public static Map<String, Map<String,MdlTreeProperty>> mapPathProperty = new HashMap<String, Map<String, MdlTreeProperty>>();
 
 	public static ConfMain getInstance() {
 		return single;
@@ -100,13 +104,13 @@ public class ConfMain extends BaseConfMain {
 		for (Map.Entry<String, T11_initfoldertree> item : mapInitfoldertrees
 				.entrySet()) {
 
-			MdlTreeProperty treeProperty = mapTreeProperty.get(item.getKey());
+			MdlTreeProperty treeProperty = mapTreeProperty.get(item.getKey().toString());
 			if (null == treeProperty) {
 				treeProperty = new MdlTreeProperty();
 				// 本身
 				treeProperty.self = item.getValue();
 				
-				mapTreeProperty.put(item.getKey(), treeProperty);
+				mapTreeProperty.put(item.getKey().toString(), treeProperty);
 			}
 
 			// 孩子关联
@@ -129,11 +133,9 @@ public class ConfMain extends BaseConfMain {
 						childTreeProperty.self = folderTreeNode;
 						
 						mapTreeProperty.put(child, childTreeProperty);
-						
-						// 父子关系
-						childTreeProperty.parent = treeProperty;
-						
 					}
+					// 父子关系
+					childTreeProperty.parent = treeProperty;
 					// 添加孩子
 					treeProperty.children.put(child, childTreeProperty);
 				}
@@ -175,30 +177,41 @@ public class ConfMain extends BaseConfMain {
 
 		}
 		//设置英文缩写
-		T_kvalue kvalue = mapKValues.get(aNode.self.getNamechi());
+		T_kvalue kvalue = mapKValues.get(aNode.self.getNamechi().toString().trim());
 		if (null == kvalue) {
 			aNode.nameEng = "null";
 		}else {
 			aNode.nameEng = kvalue.getValue_();
 		}
+		if (aNode.parent != null) {
+			aNode.nameEngPath = aNode.parent.nameEngPath
+					+"_"
+					+ aNode.nameEng;
+		}else{
+			log.debug("==="+aNode.self.getKey_());
+		}
 		
 		//以英文路径做map直接找配置文件
-		mapProperty.put(aNode.nameEngPath, aNode.property);
-		
+		mapFilterProperty.put(aNode.nameEngPath, aNode);
+		//以叶子节点的下载Path为Key
+		if (ComUtil.isEmptyMap(aNode.children)) {
+			//叶子节点
+			String pathFtp = aNode.property.getPathftp();
+			Map<String, MdlTreeProperty> mapPathNodes = mapPathProperty.get(pathFtp);
+			if (null == mapPathNodes) {
+				mapPathNodes = new HashMap<String, MdlTreeProperty>();
+				
+			}
+			mapPathNodes.put(aNode.nameEngPath, aNode);
+		}
 		//处理孩子节点的属性
 		if (!ComUtil.isEmptyMap(aNode.children)) {
 			//有孩子
 			for (Map.Entry<String, MdlTreeProperty> iChild : aNode.children.entrySet()) {
 				//设置孩子英文路径
-				iChild.getValue().nameEngPath = aNode.nameEngPath
-						+"_"
-						+ iChild.getValue().nameEng;
-				
 				buildTreeModules(iChild.getValue());
-				
 			}
 		}
-		
 		return true;
 	}
 	/**
@@ -271,7 +284,8 @@ public class ConfMain extends BaseConfMain {
 				return false;
 			}
 			for (T_kvalue item : list) {
-				mapKValues.put((String) item.getKey_(), item);
+				log.debug((String) item.getKey_());
+				mapKValues.put(item.getKey_().toString().trim(), item);
 			}
 
 		} catch (Exception e) {
