@@ -351,5 +351,4 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		
 		return (Date) obj;
 	}
-	
 }
