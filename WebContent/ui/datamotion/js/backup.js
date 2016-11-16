@@ -182,17 +182,28 @@ $('#doQuery_btn_backup')
 $('#doAllLocalDownload_btn')
 .click(
 		function() {
+			
+			var table = $('#myTable').DataTable();
+			var tableData = table.rows().data();
+			var keys = [];
+			for(var i = 0;i < tableData.length;i++)
+			{
+				keys.push(tableData[i][0]);//数据表里的所有id；
+			}
+			console.log(keys);
 			// 获取查询参数
 			var datadownload = {
 				// key_ list
-				keys : []
+				keys : keys
 			};
 			// 发送查询请求
 			$.ajax({
 						type : "post",
 						url : encodeURI(encodeURI(cxt
 								+ "/jf/datamotion/t7_backupfile/doAllLocalDownload")),
-						data : datadownload,
+						data : {
+							keys : JSON.stringify(datadownload)
+						},
 						dataType : 'json',
 						contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 						crossDomain : false,
@@ -200,12 +211,9 @@ $('#doAllLocalDownload_btn')
 						async : false,
 						cache : false,
 						success : function(response) {
-							if (response.length > 1 && response != '1') {
-								for ( var ind in response) {
-									g_BackData = response[ind];
-									g_StepData[g_BackData.number] = g_BackData;
-									parseJsonData(firstLoadHtml);
-								}
+							if(response=="1")//成功
+							{
+								alert("全部本地下载成功");
 							}
 						}
 					});
@@ -216,16 +224,27 @@ $('#doAllNewBackup_btn')
 .click(
 		function() {
 			// 获取查询参数
-			var datacheckout = {
+			var table = $('#myTable').DataTable();
+			var tableData = table.rows().data();
+			var keys = [];
+			for(var i = 0;i < tableData.length;i++)
+			{
+				keys.push(tableData[i][0]);//数据表里的所有id；
+			}
+			console.log(keys);
+			// 获取查询参数
+			var databackup = {
 				// key_ list
-				keys : []
+				keys : keys
 			};
 			// 发送查询请求
 			$.ajax({
 						type : "post",
 						url : encodeURI(encodeURI(cxt
 								+ "/jf/datamotion/t7_backupfile/doAllNewBackup")),
-						data : datacheckout,
+						data : {
+							keys : JSON.stringify(databackup)
+						},
 						dataType : 'json',
 						contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 						crossDomain : false,
@@ -233,13 +252,89 @@ $('#doAllNewBackup_btn')
 						async : false,
 						cache : false,
 						success : function(response) {
-							if (response.length > 1 && response != '1') {
-								for ( var ind in response) {
-									g_BackData = response[ind];
-									g_StepData[g_BackData.number] = g_BackData;
-									parseJsonData(firstLoadHtml);
-								}
+							if(response=="1")//成功
+							{
+								alert("全部重新备份成功");
 							}
 						}
 					});
 		});
+function doLocalDownload(id)
+{
+	$.ajax({
+		type : "post",
+		url : encodeURI(encodeURI(cxt
+				+ "/jf/datamotion/t7_backupfile/doLocalDownload")),
+		data : {id:id},
+		dataType : 'json',
+		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+		crossDomain : false,
+		// 是否使用异步发送
+		async : false,
+		cache : false,
+		success : function(response) {
+			if(response=="1")//成功
+			{
+				alert("本地下载成功");
+			}
+			
+		}
+	});
+}
+function doNewBackup(id)
+{
+	$.ajax({
+		type : "post",
+		url : encodeURI(encodeURI(cxt
+				+ "/jf/datamotion/t7_backupfile/doNewBackup")),
+		data : {id:id},
+		dataType : 'json',
+		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+		crossDomain : false,
+		// 是否使用异步发送
+		async : false,
+		cache : false,
+		success : function(response) {
+			if(response=="1")//成功
+			{
+				alert("重新备份成功");
+			}
+			
+			
+		}
+	});
+}
+function doDeleteSeleted(index,data)//选中的记录删除（修改status_＝3）
+{
+	var id = data[0];
+	// 发送查询请求
+	$.ajax({
+				type : "post",
+				url : encodeURI(encodeURI(cxt
+						+ "/jf/datamotion/t7_backupfile/doDeleteSeleted")),
+				data : {id:id},
+				dataType : 'json',
+				contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+				crossDomain : false,
+				// 是否使用异步发送
+				async : false,
+				cache : false,
+				success : function(response) {
+					var returnData = response;
+					
+					var table = $('#myTable').DataTable();
+					//console.log(table.rows().data()[0]);
+					//var tableData = table.rows().data();
+					
+					if(returnData=="1")//删除成功
+					{
+						data[15]="3";
+					}
+					//console.log(data);
+					table.row(index).remove().draw( false );
+//					table.clear().draw();
+					table.row.add(data).draw(false);
+					alert("删除成功");
+				}
+			});
+}

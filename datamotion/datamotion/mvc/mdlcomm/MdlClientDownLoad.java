@@ -132,7 +132,16 @@ public class MdlClientDownLoad implements Serializable {
 		
 		return sbSQLTree.toString();
 	}
-	
+	public String getSQLStrDS(String aTableName,String ZHname) {//数据统计SQL语句
+		// 多条件查询，数据库需要建立一些索引
+		StringBuilder DS_SQL = new StringBuilder();
+		DS_SQL.append("select datalevel,count(*) as num,sum(filesize) as vol from ").append(aTableName).append(" where aircraft='TG02'");
+		DS_SQL.append(" and sensor = '"+ ZHname+"'");
+		//getOthersStr(DS_SQL);
+		DS_SQL.append(" group by datalevel");
+		//sbSQLTree.append(" order by id desc limit 200");
+		return DS_SQL.toString();
+	}
 	
 	/**
 	 * @return the timebegcollect

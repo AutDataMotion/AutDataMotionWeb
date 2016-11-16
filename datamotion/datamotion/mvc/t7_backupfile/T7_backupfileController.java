@@ -10,14 +10,17 @@ import org.json.JSONObject;
 
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
+import com.jfinal.plugin.activerecord.Db;
 import com.platform.constant.ConstantRender;
 import com.platform.mvc.base.BaseController;
 
 import csuduc.platform.util.JsonUtils;
 import datamotion.backup.TaskCallBackBackup;
 import datamotion.common.MdlFileEvent;
+import datamotion.constant.ConstantInitMy;
 import datamotion.mvc.mdlcomm.MdlClientCheckout;
 import datamotion.mvc.mdlcomm.MdlClientDownLoad;
+import datamotion.mvc.mdlcomm.MdlKeys;
 import datamotion.mvc.t9_checkoutfiles.T9_checkoutfiles;
 
 
@@ -123,7 +126,7 @@ public class T7_backupfileController extends BaseController {
 //		String length=getPara("length");
 		
 		List<T7_backupfile> list = T7_backupfile.dao.find(
-				"select * from t7_backupfile order by id desc");
+				"select * from t7_backupfile order by id desc limit 200");
 		String Jsondata = getPagedata(list);
 		renderJson(Jsondata);
 	}
@@ -186,7 +189,7 @@ public class T7_backupfileController extends BaseController {
 //				"select * from t7_backupfile order by id desc limit ?", 100);
 //		setAttr("list", list);
 		
-		addData2Database();
+		//addData2Database();
 		
 		renderWithPath(pthv+"backupfile.html");
 		
@@ -231,7 +234,7 @@ public class T7_backupfileController extends BaseController {
 				try {
 					mdlClient = JsonUtils.deserialize(strvalue, MdlClientDownLoad.class);
 					if (null == mdlClient) {
-		renderText("-1");//错误
+						renderText("-1");//错误
 						return;
 					}
 					log.debug(JsonUtils.serialize(mdlClient));
@@ -263,13 +266,180 @@ public class T7_backupfileController extends BaseController {
 	@Clear
 	public void doAllLocalDownload() {
 		
+		// 获得参数
+		String ids = getPara("keys");
+		if (null == ids || ids.isEmpty()) {
+			renderText("-1");//错误
+		}
+		log.debug(ids);
+		MdlKeys mdlKeys = null;
+		try {
+			//更新数据库信息
+			mdlKeys = JsonUtils.deserialize(ids, MdlKeys.class);
+			if (null == mdlKeys) {
+				renderText("-1");//错误
+				return;
+			}
+			log.debug(JsonUtils.serialize(mdlKeys));
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			//return false;
+		}
+		// 遍历树结构，拼接SQL语句
+		String strSQL = mdlKeys.getSQLStr("t7_backupfile");
 		
+		// 数据库查询
+		List<T7_backupfile> res = T7_backupfile.dao.find(strSQL);
+		log.debug(strSQL);
+		// 返回结果
+		if (null == res || res.size() <= 0) {
+			renderText("-1");
+			return;
+		}else {
+			
+//			String Jsondata = getPagedata(res);
+//			renderJson(Jsondata);
+			
+			//执行全部本地下载代码
+			for(int i=0;i<res.size();i++)
+			{
+				res.get(i).get("id").toString();
+			}
+			renderText("1");
+		}
 	}
 	//全部重新备份
 	@Clear
 	public void doAllNewBackup() {
+		// 获得参数
+		String ids = getPara("keys");
+		if (null == ids || ids.isEmpty()) {
+			renderText("-1");//错误
+		}
+		log.debug(ids);
+		MdlKeys mdlKeys = null;
+		try {
+			//更新数据库信息
+			mdlKeys = JsonUtils.deserialize(ids, MdlKeys.class);
+			if (null == mdlKeys) {
+				renderText("-1");//错误
+				return;
+			}
+			log.debug(JsonUtils.serialize(mdlKeys));
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			//return false;
+		}
+		// 遍历树结构，拼接SQL语句
+		String strSQL = mdlKeys.getSQLStr("t7_backupfile");
 		
+		// 数据库查询
+		List<T7_backupfile> res = T7_backupfile.dao.find(strSQL);
+		log.debug(strSQL);
+		// 返回结果
+		if (null == res || res.size() <= 0) {
+			renderText("-1");
+			return;
+		}else {
+			
+//			String Jsondata = getPagedata(res);
+//			renderJson(Jsondata);
+			
+			//执行全部重新备份代码
+			for(int i=0;i<res.size();i++)
+			{
+				res.get(i).get("id").toString();
+			}
+			renderText("1");
+		}
+	}
+	//选中的单条记录－本地下载
+	@Clear
+	public void doLocalDownload() {//选中的单条记录－本地下载
+		String id = getPara("id");
+		if (null == id || id.isEmpty()) {
+			renderText("-1");//错误
+		}
+		log.debug(id);
+		try {
+			//拼接SQL语句
+			String strSQL = "select * from t7_backupfile where id = "+id;
+			// 数据库查询
+			List<T7_backupfile> res = T7_backupfile.dao.find(strSQL);
+			// 返回结果
+			if (null == res || res.size() <= 0) {
+				renderText("-1");
+				return;
+			}else {
+				//执行本地下载
+				res.get(0).get("id").toString();
+				
+				renderText("1");
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			//return false;
+		}
 		
 	}
+	//选中的单条记录－重新备份
+	@Clear
+	public void doNewBackup() {//选中的单条记录－重新备份
+		String id = getPara("id");
+		if (null == id || id.isEmpty()) {
+			renderText("-1");//错误
+		}
+		log.debug(id);
+		try {
+			//拼接SQL语句
+			String strSQL = "select * from t7_backupfile where id = "+id;
+			// 数据库查询
+			List<T7_backupfile> res = T7_backupfile.dao.find(strSQL);
+			// 返回结果
+			if (null == res || res.size() <= 0) {
+				renderText("-1");
+				return;
+			}else {
+				//执行本地下载
+				res.get(0).get("id").toString();
+				
+				renderText("1");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			//return false;
+		}
+		
+	}
+	//选中的单条记录－删除
+	@Clear
+	public void doDeleteSeleted() {//选中的记录删除（修改status_＝3）
+		
+		// 获得参数
+		String id = getPara("id");
+		if (null == id || id.isEmpty()) {
+			renderText("-1");//错误
+		}
+		log.debug(id);
+		try {
+			//更新数据库信息
+			String sql = "update t7_backupfile set status_ = 3"+ " where id = " +id;
+			Db.use(ConstantInitMy.db_dataSource_main).update(sql);
+			//return true;
+			renderText("1");//成功
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			//return false;
+		}
+	}
+	
 
 }
