@@ -9,6 +9,7 @@ package datamotion.archive;
 
 import datamotion.common.AbsTaskThread;
 import datamotion.common.MdlFileEvent;
+import datamotion.constant.StatusMy;
 
 /**  
  * 创建时间：2016年11月2日 下午2:53:35  
@@ -149,4 +150,5 @@ public class TaskCallBackArchive extends AbsTaskThread<MdlFileEvent>{
 		return false;
 	}
 
+	
 }
