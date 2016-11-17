@@ -1,6 +1,8 @@
 package datamotion.mvc.t6_dwnloadfile;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import com.platform.mvc.base.BaseModel;
 
 import oracle.net.aso.s;
 
+import org.apache.commons.net.ftp.FTPClient;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
@@ -21,10 +24,13 @@ import com.jfinal.aop.Clear;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 
+import csuduc.platform.util.FileUtils;
 import csuduc.platform.util.JsonUtils;
 import csuduc.platform.util.generID.UUIDGener;
+import csuduc.platform.util.networkCom.FTPClientPool;
 import datamotion.backup.TaskCallBackBackup;
 import datamotion.common.MdlFileEvent;
+import datamotion.config.ConfMain;
 import datamotion.config.RunMain;
 import datamotion.constant.ConstantInitMy;
 import datamotion.ftpdownload.TaskCallBackDownload;
@@ -158,29 +164,72 @@ public class T6_dwnloadfileController extends BaseController {
 		String namesrc=getPara("namesrc");
 		String pathdest=getPara("pathdest");
 		
+		FTPClientPool ftpPool = ConfMain.getInstance().ftpPool;
+		MdlFileEvent amdl = new MdlFileEvent(pathsrc,namesrc,pathdest,namesrc);
+		FTPClient ftpClient = null;
+		OutputStream output = null;
 		try {
-			//初始化参数
-			MdlFileEvent amdl = new MdlFileEvent(pathsrc,namesrc,pathdest,namesrc);
-			amdl.initProperties();
-			//下载文件
-			TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
-			boolean result = taskCallBackDownload.doWork(amdl);
+//			ftpUtils.connectFtpByPool(ftpHost, ftpPort, ftpNameString, ftpPasswordString);
+//			ftpUtils.downloadFile(amdl.pathsrc, amdl.namesrc, amdl.pathdest, amdl.namesrc);
+//			ftpUtils.disconnectFtpByPool();
+//			System.out.println(amdl.namesrc + "下载成功");
+			ftpClient = ftpPool.borrowObject();
+			ftpClient.changeWorkingDirectory(amdl.pathsrc);
+			log.debug(String.format("download %s%s to %s%s", amdl.pathsrc, amdl.namesrc, amdl.pathdest, amdl.namesrc));
+			if (FileUtils.folderCheckAndMake(amdl.pathdest)) {
+				File localFile = new File( amdl.pathdest+amdl.namesrc);
+				output = new FileOutputStream(localFile);
+				ftpClient.retrieveFile(amdl.namesrc, output);
+				output.flush();
+				log.debug("download done!");
+				renderText("1");
+			}else {
+				log.debug("download undone!");
+				renderText("-1");
+			}
 			
-			if(result){
-				/*更新状态为已下载*/
-				Db.use(ConstantInitMy.db_dataSource_main)
-					.update("update t6_dwnloadfile set status_=? where id=?",MdlStatusDownLoad.success,id_);
-
-				renderText("1");//成功
-			}
-			else {
-				renderText("-1");//失败
-			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			//return false;
+			System.out.println(amdl.namesrc + "下载失败");
+		}finally{
+			try {
+				ftpPool.returnObject(ftpClient);
+				if (output != null) {
+					output.close();
+					output = null;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
+//		
+//		
+//		try {
+//			//初始化参数
+//			MdlFileEvent amdl = new MdlFileEvent(pathsrc,namesrc,pathdest,namesrc);
+//			amdl.initProperties();
+//			//下载文件
+//			TaskCallBackDownload taskCallBackDownload = new TaskCallBackDownload();
+//			boolean result = taskCallBackDownload.doWork(amdl);
+//			
+//			if(result){
+//				/*更新状态为已下载*/
+//				Db.use(ConstantInitMy.db_dataSource_main)
+//					.update("update t6_dwnloadfile set status_=? where id=?",MdlStatusDownLoad.success,id_);
+//
+//				renderText("1");//成功
+//			}
+//			else {
+//				renderText("-1");//失败
+//			}
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//			//return false;
+//		}
 	}
 
 	/**
