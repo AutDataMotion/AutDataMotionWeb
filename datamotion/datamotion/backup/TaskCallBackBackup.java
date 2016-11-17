@@ -34,7 +34,7 @@ import datamotion.mvc.t7_backupfile.T7_backupfile;
 			String namesrc=amdl.namesrc;//备份文件名称
 			String pathdest=amdl.pathdest;//备份文件路径
 			
-			//ftpUtils.copyFile("oldPath", "newPath");
+			ftpUtils.copyFile(pathsrc+namesrc, pathdest+namesrc);
 			
 			System.out.println(amdl.namesrc + "备份成功");
 			return true;
