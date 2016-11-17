@@ -1,5 +1,6 @@
 package datamotion.mvc.t7_backupfile;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -169,12 +170,12 @@ public class T7_backupfileController extends BaseController {
 			subdata.add(list.get(i).get("sensor").toString());
 			subdata.add(list.get(i).get("datatype").toString());
 			subdata.add(list.get(i).get("datalevel").toString());
-			subdata.add("");
-			subdata.add("");
-			subdata.add("");
-			subdata.add("");
+			subdata.add(list.get(i).get("camera").toString());
+			subdata.add(list.get(i).get("timerecive").toString());
+			subdata.add(list.get(i).get("timecollectstart").toString());
+			subdata.add(list.get(i).get("timecollectend").toString());
 			subdata.add(list.get(i).get("status_").toString());
-			subdata.add("");
+			subdata.add(list.get(i).get("timeadd").toString());
 			subdata.add("buttons");
 			//subdata.add(sublist.get(0).get("labelids").toString());
 			data.add(subdata);
@@ -416,6 +417,7 @@ public class T7_backupfileController extends BaseController {
 				String pathdest=res.get(0).get("pathdest").toString();//备份文件路径
 				
 				//ftpUtils.copyFile("oldPath", "newPath");
+				ftpUtils.copyFile(pathsrc+namesrc, pathdest+namesrc);
 				
 				renderText("1");
 			}
@@ -438,8 +440,8 @@ public class T7_backupfileController extends BaseController {
 		log.debug(id);
 		try {
 			//更新数据库信息
-			String sql = "update t7_backupfile set status_ = 3"+ " where id = " +id;
-			Db.use(ConstantInitMy.db_dataSource_main).update(sql);
+//			String sql = "update t7_backupfile set status_ = 3"+ " where id = " +id;
+//			Db.use(ConstantInitMy.db_dataSource_main).update(sql);
 			//拼接SQL语句
 			String strSQL = "select * from t7_backupfile where id = "+id;
 			// 数据库查询
@@ -455,6 +457,18 @@ public class T7_backupfileController extends BaseController {
 				String pathdest=res.get(0).get("pathdest").toString();//备份文件路径
 				
 				//删除文件;
+				//删除文件;
+				boolean result = deleteFile(pathdest, namesrc);
+				if(result){
+					//更新数据库信息
+					String sql = "update t7_backupfile set status_ = 3"+ " where id = " +id;
+					Db.use(ConstantInitMy.db_dataSource_main).update(sql);
+					renderText("1");
+				}
+				else{
+					renderText("-1");//失败
+				}
+
 				
 				renderText("1");
 			}
@@ -466,6 +480,29 @@ public class T7_backupfileController extends BaseController {
 			//return false;
 		}
 	}
-	
+
+	/** 
+	  * 删除单个文件 
+	  *  
+	  * @param fileName 
+	  *            要删除的文件的文件名 
+	  * @return 单个文件删除成功返回true，否则返回false 
+	  */  
+	 public static boolean deleteFile(String path,String fileName) {  
+	  File file = new File(path+fileName);  
+	  // 如果文件路径所对应的文件存在，并且是一个文件，则直接删除  
+	  if (file.exists() && file.isFile()) {  
+	   if (file.delete()) {  
+	    System.out.println("删除单个文件" + fileName + "成功！");  
+	    return true;  
+	   } else {  
+	    System.out.println("删除单个文件" + fileName + "失败！");  
+	    return false;  
+	   }  
+	  } else {  
+	   System.out.println("删除单个文件失败：" + fileName + "不存在！");  
+	   return false;  
+	  }  
+	 }  
 
 }
