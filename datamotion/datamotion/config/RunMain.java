@@ -91,7 +91,10 @@ public class RunMain implements InfMainConf{
 	public boolean start() {
 		// TODO Auto-generated method stub
 		//启动各自的工作线程
-		
+		downloadWorker.start();
+		backupWorker.start();
+		archiveWorker.start();
+		checkoutWorker.start();
 		return false;
 	}
 
@@ -114,6 +117,10 @@ public class RunMain implements InfMainConf{
 	@Override
 	public boolean stop() {
 		// TODO Auto-generated method stub
+		checkoutWorker.stop();
+		archiveWorker.stop();
+		backupWorker.stop();
+		downloadWorker.stop();
 		return false;
 	}
 
