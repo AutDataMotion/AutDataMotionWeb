@@ -200,7 +200,7 @@ public class ConfMain extends BaseConfMain {
 			Map<String, MdlTreeProperty> mapPathNodes = mapPathProperty.get(pathFtp);
 			if (null == mapPathNodes) {
 				mapPathNodes = new HashMap<String, MdlTreeProperty>();
-				
+				mapPathProperty.put(pathFtp, mapPathNodes);
 			}
 			mapPathNodes.put(aNode.nameEngPath, aNode);
 		}
