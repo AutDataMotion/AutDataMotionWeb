@@ -417,6 +417,7 @@ public class T7_backupfileController extends BaseController {
 				String pathdest=res.get(0).get("pathdest").toString();//备份文件路径
 				
 				//ftpUtils.copyFile("oldPath", "newPath");
+				ftpUtils.copyFile(pathsrc+namesrc, pathdest+namesrc);
 				
 				renderText("1");
 			}
