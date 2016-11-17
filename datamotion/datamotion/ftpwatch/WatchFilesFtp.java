@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -173,6 +174,11 @@ public class WatchFilesFtp {
 			if (null == ftpClient) {
 				log.error("ftpClient == null,ftpClient = ftpPool.borrowObject()");
 				return ;
+			}
+			System.out.println("mapFil==============="+ConfMain.mapPathProperty.keySet());
+			Set<String> set = ConfMain.mapPathProperty.keySet();// 取得里面的key的集合
+			for (String str : set) {// 遍历set去出里面的的Key
+			System.out.println(ConfMain.mapPathProperty.get(str) + "     ");// 通过key,取得value打印出来
 			}
 			// 以互易Path开始扫描
 			for (Map.Entry<String, Map<String, MdlTreeProperty>> iPathNodes : ConfMain.mapPathProperty
