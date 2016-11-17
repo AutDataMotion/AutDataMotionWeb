@@ -69,7 +69,7 @@ $('#btnsrch')
 //本地下载
 function localDownLoad(index,data){//选中的记录状态更新
 	// 发送查询请求
-	alert("下载成功");
+//	alert("下载成功");
 //	table.row(index).remove().draw( false );
 //	table.row.add(data).draw(false);
 }
@@ -90,9 +90,10 @@ function reDownLoad(index,data){//选中的记录重新下载（修改status_＝
              if(returnData=="1")//下载成功
 				{
 					data[15]="1";
-					alert("下载成功");
+					
 					table.row(index).remove().draw( false );
 					table.row.add(data).draw(false);
+//					alert("下载成功");
 				}
              if(returnData=="-1")//下载失败
 				{
