@@ -178,7 +178,7 @@ float: left;
 	<p class="bottom_line"></p> -->
 	<div class="row pad20">
 		<div class="doQueryResultTable">
-			<table id="myTable" class="display"></table>
+			<table id="myTable" class="display nowrap" cellspacing="0" style="width:100%;background-color: rgba(255, 255, 255, .15);"></table>
 		</div>
 	</div>
 </div>
@@ -312,8 +312,7 @@ float: left;
              	   	//console.log(data);
           	    	  if(data[15]=="0")//未下载
           	    	  {
-          	    	  	return "<input id='reDownLoad' name='reDownLoad' type='button' value='重新下载' class='btn m-r-5'/>"
-                         +"<input id='doDeleteSeleted' name='doDeleteSeleted' type='button' value='删除' class='btn m-r-5'/>";
+          	    	  	return "<input id='reDownLoad' name='reDownLoad' type='button' value='重新下载' class='btn m-r-5'/>";
           	    	  }
           	      else if(data[15]=="1")//"已下载"
           	    	  {
@@ -322,8 +321,7 @@ float: left;
           	    	  }
           	      else if(data[15]=="2")//"下载失败"
           	    	  {
-          	    	  	return "<input id='reDownLoad' name='reDownLoad' type='button' value='重新下载' class='btn m-r-5'/>"
-                         +"<input id='doDeleteSeleted' name='doDeleteSeleted' type='button' value='删除' class='btn m-r-5'/>";
+          	    	  	return "<input id='reDownLoad' name='reDownLoad' type='button' value='重新下载' class='btn m-r-5'/>";
           	    	  }
           	      else{//"已删除"
           	    	  	return "";

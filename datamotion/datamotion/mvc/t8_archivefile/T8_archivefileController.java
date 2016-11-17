@@ -58,6 +58,13 @@ public class T8_archivefileController extends BaseController {
 		watchFtp.watchFTP("/download/");
 		renderText("");
 	}
+	
+	@Clear
+	public void watchftp(){
+		watchFtp.watchFTP("/");
+		renderText("test done once");
+	}
+	
 	@Clear
 	public void log() {
 

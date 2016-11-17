@@ -25,6 +25,7 @@ import csuduc.platform.util.JsonUtils;
 import csuduc.platform.util.generID.UUIDGener;
 import datamotion.backup.TaskCallBackBackup;
 import datamotion.common.MdlFileEvent;
+import datamotion.config.RunMain;
 import datamotion.constant.ConstantInitMy;
 import datamotion.ftpdownload.TaskCallBackDownload;
 import datamotion.mvc.mdlcomm.MdlClientCheckout;
@@ -224,7 +225,7 @@ public class T6_dwnloadfileController extends BaseController {
 	  * @return 单个文件删除成功返回true，否则返回false 
 	  */  
 	 public static boolean deleteFile(String path,String fileName) {  
-	  File file = new File(path+"\\"+fileName);  
+	  File file = new File(path+fileName);  
 	  // 如果文件路径所对应的文件存在，并且是一个文件，则直接删除  
 	  if (file.exists() && file.isFile()) {  
 	   if (file.delete()) {  
@@ -457,20 +458,17 @@ renderText("-1");//错误
 	//启动下载线程
 	@Clear
 	public void start_Download() {
-		TaskCallBackDownload download = new TaskCallBackDownload();
-		download.start();
+		RunMain.downloadWorker.start();
 	}
 	//重启下载线程
 	@Clear
 	public void restart_Download() {
-		TaskCallBackDownload download = new TaskCallBackDownload();
-		download.restart();
+		RunMain.downloadWorker.restart();
 	}
 	//停止下载线程
 	@Clear
 	public void stop_Download() {
-		TaskCallBackDownload download = new TaskCallBackDownload();
-		download.stop();
+		RunMain.downloadWorker.stop();
 	}
 	//------------------end 下载---------------------//
 	
@@ -478,20 +476,17 @@ renderText("-1");//错误
 	//启动 备份线程
 	@Clear
 	public void start_BackUp() {
-		TaskCallBackBackup backBackup = new TaskCallBackBackup();
-		backBackup.start();
+		RunMain.backupWorker.start();
 	}
 	//重启 备份线程
 	@Clear
 	public void restart_BackUp() {
-		TaskCallBackBackup backBackup = new TaskCallBackBackup();
-		backBackup.restart();
+		RunMain.backupWorker.restart();
 	}
 	//停止 备份线程
 	@Clear
 	public void stop_BackUp() {
-		TaskCallBackBackup backBackup = new TaskCallBackBackup();
-		backBackup.stop();
+		RunMain.backupWorker.stop();
 	}
 	//------------------end 备份---------------------//
 	
@@ -499,20 +494,17 @@ renderText("-1");//错误
 	//启动归档线程
 	@Clear
 	public void start_ArchiveFile() {
-		TaskCallBackBackup backBackup = new TaskCallBackBackup();
-		backBackup.start();
+		RunMain.archiveWorker.start();
 	}
 	//重启归档线程
 	@Clear
 	public void restart_ArchiveFile() {
-		TaskCallBackBackup backBackup = new TaskCallBackBackup();
-		backBackup.restart();
+		RunMain.archiveWorker.restart();
 	}
 	//停止归档线程
 	@Clear
 	public void stop_ArchiveFile() {
-		TaskCallBackBackup backBackup = new TaskCallBackBackup();
-		backBackup.stop();
+		RunMain.archiveWorker.stop();
 	}
 	//------------------end 归档---------------------//
 	
@@ -520,20 +512,17 @@ renderText("-1");//错误
 	//启动检出线程
 	@Clear
 	public void start_CheckOutFile() {
-		TaskCallBackBackup backBackup = new TaskCallBackBackup();
-		backBackup.start();
+		RunMain.checkoutWorker.start();
 	}
 	//重启检出线程
 	@Clear
 	public void restart_CheckOutFile() {
-		TaskCallBackBackup backBackup = new TaskCallBackBackup();
-		backBackup.restart();
+		RunMain.checkoutWorker.restart();
 	}
 	//停止检出线程
 	@Clear
 	public void stop_CheckOutFile() {
-		TaskCallBackBackup backBackup = new TaskCallBackBackup();
-		backBackup.stop();
+		RunMain.checkoutWorker.stop();
 	}
 	//------------------end 检出---------------------//
 	//------------------end 控制面板---------------------//
