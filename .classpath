@@ -68,7 +68,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ice-3.6.2.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DUCRPC"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/UtilZW"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
@@ -78,5 +77,6 @@
 		</accessrules>
 	</classpathentry>
 	<classpathentry kind="lib" path="/UtilZW/refLib/commons-net-3.3.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/UtilZW"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>

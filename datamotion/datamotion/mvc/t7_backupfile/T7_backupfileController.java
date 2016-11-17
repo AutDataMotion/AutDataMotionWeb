@@ -15,6 +15,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.platform.constant.ConstantRender;
 import com.platform.mvc.base.BaseController;
 
+import csuduc.platform.util.FileUtils;
 import csuduc.platform.util.JsonUtils;
 import datamotion.backup.TaskCallBackBackup;
 import datamotion.common.MdlFileEvent;
@@ -417,7 +418,8 @@ public class T7_backupfileController extends BaseController {
 				String pathdest=res.get(0).get("pathdest").toString();//备份文件路径
 				
 				//ftpUtils.copyFile("oldPath", "newPath");
-				boolean result=ftpUtils.copyFile(pathsrc+namesrc, pathdest+namesrc);
+				boolean result=FileUtils.copyFile(pathsrc, namesrc,pathdest,
+						namesrc, true);
 				log.debug("doNewBackup "+result);
 				if(result)
 				{
