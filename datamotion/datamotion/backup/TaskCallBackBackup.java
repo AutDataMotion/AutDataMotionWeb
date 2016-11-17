@@ -9,6 +9,7 @@ import com.jfinal.plugin.activerecord.Db;
 import csuduc.platform.util.generID.UUIDGener;
 import datamotion.common.AbsTaskThread;
 import datamotion.common.MdlFileEvent;
+import datamotion.config.RunMain;
 import datamotion.constant.ConstantInitMy;
 import datamotion.constant.StatusMy;
 import datamotion.ftpdownload.FtpUtils_QM;
@@ -137,6 +138,7 @@ import datamotion.mvc.t7_backupfile.T7_backupfile;
 	@Override
 	public boolean notifyOthers(MdlFileEvent afile) {
 		// TODO Auto-generated method stub
+		RunMain.archiveWorker.addWork(afile);
 		return false;
 	}
 
@@ -158,6 +160,8 @@ import datamotion.mvc.t7_backupfile.T7_backupfile;
 		return false;
 	}
 
+
+
 	/* (non-Javadoc)
 	 * <p>Description: <／p>
 	 * @return
@@ -169,4 +173,6 @@ import datamotion.mvc.t7_backupfile.T7_backupfile;
 		
 		return StatusMy.FLOW_BACKUP;
 	}
+
+
 }

@@ -137,6 +137,8 @@ public class TaskCallBackCheckout extends AbsTaskThread<MdlFileEvent>{
 		return false;
 	}
 
+
+
 	/* (non-Javadoc)
 	 * <p>Description: <／p>
 	 * @return
@@ -148,5 +150,7 @@ public class TaskCallBackCheckout extends AbsTaskThread<MdlFileEvent>{
 		
 		return StatusMy.FLOW_CHECKOUT;
 	}
+
+
 
 }
