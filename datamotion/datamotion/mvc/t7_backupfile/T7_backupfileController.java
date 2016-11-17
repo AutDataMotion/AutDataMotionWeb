@@ -417,13 +417,26 @@ public class T7_backupfileController extends BaseController {
 				String pathdest=res.get(0).get("pathdest").toString();//备份文件路径
 				
 				//ftpUtils.copyFile("oldPath", "newPath");
-				ftpUtils.copyFile(pathsrc+namesrc, pathdest+namesrc);
+				boolean result=ftpUtils.copyFile(pathsrc+namesrc, pathdest+namesrc);
+				log.debug("doNewBackup "+result);
+				if(result)
+				{
+					//更新数据库信息
+					String sql = "update t7_backupfile set status_ = 1"+ " where id = " +id;
+					Db.use(ConstantInitMy.db_dataSource_main).update(sql);
+					
+					renderText("1");
+				}
+				else{
+					renderText("-1");
+				}
 				
-				renderText("1");
 			}
 		} catch (Exception e) {
+			renderText("-1");
 			// TODO: handle exception
 			e.printStackTrace();
+			
 			//return false;
 		}
 		
@@ -470,13 +483,15 @@ public class T7_backupfileController extends BaseController {
 				}
 
 				
-				renderText("1");
+				//renderText("1");
 			}
 			
 			
 		} catch (Exception e) {
+			renderText("-1");
 			// TODO: handle exception
 			e.printStackTrace();
+			
 			//return false;
 		}
 	}
