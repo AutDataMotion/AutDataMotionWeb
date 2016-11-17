@@ -7,6 +7,8 @@
  */
 package datamotion.archive;
 
+import java.sql.Timestamp;
+
 import datamotion.common.AbsTaskThread;
 import datamotion.common.MdlFileEvent;
 import datamotion.constant.StatusMy;
@@ -50,18 +52,6 @@ public class TaskCallBackArchive extends AbsTaskThread<MdlFileEvent>{
 	 */
 	@Override
 	protected boolean reDoFailedWorks(MdlFileEvent amdlWork) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * <p>Description: <／p>
-	 * @param afile
-	 * @return
-	 * @see datamotion.common.AbsTaskThread#isCorrectFile(datamotion.common.MdlFileEvent)
-	 */
-	@Override
-	public boolean isCorrectFile(MdlFileEvent afile) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -136,6 +126,7 @@ public class TaskCallBackArchive extends AbsTaskThread<MdlFileEvent>{
 	@Override
 	public boolean doWork(MdlFileEvent amdl) {
 		// TODO Auto-generated method stub
+//amdl.timedo = new Timestamp(System.currentTimeMillis());
 		return false;
 	}
 

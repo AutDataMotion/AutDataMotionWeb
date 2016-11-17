@@ -128,7 +128,7 @@ public abstract class BaseConfMain {
 				.getparamMapMy(ConstantInit.ftp_pwd));
 		configure.setPassiveMode("false");
 		configure.setEncoding("utf-8");
-		configure.setClientTimeout(60 * 1000);
+		configure.setClientTimeout(6*60*60 * 1000);
 
 		this.ftpFactory = new FTPClientFactory(configure);
 		try {

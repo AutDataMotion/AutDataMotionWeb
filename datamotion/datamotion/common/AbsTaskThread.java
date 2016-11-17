@@ -7,6 +7,7 @@
  */
 package datamotion.common;
 
+import java.sql.Timestamp;
 import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -55,7 +56,6 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements
 	final Lock lock = new ReentrantLock();// 锁对象
 	final Condition singalQue = lock.newCondition();// 读写条件
 
-	private StatusMy flowStatus = StatusMy.FLOW_UNKNOWN;
 	// 执行任务线程
 	private ConsumerTask consumerTask;
 	// 内存回收线程
@@ -158,7 +158,7 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements
 	public boolean addWork(MdlFileEvent amdl) {
 		// TODO Auto-generated method stub
 		//根据配置文件设置路径
-		amdl.changeFileEvent(amdl.pathdest, amdl.namedest, flowStatus);
+		amdl.changeFileEvent(amdl.pathdest, amdl.namedest, getFlowStatus());
 		//添加到待处理队列
 		quefiles_undo.add((F) amdl);
 		lock.lock();
@@ -172,7 +172,9 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements
 
 	public abstract StatusMy getFlowStatus();
 
-	public abstract boolean isCorrectFile(F afile);
+	public boolean isCorrectFile(F afile){
+		return true;
+	}
 
 	public abstract boolean doWorkSucAfter(F afile);
 
@@ -230,6 +232,8 @@ public abstract class AbsTaskThread<F extends MdlFileEvent> implements
 						log.debug("ConsumerTask run not CorrectFile(file)");
 						continue;
 					}
+					
+					file.timedo = new Timestamp(System.currentTimeMillis());
 					if (!dbAddFileInfo(file)) {
 						log.debug("ConsumerTask run failed dbAddFileInfo(file)");
 						continue;

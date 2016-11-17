@@ -92,7 +92,7 @@ public class WatchFilesFtp {
 			if (null == mdlFileEvent) {
 				// 已分发中也没有 则是新发现的文件
 				log.debug("new ftpFile:" + fileName);
-				mdlFileEvent = new MdlFileEvent(aPathFtp, fileName);
+				mdlFileEvent = new MdlFileEvent(aPathFtp, fileName, aPathFtp, fileName);
 				if (!mdlFileEvent.initProperties(nameTokens,
 						filterMdlTreeProperty)) {
 					// 文件名结构初始化失败 则不能再继续处理

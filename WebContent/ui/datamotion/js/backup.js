@@ -273,16 +273,21 @@ function doLocalDownload(id)
 		async : false,
 		cache : false,
 		success : function(response) {
-			if(response=="1")//成功
-			{
-				alert("本地下载成功");
-			}
+//			if(response=="1")//成功
+//			{
+//				alert("本地下载成功");
+//			}
+//			if(response=="－1")//成功
+//			{
+//				alert("本地下载失败");
+//			}
 			
 		}
 	});
 }
-function doNewBackup(id)
+function doNewBackup(index,data)
 {
+	var id = data[0];
 	$.ajax({
 		type : "post",
 		url : encodeURI(encodeURI(cxt
@@ -295,9 +300,21 @@ function doNewBackup(id)
 		async : false,
 		cache : false,
 		success : function(response) {
+			//alert(response);
 			if(response=="1")//成功
 			{
+				var table = $('#myTable').DataTable();
+				data[15]="1";
+				//console.log(data);
+				table.row(index).remove().draw( false );
+//				table.clear().draw();
+				table.row.add(data).draw(false);
+				
 				alert("重新备份成功");
+			}
+			if(response=="-1")//成功
+			{
+				alert("重新备份失败");
 			}
 			
 			
@@ -329,12 +346,17 @@ function doDeleteSeleted(index,data)//选中的记录删除（修改status_＝3�
 					if(returnData=="1")//删除成功
 					{
 						data[15]="3";
+						//console.log(data);
+						table.row(index).remove().draw( false );
+//						table.clear().draw();
+						table.row.add(data).draw(false);
+						alert("删除成功");
 					}
-					//console.log(data);
-					table.row(index).remove().draw( false );
-//					table.clear().draw();
-					table.row.add(data).draw(false);
-					alert("删除成功");
+					if(returnData=="-1")
+					{
+						alert("删除失败");
+					}
+					
 				}
 			});
 }

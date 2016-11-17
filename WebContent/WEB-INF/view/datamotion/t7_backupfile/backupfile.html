@@ -210,7 +210,7 @@ float: left;
                                     </form>
                                 </div-->
                                 <div class="modal-footer">
-                                    <button onclick="YesButton()" type="button" class="btn btn-sm btn-alt">YES</button>
+                                    <button onclick="Yesbutton()" type="button" class="btn btn-sm btn-alt">YES</button>
                                     <button type="button" class="btn btn-sm btn-alt" data-dismiss="modal">NO</button>
                                 </div>
                             </div>
@@ -381,48 +381,49 @@ float: left;
                    } 
                 	  	]
                } );
-
-        	   var Yes=false;
-        	   function YesButton()
-        	   {
-        		   Yes=true;
-        	   }
-
+		
+        
         	   
 
         	   $('#myTable tbody').on( 'click', '#doLocalDownload', function () {
        	        var data = myTable.row($(this).parents('tr')).data();
        	        //alert( data[0]+" doLocalDownload");
-       	        if(Yes)
+       	        /* if(Yes)
        	        	{
        	        		doLocalDownload(data[0]);
        	        		Yes=false;
-       	        	}
+       	        	} */
+       	     	WhichClick=1;
+       	        	Data=data[0];
        	     	
        	    } );
         	   
         	   $('#myTable tbody').on( 'click', '#doNewBackup', function () {
-          	        var data = myTable.row($(this).parents('tr')).data();
-          	      if(Yes)
+        		   var index = $(this).parents('tr');
+        		   var data = myTable.row(index).data();
+          	      /* if(Yes)
 	     	        	{
           	    			doNewBackup(data[0]);
 	     	        		Yes=false;
-	     	        	}
-          	      	
-          	        //alert( data[0]+" doNewBackup");
+	     	        	} */
+          	      	WhichClick=2;
+	          	  	Index=index;
+	    				Data=data;
+          	       
           	    } );
         	   
         	   $('#myTable tbody').on( 'click', '#doDeleteSeleted', function () {
         		   //console.log($(this).parents('tr'));
 	        		   var index = $(this).parents('tr');
 	        		   var data = myTable.row(index).data();
-	        		   if(Yes)
+	        		  /*  if(Yes)
 	     	        	{
 	        			   doDeleteSeleted(index,data);
 	     	        		Yes=false;
-	     	        	}
-         	       	
-         	        //alert( data[0]+" doDeleteSeleted");
+	     	        	} */
+	        		   	WhichClick=3;
+	     	        	Index=index;
+    	        			Data=data;
          	    } );
         	   
            } );
@@ -464,7 +465,30 @@ float: left;
          	        }    
          	    });    
             }
-             
+      	 var Yes=false;
+      	 var Index;
+      	 var Data;
+      	 var WhichClick=0;
+	    	 function Yesbutton(){
+	    		 
+	    		 if(WhichClick==1)//
+    			 {
+	    			 //doLocalDownload(Data);
+    			 }
+	    		 if(WhichClick==2)//
+    			 {
+	    			 
+	    			 doNewBackup(Index,Data);
+    			 }
+	    		 if(WhichClick==3)//
+    			 {
+	    			 doDeleteSeleted(Index,Data);
+    			 }
+	    		 WhichClick=0;
+	    		 $('#form-modal').modal('hide');
+	    		 
+	    		
+	    	 }
 	</script>
 <% }; %>
 <% include("../f/commonTree.html",{cssSec:cssSec,contSec:contSec,jsSec:jsSec}){} %>
