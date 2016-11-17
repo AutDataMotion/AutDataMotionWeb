@@ -22,6 +22,7 @@ import csuduc.platform.util.generID.UUIDGener;
 import datamotion.common.AbsTaskThread;
 import datamotion.common.MdlFileEvent;
 import datamotion.common.MdlFileEvent.NAMETOKE;
+import datamotion.config.RunMain;
 import datamotion.constant.ConstantInitMy;
 import datamotion.constant.StatusMy;
 import datamotion.mvc.t6_dwnloadfile.T6_dwnloadfile;
@@ -248,6 +249,7 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 	public boolean notifyOthers(MdlFileEvent afile) {
 		// TODO Auto-generated method stub
 		//稍后在做
+		RunMain.backupWorker.addWork(afile);
 		return false;
 	}
 
@@ -291,6 +293,8 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 		taskCallBackDownload.doWork(mdlFileEvent);
 	}
 
+
+
 	/* (non-Javadoc)
 	 * <p>Description: <／p>
 	 * @return
@@ -302,6 +306,8 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 		
 		return StatusMy.FLOW_DOWNLAD;
 	}
+
+
 
 
 }

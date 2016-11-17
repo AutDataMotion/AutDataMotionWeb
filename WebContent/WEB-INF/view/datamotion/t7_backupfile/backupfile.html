@@ -345,16 +345,34 @@ float: left;
                    } 
                 	  	]
                } );
+<<<<<<< HEAD
+        	   var Yes=false;
+        	   function YesButton()
+        	   {
+        		   Yes=true;
+        	   }
+=======
         	   
+>>>>>>> parent of 5411840... update again
         	   $('#myTable tbody').on( 'click', '#doLocalDownload', function () {
        	        var data = myTable.row($(this).parents('tr')).data();
        	        //alert( data[0]+" doLocalDownload");
-       	     	doLocalDownload(data[0]);
+       	        if(Yes)
+       	        	{
+       	        		doLocalDownload(data[0]);
+       	        		Yes=false;
+       	        	}
+       	     	
        	    } );
         	   
         	   $('#myTable tbody').on( 'click', '#doNewBackup', function () {
           	        var data = myTable.row($(this).parents('tr')).data();
-          	      	doNewBackup(data[0]);
+          	      if(Yes)
+	     	        	{
+          	    			doNewBackup(data[0]);
+	     	        		Yes=false;
+	     	        	}
+          	      	
           	        //alert( data[0]+" doNewBackup");
           	    } );
         	   
@@ -362,7 +380,12 @@ float: left;
         		   //console.log($(this).parents('tr'));
 	        		   var index = $(this).parents('tr');
 	        		   var data = myTable.row(index).data();
-         	       	doDeleteSeleted(index,data);
+	        		   if(Yes)
+	     	        	{
+	        			   doDeleteSeleted(index,data);
+	     	        		Yes=false;
+	     	        	}
+         	       	
          	        //alert( data[0]+" doDeleteSeleted");
          	    } );
         	   
