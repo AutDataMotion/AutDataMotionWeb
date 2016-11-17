@@ -183,10 +183,11 @@ public class MdlFileEvent implements Serializable {
 			return null;
 		}
 		// 这个需要修改
-		return String.format("_%s_%s_%s_%s",
+		return String.format("_%s_%s_%s_%s_%s",
 				aFileNameTokens.get(NAMETOKE.AIRCRAFT.ordinal()),
 				aFileNameTokens.get(NAMETOKE.SENSOR.ordinal()),
 				aFileNameTokens.get(NAMETOKE.TYPE.ordinal()),
+				aFileNameTokens.get(NAMETOKE.LEVEL.ordinal()).split("\\.")[0],
 				aFileNameTokens.get(NAMETOKE.CAMERA.ordinal()));
 	}
 

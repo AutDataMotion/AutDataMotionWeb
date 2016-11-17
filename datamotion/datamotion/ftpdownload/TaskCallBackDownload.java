@@ -8,6 +8,8 @@
 package datamotion.ftpdownload;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -17,11 +19,14 @@ import org.apache.log4j.Logger;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 
+import csuduc.platform.util.FileUtils;
 import csuduc.platform.util.StringUtil;
 import csuduc.platform.util.generID.UUIDGener;
+import csuduc.platform.util.networkCom.FTPClientPool;
 import datamotion.common.AbsTaskThread;
 import datamotion.common.MdlFileEvent;
 import datamotion.common.MdlFileEvent.NAMETOKE;
+import datamotion.config.ConfMain;
 import datamotion.config.RunMain;
 import datamotion.constant.ConstantInitMy;
 import datamotion.constant.StatusMy;
@@ -55,40 +60,60 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 	private String ftpPasswordString = "anonymous";
 
 
+	// ftp Pool
+	private FTPClientPool ftpPool = ConfMain.getInstance().ftpPool;
 	/* (non-Javadoc)
 	 * <p>Description: <／p>
 	 * @param amdl
 	 * @return
 	 * @see datamotion.common.InfTaskThread#doWork(datamotion.common.MdlFileEvent)
 	 */
+	
 	@Override
 	public boolean doWork(MdlFileEvent amdl) {
 		// TODO Auto-generated method stub
+		
+		FTPClient ftpClient = null;
+		OutputStream output = null;
 		try {
-			ftpUtils.connectFtpByPool(ftpHost, ftpPort, ftpNameString, ftpPasswordString);
-			ftpUtils.downloadFile(amdl.pathsrc, amdl.namesrc, amdl.pathdest, amdl.namesrc);
-			ftpUtils.disconnectFtpByPool();
-			System.out.println(amdl.namesrc + "下载成功");
-			return true;
+//			ftpUtils.connectFtpByPool(ftpHost, ftpPort, ftpNameString, ftpPasswordString);
+//			ftpUtils.downloadFile(amdl.pathsrc, amdl.namesrc, amdl.pathdest, amdl.namesrc);
+//			ftpUtils.disconnectFtpByPool();
+//			System.out.println(amdl.namesrc + "下载成功");
+			ftpClient = ftpPool.borrowObject();
+			ftpClient.changeWorkingDirectory(amdl.pathsrc);
+			log.debug(String.format("download %s%s to %s%s", amdl.pathsrc, amdl.namesrc, amdl.pathdest, amdl.namesrc));
+			if (FileUtils.folderCheckAndMake(amdl.pathdest)) {
+				File localFile = new File( amdl.pathdest+amdl.namesrc);
+				output = new FileOutputStream(localFile);
+				ftpClient.retrieveFile(amdl.namesrc, output);
+				output.flush();
+				log.debug("download done!");
+				return true;
+			}else {
+				log.debug("download undone!");
+				return false;
+			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			System.out.println(amdl.namesrc + "下载失败");
 			return false;
+		}finally{
+			try {
+				ftpPool.returnObject(ftpClient);
+				if (output != null) {
+					output.close();
+					output = null;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
 		}
 		
-	}
-	/* (non-Javadoc)
-	 * <p>Description: <／p>
-	 * @param afile
-	 * @return
-	 * @see datamotion.common.AbsTaskThread#isCorrectFile(datamotion.common.MdlFileEvent)
-	 */
-	@Override
-	public boolean isCorrectFile(MdlFileEvent afile) {
-		// TODO Auto-generated method stub
-		//直接返回true
-		
-		return true;
 	}
 
 	/* (non-Javadoc)
@@ -134,6 +159,7 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 			mdl.setPathsrc(afile.pathsrc);
 			mdl.setNamesrc(afile.namesrc);
 			mdl.setPathdest(afile.pathdest);
+			log.debug(String.format("timeDo:%s", afile.timedo.toString()));
 			mdl.setTimedo(afile.timedo);
 			mdl.setFilesize(afile.filesize);
 			mdl.setStation(afile.station);
@@ -149,6 +175,8 @@ public class TaskCallBackDownload extends AbsTaskThread<MdlFileEvent>{
 			mdl.setStatus_(afile.status_);
 			mdl.setTimeadd(new Timestamp(System.currentTimeMillis()));
 			mdl.saveGenIntId();
+			
+			afile.id = mdl.getId();
 			
 //			操作数据库方式一：
 //			new T6_dwnloadfile()
